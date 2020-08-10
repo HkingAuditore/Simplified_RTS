@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using Units;
+using UnityEngine.Events;
 using Object = System.Object;
 
 public class Farmer : Unit
@@ -23,6 +25,9 @@ public class Farmer : Unit
         GenerateWorkPath();
         this.onNavStop += OnNavStop;
         
+        this.onFarmerBack += Drop;
+        this.onFarmerBack += this.sidePlayer.FarmerBack;
+        
         ResouceCarried = 0;
         InitTarget = _targerResource;
     }
@@ -30,13 +35,13 @@ public class Farmer : Unit
     //到达目的地
     private void OnNavStop(GameObject gm,Transform tr)
     {
-        if (Vector3.Distance(tr.position,_targerResource.position) < 0.3f)
+        if (Vector3.Distance(tr.position,_targerResource.position) < 0.5f)
         {
             Invoke("Work", workTime);
         }
         else
         {
-            Invoke("Drop", workTime);
+            Invoke("FarmerBack", workTime);
         }
     }
 
@@ -44,9 +49,6 @@ public class Farmer : Unit
     {
         this._home = this.sidePlayer.gameObject.transform.Find("Positions").Find(this.road.ToString() + "Ori").transform;
         // 注意资源排布要按照上中下路的顺序
-        // Debug.Log(Road.Top.ToString() +":"+ GameObject.FindGameObjectsWithTag("Resouce")[(int)Road.Top].name);
-        // Debug.Log(Road.Mid.ToString() +":"+ GameObject.FindGameObjectsWithTag("Resouce")[(int)Road.Mid].name);
-        // Debug.Log(Road.Bot.ToString() +":"+ GameObject.FindGameObjectsWithTag("Resouce")[(int)Road.Bot].name);
         this._targerResource = GameObject.FindGameObjectsWithTag("Resouce")[(int)this.road + 1].transform;
         switch (road)
         {
@@ -66,6 +68,10 @@ public class Farmer : Unit
     
     
     // 工作
+    
+    //返回
+    public UnityAction<Farmer, Transform> onFarmerBack;
+    
     private void Work()
     {
         this.ResouceCarried += maxLoad;
@@ -74,11 +80,18 @@ public class Farmer : Unit
     }
     
     // 放下资源
-    private void Drop()
+    private void FarmerBack()
+    {
+        onFarmerBack(this,this.transform);
+    }
+    
+    private void Drop(Farmer farmer,Transform tr)
     {
         this.sidePlayer.ChangeResource(_resouceType,this.ResouceCarried);
         this.ResouceCarried = 0;
         this.Goto(_targerResource);
         Debug.Log("GO Resource");
+        //查看是否人数已满
+        
     }
 }
