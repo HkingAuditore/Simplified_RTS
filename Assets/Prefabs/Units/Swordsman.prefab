@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7113462260099920340}
   m_Layer: 9
   m_Name: Swordsman
-  m_TagString: MilitaryUnit
+  m_TagString: Mid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3367254790986935633}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.69, y: 0, z: 0.48}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6254232402915615995}
@@ -81,13 +81,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 620d5ab9a1139a74c8b1805b6ceddd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hp: 100
-  defence: 5
   road: 1
   sidePlayer: {fileID: 0}
+  _hp: 100
+  defence: 5
+  _speed: 1.9
+  costFood: 5
+  costWood: 5
+  costGold: 5
   attack: 10
   attackColdDownTime: 0.5
-  attackRange: 1
+  attackRange: 0.65
 --- !u!1 &6254232402915615997
 GameObject:
   m_ObjectHideFlags: 0

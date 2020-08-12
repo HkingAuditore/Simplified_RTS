@@ -13,6 +13,7 @@ public class Farmer : Unit
 
     private Transform _targerResource;
     private Transform _home;
+    
     private Resource _resouceType;
 
 
@@ -23,23 +24,33 @@ public class Farmer : Unit
     public void Awake()
     {
         GenerateWorkPath();
-        this.onNavStop += OnNavStop;
+        this.navStopEventHandler += OnNavStop;
         
-        this.onFarmerBack += Drop;
-        this.onFarmerBack += this.sidePlayer.FarmerBack;
+        this.farmerBackEventHandler += Drop;
+        this.farmerBackEventHandler += this.sidePlayer.FarmerBack;
         
-        ResouceCarried = 0;
+        //死亡处理
+        this.unitDeathEventHandler += () =>  
+        {
+            this.sidePlayer.FarmerCount--;
+            this.sidePlayer.RoadFarmers[(int) this.road]--;
+            this.sidePlayer.RoadWorkingFarmers[(int) this.road]--;
+        };
+        
+        this.ResouceCarried = 0;
         InitTarget = _targerResource;
     }
     
     //到达目的地
     private void OnNavStop(GameObject gm,Transform tr)
     {
-        if (Vector3.Distance(tr.position,_targerResource.position) < 0.5f)
+        // Debug.Log("To Resource:" + Vector3.Distance(tr.position,_targerResource.position));
+        // Debug.Log("To Home:" + Vector3.Distance(tr.position,_home.position));
+        if (Vector3.Distance(tr.position,_targerResource.position) < 0.6f)
         {
             Invoke("Work", workTime);
         }
-        else
+        else if(Vector3.Distance(tr.position,_home.position) < 0.6f)
         {
             Invoke("FarmerBack", workTime);
         }
@@ -49,7 +60,12 @@ public class Farmer : Unit
     {
         this._home = this.sidePlayer.gameObject.transform.Find("Positions").Find(this.road.ToString() + "Ori").transform;
         // 注意资源排布要按照上中下路的顺序
-        this._targerResource = GameObject.FindGameObjectsWithTag("Resouce")[(int)this.road + 1].transform;
+        LayerMask resourceLayerMask = (1 << LayerMask.NameToLayer(LayerMask.LayerToName(this.gameObject.layer)[0] + "Side")) | (1 << LayerMask.NameToLayer("Neutrality"));
+        GameObject[] sideResource = GameObject.FindGameObjectsWithTag("Resouce").Where(gb => (resourceLayerMask.value & 1 << gb.layer) > 0).ToArray();
+        // Debug.Log(sideResource[0]);
+        // Debug.Log(sideResource[1]);
+        // Debug.Log(sideResource[2]);
+        this._targerResource = sideResource[(int)this.road].transform;
         switch (road)
         {
             case Road.Top:
@@ -67,11 +83,10 @@ public class Farmer : Unit
     }
     
     
+    //返回事件
+    public UnityAction<Farmer, Transform> farmerBackEventHandler;
+    
     // 工作
-    
-    //返回
-    public UnityAction<Farmer, Transform> onFarmerBack;
-    
     private void Work()
     {
         this.ResouceCarried += maxLoad;
@@ -82,7 +97,7 @@ public class Farmer : Unit
     // 放下资源
     private void FarmerBack()
     {
-        onFarmerBack(this,this.transform);
+        farmerBackEventHandler(this,this.transform);
     }
     
     private void Drop(Farmer farmer,Transform tr)

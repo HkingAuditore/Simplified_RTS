@@ -13,7 +13,6 @@ public class FarmerDispatchUI : MonoBehaviour
         if (isAdd)
         {
             player.AddFarmer(Resource.Food);
-            Debug.Log("!");
         }
         else
         {

@@ -8,6 +8,10 @@ TagManager:
   - Door
   - Farmer
   - MilitaryUnit
+  - Unattackable
+  - Top
+  - Mid
+  - Bot
   layers:
   - Default
   - TransparentFX
@@ -19,7 +23,7 @@ TagManager:
   - 
   - ASide
   - BSide
-  - 
+  - Neutrality
   - 
   - 
   - 

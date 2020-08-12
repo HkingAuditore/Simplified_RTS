@@ -72,19 +72,23 @@ public class MeleeUnit : Unit
                             where enemy.gameObject.GetComponent<Unit>()?.road == this.road
                             orderby Vector3.Distance(enemy.transform.position, this.transform.position)
                             select enemy).ToArray()[0].gameObject.GetComponent<Unit>();
-        Debug.Log("END FIND:" + this._enemyUnit.gameObject.name);
+        // Debug.Log("END FIND:" + this._enemyUnit.gameObject.name);
     }
     
     
     
     /************战斗*****************/
-    private void Attack()
+    private int Attack()
     {
+        int damage = -1;
         if (Vector3.Distance(this.transform.position, _enemyUnit.transform.position) < attackRange)
         {
-            _enemyUnit.HP -= (this.attack-_enemyUnit.defence) > 0 ? (this.attack-_enemyUnit.defence) : 1;
+            damage = (this.attack - _enemyUnit.defence) > 0 ? (this.attack - _enemyUnit.defence) : 1;
+
+            _enemyUnit.HP -= damage;
         }
 
         if (_enemyUnit.HP <= 0) _isFoundEnemy = false;
+        return damage;
     }
 }

@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 5408525696826754838}
   - component: {fileID: 5408525696826754843}
   - component: {fileID: 5408525696826754839}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Farmer
-  m_TagString: Farmer
+  m_TagString: Mid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -46,12 +46,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf0ec4cb750169b4aabd92723410f4c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hp: 50
-  defence: 0
   road: 1
   sidePlayer: {fileID: 0}
+  _hp: 50
+  defence: 0
+  _speed: 2
+  costFood: 0
+  costWood: 0
+  costGold: 0
   workTime: 1
-  maxLoad: 10
+  maxLoad: 5
 --- !u!65 &5408525696826754843
 BoxCollider:
   m_ObjectHideFlags: 0
