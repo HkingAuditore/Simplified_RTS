@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Units;
 using UnityEngine;
+using UnityEngine.AI;
 
 
 public class MeleeUnit : Unit
@@ -28,7 +29,7 @@ public class MeleeUnit : Unit
         if(_enemyUnit!=null)
             this.Goto(_enemyUnit.transform);
         // 寻敌攻击
-        if (!_isFoundEnemy || _enemyUnit?.HP <= 0)
+        if (!_isFoundEnemy || _enemyUnit?.HP <= 0 || Vector3.Distance(_enemyUnit.transform.position,this.transform.position) > _giveUpRadius)
         {
             FindEnemy();
             if(_enemyUnit!=null)
@@ -55,6 +56,7 @@ public class MeleeUnit : Unit
 
 
     /********寻敌********/
+    private float _giveUpRadius = 2.8f;
     private bool _isFoundEnemy = false;
     private float _findEnemyRadius = 2.5f;
     private Unit _enemyUnit;
@@ -69,11 +71,16 @@ public class MeleeUnit : Unit
         Array.Resize(ref enemiesCol, size);
         _isFoundEnemy = true;
         this._enemyUnit =  (from enemy in enemiesCol
-                            where enemy.gameObject.GetComponent<Unit>()?.road == this.road
-                            orderby Vector3.Distance(enemy.transform.position, this.transform.position)
+                            // where enemy.gameObject.GetComponent<Unit>()?.road == this.road
+                            orderby GetAgentDistanceOnNavMesh(enemy.transform.position)
                             select enemy).ToArray()[0].gameObject.GetComponent<Unit>();
         // Debug.Log("END FIND:" + this._enemyUnit.gameObject.name);
     }
+
+
+    private float GetAgentDistanceOnNavMesh(Vector3 targetPoint) =>
+        Unit.GetTwoPointDistanceOnNavMesh(this.transform.position, targetPoint,
+            LayerMask.LayerToName(this.gameObject.layer) == "ASide");
     
     
     
@@ -84,11 +91,21 @@ public class MeleeUnit : Unit
         if (Vector3.Distance(this.transform.position, _enemyUnit.transform.position) < attackRange)
         {
             damage = (this.attack - _enemyUnit.defence) > 0 ? (this.attack - _enemyUnit.defence) : 1;
-
+            _enemyUnit.BeAttacked(this);
             _enemyUnit.HP -= damage;
         }
 
         if (_enemyUnit.HP <= 0) _isFoundEnemy = false;
         return damage;
     }
+
+    private void AttackedReact(Unit attacker)
+    {
+        if (Vector3.Distance(this.transform.position, _enemyUnit.transform.position) >
+            Vector3.Distance(this.transform.position, attacker.transform.position))
+        {
+            this._enemyUnit = attacker;
+        }
+    }
+    
 }

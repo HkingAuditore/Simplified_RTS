@@ -39,8 +39,8 @@ namespace Units
         /****总****/
         public void Start()
         {
-            _agent = this.GetComponent<NavMeshAgent>();
-            _agent.speed = this.Speed;
+            agent = this.GetComponent<NavMeshAgent>();
+            agent.speed = this.Speed;
             if (InitTarget != null) this.Goto(InitTarget);
         }
 
@@ -51,9 +51,9 @@ namespace Units
                 unitDeathEventHandler?.Invoke();
                 GameObject.Destroy(this.gameObject);
             }
-            if (_agent.remainingDistance < 0.2f && !_isAtTarget)
+            if (agent.remainingDistance < 0.2f && !_isAtTarget)
             {
-                this.navStopEventHandler?.Invoke(this.gameObject,this._agent.gameObject.transform);
+                this.navStopEventHandler?.Invoke(this.gameObject,this.agent.gameObject.transform);
                 _isAtTarget = true;
             }
         }
@@ -66,16 +66,32 @@ namespace Units
         public UnityAction<GameObject, Transform> navStopEventHandler;
 
         protected Transform InitTarget { get; set; }
-        private NavMeshAgent _agent;
+        protected NavMeshAgent agent;
         private bool _isAtTarget = false;
 
 
         // 前往目的地
         protected void Goto(Transform tr)
         {
-            this._agent.SetDestination(tr.position);
+            this.agent.SetDestination(tr.position);
             _isAtTarget = false;
         }
+
+        protected static float GetTwoPointDistanceOnNavMesh(Vector3 oriPoint, Vector3 targetPoint, bool isASide)
+        {
+            var path = new NavMeshPath();
+            var side = isASide ? "A" : "B";
+            LayerMask layerMask = 1 << NavMesh.GetAreaFromName(side + "Walkable") | (1 << NavMesh.GetAreaFromName("Walkable"));
+            NavMesh.CalculatePath(oriPoint, targetPoint, layerMask, path);
+            float distance = 0f;
+            for (int i = 1; i <path.corners.Length; i++)
+            {
+                distance += Vector3.Distance(path.corners[i - 1], path.corners[i]);
+            }
+
+            return distance;
+        }
+
         
 
         #endregion
@@ -86,6 +102,16 @@ namespace Units
 
         #endregion
 
+        #region 战斗
+
+        //收到攻击
+        protected UnityAction<Unit> BeAttackedEventHandler;
+        public void BeAttacked(Unit attacker)
+        {
+            BeAttackedEventHandler?.Invoke(attacker);
+        }
+
+        #endregion
 
 
     }

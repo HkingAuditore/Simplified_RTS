@@ -197,7 +197,20 @@ public class Player : MonoBehaviour
         farmerPrefab.tag = rd.ToString();
         farmerPrefab.gameObject.layer = this.gameObject.layer;
         farmerPrefab.sidePlayer = this;
+        
+        
+        // Debug.Log(Resources.Load("Units/" + farmerPrefab.name + LayerMask.LayerToName(this.gameObject.layer)[0]));
+
         var farmerInstantiated = (Farmer) Instantiate<Farmer>(farmerPrefab, bornPoint.position, farmerPrefab.transform.rotation, this.gameObject.transform.Find(this.gameObject.name[0] + "Units").transform);
+        //TODO 动态生成材质实例，需要优化
+        farmerInstantiated.gameObject.transform.Find(farmerPrefab.name).gameObject.GetComponent<SpriteRenderer>()
+            .sharedMaterial = Instantiate<Material>(farmerPrefab.gameObject.transform.Find(farmerPrefab.name).gameObject
+            .GetComponent<SpriteRenderer>().sharedMaterial);
+        farmerInstantiated.gameObject.transform.Find(farmerPrefab.name).gameObject.GetComponent<SpriteRenderer>().sharedMaterial.SetTexture(
+            "_BaseMap",
+            Resources.Load("Units/" + farmerPrefab.name + LayerMask.LayerToName(this.gameObject.layer)[0]) as Texture
+        );
+
         DispatchableFarmer--;
     }
 
@@ -271,8 +284,8 @@ public class Player : MonoBehaviour
         unitGb.gameObject.GetComponent<Unit>().sidePlayer = this;
         
         //寻路设置
-        LayerMask resourceLayerMask = (1 << NavMesh.GetAreaFromName(LayerMask.LayerToName(this.gameObject.layer)[0] + "Walkable")) | (1 << NavMesh.GetAreaFromName("Walkable"));
-        unitGb.GetComponent<NavMeshAgent>().areaMask = resourceLayerMask.value;
+        LayerMask layerMask = (1 << NavMesh.GetAreaFromName(LayerMask.LayerToName(this.gameObject.layer)[0] + "Walkable")) | (1 << NavMesh.GetAreaFromName("Walkable"));
+        unitGb.GetComponent<NavMeshAgent>().areaMask = layerMask.value;
 
         
         for (int i = 0; i < number; i++)
@@ -282,9 +295,21 @@ public class Player : MonoBehaviour
             var oriPoint = new Vector3(tr.x + randomTr.x,0,tr.z + randomTr.y);
             // Debug.Log("SET POINT:" + oriPoint);
             
+
             var unitInstantiated = 
                 Instantiate(unitGb, oriPoint, unitGb.transform.rotation, this.gameObject.transform.Find(this.gameObject.name[0] + "Units").transform);
             unitInstantiated.GetComponent<Unit>().enabled = true;
+            
+            //TODO 动态生成材质实例，需要优化
+            unitInstantiated.gameObject.transform.Find(unitGb.name).gameObject.GetComponent<SpriteRenderer>()
+                .sharedMaterial = Instantiate<Material>(unitGb.gameObject.transform.Find(unitGb.name).gameObject
+                .GetComponent<SpriteRenderer>().sharedMaterial);
+
+            unitInstantiated.gameObject.transform.Find(unitGb.name).gameObject.GetComponent<SpriteRenderer>().sharedMaterial.SetTexture(
+                "_BaseMap",
+                Resources.Load("Units/" + unitGb.name + LayerMask.LayerToName(this.gameObject.layer)[0]) as Texture
+            );
+
         }
 
     }

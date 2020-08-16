@@ -85,13 +85,13 @@ MonoBehaviour:
   sidePlayer: {fileID: 0}
   _hp: 100
   defence: 5
-  _speed: 1.9
+  _speed: 1
   costFood: 5
   costWood: 5
   costGold: 5
   attack: 10
-  attackColdDownTime: 0.5
-  attackRange: 0.65
+  attackColdDownTime: 1
+  attackRange: 0.85
 --- !u!1 &6254232402915615997
 GameObject:
   m_ObjectHideFlags: 0
