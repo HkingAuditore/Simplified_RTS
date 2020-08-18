@@ -9,6 +9,8 @@ public class SpriteRendererPlus : MonoBehaviour
 {
     private int _isAside;
     private NavMeshAgent _parentAgent;
+
+    public bool isUnit;
     void Start()
     {
         _parentAgent = this.transform.parent.GetComponent<NavMeshAgent>();
@@ -18,7 +20,10 @@ public class SpriteRendererPlus : MonoBehaviour
 
     private void Update()
     {
-        int isForward = _parentAgent.velocity.x < 0 ? 1 : 0;
-        this.transform.rotation = Quaternion.Euler(0, isForward * _isAside * 180 - this.transform.parent.transform.rotation.y ,0);
+        if (isUnit)
+        {
+            int isForward = _parentAgent.velocity.x < 0 ? 1 : 0;
+            this.transform.rotation = Quaternion.Euler(0, isForward * _isAside * 180 - this.transform.parent.transform.rotation.y ,0);
+        }
     }
 }

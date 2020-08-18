@@ -39,8 +39,8 @@ namespace Units
         /****总****/
         public void Start()
         {
-            agent = this.GetComponent<NavMeshAgent>();
-            agent.speed = this.Speed;
+            navMeshAgent = this.GetComponent<NavMeshAgent>();
+            navMeshAgent.speed = this.Speed;
             if (InitTarget != null) this.Goto(InitTarget);
         }
 
@@ -51,9 +51,9 @@ namespace Units
                 unitDeathEventHandler?.Invoke();
                 GameObject.Destroy(this.gameObject);
             }
-            if (agent.remainingDistance < 0.2f && !_isAtTarget)
+            if (navMeshAgent.remainingDistance < 0.2f && !_isAtTarget)
             {
-                this.navStopEventHandler?.Invoke(this.gameObject,this.agent.gameObject.transform);
+                this.navStopEventHandler?.Invoke(this.gameObject,this.navMeshAgent.gameObject.transform);
                 _isAtTarget = true;
             }
         }
@@ -66,14 +66,14 @@ namespace Units
         public UnityAction<GameObject, Transform> navStopEventHandler;
 
         protected Transform InitTarget { get; set; }
-        protected NavMeshAgent agent;
+        protected NavMeshAgent navMeshAgent;
         private bool _isAtTarget = false;
 
 
         // 前往目的地
         protected void Goto(Transform tr)
         {
-            this.agent.SetDestination(tr.position);
+            this.navMeshAgent.SetDestination(tr.position);
             _isAtTarget = false;
         }
 

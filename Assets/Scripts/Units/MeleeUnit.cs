@@ -14,7 +14,6 @@ public class MeleeUnit : Unit
     public float attackRange;
     
 
-
     public void Awake()
     {
         this.InitTarget = GetEnemySide();
@@ -56,9 +55,9 @@ public class MeleeUnit : Unit
 
 
     /********寻敌********/
-    private float _giveUpRadius = 2.8f;
+    private float _giveUpRadius = 2f;
     private bool _isFoundEnemy = false;
-    private float _findEnemyRadius = 2.5f;
+    private float _findEnemyRadius = 1.8f;
     private Unit _enemyUnit;
 
     private void FindEnemy()
@@ -70,8 +69,8 @@ public class MeleeUnit : Unit
             return;
         Array.Resize(ref enemiesCol, size);
         _isFoundEnemy = true;
-        this._enemyUnit =  (from enemy in enemiesCol
-                            // where enemy.gameObject.GetComponent<Unit>()?.road == this.road
+        this._enemyUnit = (from enemy in enemiesCol
+                            where enemy.gameObject.tag != "Unattackable"
                             orderby GetAgentDistanceOnNavMesh(enemy.transform.position)
                             select enemy).ToArray()[0].gameObject.GetComponent<Unit>();
         // Debug.Log("END FIND:" + this._enemyUnit.gameObject.name);
