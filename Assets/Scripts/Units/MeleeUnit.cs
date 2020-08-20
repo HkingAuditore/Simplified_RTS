@@ -7,12 +7,18 @@ using UnityEngine;
 using UnityEngine.AI;
 
 
-public class MeleeUnit : Unit
+public class MeleeUnit : Unit, IMilitaryUnit
 {
-    public int attack;
-    public float attackColdDownTime;
-    public float attackRange;
     
+    [SerializeField] private int attackPower;
+    [SerializeField] private float attackColdDownTime;
+    [SerializeField] private float attackRange;
+
+    public int AttackPower => attackPower;
+
+    public float AttackColdDownTime => attackColdDownTime;
+
+    public float AttackRange => attackRange;
 
     public void Awake()
     {
@@ -31,8 +37,12 @@ public class MeleeUnit : Unit
         if (!_isFoundEnemy || _enemyUnit?.HP <= 0 || Vector3.Distance(_enemyUnit.transform.position,this.transform.position) > _giveUpRadius)
         {
             FindEnemy();
-            if(_enemyUnit!=null)
+            if (_enemyUnit != null)
+            {
                 this.Goto(_enemyUnit.transform);
+                _isFoundEnemy = true;
+
+            }
             else
             {
                 this.Goto(this.InitTarget);
@@ -40,7 +50,7 @@ public class MeleeUnit : Unit
         }
         else if (_isFoundEnemy)
         {
-            if (_timer > attackColdDownTime)
+            if (_timer > AttackColdDownTime)
             {
                 this.Attack();
                 _timer = 0f;
@@ -55,9 +65,9 @@ public class MeleeUnit : Unit
 
 
     /********寻敌********/
-    private float _giveUpRadius = 2f;
+    private float _giveUpRadius = 1.5f;
     private bool _isFoundEnemy = false;
-    private float _findEnemyRadius = 1.8f;
+    private float _findEnemyRadius = 1.2f;
     private Unit _enemyUnit;
 
     private void FindEnemy()
@@ -68,7 +78,7 @@ public class MeleeUnit : Unit
         if (size == 0) 
             return;
         Array.Resize(ref enemiesCol, size);
-        _isFoundEnemy = true;
+        
         this._enemyUnit = (from enemy in enemiesCol
                             where enemy.gameObject.tag != "Unattackable"
                             orderby GetAgentDistanceOnNavMesh(enemy.transform.position)
@@ -84,18 +94,14 @@ public class MeleeUnit : Unit
     
     
     /************战斗*****************/
-    private int Attack()
+    public void Attack()
     {
-        int damage = -1;
-        if (Vector3.Distance(this.transform.position, _enemyUnit.transform.position) < attackRange)
+        if (Vector3.Distance(this.transform.position, _enemyUnit.transform.position) < AttackRange)
         {
-            damage = (this.attack - _enemyUnit.defence) > 0 ? (this.attack - _enemyUnit.defence) : 1;
             _enemyUnit.BeAttacked(this);
-            _enemyUnit.HP -= damage;
         }
 
         if (_enemyUnit.HP <= 0) _isFoundEnemy = false;
-        return damage;
     }
 
     private void AttackedReact(Unit attacker)
@@ -106,5 +112,5 @@ public class MeleeUnit : Unit
             this._enemyUnit = attacker;
         }
     }
-    
+
 }

@@ -13,8 +13,12 @@ public class SpriteRendererPlus : MonoBehaviour
     public bool isUnit;
     void Start()
     {
-        _parentAgent = this.transform.parent.GetComponent<NavMeshAgent>();
-        _isAside = LayerMask.LayerToName(this.transform.parent.gameObject.layer) == "ASide" ? 1 : -1;
+        if (isUnit)
+        {
+            _parentAgent = this.transform.parent.GetComponent<NavMeshAgent>();
+            _isAside = LayerMask.LayerToName(this.transform.parent.gameObject.layer) == "ASide" ? 1 : -1;
+
+        }
         this.GetComponent<SpriteRenderer>().shadowCastingMode = ShadowCastingMode.On;
     }
 
@@ -22,8 +26,9 @@ public class SpriteRendererPlus : MonoBehaviour
     {
         if (isUnit)
         {
-            int isForward = _parentAgent.velocity.x < 0 ? 1 : 0;
-            this.transform.rotation = Quaternion.Euler(0, isForward * _isAside * 180 - this.transform.parent.transform.rotation.y ,0);
+            int isForward = _parentAgent.velocity.x < 0 ? 1 : -1;
+            // Debug.Log(isForward);
+            this.transform.eulerAngles = new Vector3(0, isForward * 180 * (_isAside == 1 ? 0 : -1) - this.transform.parent.transform.eulerAngles.y + _isAside * 90f ,0);
         }
     }
 }

@@ -11,6 +11,17 @@ namespace Units
     {
         Top,Mid,Bot
     }
+
+    public interface IMilitaryUnit
+    {
+        int AttackPower { get; }
+        float AttackColdDownTime { get; }
+        float AttackRange { get; }
+
+        void Attack();
+    }
+    
+    
     public class Unit : MonoBehaviour
     {
         //基本属性
@@ -37,10 +48,14 @@ namespace Units
 
 
         /****总****/
+        protected UnityAction StartEventHandler;
         public void Start()
         {
             navMeshAgent = this.GetComponent<NavMeshAgent>();
             navMeshAgent.speed = this.Speed;
+
+            StartEventHandler?.Invoke();
+
             if (InitTarget != null) this.Goto(InitTarget);
         }
 
@@ -105,9 +120,12 @@ namespace Units
         #region 战斗
 
         //收到攻击
-        protected UnityAction<Unit> BeAttackedEventHandler;
-        public void BeAttacked(Unit attacker)
+        protected UnityAction<IMilitaryUnit> BeAttackedEventHandler;
+        public void BeAttacked(IMilitaryUnit attacker)
         {
+            var damage = (attacker.AttackPower - this.defence) > 0 ? (attacker.AttackPower - this.defence) : 1;
+            this.HP -= damage;
+
             BeAttackedEventHandler?.Invoke(attacker);
         }
 

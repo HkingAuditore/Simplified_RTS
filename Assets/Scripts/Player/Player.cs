@@ -286,10 +286,12 @@ public class Player : MonoBehaviour
         //寻路设置
         LayerMask layerMask = (1 << NavMesh.GetAreaFromName(LayerMask.LayerToName(this.gameObject.layer)[0] + "Walkable")) | (1 << NavMesh.GetAreaFromName("Walkable"));
         unitGb.GetComponent<NavMeshAgent>().areaMask = layerMask.value;
+        // Debug.Log("NUMBER:" + number);
 
         
         for (int i = 0; i < number; i++)
         {
+
             //随机生成点
             Vector2 randomTr = Random.insideUnitCircle * 0.1f;
             var oriPoint = new Vector3(tr.x + randomTr.x,0,tr.z + randomTr.y);
@@ -299,7 +301,7 @@ public class Player : MonoBehaviour
             var unitInstantiated = 
                 Instantiate(unitGb, oriPoint, unitGb.transform.rotation, this.gameObject.transform.Find(this.gameObject.name[0] + "Units").transform);
             unitInstantiated.GetComponent<Unit>().enabled = true;
-            
+           
             //TODO 动态生成材质实例，需要优化
             unitInstantiated.gameObject.transform.Find(unitGb.name).gameObject.GetComponent<SpriteRenderer>()
                 .sharedMaterial = Instantiate<Material>(unitGb.gameObject.transform.Find(unitGb.name).gameObject

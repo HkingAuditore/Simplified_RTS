@@ -89,7 +89,7 @@ MonoBehaviour:
   costFood: 5
   costWood: 5
   costGold: 5
-  attack: 10
+  attackPower: 15
   attackColdDownTime: 1
   attackRange: 0.85
 --- !u!1 &6254232402915615997

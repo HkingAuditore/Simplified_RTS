@@ -5,22 +5,27 @@ using System.Linq;
 using Units;
 using UnityEngine;
 
-public class RangedAttackUnit : Unit
+public class RangedAttackUnit : Unit, IMilitaryUnit
 {
-    public int attack;
-    public float attackColdDownTime;
-    
-    public float attackRange;
+    [SerializeField] private int attackPower;
+    [SerializeField] private float attackColdDownTime;
+    [SerializeField] private float attackRange;
+
+    public float AttackColdDownTime => attackColdDownTime;
+    public int AttackPower => attackPower;
+    public float AttackRange => attackRange;
+
     public Transform shootTransform;
     
     //子弹相关
-    public GameObject BulletObject;
-    public float ShootSpeed;
+    public GameObject bulletObject;
+    private float _maxShootSpeed;
     
     public void Awake()
     {
+        StartEventHandler += () => this.navMeshAgent.stoppingDistance = attackRange * 0.8f;
         this.InitTarget = GetEnemySide();
-        this.navMeshAgent.stoppingDistance = attackRange * 0.75f;
+        _maxShootSpeed = Mathf.Sqrt(attackRange * Bullet.Gravity / (float) Mathf.Sin(45f * 2 * Mathf.Deg2Rad));
         FindEnemy();
 
     }
@@ -32,15 +37,20 @@ public class RangedAttackUnit : Unit
         if(_enemyUnit!=null)
             this.Goto(_enemyUnit.transform);
         // 寻敌攻击
-        if (!_isFoundEnemy || _enemyUnit?.HP <= 0 || Vector3.Distance(_enemyUnit.transform.position,this.transform.position) > _giveUpRadius)
+        if (!_isFoundEnemy || _enemyUnit?.HP <= 0 || Vector3.Distance(_enemyUnit.transform.position,this.transform.position) > attackRange)
         {
             FindEnemy();
-            if(_enemyUnit!=null)
+            if (_enemyUnit != null)
+            {
                 this.Goto(_enemyUnit.transform);
+                _isFoundEnemy = true;
+            }
             else
             {
                 this.Goto(this.InitTarget);
             }
+            this.navMeshAgent.speed = this.Speed;
+
         }
         else if (_isFoundEnemy)
         {
@@ -59,9 +69,9 @@ public class RangedAttackUnit : Unit
 
 
     /********寻敌********/
-    private float _giveUpRadius = 3f;
+    private float _giveUpRadius = 8f;
     private bool _isFoundEnemy = false;
-    private float _findEnemyRadius = 2.5f;
+    private float _findEnemyRadius = 8.8f;
     private Unit _enemyUnit;
 
     private void FindEnemy()
@@ -72,7 +82,7 @@ public class RangedAttackUnit : Unit
         if (size == 0) 
             return;
         Array.Resize(ref enemiesCol, size);
-        _isFoundEnemy = true;
+        
         this._enemyUnit =  (from enemy in enemiesCol
                             where enemy.gameObject.tag != "Unattackable"
                             orderby GetAgentDistanceOnNavMesh(enemy.transform.position)
@@ -88,19 +98,39 @@ public class RangedAttackUnit : Unit
     
     
     /************战斗*****************/
-    private void Attack()
+    public void Attack()
     {
-        if (Vector3.Distance(this.transform.position, _enemyUnit.transform.position) < attackRange)
+        // Debug.Log(this.navMeshAgent.velocity.magnitude);
+        float distance = Vector3.Distance(this.transform.position, _enemyUnit.transform.position);
+        if (distance < attackRange && this.navMeshAgent.velocity.magnitude < 2f)
         {
-            float shootAngle = (float)Math.Asin(
-                                        Vector3.Distance(shootTransform.position, _enemyUnit.transform.position) * Bullet.Gravity * 0.5 / (ShootSpeed * ShootSpeed)
-                                        )/2 * Mathf.Rad2Deg;
-            Vector3 shootRotation =  new Vector3(this.transform.rotation.x,this.transform.rotation.y,shootAngle);
-            BulletObject.gameObject.layer = this.gameObject.layer;
+            this.transform.LookAt(_enemyUnit.transform);
+            this.navMeshAgent.speed = 0f;
+            
+            //射击角度 0~45
+            //两者距离为0时，出射角度为0,；距离到attackrange时，出射角度为45
+            //生成原因，需要再求一次余角
+            float shootAngle = 90 - Mathf.Clamp01(distance / attackRange) * 45 * 0.65f;
+
+            Vector3 shootRotation =  new Vector3(shootTransform.eulerAngles.x,shootTransform.eulerAngles.y-90f,shootAngle );
+            
+            bulletObject.gameObject.layer = this.gameObject.layer;
+            
+
             var bullet = 
-                Instantiate(BulletObject, shootTransform.position, Quaternion.Euler(shootRotation), this.gameObject.transform.parent.parent.Find(this.gameObject.transform.parent.gameObject.name[0] + "Item").transform);
-            bullet.GetComponent<Bullet>().initSpeed = this.ShootSpeed;
-            bullet.GetComponent<Bullet>().enabled = true;
+                Instantiate(bulletObject, shootTransform.position, Quaternion.Euler(shootRotation), this.gameObject.transform.parent.parent.Find(this.gameObject.transform.parent.gameObject.name[0] + "Item").transform);
+
+            float expectSpeed = Mathf.Clamp(
+                (float) Mathf.Sqrt(
+                                Vector3.Distance(shootTransform.position, _enemyUnit.transform.position) * 1.2f *
+                                Bullet.Gravity / (float) Mathf.Sin(shootRotation.z * 2 * Mathf.Deg2Rad)),
+                        0,
+                            _maxShootSpeed);
+            
+            Bullet bulletComponent = bullet.GetComponent<Bullet>();
+            bulletComponent.initSpeed = expectSpeed;
+            bulletComponent.SetShooter(this);
+            bulletComponent.enabled = true;
         }
     }
 
@@ -112,7 +142,6 @@ public class RangedAttackUnit : Unit
             this._enemyUnit = attacker;
         }
     }
-    
-    
-    
+
+
 }

@@ -62,7 +62,16 @@ public class PlayerAI : Player
             sendArray[i] = GetUnitMaxSend(aiAvailableUnits[i]);
         }
 
-        Unit sendUnit = aiAvailableUnits[Array.IndexOf(sendArray, sendArray.Max())];
+        Unit sendUnit;
+        float probability = Random.Range(0f, 1f);
+        if (probability < 0.5f)
+        {
+            sendUnit = aiAvailableUnits[Array.IndexOf(sendArray, sendArray.Max())];
+        }
+        else
+        {
+            sendUnit = aiAvailableUnits[(int) Random.Range(0, aiAvailableUnits.Length)];
+        }
 
         //消耗资源计算
         int foodAndWoodSend = (this.Food / sendUnit.costFood) > (this.Wood / sendUnit.costWood)

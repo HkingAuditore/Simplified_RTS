@@ -1,54 +1,93 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Units;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public static float Gravity { get; } = 0.01f;
+    public static float Gravity { get; } = 6f;
 
     public float initSpeed;
+
+    private Unit _shooter;
 
 
     private void Start()
     {
         _curSpeed = initSpeed;
-        _curAngle = this.transform.rotation.z;
+        _isFlying = true;
+        _curAngle = this.transform.eulerAngles.z;
+
+        //水平速度
+        _horizontalSpeed = _curSpeed * (float) Math.Sin(_curAngle * Mathf.Deg2Rad);
+        //竖直速度
+        _verticalSpeed = _curSpeed * (float) Math.Cos(_curAngle * Mathf.Deg2Rad);
+
     }
 
     private float _curSpeed;
     private float _curAngle;
-    private bool _isFlying = true;
-    
+    private bool _isFlying;
+
+    private float _horizontalSpeed;
+    private float _verticalSpeed;
+
     private void FixedUpdate()
     {
         if (_isFlying)
         {
-            
-            //水平速度
-            float horizontalSpeed = _curSpeed * (float)Math.Sin(_curAngle *Mathf.Deg2Rad );
             //竖直速度
-            float verticalSpeed = _curSpeed * (float)Math.Cos(_curAngle*Mathf.Deg2Rad ) - Gravity * Time.deltaTime;
+            _verticalSpeed = _verticalSpeed - Math.Abs(Bullet.Gravity) * Time.fixedDeltaTime;
 
-            _curAngle = (float)Math.Atan(verticalSpeed / horizontalSpeed) * Mathf.Rad2Deg;
-            _curSpeed = (float)Math.Sqrt(horizontalSpeed * horizontalSpeed + verticalSpeed * verticalSpeed);
-        
-            this.transform.rotation = Quaternion.Euler(this.transform.rotation.x, this.transform.rotation.y, _curAngle);
-            this.transform.Translate(this.transform.right * _curSpeed * Time.deltaTime);
+            float zAngle = (float) Math.Atan(_verticalSpeed/_horizontalSpeed)* Mathf.Rad2Deg;
             
+            // Debug.Log("ANGLE:"+ _curAngle);
+
+            _curSpeed = (float) Math.Sqrt(_horizontalSpeed * _horizontalSpeed + _verticalSpeed * _verticalSpeed);
+            this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x,this.transform.eulerAngles.y,zAngle);
+            this.transform.Translate(Vector3.right * _curSpeed * Time.fixedDeltaTime,Space.Self);
+
+            _curAngle = zAngle;
+            // Debug.Log(this.transform.TransformDirection(this.transform.right));
+
         }
     }
 
     private void OnCollisionEnter(Collision other)
     {
-        Debug.Log("COL!");
-        this._isFlying = false;
+        if (other.gameObject.layer != this.gameObject.layer)
+        {
+            Debug.Log("COL!");
+            this._isFlying = false;
+            Invoke("DestroyArrow", 5f);
+  
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("TRI!");
-        this._isFlying = false;
-        this.gameObject.transform.SetParent(other.gameObject.transform);
+        if (!other.isTrigger)
+        {
+            this._isFlying = false;
+            Invoke("DestroyArrow", 5f);
+            return;
+        }
+        if (other.gameObject.layer != this.gameObject.layer && other.gameObject.TryGetComponent(out Unit unitComponent))
+        {
+            Debug.Log("TRI!");
+            this._isFlying = false;
+            this.gameObject.transform.SetParent(other.gameObject.transform);
+            unitComponent.BeAttacked(_shooter as IMilitaryUnit);
+            Invoke("DestroyArrow",0.1f);
+        }
+
+    }
+
+
+    public void SetShooter(Unit shooter) => _shooter = shooter;
+    private void DestroyArrow()
+    {
+        Destroy(this.gameObject);
     }
 }

@@ -12,8 +12,9 @@ public class UnitDispatchUI : MonoBehaviour
     public GameObject unitSetIndicator;
     public Unit unit;
     public Player player;
+    public UnitDIspatchManagerUI managerUI;
 
-    private int _unitDispatchNumber = 0;
+    public int UnitDispatchNumber { get; set; } = 0;
     private Stack<bool> _unitSelectStack = new Stack<bool>();
 
     public void AddClick(bool isFoodAndWood)
@@ -50,9 +51,10 @@ public class UnitDispatchUI : MonoBehaviour
                 return;
             }
         }
-        _unitDispatchNumber++;
+        UnitDispatchNumber++;
+
         unitNumberText.gameObject.SetActive(true);
-        unitNumberText.text = _unitDispatchNumber.ToString();
+        unitNumberText.text = UnitDispatchNumber.ToString();
         unitSetIndicator.gameObject.SetActive(true);
         unitRemoveButton.gameObject.SetActive(true);
         
@@ -61,8 +63,8 @@ public class UnitDispatchUI : MonoBehaviour
 
     public void RemoveClick()
     {
-        _unitDispatchNumber--;
-        unitNumberText.text = _unitDispatchNumber.ToString();
+        UnitDispatchNumber--;
+        unitNumberText.text = UnitDispatchNumber.ToString();
 
         if (_unitSelectStack.Pop())
         {
@@ -74,7 +76,7 @@ public class UnitDispatchUI : MonoBehaviour
             this.player.ChangeResource(Resource.Gold,unit.costGold);
         }
         
-        if (_unitDispatchNumber <= 0)
+        if (UnitDispatchNumber <= 0)
         {
             unitNumberText.gameObject.SetActive(false);
             unitSetIndicator.gameObject.SetActive(false);
@@ -83,25 +85,4 @@ public class UnitDispatchUI : MonoBehaviour
 
     }
 
-    public void SetClick(int rdInt)
-    {
-        Road rd = (Road) rdInt;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit rayHit;
-        Physics.Raycast(ray, out rayHit);
-        
-        Debug.DrawLine(ray.origin, rayHit.point);
-        // Debug.Log(rayHit.point);
-        Vector3 pos = new Vector3(rayHit.point.x,rayHit.point.y,rayHit.point.z+0.3f);
-        // Debug.Log("HIT POINT:" + pos);
-        
-        
-        player.SetUnits(pos,unit.gameObject,rd,_unitDispatchNumber);
-
-        _unitDispatchNumber = 0;
-        unitNumberText.gameObject.SetActive(false);
-        unitSetIndicator.gameObject.SetActive(false);
-        unitRemoveButton.gameObject.SetActive(false);
-
-    }
 }
