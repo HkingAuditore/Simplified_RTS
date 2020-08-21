@@ -48,6 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   road: 0
   sidePlayer: {fileID: 0}
+  isUnmovable: 0
   _hp: 50
   defence: 5
   _speed: 1.5

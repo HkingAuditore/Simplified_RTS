@@ -27,6 +27,7 @@ namespace Units
         //基本属性
         public Road road;
         public Player sidePlayer;
+        public bool isUnmovable;
 
         // 能力属性
         [SerializeField] private int _hp;
@@ -51,8 +52,12 @@ namespace Units
         protected UnityAction StartEventHandler;
         public void Start()
         {
-            navMeshAgent = this.GetComponent<NavMeshAgent>();
-            navMeshAgent.speed = this.Speed;
+            if (!isUnmovable)
+            {
+                navMeshAgent = this.GetComponent<NavMeshAgent>();
+                navMeshAgent.speed = this.Speed;
+
+            }
 
             StartEventHandler?.Invoke();
 
@@ -66,7 +71,7 @@ namespace Units
                 unitDeathEventHandler?.Invoke();
                 GameObject.Destroy(this.gameObject);
             }
-            if (navMeshAgent.remainingDistance < 0.2f && !_isAtTarget)
+            if (!isUnmovable && navMeshAgent.remainingDistance < 0.2f && !_isAtTarget)
             {
                 this.navStopEventHandler?.Invoke(this.gameObject,this.navMeshAgent.gameObject.transform);
                 _isAtTarget = true;

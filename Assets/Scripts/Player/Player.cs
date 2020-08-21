@@ -24,9 +24,14 @@ public class ResourceRunOutException : ApplicationException
 
 public class Player : MonoBehaviour
 {
-    public int HP { get; private set; }
+    [SerializeField] private int hp;
+    public int HP
+    {
+        get => hp;
+        set => hp = value;
+    }
 
-    
+
     private void Start()
     {
         this._top = this.gameObject.transform.Find("Positions").transform.Find("TopOri").transform;
@@ -36,14 +41,17 @@ public class Player : MonoBehaviour
         this.Food = 0;
         this.Wood = 0;
         this.Gold = 0;
-        this.HP = 100;
+
         DispatchableFarmer = FarmerCount;
     }
 
     public UnityAction updateEventHandler;
     private void FixedUpdate()
     {
+        //生产任务
         RegisterProduceFarmer();
+        RegisterProduceResource();
+        
         DispatchFarmer();
         updateEventHandler?.Invoke();
     }
@@ -270,7 +278,31 @@ public class Player : MonoBehaviour
         _isProducingFarmer = false;
     }
 
-#endregion
+    #endregion
+    
+    #region 资源生产
+
+    private bool _isProducingResource = false;
+    private float _resourceProducingTime = 2.5f;
+
+    private void RegisterProduceResource()
+    {
+        if (!_isProducingResource)
+        {
+            _isProducingResource = true;
+            Invoke("ProduceResource",_resourceProducingTime);
+        }
+    }
+
+    private void ProduceResource()
+    {
+        this.ChangeResource(Resource.Food,3);
+        this.ChangeResource(Resource.Wood,3);
+
+        _isProducingResource = false;
+    }
+
+    #endregion
 
     #endregion
 
@@ -317,5 +349,7 @@ public class Player : MonoBehaviour
     }
 
     #endregion
+
+
     
 }

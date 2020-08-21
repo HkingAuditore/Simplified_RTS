@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7113462260099920340}
   m_Layer: 9
   m_Name: Swordsman
-  m_TagString: Top
+  m_TagString: Mid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -81,8 +81,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 620d5ab9a1139a74c8b1805b6ceddd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  road: 0
+  road: 1
   sidePlayer: {fileID: 0}
+  isUnmovable: 0
   _hp: 100
   defence: 5
   _speed: 1
