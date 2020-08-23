@@ -21,8 +21,9 @@ public class Farmer : Unit
     public int maxLoad = 10;
     
 
-    public void Awake()
+    public override void Start()
     {
+
         GenerateWorkPath();
         this.navStopEventHandler += OnNavStop;
         
@@ -30,7 +31,7 @@ public class Farmer : Unit
         this.farmerBackEventHandler += this.sidePlayer.FarmerBack;
         
         //死亡处理
-        this.unitDeathEventHandler += () =>  
+        this.UnitDeathEventHandler += () =>  
         {
             this.sidePlayer.FarmerCount--;
             this.sidePlayer.RoadFarmers[(int) this.road]--;
@@ -39,6 +40,9 @@ public class Farmer : Unit
         
         this.ResouceCarried = 0;
         InitTarget = _targerResource;
+        
+        base.Start();
+
     }
     
     //到达目的地

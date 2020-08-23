@@ -6,6 +6,7 @@ using Units;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
+
 using Random = UnityEngine.Random;
 
 public enum Resource
@@ -199,17 +200,11 @@ public class Player : MonoBehaviour
         }
         //寻路设置
         LayerMask resourceLayerMask = (1 << NavMesh.GetAreaFromName(LayerMask.LayerToName(this.gameObject.layer)[0] + "Walkable")) | (1 << NavMesh.GetAreaFromName("Walkable"));
-        farmerPrefab.GetComponent<NavMeshAgent>().areaMask = resourceLayerMask.value;
-            
-        farmerPrefab.road = rd;
-        farmerPrefab.tag = rd.ToString();
-        farmerPrefab.gameObject.layer = this.gameObject.layer;
-        farmerPrefab.sidePlayer = this;
-        
         
         // Debug.Log(Resources.Load("Units/" + farmerPrefab.name + LayerMask.LayerToName(this.gameObject.layer)[0]));
 
         var farmerInstantiated = (Farmer) Instantiate<Farmer>(farmerPrefab, bornPoint.position, farmerPrefab.transform.rotation, this.gameObject.transform.Find(this.gameObject.name[0] + "Units").transform);
+
         //TODO 动态生成材质实例，需要优化
         farmerInstantiated.gameObject.transform.Find(farmerPrefab.name).gameObject.GetComponent<SpriteRenderer>()
             .sharedMaterial = Instantiate<Material>(farmerPrefab.gameObject.transform.Find(farmerPrefab.name).gameObject
@@ -218,8 +213,22 @@ public class Player : MonoBehaviour
             "_BaseMap",
             Resources.Load("Units/" + farmerPrefab.name + LayerMask.LayerToName(this.gameObject.layer)[0]) as Texture
         );
+        
+        farmerInstantiated.GetComponent<NavMeshAgent>().areaMask = resourceLayerMask.value;
+        farmerInstantiated.tag = rd.ToString();
+        farmerInstantiated.sidePlayer = this;
 
+
+        farmerInstantiated.road = rd;
+        //Debug.Log(this.gameObject.name + " Farmer Road :" + rd);
+        farmerInstantiated.gameObject.layer = this.gameObject.layer;
         DispatchableFarmer--;
+
+        farmerInstantiated.enabled = true;
+
+
+
+        
     }
 
     // 当农民返回
@@ -283,7 +292,7 @@ public class Player : MonoBehaviour
     #region 资源生产
 
     private bool _isProducingResource = false;
-    private float _resourceProducingTime = 2.5f;
+    private float _resourceProducingTime = 3f;
 
     private void RegisterProduceResource()
     {
@@ -296,8 +305,8 @@ public class Player : MonoBehaviour
 
     private void ProduceResource()
     {
-        this.ChangeResource(Resource.Food,3);
-        this.ChangeResource(Resource.Wood,3);
+        this.ChangeResource(Resource.Food,1);
+        this.ChangeResource(Resource.Wood,1);
 
         _isProducingResource = false;
     }
@@ -310,14 +319,10 @@ public class Player : MonoBehaviour
 
     public void SetUnits(Vector3 tr, GameObject unitGb, Road rd, int number)
     {
-        unitGb.gameObject.GetComponent<Unit>().road = rd;
-        unitGb.gameObject.tag = rd.ToString();
-        unitGb.gameObject.layer = this.gameObject.layer;
-        unitGb.gameObject.GetComponent<Unit>().sidePlayer = this;
+
         
         //寻路设置
         LayerMask layerMask = (1 << NavMesh.GetAreaFromName(LayerMask.LayerToName(this.gameObject.layer)[0] + "Walkable")) | (1 << NavMesh.GetAreaFromName("Walkable"));
-        unitGb.GetComponent<NavMeshAgent>().areaMask = layerMask.value;
         // Debug.Log("NUMBER:" + number);
 
         
@@ -332,7 +337,7 @@ public class Player : MonoBehaviour
 
             var unitInstantiated = 
                 Instantiate(unitGb, oriPoint, unitGb.transform.rotation, this.gameObject.transform.Find(this.gameObject.name[0] + "Units").transform);
-            unitInstantiated.GetComponent<Unit>().enabled = true;
+            
            
             //TODO 动态生成材质实例，需要优化
             unitInstantiated.gameObject.transform.Find(unitGb.name).gameObject.GetComponent<SpriteRenderer>()
@@ -343,6 +348,15 @@ public class Player : MonoBehaviour
                 "_BaseMap",
                 Resources.Load("Units/" + unitGb.name + LayerMask.LayerToName(this.gameObject.layer)[0]) as Texture
             );
+            
+            unitInstantiated.gameObject.tag = rd.ToString();
+            unitInstantiated.gameObject.layer = this.gameObject.layer;
+            unitInstantiated.GetComponent<NavMeshAgent>().areaMask = layerMask.value;
+
+            unitInstantiated.gameObject.GetComponent<Unit>().road = rd;
+            unitInstantiated.gameObject.GetComponent<Unit>().sidePlayer = this;
+
+            unitInstantiated.GetComponent<Unit>().enabled = true;
 
         }
 

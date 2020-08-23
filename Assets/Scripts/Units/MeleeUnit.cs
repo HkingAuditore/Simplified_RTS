@@ -20,11 +20,11 @@ public class MeleeUnit : Unit, IMilitaryUnit
 
     public float AttackRange => attackRange;
 
-    public void Awake()
+    public override void Start()
     {
         this.InitTarget = GetEnemySide();
         FindEnemy();
-
+        base.Start();
     }
 
     private float _timer;
@@ -79,10 +79,8 @@ public class MeleeUnit : Unit, IMilitaryUnit
             return;
         Array.Resize(ref enemiesCol, size);
         
-        this._enemyUnit = (from enemy in enemiesCol
-                            where enemy.gameObject.tag != "Unattackable"
-                            orderby GetAgentDistanceOnNavMesh(enemy.transform.position)
-                            select enemy).ToArray()[0].gameObject.GetComponent<Unit>();
+        this._enemyUnit = (enemiesCol.Where(enemy => enemy.gameObject.tag != "Unattackable")
+            .OrderBy(enemy => GetAgentDistanceOnNavMesh(enemy.transform.position)))?.ToArray()?[0].gameObject.GetComponent<Unit>();
         // Debug.Log("END FIND:" + this._enemyUnit.gameObject.name);
     }
 

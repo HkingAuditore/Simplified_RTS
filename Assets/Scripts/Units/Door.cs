@@ -11,7 +11,7 @@ public class Door : Unit
         this.HP = this.sidePlayer.HP;
     }
 
-    private void Update()
+    private new void Update()
     {
         this.sidePlayer.HP = this.HP;
     }

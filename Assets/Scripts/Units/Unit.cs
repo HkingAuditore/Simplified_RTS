@@ -25,6 +25,7 @@ namespace Units
     public class Unit : MonoBehaviour
     {
         //基本属性
+        
         public Road road;
         public Player sidePlayer;
         public bool isUnmovable;
@@ -35,11 +36,11 @@ namespace Units
         public int HP
         {
             get => _hp;
-            set => _hp = value >= 0 ?  value : 0;
+            protected set => _hp = value >= 0 ?  value : 0;
         }
 
-        [SerializeField] private float _speed = 1;
-        public float Speed => _speed;
+        [SerializeField] private float speed = 1;
+        public float Speed => speed;
 
 
         //生产成本
@@ -50,7 +51,7 @@ namespace Units
 
         /****总****/
         protected UnityAction StartEventHandler;
-        public void Start()
+        public virtual void Start()
         {
             if (!isUnmovable)
             {
@@ -68,7 +69,7 @@ namespace Units
         {
             if (this.HP <= 0)
             {
-                unitDeathEventHandler?.Invoke();
+                UnitDeathEventHandler?.Invoke();
                 GameObject.Destroy(this.gameObject);
             }
             if (!isUnmovable && navMeshAgent.remainingDistance < 0.2f && !_isAtTarget)
@@ -118,7 +119,7 @@ namespace Units
 
         #region 事件触发
 
-        public UnityAction unitDeathEventHandler;
+        public UnityAction UnitDeathEventHandler;
 
         #endregion
 
