@@ -20,6 +20,9 @@ public class PlayerAI : Player
 
     private LayerMask _enemyLayer;
     private Collider[] _enemiesCol = new Collider[100];
+    
+    public float aiRestTime = 5f;
+
 
     public void Awake()
     {
@@ -39,7 +42,7 @@ public class PlayerAI : Player
         DispatchUnits();
         AIDispatchFarmers();
         _isColdDown = true;
-        Invoke("RestEnd", 5f);
+        Invoke("RestEnd", aiRestTime);
     }
 
     private void CountEnemy()
@@ -73,21 +76,32 @@ public class PlayerAI : Player
             sendUnit = aiAvailableUnits[(int) Random.Range(0, aiAvailableUnits.Length)];
         }
 
-        //消耗资源计算
+
+
+        //消耗木材、食物资源计算
         int foodAndWoodSend = (this.Food / sendUnit.costFood) > (this.Wood / sendUnit.costWood)
             ? (this.Wood / sendUnit.costWood)
             : (this.Food / sendUnit.costFood);
-        int goldSend = this.Gold / sendUnit.costGold;
+        //派遣数量随机
+        int foodAndWoodSendNumber = Random.Range((int) Mathf.Ceil(foodAndWoodSend * 0.5f),foodAndWoodSend);
 
-        int costFood = foodAndWoodSend * sendUnit.costFood;
-        int costWood = foodAndWoodSend * sendUnit.costWood;
-        int costGold = goldSend * sendUnit.costGold;
+        //消耗金矿资源计算
+        int goldSend = this.Gold / sendUnit.costGold;
+        //派遣数量随机
+        int goldSendNumber = Random.Range((int) Mathf.Ceil(goldSend * 0.5f),goldSend);
+
+
+        int costFood = foodAndWoodSendNumber * sendUnit.costFood;
+        int costWood = foodAndWoodSendNumber * sendUnit.costWood;
+        int costGold = goldSendNumber * sendUnit.costGold;
+        
+
 
         this.ChangeResource(Resource.Food, -costFood);
         this.ChangeResource(Resource.Wood, -costWood);
         this.ChangeResource(Resource.Gold, -costGold);
 
-        this.SetUnits(this.RoadToTransform(sendRoad).position, sendUnit.gameObject, sendRoad, sendArray.Max());
+        this.SetUnits(this.RoadToTransform(sendRoad).position, sendUnit.gameObject, sendRoad, goldSendNumber + foodAndWoodSendNumber);
     }
 
     private void RestEnd()

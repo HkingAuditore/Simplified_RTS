@@ -88,7 +88,9 @@ namespace Units
 
         protected Transform InitTarget { get; set; }
         protected NavMeshAgent navMeshAgent;
+        
         private bool _isAtTarget = false;
+        public bool IsAtEnemyDoor { get; set; } = false;
 
 
         // 前往目的地

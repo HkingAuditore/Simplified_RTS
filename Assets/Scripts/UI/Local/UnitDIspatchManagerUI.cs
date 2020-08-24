@@ -24,7 +24,7 @@ public class UnitDIspatchManagerUI : MonoBehaviourPun
           foreach (var unitDispatchUI in UnitDispatchUIs)
           {
                player.SetUnits(pos,unitDispatchUI.unit.gameObject,rd,unitDispatchUI.UnitDispatchNumber);
-               Debug.Log("NUMBER:" + unitDispatchUI.UnitDispatchNumber);
+               //Debug.Log("NUMBER:" + unitDispatchUI.UnitDispatchNumber);
 
                unitDispatchUI.UnitDispatchNumber = 0;
                unitDispatchUI.unitNumberText.gameObject.SetActive(false);

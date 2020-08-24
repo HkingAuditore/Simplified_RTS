@@ -18,7 +18,7 @@ public class Farmer : Unit
 
 
     public float workTime = 5f;
-    public int maxLoad = 10;
+    public int[] maxLoad = new []{10,5,10};
     
 
     public override void Start()
@@ -65,20 +65,24 @@ public class Farmer : Unit
         this._home = this.sidePlayer.gameObject.transform.Find("Positions").Find(this.road.ToString() + "Ori").transform;
         // 注意资源排布要按照上中下路的顺序
         LayerMask resourceLayerMask = (1 << LayerMask.NameToLayer(LayerMask.LayerToName(this.gameObject.layer)[0] + "Side")) | (1 << LayerMask.NameToLayer("Neutrality"));
-        GameObject[] sideResource = GameObject.FindGameObjectsWithTag("Resouce").Where(gb => (resourceLayerMask.value & 1 << gb.layer) > 0).ToArray();
+       // GameObject[] sideResource = GameObject.FindGameObjectsWithTag("Resouce").Where(gb => (resourceLayerMask.value & 1 << gb.layer) > 0).ToArray();
+       Transform[] sideResource = this.sidePlayer.resourceTransform;
         // Debug.Log(sideResource[0]);
         // Debug.Log(sideResource[1]);
         // Debug.Log(sideResource[2]);
-        this._targerResource = sideResource[(int)this.road].transform;
+        this._targerResource = sideResource[(int)this.road];
         switch (road)
         {
             case Road.Top:
+                //this._targerResource = sideResource[0].transform;
                 this._resouceType = Resource.Food;
                 break;
             case Road.Mid:
+                //this._targerResource = sideResource[1].transform;
                 this._resouceType = Resource.Gold;
                 break;
             case Road.Bot:
+                //this._targerResource = sideResource[2].transform;
                 this._resouceType = Resource.Wood;
                 break;
             default:
@@ -93,7 +97,7 @@ public class Farmer : Unit
     // 工作
     private void Work()
     {
-        this.ResouceCarried += maxLoad;
+        this.ResouceCarried += maxLoad[(int)road];
         this.Goto(_home);
         Debug.Log("GO HOME");
     }

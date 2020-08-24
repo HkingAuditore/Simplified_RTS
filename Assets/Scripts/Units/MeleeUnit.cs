@@ -59,9 +59,9 @@ public class MeleeUnit : Unit, IMilitaryUnit
     }
 
     private Transform GetEnemySide() =>
-        ( LayerMask.LayerToName(this.gameObject.layer) == "ASide")
-            ? GameObject.FindGameObjectsWithTag("Door")[1].transform
-            : GameObject.FindGameObjectsWithTag("Door")[0].transform;
+        (LayerMask.LayerToName(this.gameObject.layer) == "ASide")
+            ? GameObject.Find("BDoor").transform
+            : GameObject.Find("ADoor").transform;
 
 
     /********寻敌********/
@@ -78,9 +78,19 @@ public class MeleeUnit : Unit, IMilitaryUnit
         if (size == 0) 
             return;
         Array.Resize(ref enemiesCol, size);
-        
-        this._enemyUnit = (enemiesCol.Where(enemy => enemy.gameObject.tag != "Unattackable")
-            .OrderBy(enemy => GetAgentDistanceOnNavMesh(enemy.transform.position)))?.ToArray()?[0].gameObject.GetComponent<Unit>();
+        try
+        {
+            _enemyUnit = enemiesCol.Where(enemy => enemy.gameObject.tag != "Unattackable")
+                .OrderBy(enemy => GetAgentDistanceOnNavMesh(enemy.transform.position))
+                .ToArray()?[0].gameObject
+                .GetComponent<Unit>();
+
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            //throw;
+        }
         // Debug.Log("END FIND:" + this._enemyUnit.gameObject.name);
     }
 

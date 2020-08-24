@@ -75,7 +75,7 @@ public class Bullet : MonoBehaviour
         }
         if (other.gameObject.layer != this.gameObject.layer && other.gameObject.TryGetComponent(out Unit unitComponent))
         {
-            Debug.Log("TRI!");
+            //Debug.Log("TRI!");
             this._isFlying = false;
             this.gameObject.transform.SetParent(other.gameObject.transform);
             unitComponent.BeAttacked(_shooter as IMilitaryUnit);

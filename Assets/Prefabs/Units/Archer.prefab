@@ -214,11 +214,11 @@ MonoBehaviour:
   _hp: 80
   defence: 3
   speed: 1
-  costFood: 8
-  costWood: 8
-  costGold: 6
+  costFood: 12
+  costWood: 16
+  costGold: 5
   attackPower: 10
   attackColdDownTime: 1.2
-  attackRange: 10
+  attackRange: 7
   shootTransform: {fileID: 1075564247}
   bulletObject: {fileID: 3804412901380430263, guid: 608395d063a25f042ac86d9d98df15fc, type: 3}

@@ -128,6 +128,8 @@ public class Player : MonoBehaviour
 
     #region 农民相关处理
 
+    public Transform[] resourceTransform;
+
     #region 农民调遣
     /**********农民派遣*********/
     //农民

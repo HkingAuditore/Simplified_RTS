@@ -87,9 +87,9 @@ MonoBehaviour:
   _hp: 100
   defence: 5
   speed: 1
-  costFood: 5
-  costWood: 5
-  costGold: 5
+  costFood: 4
+  costWood: 2
+  costGold: 2
   attackPower: 15
   attackColdDownTime: 1
   attackRange: 0.85

@@ -26,6 +26,7 @@ public class RangedAttackUnit : Unit, IMilitaryUnit
         StartEventHandler += () => this.navMeshAgent.stoppingDistance = attackRange * 0.8f;
         this.InitTarget = GetEnemySide();
         _maxShootSpeed = Mathf.Sqrt(attackRange * Bullet.Gravity / (float) Mathf.Sin(45f * 2 * Mathf.Deg2Rad));
+        _enemyLayer = LayerMask.LayerToName(this.gameObject.layer) == "ASide" ? "BSide" : "ASide";
         FindEnemy();
 
         base.Start();
@@ -65,9 +66,9 @@ public class RangedAttackUnit : Unit, IMilitaryUnit
     }
 
     private Transform GetEnemySide() =>
-        ( LayerMask.LayerToName(this.gameObject.layer) == "ASide")
-            ? GameObject.FindGameObjectsWithTag("Door")[1].transform
-            : GameObject.FindGameObjectsWithTag("Door")[0].transform;
+        (LayerMask.LayerToName(this.gameObject.layer) == "ASide")
+            ? GameObject.Find("BDoor").transform
+            : GameObject.Find("ADoor").transform;
 
 
     /********寻敌********/
@@ -76,17 +77,35 @@ public class RangedAttackUnit : Unit, IMilitaryUnit
     private float _findEnemyRadius = 8.8f;
     private Unit _enemyUnit;
 
+    private string _enemyLayer;
     private void FindEnemy()
     {
-        var enemyLayer = LayerMask.LayerToName(this.gameObject.layer) == "ASide" ? "BSide" : "ASide";
+        
         Collider[] enemiesCol = new Collider[10];
-        var size = Physics.OverlapSphereNonAlloc(this.transform.position, _findEnemyRadius, enemiesCol, 1 << LayerMask.NameToLayer(enemyLayer));
+        var size = Physics.OverlapSphereNonAlloc(this.transform.position, _findEnemyRadius, enemiesCol, 1 << LayerMask.NameToLayer(_enemyLayer));
         if (size == 0) 
             return;
         Array.Resize(ref enemiesCol, size);
-        
-        this._enemyUnit =  (enemiesCol.Where(enemy => enemy.gameObject.tag != "Unattackable")
-            .OrderBy(enemy => GetAgentDistanceOnNavMesh(enemy.transform.position)))?.ToArray()?[0].gameObject.GetComponent<Unit>();
+        try
+        {
+            
+            this._enemyUnit = enemiesCol?.Where(
+                                    enemy => ((enemy.gameObject.CompareTag(this.gameObject.tag))
+                                                    ||
+                                                    (enemy.gameObject.GetComponent<Unit>().IsAtEnemyDoor == true))
+                                                    
+                                    )
+                                ?.OrderBy(enemy => GetAgentDistanceOnNavMesh(enemy.transform.position))
+                                ?.ToArray()?[0]
+                                .gameObject
+                                .GetComponent<Unit>();
+
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            //throw;
+        }
         // Debug.Log("END FIND:" + this._enemyUnit.gameObject.name);
     }
 

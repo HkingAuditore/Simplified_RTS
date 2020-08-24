@@ -56,7 +56,7 @@ MonoBehaviour:
   costWood: 0
   costGold: 0
   workTime: 1
-  maxLoad: 5
+  maxLoad: 080000000500000008000000
 --- !u!65 &5408525696826754843
 BoxCollider:
   m_ObjectHideFlags: 0
