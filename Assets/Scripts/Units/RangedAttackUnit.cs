@@ -92,7 +92,11 @@ public class RangedAttackUnit : Unit, IMilitaryUnit
             this._enemyUnit = enemiesCol?.Where(
                                     enemy => ((enemy.gameObject.CompareTag(this.gameObject.tag))
                                                     ||
-                                                    (enemy.gameObject.GetComponent<Unit>().IsAtEnemyDoor == true))
+                                                    (enemy.gameObject.GetComponent<Unit>().IsAtEnemyDoor == true)
+                                                    ||
+                                                    (enemy.gameObject.CompareTag("Door"))
+                                                    )
+                                                
                                                     
                                     )
                                 ?.OrderBy(enemy => GetAgentDistanceOnNavMesh(enemy.transform.position))

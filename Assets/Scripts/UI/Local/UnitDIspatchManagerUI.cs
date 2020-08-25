@@ -4,7 +4,7 @@ using Units;
 using UnityEngine;
 using Photon.Pun;
 
-public class UnitDIspatchManagerUI : MonoBehaviourPun
+public class UnitDIspatchManagerUI : MonoBehaviour
 {
      public UnitDispatchUI[] UnitDispatchUIs;
      public Player player;
