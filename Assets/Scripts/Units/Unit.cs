@@ -72,10 +72,20 @@ namespace Units
                 UnitDeathEventHandler?.Invoke();
                 GameObject.Destroy(this.gameObject);
             }
-            if (!isUnmovable && navMeshAgent.remainingDistance < 0.2f && !_isAtTarget)
+
+            try
             {
-                this.navStopEventHandler?.Invoke(this.gameObject,this.navMeshAgent.gameObject.transform);
-                _isAtTarget = true;
+                //TODO 这里会跳出"GetRemainingDistance" can only be called on an active agent that has been placed on a NavMesh.
+                if (!isUnmovable && navMeshAgent.remainingDistance < 0.2f && !_isAtTarget)
+                {
+                    this.navStopEventHandler?.Invoke(this.gameObject,this.navMeshAgent.gameObject.transform);
+                    _isAtTarget = true;
+                }
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
             }
         }
 
@@ -96,7 +106,8 @@ namespace Units
         // 前往目的地
         protected void Goto(Transform tr)
         {
-            this.navMeshAgent.SetDestination(tr.position);
+            if (!isUnmovable)
+                this.navMeshAgent.SetDestination(tr.position);
             _isAtTarget = false;
         }
 

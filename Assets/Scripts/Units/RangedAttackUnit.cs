@@ -23,7 +23,8 @@ public class RangedAttackUnit : Unit, IMilitaryUnit
     
     public override void Start()
     {
-        StartEventHandler += () => this.navMeshAgent.stoppingDistance = attackRange * 0.8f;
+        if (!isUnmovable)
+            StartEventHandler += () => this.navMeshAgent.stoppingDistance = attackRange * 0.8f;
         this.InitTarget = GetEnemySide();
         _maxShootSpeed = Mathf.Sqrt(attackRange * Bullet.Gravity / (float) Mathf.Sin(45f * 2 * Mathf.Deg2Rad));
         _enemyLayer = LayerMask.LayerToName(this.gameObject.layer) == "ASide" ? "BSide" : "ASide";
@@ -52,7 +53,8 @@ public class RangedAttackUnit : Unit, IMilitaryUnit
             {
                 this.Goto(this.InitTarget);
             }
-            this.navMeshAgent.speed = this.Speed;
+            if (!isUnmovable)
+                this.navMeshAgent.speed = this.Speed;
 
         }
         else if (_isFoundEnemy)
@@ -99,7 +101,12 @@ public class RangedAttackUnit : Unit, IMilitaryUnit
                                                 
                                                     
                                     )
-                                ?.OrderBy(enemy => GetAgentDistanceOnNavMesh(enemy.transform.position))
+                                ?.OrderBy(enemy =>
+                                {
+                                    if (this.isUnmovable)
+                                        return Vector3.Distance(this.transform.position, enemy.transform.position);
+                                    return GetAgentDistanceOnNavMesh(enemy.transform.position);
+                                })
                                 ?.ToArray()?[0]
                                 .gameObject
                                 .GetComponent<Unit>();
@@ -121,21 +128,26 @@ public class RangedAttackUnit : Unit, IMilitaryUnit
     
     
     /************战斗*****************/
+    public float shootAngleOffset = 0;
     public void Attack()
     {
         // Debug.Log(this.navMeshAgent.velocity.magnitude);
         float distance = Vector3.Distance(this.transform.position, _enemyUnit.transform.position);
-        if (distance < attackRange && this.navMeshAgent.velocity.magnitude < 2f)
+        if (distance < attackRange && (this.isUnmovable || this.navMeshAgent.velocity.magnitude < 2f))
         {
-            this.transform.LookAt(_enemyUnit.transform);
-            this.navMeshAgent.speed = 0f;
+            if (!isUnmovable)
+                this.transform.LookAt(_enemyUnit.transform);
+            else
+                this.shootTransform.LookAt(_enemyUnit.transform);
+            if (!isUnmovable)
+                this.navMeshAgent.speed = 0f;
             
             //射击角度 0~45
             //两者距离为0时，出射角度为0,；距离到attackrange时，出射角度为45
             //生成原因，需要再求一次余角
-            float shootAngle = 90 - Mathf.Clamp01(distance / attackRange) * 45 * 0.65f;
+            float shootAngle = 90 - Mathf.Clamp01(distance / attackRange) * 45 * 0.65f + shootAngleOffset;
 
-            Vector3 shootRotation =  new Vector3(shootTransform.eulerAngles.x,shootTransform.eulerAngles.y-90f,shootAngle );
+            Vector3 shootRotation =  new Vector3(0f,shootTransform.eulerAngles.y-90f,shootAngle );
             
             bulletObject.gameObject.layer = this.gameObject.layer;
             
@@ -149,7 +161,7 @@ public class RangedAttackUnit : Unit, IMilitaryUnit
                                 Bullet.Gravity / (float) Mathf.Sin(shootRotation.z * 2 * Mathf.Deg2Rad)),
                         0,
                             _maxShootSpeed);
-            
+            if (double.IsNaN(expectSpeed)) expectSpeed = 0.01f;
             Bullet bulletComponent = bullet.GetComponent<Bullet>();
             bulletComponent.initSpeed = expectSpeed;
             bulletComponent.SetShooter(this);

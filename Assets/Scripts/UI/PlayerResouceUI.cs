@@ -25,9 +25,11 @@ public class PlayerResouceUI : MonoBehaviour
         dispatchableFarmersText.text = "可调遣农夫:" + player.DispatchableFarmer;
         maxFarmersText.text = "最大农夫人口数:" + player.MaxFarmerNumber;
 
+        #if UNITY_EDITOR
         if (Input.GetKey(KeyCode.Q))
         {
             player.ChangeResource(Resource.Gold,10);
         }
+        #endif
     }
 }

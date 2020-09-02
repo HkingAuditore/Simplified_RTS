@@ -11,11 +11,24 @@ public class UnitDispatchUI : MonoBehaviour
     public Button unitRemoveButton;
     public GameObject unitSetIndicator;
     public Unit unit;
+    public int unitNumber;
     public Player player;
-    public UnitDIspatchManagerUI managerUI;
+    public UnitDispatchManagerUI managerUI;
+
+    private Text _foodWoodRequiredText;
+    private Text _goldRequiredText;
 
     public int UnitDispatchNumber { get; set; } = 0;
     private Stack<bool> _unitSelectStack = new Stack<bool>();
+
+    private void Awake()
+    {
+        this._foodWoodRequiredText = this.transform.Find("ResourceRequired").Find("FoodWood").GetComponent<Text>();
+        this._goldRequiredText = this.transform.Find("ResourceRequired").Find("Gold").GetComponent<Text>();
+
+        _foodWoodRequiredText.text = this.unit.costFood + " 食物 " + this.unit.costWood + " 木材";
+        _goldRequiredText.text = this.unit.costGold + " 黄金";
+    }
 
     public void AddClick(bool isFoodAndWood)
     {

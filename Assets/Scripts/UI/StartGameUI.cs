@@ -17,7 +17,7 @@ public class StartGameUI : MonoBehaviour
             PhotonNetwork.CurrentRoom.PlayerCount == 2)
         {
             PhotonNetwork.CurrentRoom.IsOpen = false;
-            PhotonNetwork.LoadLevel(1);
+            PhotonNetwork.LoadLevel(2);
 
         }
     }

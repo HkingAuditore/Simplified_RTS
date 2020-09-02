@@ -101,7 +101,7 @@ public class PlayerAI : Player
         this.ChangeResource(Resource.Wood, -costWood);
         this.ChangeResource(Resource.Gold, -costGold);
 
-        this.SetUnits(this.RoadToTransform(sendRoad).position, sendUnit.gameObject, sendRoad, goldSendNumber + foodAndWoodSendNumber);
+        this.SetUnits(this.RoadToTransform(sendRoad).position, Array.IndexOf(aiAvailableUnits,sendUnit), sendRoad, goldSendNumber + foodAndWoodSendNumber);
     }
 
     private void RestEnd()

@@ -8,7 +8,7 @@ using Photon.Realtime;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class NetworkLobbyManager :MonoBehaviourPunCallbacks
+public class NetworkLobbyManager : MonoBehaviourPunCallbacks
 {
     public GameObject lobbyUI;
     public Transform lobbyPanelContent;
@@ -22,10 +22,10 @@ public class NetworkLobbyManager :MonoBehaviourPunCallbacks
     public GameObject playerB;
 
     public Text roomPingText;
-    
+
     private Text _playerANameText;
     private Text _playerBNameText;
-    
+
     private void Awake()
     {
         _playerANameText = playerA.transform.Find("PlayerName").GetComponent<Text>();
@@ -33,10 +33,12 @@ public class NetworkLobbyManager :MonoBehaviourPunCallbacks
 
         PhotonNetwork.GameVersion = "1";
         PhotonNetwork.AutomaticallySyncScene = true;
-        PhotonNetwork.ConnectUsingSettings();
+        PhotonNetwork.SendRate = 20;
+        PhotonNetwork.SerializationRate = 5;
         
+        PhotonNetwork.ConnectUsingSettings();
     }
-    
+
     private void Update()
     {
         if (PhotonNetwork.InRoom)
@@ -59,23 +61,21 @@ public class NetworkLobbyManager :MonoBehaviourPunCallbacks
 
         Debug.Log("VAR");
         // PhotonNetwork.JoinOrCreateRoom("Room", new Photon.Realtime.RoomOptions() {MaxPlayers = 2}, default);
-        
     }
 
     #endregion
 
     #region 大厅
 
-
     private List<RoomInfo> _roomList = new List<RoomInfo>();
+
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
         base.OnRoomListUpdate(roomList);
         //Debug.Log("IN!");
         UpdateRoomList(roomList);
-
     }
-    
+
     //更新房间列表
     private void UpdateRoomList(List<RoomInfo> roomList)
     {
@@ -107,7 +107,6 @@ public class NetworkLobbyManager :MonoBehaviourPunCallbacks
             }
         }
     }
-    
 
 
     public void CreateRoom()
@@ -116,15 +115,17 @@ public class NetworkLobbyManager :MonoBehaviourPunCallbacks
             return;
         PhotonNetwork.LocalPlayer.NickName = playerName.text;
         string now = DateTime.Now.ToString("T");
-        PhotonNetwork.CreateRoom("[" + PhotonNetwork.LocalPlayer.NickName  + "]" + now, new RoomOptions() {MaxPlayers = 2}, TypedLobby.Default);
-        
+        PhotonNetwork.CreateRoom("[" + PhotonNetwork.LocalPlayer.NickName + "]" + now,
+            new RoomOptions() {MaxPlayers = 2, PublishUserId = true, BroadcastPropsChangeToAll = true},
+            TypedLobby.Default);
+
         GameObject lineRoom = Instantiate(roomLine, lobbyPanelContent);
-        
+
         if (lineRoom != null)
         {
-            lineRoom.name = "[" + PhotonNetwork.LocalPlayer.NickName  + "]" + now;
+            lineRoom.name = "[" + PhotonNetwork.LocalPlayer.NickName + "]" + now;
             var roomText = lineRoom.transform.Find("Text").GetComponent<Text>();
-            roomText.text = "[" + PhotonNetwork.LocalPlayer.NickName  + "]" + now;
+            roomText.text = "[" + PhotonNetwork.LocalPlayer.NickName + "]" + now;
             // roomText.color = new Color(1f, 0.34f, 0.44f);
         }
 
@@ -144,7 +145,7 @@ public class NetworkLobbyManager :MonoBehaviourPunCallbacks
     }
 
     #endregion
-    
+
     #region 房间
 
     public override void OnJoinedRoom()
@@ -152,9 +153,9 @@ public class NetworkLobbyManager :MonoBehaviourPunCallbacks
         base.OnJoinedRoom();
         lobbyUI.SetActive(false);
         roomUI.SetActive(true);
-        
+
         ShowPlayerInfo();
-        
+
         // if (PhotonNetwork.CurrentRoom.MaxPlayers == PhotonNetwork.CurrentRoom.PlayerCount)
         // {
         //     SceneManager.LoadScene(sceneBuildIndex: 1);
@@ -177,7 +178,7 @@ public class NetworkLobbyManager :MonoBehaviourPunCallbacks
     {
         var playersArray = PhotonNetwork.CurrentRoom.Players.Values.ToArray();
         _playerANameText.text = playersArray[0].NickName;
-        if(PhotonNetwork.CurrentRoom.PlayerCount > 1)
+        if (PhotonNetwork.CurrentRoom.PlayerCount > 1)
             _playerBNameText.text = playersArray[1].NickName;
     }
 
