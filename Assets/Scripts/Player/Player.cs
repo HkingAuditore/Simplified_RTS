@@ -27,6 +27,7 @@ public class ResourceRunOutException : ApplicationException
 
 public class Player : MonoBehaviour
 {
+    private GameObject _gameEventHandler;
     [SerializeField] private int hp;
 
     public int HP
@@ -34,15 +35,19 @@ public class Player : MonoBehaviour
         get => hp;
         set
         {
-            hp = value;
-            //Debug.Log("Change HP");
-            //UpdateLocalPlayerProperties();
+            // hp = value;
+            if (value > 0)
+                hp = value;
+            else
+                _gameEventHandler.GetComponent<ResultUI>().ShowResult(this.gameObject.name[0] == 'B');
         }
     }
 
 
     public virtual void Start()
     {
+        _gameEventHandler = GameObject.Find("GameEventHandler").gameObject;
+        
         this._top = this.gameObject.transform.Find("Positions").transform.Find("TopOri").transform;
         this._mid = this.gameObject.transform.Find("Positions").transform.Find("MidOri").transform;
         this._bot = this.gameObject.transform.Find("Positions").transform.Find("BotOri").transform;
