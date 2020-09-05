@@ -19,6 +19,8 @@ namespace Units
         float AttackRange { get; }
 
         void Attack();
+
+        Unit GetUnit();
     }
     
     

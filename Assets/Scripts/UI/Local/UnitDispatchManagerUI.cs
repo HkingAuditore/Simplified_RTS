@@ -14,12 +14,13 @@ public class UnitDispatchManagerUI : MonoBehaviour
           Road rd = (Road) rdInt;
           Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
           RaycastHit rayHit;
-          Physics.Raycast(ray, out rayHit);
+          int layerMask = 1 << 0; 
+          Physics.Raycast(ray, out rayHit,50f,layerMask);
         
           Debug.DrawLine(ray.origin, rayHit.point);
           // Debug.Log(rayHit.point);
           Vector3 pos = new Vector3(rayHit.point.x,rayHit.point.y,rayHit.point.z+0.3f);
-          // Debug.Log("HIT POINT:" + pos);
+          Debug.Log("HIT POINT:" + pos);
 
           foreach (var unitDispatchUI in UnitDispatchUIs)
           {

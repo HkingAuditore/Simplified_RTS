@@ -140,6 +140,7 @@ GameObject:
   - component: {fileID: 1248671747110095697}
   - component: {fileID: -3355381918789182122}
   - component: {fileID: -2091491486495768192}
+  - component: {fileID: 7978151199651692128}
   m_Layer: 0
   m_Name: Archer
   m_TagString: Untagged
@@ -155,7 +156,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5051234519974670922}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.58, y: 0.25, z: 0.74}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4496857796599364576}
@@ -221,9 +222,10 @@ MonoBehaviour:
   costGold: 5
   attackPower: 10
   attackColdDownTime: 1.2
-  attackRange: 4
+  attackRange: 4.5
   shootTransform: {fileID: 1075564247}
   bulletObject: {fileID: 3804412901380430263, guid: 608395d063a25f042ac86d9d98df15fc, type: 3}
+  shootAngleOffset: 0
 --- !u!114 &-3355381918789182122
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -262,3 +264,16 @@ MonoBehaviour:
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
+--- !u!135 &7978151199651692128
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5051234519974670922}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 7
+  m_Center: {x: 0, y: 0, z: 0}

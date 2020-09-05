@@ -23,6 +23,7 @@ public class RangedAttackUnit : Unit, IMilitaryUnit
     
     public override void Start()
     {
+        this.BeAttackedEventHandler += AttackedReact;
         if (!isUnmovable)
             StartEventHandler += () => this.navMeshAgent.stoppingDistance = attackRange * 0.8f;
         this.InitTarget = GetEnemySide();
@@ -104,7 +105,7 @@ public class RangedAttackUnit : Unit, IMilitaryUnit
                                 ?.OrderBy(enemy =>
                                 {
                                     if (this.isUnmovable)
-                                        return Vector3.Distance(this.transform.position, enemy.transform.position);
+                                        return Vector3.Distance(this.transform.position, enemy.transform.position) * 3.5;
                                     return GetAgentDistanceOnNavMesh(enemy.transform.position);
                                 })
                                 ?.ToArray()?[0]
@@ -169,12 +170,18 @@ public class RangedAttackUnit : Unit, IMilitaryUnit
         }
     }
 
-    private void AttackedReact(Unit attacker)
+    public Unit GetUnit()
+    {
+        return this;
+    }
+
+
+    private void AttackedReact(IMilitaryUnit attacker)
     {
         if (Vector3.Distance(this.transform.position, _enemyUnit.transform.position) >
-            Vector3.Distance(this.transform.position, attacker.transform.position))
+            Vector3.Distance(this.transform.position, attacker.GetUnit().transform.position))
         {
-            this._enemyUnit = attacker;
+            this._enemyUnit = attacker.GetUnit();
         }
     }
 

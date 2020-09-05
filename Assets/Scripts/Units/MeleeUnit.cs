@@ -112,6 +112,11 @@ public class MeleeUnit : Unit, IMilitaryUnit
         if (_enemyUnit.HP <= 0) _isFoundEnemy = false;
     }
 
+    public Unit GetUnit()
+    {
+        return this;
+    }
+
     private void AttackedReact(Unit attacker)
     {
         if (Vector3.Distance(this.transform.position, _enemyUnit.transform.position) >

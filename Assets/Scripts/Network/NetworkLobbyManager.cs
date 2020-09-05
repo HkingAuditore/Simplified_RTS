@@ -37,6 +37,7 @@ public class NetworkLobbyManager : MonoBehaviourPunCallbacks
         PhotonNetwork.SerializationRate = 5;
         
         PhotonNetwork.ConnectUsingSettings();
+
     }
 
     private void Update()
@@ -57,7 +58,7 @@ public class NetworkLobbyManager : MonoBehaviourPunCallbacks
     public override void OnConnectedToMaster()
     {
         base.OnConnectedToMaster();
-        PhotonNetwork.JoinLobby();
+        PhotonNetwork.JoinLobby(new TypedLobby("TestLobby", default));
 
         Debug.Log("VAR");
         // PhotonNetwork.JoinOrCreateRoom("Room", new Photon.Realtime.RoomOptions() {MaxPlayers = 2}, default);
