@@ -28,7 +28,8 @@ public class RangedAttackUnit : Unit, IMilitaryUnit
             StartEventHandler += () => this.navMeshAgent.stoppingDistance = attackRange * 0.8f;
         this.InitTarget = GetEnemySide();
         _maxShootSpeed = Mathf.Sqrt(attackRange * Bullet.Gravity / (float) Mathf.Sin(45f * 2 * Mathf.Deg2Rad));
-        _enemyLayer = LayerMask.LayerToName(this.gameObject.layer) == "ASide" ? "BSide" : "ASide";
+        _attackTrigger = this.transform.Find("FindEnemyRange").GetComponent<FindEnemyTrigger>();
+        
         FindEnemy();
 
         base.Start();
@@ -42,8 +43,9 @@ public class RangedAttackUnit : Unit, IMilitaryUnit
         if(_enemyUnit!=null)
             this.Goto(_enemyUnit.transform);
         // 寻敌攻击
-        if (!_isFoundEnemy || _enemyUnit?.HP <= 0 || Vector3.Distance(_enemyUnit.transform.position,this.transform.position) > attackRange)
+        if (!_isFoundEnemy || _enemyUnit == null || (_isFoundEnemy && _enemyUnit.HP <= 0))
         {
+            //Debug.Log("FIND NEW!");
             FindEnemy();
             if (_enemyUnit != null)
             {
@@ -53,6 +55,7 @@ public class RangedAttackUnit : Unit, IMilitaryUnit
             else
             {
                 this.Goto(this.InitTarget);
+                _isFoundEnemy = false;
             }
             if (!isUnmovable)
                 this.navMeshAgent.speed = this.Speed;
@@ -77,47 +80,51 @@ public class RangedAttackUnit : Unit, IMilitaryUnit
     /********寻敌********/
     private float _giveUpRadius = 8f;
     private bool _isFoundEnemy = false;
-    private float _findEnemyRadius = 8.8f;
+    public float findEnemyRadius = 8.8f;
     private Unit _enemyUnit;
+    
+    private FindEnemyTrigger _attackTrigger;
 
-    private string _enemyLayer;
     private void FindEnemy()
     {
         
-        Collider[] enemiesCol = new Collider[10];
-        var size = Physics.OverlapSphereNonAlloc(this.transform.position, _findEnemyRadius, enemiesCol, 1 << LayerMask.NameToLayer(_enemyLayer));
-        if (size == 0) 
-            return;
-        Array.Resize(ref enemiesCol, size);
-        try
-        {
-            
-            this._enemyUnit = enemiesCol?.Where(
-                                    enemy => ((enemy.gameObject.CompareTag(this.gameObject.tag))
-                                                    ||
-                                                    (enemy.gameObject.GetComponent<Unit>().IsAtEnemyDoor == true)
-                                                    ||
-                                                    (enemy.gameObject.CompareTag("Door"))
-                                                    )
-                                                
-                                                    
-                                    )
-                                ?.OrderBy(enemy =>
-                                {
-                                    if (this.isUnmovable)
-                                        return Vector3.Distance(this.transform.position, enemy.transform.position) * 3.5;
-                                    return GetAgentDistanceOnNavMesh(enemy.transform.position);
-                                })
-                                ?.ToArray()?[0]
-                                .gameObject
-                                .GetComponent<Unit>();
+        // Collider[] enemiesCol = new Collider[10];
+        // var size = Physics.OverlapSphereNonAlloc(this.transform.position, _findEnemyRadius, enemiesCol, 1 << LayerMask.NameToLayer(_enemyLayer));
+        // if (size == 0) 
+        //     return;
+        // Array.Resize(ref enemiesCol, size);
+        // try
+        // {
+        //     
+        //     this._enemyUnit = enemiesCol?.Where(
+        //                             enemy => ((enemy.gameObject.CompareTag(this.gameObject.tag))
+        //                                             ||
+        //                                             (enemy.gameObject.GetComponent<Unit>().IsAtEnemyDoor == true)
+        //                                             ||
+        //                                             (enemy.gameObject.CompareTag("Door"))
+        //                                             )
+        //                                         
+        //                                             
+        //                             )
+        //                         ?.OrderBy(enemy =>
+        //                         {
+        //                             if (this.isUnmovable)
+        //                                 return Vector3.Distance(this.transform.position, enemy.transform.position) * 3.5;
+        //                             return GetAgentDistanceOnNavMesh(enemy.transform.position);
+        //                         })
+        //                         ?.ToArray()?[0]
+        //                         .gameObject
+        //                         .GetComponent<Unit>();
+        //
+        // }
+        // catch (Exception e)
+        // {
+        //     Console.WriteLine(e);
+        //     //throw;
+        // }
+        
+        this._enemyUnit = _attackTrigger.GetEnemyInList();
 
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            //throw;
-        }
         // Debug.Log("END FIND:" + this._enemyUnit.gameObject.name);
     }
 
@@ -178,10 +185,22 @@ public class RangedAttackUnit : Unit, IMilitaryUnit
 
     private void AttackedReact(IMilitaryUnit attacker)
     {
-        if (Vector3.Distance(this.transform.position, _enemyUnit.transform.position) >
-            Vector3.Distance(this.transform.position, attacker.GetUnit().transform.position))
+        try
         {
-            this._enemyUnit = attacker.GetUnit();
+            if (attacker != null)
+            {
+                if (Vector3.Distance(this.transform.position, _enemyUnit.transform.position) >
+                    Vector3.Distance(this.transform.position, attacker.GetUnit().transform.position))
+                {
+                    this._enemyUnit = attacker.GetUnit();
+                }
+
+            }
+
+        }
+        catch
+        {
+            // ignored
         }
     }
 

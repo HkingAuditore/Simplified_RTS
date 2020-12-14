@@ -14,7 +14,7 @@ public class UnitDispatchManagerUI : MonoBehaviour
           Road rd = (Road) rdInt;
           Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
           RaycastHit rayHit;
-          int layerMask = 1 << 0; 
+          int layerMask = 1 << 11; 
           Physics.Raycast(ray, out rayHit,50f,layerMask);
         
           Debug.DrawLine(ray.origin, rayHit.point);

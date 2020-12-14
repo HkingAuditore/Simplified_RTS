@@ -39,7 +39,11 @@ public class Player : MonoBehaviour
             if (value > 0)
                 hp = value;
             else
+            {
+                Time.timeScale = 0;
                 _gameEventHandler.GetComponent<ResultUI>().ShowResult(this.gameObject.name[0] == 'B');
+            }
+            
         }
     }
 
@@ -405,9 +409,9 @@ public class Player : MonoBehaviour
         for (int i = 0; i < number; i++)
         {
             //随机生成点
-            Vector2 randomTr = Random.insideUnitCircle * 0.1f;
+            Vector2 randomTr = Random.insideUnitCircle * 0.3f;
             var oriPoint = new Vector3(tr.x + randomTr.x, 0, tr.z + randomTr.y);
-            // Debug.Log("SET POINT:" + oriPoint);
+            Debug.Log("SET POINT:" + oriPoint);
             
             InstantiateUnit(chosenUnit, rd, oriPoint);
         }

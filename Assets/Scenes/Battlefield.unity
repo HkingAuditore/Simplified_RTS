@@ -106,15 +106,15 @@ NavMeshSettings:
   m_BuildSettings:
     serializedVersion: 2
     agentTypeID: 0
-    agentRadius: 0.07
-    agentHeight: 0.05
-    agentSlope: 31.8
-    agentClimb: 0.04
+    agentRadius: 0.14
+    agentHeight: 0.5
+    agentSlope: 16.1
+    agentClimb: 0.2
     ledgeDropHeight: 0
     maxJumpAcrossDistance: 0
     minRegionArea: 2
-    manualCellSize: 0
-    cellSize: 0.023333333
+    manualCellSize: 1
+    cellSize: 0.1
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
@@ -2361,6 +2361,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1100839058}
     m_Modifications:
+    - target: {fileID: 252931517332627836, guid: 4d3931a7a5c807c468f48894462966a7, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1142458318243453785, guid: 4d3931a7a5c807c468f48894462966a7, type: 3}
       propertyPath: m_Name
       value: MidTower
@@ -2376,6 +2380,10 @@ PrefabInstance:
     - target: {fileID: 1777810440787457093, guid: 4d3931a7a5c807c468f48894462966a7, type: 3}
       propertyPath: viewIdField
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5360175178328026463, guid: 4d3931a7a5c807c468f48894462966a7, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6363538013402110790, guid: 4d3931a7a5c807c468f48894462966a7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5881,6 +5889,8 @@ GameObject:
   - component: {fileID: 1250947453}
   - component: {fileID: 1250947454}
   - component: {fileID: 1250947455}
+  - component: {fileID: 1250947456}
+  - component: {fileID: 1250947457}
   m_Layer: 9
   m_Name: BDoor
   m_TagString: Door
@@ -5936,6 +5946,42 @@ MonoBehaviour:
   costFood: 0
   costWood: 0
   costGold: 0
+--- !u!195 &1250947456
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1250947452}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.1
+  m_Speed: 1
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0.01
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1
+  m_BaseOffset: 0.5
+  m_WalkableMask: 9
+  m_ObstacleAvoidanceType: 4
+--- !u!136 &1250947457
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1250947452}
+  m_Material: {fileID: 13400000, guid: 17d87b79d3e691a48b2ab6916a393374, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.03
+  m_Height: 1.54
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1270445946
 GameObject:
   m_ObjectHideFlags: 0
@@ -6837,6 +6883,8 @@ GameObject:
   - component: {fileID: 1530438262}
   - component: {fileID: 1530438263}
   - component: {fileID: 1530438264}
+  - component: {fileID: 1530438265}
+  - component: {fileID: 1530438266}
   m_Layer: 8
   m_Name: ADoor
   m_TagString: Door
@@ -6892,6 +6940,42 @@ MonoBehaviour:
   costFood: 0
   costWood: 0
   costGold: 0
+--- !u!195 &1530438265
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1530438261}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.1
+  m_Speed: 1
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0.01
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1
+  m_BaseOffset: 0.5
+  m_WalkableMask: 9
+  m_ObstacleAvoidanceType: 0
+--- !u!136 &1530438266
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1530438261}
+  m_Material: {fileID: 13400000, guid: 17d87b79d3e691a48b2ab6916a393374, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.03
+  m_Height: 1.54
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1532695908
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7431,6 +7515,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1417364947}
     m_Modifications:
+    - target: {fileID: 252931517332627836, guid: 4d3931a7a5c807c468f48894462966a7, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1142458318243453785, guid: 4d3931a7a5c807c468f48894462966a7, type: 3}
       propertyPath: m_Name
       value: BotTower
@@ -8703,6 +8791,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 79bd1a24372a52449a9b2f130e074fc5, type: 3}
       propertyPath: m_NavMeshLayer
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 79bd1a24372a52449a9b2f130e074fc5, type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 79bd1a24372a52449a9b2f130e074fc5, type: 3}
@@ -10911,6 +11003,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1417364947}
     m_Modifications:
+    - target: {fileID: 252931517332627836, guid: 4d3931a7a5c807c468f48894462966a7, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1142458318243453785, guid: 4d3931a7a5c807c468f48894462966a7, type: 3}
       propertyPath: m_Name
       value: TopTower

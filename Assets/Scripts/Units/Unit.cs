@@ -67,6 +67,7 @@ namespace Units
             if (InitTarget != null) this.Goto(InitTarget);
         }
 
+        private float _baseTimer = 0f; 
         public void Update()
         {
             if (this.HP <= 0)
@@ -75,8 +76,23 @@ namespace Units
                 GameObject.Destroy(this.gameObject);
             }
 
+            _baseTimer += Time.deltaTime;
             try
             {
+                // if(_baseTimer > 1f)
+                // {
+                //     var dst = navMeshAgent.destination;
+                //     navMeshAgent.ResetPath();
+                //     navMeshAgent.SetDestination(dst);
+                //     _baseTimer = 0;
+                // }      
+                // if (!navMeshAgent.hasPath && navMeshAgent.pathStatus == NavMeshPathStatus.PathComplete) {
+                //     Debug.Log("Character stuck");
+                //     navMeshAgent.enabled = false;
+                //     navMeshAgent.enabled = true;
+                //     Debug.Log("navmesh re enabled");
+                //     // navmesh agent will start moving again
+                // }
                 //TODO 这里会跳出"GetRemainingDistance" can only be called on an active agent that has been placed on a NavMesh.
                 if (!isUnmovable && navMeshAgent.remainingDistance < 0.2f && !_isAtTarget)
                 {
@@ -87,7 +103,7 @@ namespace Units
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                //Console.WriteLine(e);
             }
         }
 
@@ -100,7 +116,7 @@ namespace Units
 
         protected Transform InitTarget { get; set; }
         protected NavMeshAgent navMeshAgent;
-        
+
         private bool _isAtTarget = false;
         public bool IsAtEnemyDoor { get; set; } = false;
 
