@@ -14,9 +14,11 @@ namespace Units
 
     public interface IMilitaryUnit
     {
-        int AttackPower { get; }
-        float AttackColdDownTime { get; }
-        float AttackRange { get; }
+        int AttackValue { get; set; }
+        float AttackColdDownTime { get; set; }
+        float AttackRange { get; set; }
+        int DefenceValue { get; set; }
+        float SpeedValue { get; set; }
 
         void Attack();
 
@@ -42,7 +44,15 @@ namespace Units
         }
 
         [SerializeField] private float speed = 1;
-        public float Speed => speed;
+        public float Speed
+        {
+            get => speed;
+            set
+            {
+                speed = value;
+                this.navMeshAgent.speed = value;
+            }
+        }
 
 
         //生产成本
@@ -160,7 +170,7 @@ namespace Units
         protected UnityAction<IMilitaryUnit> BeAttackedEventHandler;
         public void BeAttacked(IMilitaryUnit attacker)
         {
-            var damage = (attacker.AttackPower - this.defence) > 0 ? (attacker.AttackPower - this.defence) : 1;
+            var damage = (attacker.AttackValue - this.defence) > 0 ? (attacker.AttackValue - this.defence) : 1;
             this.HP -= damage;
 
             BeAttackedEventHandler?.Invoke(attacker);

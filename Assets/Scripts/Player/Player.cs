@@ -262,7 +262,7 @@ public class Player : MonoBehaviour
 
 
     // 生成农民GameObject
-    private void InstantiateFarmer(Road rd)
+    private  void InstantiateFarmer(Road rd)
     {
         RoadWorkingFarmers[(int) rd]++;
         Transform bornPoint;
@@ -302,6 +302,7 @@ public class Player : MonoBehaviour
                 Resources.Load("Units/" + farmerPrefab.name + LayerMask.LayerToName(this.gameObject.layer)[0]) as
                     Texture
             );
+        Debug.Log("TEX :" + "Units/" + farmerPrefab.name + LayerMask.LayerToName(this.gameObject.layer)[0]);
 
         farmerInstantiated.GetComponent<NavMeshAgent>().areaMask = resourceLayerMask.value;
         farmerInstantiated.tag = rd.ToString();
@@ -309,6 +310,50 @@ public class Player : MonoBehaviour
 
 
         farmerInstantiated.road = rd;
+        farmerInstantiated.ResouceCarried = 0;
+        //Debug.Log(this.gameObject.name + " Farmer Road :" + rd);
+        farmerInstantiated.gameObject.layer = this.gameObject.layer;
+        DispatchableFarmer--;
+
+        farmerInstantiated.enabled = true;
+    }
+
+    public void InstantiateFarmer(Road rd,Transform transform,int resourceCarried)
+    {
+        RoadWorkingFarmers[(int) rd]++;
+        Transform bornPoint = transform;
+
+        //寻路设置
+        LayerMask resourceLayerMask =
+            (1 << NavMesh.GetAreaFromName(LayerMask.LayerToName(this.gameObject.layer)[0] + "Walkable")) |
+            (1 << NavMesh.GetAreaFromName("Walkable"));
+
+        // Debug.Log(Resources.Load("Units/" + farmerPrefab.name + LayerMask.LayerToName(this.gameObject.layer)[0]));
+        
+        var farmerInstantiated = (Farmer) Instantiate<Farmer>(farmerPrefab, bornPoint.position,
+            farmerPrefab.transform.rotation,
+            this.gameObject.transform.Find(this.gameObject.name[0] + "Units").transform);
+
+        //TODO 动态生成材质实例，需要优化
+        farmerInstantiated.gameObject.transform.Find(farmerPrefab.name).gameObject.GetComponent<SpriteRenderer>()
+            .sharedMaterial = Instantiate<Material>(farmerPrefab.gameObject.transform.Find(farmerPrefab.name).gameObject
+            .GetComponent<SpriteRenderer>().sharedMaterial);
+        farmerInstantiated.gameObject.transform.Find(farmerPrefab.name).gameObject.GetComponent<SpriteRenderer>()
+            .sharedMaterial.SetTexture(
+                "_BaseMap",
+                Resources.Load("Units/" + farmerPrefab.name + LayerMask.LayerToName(this.gameObject.layer)[0]) as
+                    Texture
+            );
+
+        farmerInstantiated.GetComponent<NavMeshAgent>().areaMask = resourceLayerMask.value;
+        farmerInstantiated.tag = rd.ToString();
+        farmerInstantiated.sidePlayer = this;
+
+        farmerInstantiated.road = rd;
+        farmerInstantiated.ResouceCarried = (resourceCarried > farmerInstantiated.maxLoad[(int) rd])
+            ? farmerInstantiated.maxLoad[(int) rd]
+            : resourceCarried;
+
         //Debug.Log(this.gameObject.name + " Farmer Road :" + rd);
         farmerInstantiated.gameObject.layer = this.gameObject.layer;
         DispatchableFarmer--;

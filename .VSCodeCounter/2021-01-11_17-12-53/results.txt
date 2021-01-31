@@ -1,0 +1,61 @@
+Date : 2021-01-11 17:12:53
+Directory : f:\SimpleRTS\SimpleRTS\Simplified_RTS\Assets\Scripts
+Total : 26 files,  1750 codes, 233 comments, 458 blanks, all 2441 lines
+
+Languages
++----------+------------+------------+------------+------------+------------+
+| language | files      | code       | comment    | blank      | total      |
++----------+------------+------------+------------+------------+------------+
+| C#       |         26 |      1,750 |        233 |        458 |      2,441 |
++----------+------------+------------+------------+------------+------------+
+
+Directories
++------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                           | files      | code       | comment    | blank      | total      |
++------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                              |         26 |      1,750 |        233 |        458 |      2,441 |
+| Controllers                                                                                    |          1 |         26 |          0 |          4 |         30 |
+| Controllers\Camera                                                                             |          1 |         26 |          0 |          4 |         30 |
+| Network                                                                                        |          2 |        201 |         16 |         49 |        266 |
+| Player                                                                                         |          4 |        567 |         64 |        151 |        782 |
+| Render                                                                                         |          1 |         29 |          1 |          5 |         35 |
+| UI                                                                                             |         11 |        342 |         29 |         79 |        450 |
+| UI\Local                                                                                       |          3 |        153 |          3 |         35 |        191 |
+| UI\Online                                                                                      |          3 |         76 |         26 |         16 |        118 |
+| Units                                                                                          |          7 |        585 |        123 |        170 |        878 |
+| Units\Melee                                                                                    |          1 |         90 |         29 |         27 |        146 |
+| Units\RangedAttack                                                                             |          2 |        193 |         51 |         58 |        302 |
++------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| filename                                                                                       | language | code       | comment    | blank      | total      |
++------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| f:\SimpleRTS\SimpleRTS\Simplified_RTS\Assets\Scripts\Controllers\Camera\CameraController.cs    | C#       |         26 |          0 |          4 |         30 |
+| f:\SimpleRTS\SimpleRTS\Simplified_RTS\Assets\Scripts\Network\NetworkLobbyManager.cs            | C#       |        147 |         12 |         35 |        194 |
+| f:\SimpleRTS\SimpleRTS\Simplified_RTS\Assets\Scripts\Network\NetworkPlayerManager.cs           | C#       |         54 |          4 |         14 |         72 |
+| f:\SimpleRTS\SimpleRTS\Simplified_RTS\Assets\Scripts\Player\Player.cs                          | C#       |        338 |         39 |         87 |        464 |
+| f:\SimpleRTS\SimpleRTS\Simplified_RTS\Assets\Scripts\Player\PlayerAI.cs                        | C#       |        127 |          6 |         32 |        165 |
+| f:\SimpleRTS\SimpleRTS\Simplified_RTS\Assets\Scripts\Player\PlayerOnline_ASide.cs              | C#       |         50 |          6 |         14 |         70 |
+| f:\SimpleRTS\SimpleRTS\Simplified_RTS\Assets\Scripts\Player\PlayerOnline_BSide.cs              | C#       |         52 |         13 |         18 |         83 |
+| f:\SimpleRTS\SimpleRTS\Simplified_RTS\Assets\Scripts\Render\SpriteRendererPlus.cs              | C#       |         29 |          1 |          5 |         35 |
+| f:\SimpleRTS\SimpleRTS\Simplified_RTS\Assets\Scripts\UI\Local\FarmerDispatchUI.cs              | C#       |         41 |          0 |          5 |         46 |
+| f:\SimpleRTS\SimpleRTS\Simplified_RTS\Assets\Scripts\UI\Local\UnitDispatchManagerUI.cs         | C#       |         29 |          2 |         12 |         43 |
+| f:\SimpleRTS\SimpleRTS\Simplified_RTS\Assets\Scripts\UI\Local\UnitDispatchUI.cs                | C#       |         83 |          1 |         18 |        102 |
+| f:\SimpleRTS\SimpleRTS\Simplified_RTS\Assets\Scripts\UI\Online\FarmerDispatchUI_Online.cs      | C#       |         41 |          0 |          5 |         46 |
+| f:\SimpleRTS\SimpleRTS\Simplified_RTS\Assets\Scripts\UI\Online\NetworkRoomUI.cs                | C#       |         23 |          0 |          4 |         27 |
+| f:\SimpleRTS\SimpleRTS\Simplified_RTS\Assets\Scripts\UI\Online\UnitDIspatchManagerUI_Online.cs | C#       |         12 |         26 |          7 |         45 |
+| f:\SimpleRTS\SimpleRTS\Simplified_RTS\Assets\Scripts\UI\PlayerHPUI.cs                          | C#       |         20 |          0 |          5 |         25 |
+| f:\SimpleRTS\SimpleRTS\Simplified_RTS\Assets\Scripts\UI\PlayerResouceUI.cs                     | C#       |         28 |          0 |          8 |         36 |
+| f:\SimpleRTS\SimpleRTS\Simplified_RTS\Assets\Scripts\UI\ResultUI.cs                            | C#       |         24 |          0 |          4 |         28 |
+| f:\SimpleRTS\SimpleRTS\Simplified_RTS\Assets\Scripts\UI\StartGameUI.cs                         | C#       |         21 |          0 |          6 |         27 |
+| f:\SimpleRTS\SimpleRTS\Simplified_RTS\Assets\Scripts\UI\UnitHPUI.cs                            | C#       |         20 |          0 |          5 |         25 |
+| f:\SimpleRTS\SimpleRTS\Simplified_RTS\Assets\Scripts\Units\Door.cs                             | C#       |         32 |          0 |          8 |         40 |
+| f:\SimpleRTS\SimpleRTS\Simplified_RTS\Assets\Scripts\Units\Farmer.cs                           | C#       |         83 |         16 |         22 |        121 |
+| f:\SimpleRTS\SimpleRTS\Simplified_RTS\Assets\Scripts\Units\FindEnemyTrigger.cs                 | C#       |         78 |          3 |         15 |         96 |
+| f:\SimpleRTS\SimpleRTS\Simplified_RTS\Assets\Scripts\Units\Melee\MeleeUnit.cs                  | C#       |         90 |         29 |         27 |        146 |
+| f:\SimpleRTS\SimpleRTS\Simplified_RTS\Assets\Scripts\Units\RangedAttack\Bullet.cs              | C#       |         66 |          6 |         21 |         93 |
+| f:\SimpleRTS\SimpleRTS\Simplified_RTS\Assets\Scripts\Units\RangedAttack\RangedAttackUnit.cs    | C#       |        127 |         45 |         37 |        209 |
+| f:\SimpleRTS\SimpleRTS\Simplified_RTS\Assets\Scripts\Units\Unit.cs                             | C#       |        109 |         24 |         40 |        173 |
+| Total                                                                                          |          |      1,750 |        233 |        458 |      2,441 |
++------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+

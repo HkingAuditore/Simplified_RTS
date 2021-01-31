@@ -11,9 +11,35 @@ public class RangedAttackUnit : Unit, IMilitaryUnit
     [SerializeField] private float attackColdDownTime;
     [SerializeField] private float attackRange;
 
-    public float AttackColdDownTime => attackColdDownTime;
-    public int AttackPower => attackPower;
-    public float AttackRange => attackRange;
+    public float AttackColdDownTime
+    {
+        get => attackColdDownTime;
+        set => attackColdDownTime = value;
+    }
+
+    public int AttackValue
+    {
+        get => attackPower;
+        set => attackPower = value;
+    }
+
+    public float AttackRange
+    {
+        get => attackRange;
+        set => attackRange = value;
+    }
+
+    public int DefenceValue
+    {
+        get => defence;
+        set => defence = value;
+    }
+
+    public float SpeedValue
+    {
+        get => Speed;
+        set => Speed = value;
+    }
 
     public Transform shootTransform;
     

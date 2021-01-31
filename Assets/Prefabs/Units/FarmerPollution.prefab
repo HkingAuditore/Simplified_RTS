@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: -5886522035748786529}
   - component: {fileID: 8897996601518690296}
   - component: {fileID: 7789424742620534486}
-  - component: {fileID: 5408525696826754838}
+  - component: {fileID: -6389959626366354340}
   m_Layer: 0
-  m_Name: Farmer
+  m_Name: FarmerPollution
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -124,7 +124,7 @@ CapsuleCollider:
   m_Height: 0.76
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5408525696826754838
+--- !u!114 &-6389959626366354340
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -133,7 +133,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5408525696826754846}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf0ec4cb750169b4aabd92723410f4c6, type: 3}
+  m_Script: {fileID: 11500000, guid: fb456977fc5c09141a01bcd386d73ccc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   road: 1
@@ -147,6 +147,8 @@ MonoBehaviour:
   costGold: 0
   workTime: 1
   maxLoad: 080000000500000008000000
+  isPollution: 0
+  pollutionProduct: 0
 --- !u!1 &8558689829228214449
 GameObject:
   m_ObjectHideFlags: 0
@@ -159,7 +161,7 @@ GameObject:
   - component: {fileID: 4526416573260979304}
   - component: {fileID: 4526416573260979310}
   m_Layer: 0
-  m_Name: Farmer
+  m_Name: FarmerPollution
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -30,13 +30,13 @@ public class PlayerAI : Player
             LayerMask.NameToLayer(LayerMask.LayerToName(this.gameObject.layer) == "ASide" ? "BSide" : "ASide");
     }
 
-    private void Update()
+    protected void Update()
     {
         if (!_isColdDown)
             AIGaming();
     }
 
-    private void AIGaming()
+    protected virtual void AIGaming()
     {
         CountEnemy();
         DispatchUnits();
@@ -45,16 +45,16 @@ public class PlayerAI : Player
         Invoke("RestEnd", aiRestTime);
     }
 
-    private void CountEnemy()
+    protected void CountEnemy()
     {
         _topEnemy = GameObject.FindGameObjectsWithTag("Top").Count(gb => (_enemyLayer.value & (1 << gb.layer)) > 0);
         _midEnemy = GameObject.FindGameObjectsWithTag("Mid").Count(gb => (_enemyLayer.value & (1 << gb.layer)) > 0);
         _botEnemy = GameObject.FindGameObjectsWithTag("Bot").Count(gb => (_enemyLayer.value & (1 << gb.layer)) > 0);
     }
 
-    private bool _isColdDown = false;
+    protected bool _isColdDown = false;
 
-    private void DispatchUnits()
+    protected void DispatchUnits()
     {
         Road sendRoad = FindBiggestDisadvantageRoad();
 

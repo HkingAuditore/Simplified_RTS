@@ -9,10 +9,10 @@ using Object = System.Object;
 
 public class Farmer : Unit
 {
-    public int ResouceCarried { get; private set; }
+    public int ResouceCarried { get; protected internal set; }
 
-    private Transform _targerResource;
-    private Transform _home;
+    protected Transform _targerResource;
+    protected Transform _home;
     
     private Resource _resouceType;
 
@@ -38,15 +38,22 @@ public class Farmer : Unit
             this.sidePlayer.RoadWorkingFarmers[(int) this.road]--;
         };
         
-        this.ResouceCarried = 0;
-        InitTarget = _targerResource;
+        
+        if(this.ResouceCarried > 0)
+        {
+            InitTarget = _home;
+        }else {
+            this.ResouceCarried = 0;
+            InitTarget = _targerResource;
+        }
+        
         
         base.Start();
 
     }
     
     //到达目的地
-    private void OnNavStop(GameObject gm,Transform tr)
+    protected void OnNavStop(GameObject gm,Transform tr)
     {
         // Debug.Log("To Resource:" + Vector3.Distance(tr.position,_targerResource.position));
         // Debug.Log("To Home:" + Vector3.Distance(tr.position,_home.position));
@@ -60,7 +67,7 @@ public class Farmer : Unit
         }
     }
 
-    private void GenerateWorkPath()
+    protected void GenerateWorkPath()
     {
         this._home = this.sidePlayer.gameObject.transform.Find("Positions").Find(this.road.ToString() + "Ori").transform;
         // 注意资源排布要按照上中下路的顺序
@@ -95,7 +102,7 @@ public class Farmer : Unit
     public UnityAction<Farmer, Transform> farmerBackEventHandler;
     
     // 工作
-    private void Work()
+    protected virtual void Work()
     {
         this.ResouceCarried += maxLoad[(int)road];
         this.Goto(_home);
@@ -107,8 +114,8 @@ public class Farmer : Unit
     {
         farmerBackEventHandler(this,this.transform);
     }
-    
-    private void Drop(Farmer farmer,Transform tr)
+
+    protected void Drop(Farmer farmer,Transform tr)
     {
         this.sidePlayer.ChangeResource(_resouceType,this.ResouceCarried);
         this.ResouceCarried = 0;

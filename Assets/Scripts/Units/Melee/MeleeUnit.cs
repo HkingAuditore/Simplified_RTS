@@ -14,11 +14,35 @@ public class MeleeUnit : Unit, IMilitaryUnit
     [SerializeField] private float attackColdDownTime;
     [SerializeField] private float attackRange;
 
-    public int AttackPower => attackPower;
+    public int AttackValue
+    {
+        get => attackPower;
+        set => attackPower = value;
+    }
 
-    public float AttackColdDownTime => attackColdDownTime;
+    public float AttackColdDownTime
+    {
+        get => attackColdDownTime;
+        set => attackColdDownTime = value;
+    }
 
-    public float AttackRange => attackRange;
+    public float AttackRange
+    {
+        get => attackRange;
+        set => attackRange = value;
+    }
+
+    public int DefenceValue
+    {
+        get => defence;
+        set => defence = value;
+    }
+
+    public float SpeedValue
+    {
+        get => Speed;
+        set => Speed = value;
+    }
 
     public override void Start()
     {
