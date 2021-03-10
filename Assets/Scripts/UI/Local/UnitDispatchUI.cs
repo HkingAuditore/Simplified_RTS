@@ -1,76 +1,65 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Units;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UnitDispatchUI : MonoBehaviour
 {
-    public Text unitNumberText;
-    public Button unitRemoveButton;
-    public GameObject unitSetIndicator;
-    public Unit unit;
-    public int unitNumber;
-    public Player player;
+    public Text                  unitNumberText;
+    public Button                unitRemoveButton;
+    public GameObject            unitSetIndicator;
+    public Unit                  unit;
+    public int                   unitNumber;
+    public Player                player;
     public UnitDispatchManagerUI managerUI;
 
-    private Text _foodWoodRequiredText;
-    private Text _goldRequiredText;
+    private          Text        _foodWoodRequiredText;
+    private          Text        _goldRequiredText;
+    private readonly Stack<bool> _unitSelectStack = new Stack<bool>();
 
-    public int UnitDispatchNumber { get; set; } = 0;
-    private Stack<bool> _unitSelectStack = new Stack<bool>();
+    public int UnitDispatchNumber { get; set; }
 
     private void Awake()
     {
-        this._foodWoodRequiredText = this.transform.Find("ResourceRequired").Find("FoodWood").GetComponent<Text>();
-        this._goldRequiredText = this.transform.Find("ResourceRequired").Find("Gold").GetComponent<Text>();
+        _foodWoodRequiredText = transform.Find("ResourceRequired").Find("FoodWood").GetComponent<Text>();
+        _goldRequiredText     = transform.Find("ResourceRequired").Find("Gold").GetComponent<Text>();
 
-        _foodWoodRequiredText.text = this.unit.costFood + " 食物 " + this.unit.costWood + " 木材";
-        _goldRequiredText.text = this.unit.costGold + " 黄金";
+        _foodWoodRequiredText.text = unit.costFood + " 食物 " + unit.costWood + " 木材";
+        _goldRequiredText.text     = unit.costGold + " 黄金";
     }
 
     public void AddClick(bool isFoodAndWood)
     {
         // 尝试分配资源
         if (isFoodAndWood)
-        {
             try
             {
-                this.player.ChangeResource(Resource.Food,-unit.costFood);
-                this.player.ChangeResource(Resource.Wood,-unit.costWood);
-                
+                player.ChangeResource(Resource.Food, -unit.costFood);
+                player.ChangeResource(Resource.Wood, -unit.costWood);
             }
             catch (ResourceRunOutException e)
             {
-                if (e.resource == Resource.Wood)
-                {
-                    this.player.ChangeResource(Resource.Food,unit.costFood);
-                }
+                if (e.resource == Resource.Wood) player.ChangeResource(Resource.Food, unit.costFood);
 
                 return;
             }
-
-        }
         else
-        {
             try
             {
-                this.player.ChangeResource(Resource.Gold,-unit.costGold);
-                
+                player.ChangeResource(Resource.Gold, -unit.costGold);
             }
             catch (ResourceRunOutException)
             {
                 return;
             }
-        }
+
         UnitDispatchNumber++;
 
         unitNumberText.gameObject.SetActive(true);
         unitNumberText.text = UnitDispatchNumber.ToString();
         unitSetIndicator.gameObject.SetActive(true);
         unitRemoveButton.gameObject.SetActive(true);
-        
+
         _unitSelectStack.Push(isFoodAndWood);
     }
 
@@ -81,21 +70,19 @@ public class UnitDispatchUI : MonoBehaviour
 
         if (_unitSelectStack.Pop())
         {
-            this.player.ChangeResource(Resource.Food,unit.costFood);
-            this.player.ChangeResource(Resource.Wood,unit.costWood);
+            player.ChangeResource(Resource.Food, unit.costFood);
+            player.ChangeResource(Resource.Wood, unit.costWood);
         }
         else
         {
-            this.player.ChangeResource(Resource.Gold,unit.costGold);
+            player.ChangeResource(Resource.Gold, unit.costGold);
         }
-        
+
         if (UnitDispatchNumber <= 0)
         {
             unitNumberText.gameObject.SetActive(false);
             unitSetIndicator.gameObject.SetActive(false);
             unitRemoveButton.gameObject.SetActive(false);
         }
-
     }
-
 }

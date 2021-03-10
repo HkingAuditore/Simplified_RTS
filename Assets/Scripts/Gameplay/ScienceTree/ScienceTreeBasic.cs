@@ -7,6 +7,4 @@ namespace Gameplay.ScienceTree
     {
         public GlobalEventManager globalEventManager;
     }
-    
-    
 }

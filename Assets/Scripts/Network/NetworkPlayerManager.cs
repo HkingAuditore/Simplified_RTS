@@ -1,48 +1,46 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using ExitGames.Client.Photon;
 using Photon.Pun;
 using Units;
 using UnityEngine;
-using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 public class NetworkPlayerManager : MonoBehaviourPunCallbacks
 {
     public PlayerOnline_ASide playerASideOnline;
     public PlayerOnline_BSide playerBSideOnline;
+
     public override void OnPlayerPropertiesUpdate(Photon.Realtime.Player targetPlayer, Hashtable changedProps)
     {
         base.OnPlayerPropertiesUpdate(targetPlayer, changedProps);
         Debug.Log("Properties Changed!");
 
         if (targetPlayer != null && Equals(targetPlayer, playerBSideOnline.PlayerPhoton))
-        {
             // 需要优化
             playerBSideOnline.UpdateRemotePlayerProperties();
-        }
     }
 
     #region 操作命令传输
 
     #region 农民调遣
-    
+
     //A发送过来，传输给另一个端的B
     public void SendAddFarmer(Resource rs)
     {
         // Debug.Log("Call PRC!");
-        base.photonView.RPC("RPC_AddFarmer",RpcTarget.Others,rs);
+        photonView.RPC("RPC_AddFarmer", RpcTarget.Others, rs);
     }
-    
+
     [PunRPC]
     public void RPC_AddFarmer(Resource rs)
     {
         // Debug.Log("On PRC!");
         playerBSideOnline.AddFarmer(rs);
     }
-    
+
     public void SendSubtractFarmer(Resource rs)
     {
-        base.photonView.RPC("RPC_SubtractFarmer",RpcTarget.Others,rs);
+        photonView.RPC("RPC_SubtractFarmer", RpcTarget.Others, rs);
     }
+
     [PunRPC]
     public void RPC_SubtractFarmer(Resource rs)
     {
@@ -56,16 +54,16 @@ public class NetworkPlayerManager : MonoBehaviourPunCallbacks
     public void SendInstantiateUnit(int chosenUnit, Road rd, Vector3 oriPoint)
     {
         oriPoint.x *= -1;
-        base.photonView.RPC("RPC_SendInstantiateUnit",RpcTarget.Others,chosenUnit,rd,oriPoint);
+        photonView.RPC("RPC_SendInstantiateUnit", RpcTarget.Others, chosenUnit, rd, oriPoint);
     }
+
     [PunRPC]
     public void RPC_SendInstantiateUnit(int chosenUnit, Road rd, Vector3 oriPoint)
     {
         playerBSideOnline.InstantiateUnit(chosenUnit, rd, oriPoint);
     }
 
-
-    #endregion
     #endregion
 
+    #endregion
 }

@@ -7,23 +7,17 @@ namespace Gameplay.EventSystem
 {
     public class GlobalEventManager : MonoBehaviour
     {
-        private static GlobalEventManager _globalEventManager;
-        public static GlobalEventManager GetManager{
-            get
-            {
-                return _globalEventManager;
-            }
-        }
-
-        private void Awake()
-        {
-            _globalEventManager = this;
-        }
-
         public Player aSide;
         public Player bSide;
 
         public List<GlobalEventArgs> globalEventArgsList = new List<GlobalEventArgs>();
+
+        public static GlobalEventManager GetManager { get; private set; }
+
+        private void Awake()
+        {
+            GetManager = this;
+        }
 
         // void Start()
         // {
@@ -49,7 +43,7 @@ namespace Gameplay.EventSystem
                 StartCoroutine(DelayGlobalEvent(globalEventArgs.DelayTime, globalEventArgs));
             }
         }
-        
+
         private IEnumerator DelayGlobalEvent(float delayTime, GlobalEventArgs globalEventArgs)
         {
             Debug.Log("Delay Start");
@@ -58,7 +52,7 @@ namespace Gameplay.EventSystem
             globalEventArgsList.Add(globalEventArgs);
             GlobalEventInit(globalEventArgs);
         }
-        
+
         private void GlobalEventInit(GlobalEventArgs globalEventArgs)
         {
             if (globalEventArgsList.Contains(globalEventArgs))
@@ -66,16 +60,14 @@ namespace Gameplay.EventSystem
                 globalEventArgs.InitEventFunction(aSide, bSide, globalEventArgs.Args);
                 globalEventArgs.State = EventState.OnGoing;
                 if (globalEventArgs.IsTimeLimitation)
-                {
                     StartCoroutine(TimeLimitGlobalEvent(globalEventArgs.LimitTime, globalEventArgs));
-                }
             }
             else
             {
                 throw new Exception("事件表中找不到目标事件");
             }
         }
-        
+
         private IEnumerator TimeLimitGlobalEvent(float duration, GlobalEventArgs globalEventArgs)
         {
             Debug.Log("Event Start");
@@ -96,7 +88,6 @@ namespace Gameplay.EventSystem
             {
                 throw new Exception("事件表中找不到目标事件");
             }
-
         }
     }
 }

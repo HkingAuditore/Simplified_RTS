@@ -1,21 +1,19 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
-using UnityEngine.SceneManagement;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class NetworkLobbyManager : MonoBehaviourPunCallbacks
 {
     public GameObject lobbyUI;
-    public Transform lobbyPanelContent;
+    public Transform  lobbyPanelContent;
     public GameObject roomLine;
-    public Text lobbyPingText;
-    public Text playerName;
-    public Text pingText;
+    public Text       lobbyPingText;
+    public Text       playerName;
+    public Text       pingText;
 
     public GameObject roomUI;
     public GameObject playerA;
@@ -31,25 +29,20 @@ public class NetworkLobbyManager : MonoBehaviourPunCallbacks
         _playerANameText = playerA.transform.Find("PlayerName").GetComponent<Text>();
         _playerBNameText = playerB.transform.Find("PlayerName").GetComponent<Text>();
 
-        PhotonNetwork.GameVersion = "1";
+        PhotonNetwork.GameVersion            = "1";
         PhotonNetwork.AutomaticallySyncScene = true;
-        PhotonNetwork.SendRate = 20;
-        PhotonNetwork.SerializationRate = 5;
-        
-        PhotonNetwork.ConnectUsingSettings();
+        PhotonNetwork.SendRate               = 20;
+        PhotonNetwork.SerializationRate      = 5;
 
+        PhotonNetwork.ConnectUsingSettings();
     }
 
     private void Update()
     {
         if (PhotonNetwork.InRoom)
-        {
-            roomPingText.text = "PING:" + PhotonNetwork.GetPing().ToString();
-        }
+            roomPingText.text = "PING:" + PhotonNetwork.GetPing();
         else
-        {
-            pingText.text = "PING:" + PhotonNetwork.GetPing().ToString();
-        }
+            pingText.text = "PING:" + PhotonNetwork.GetPing();
     }
 
 
@@ -68,7 +61,7 @@ public class NetworkLobbyManager : MonoBehaviourPunCallbacks
 
     #region 大厅
 
-    private List<RoomInfo> _roomList = new List<RoomInfo>();
+    private readonly List<RoomInfo> _roomList = new List<RoomInfo>();
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
@@ -80,7 +73,7 @@ public class NetworkLobbyManager : MonoBehaviourPunCallbacks
     //更新房间列表
     private void UpdateRoomList(List<RoomInfo> roomList)
     {
-        foreach (RoomInfo roomInfo in roomList)
+        foreach (var roomInfo in roomList)
         {
             Debug.Log(roomInfo.Name);
             if (roomInfo.RemovedFromList)
@@ -89,12 +82,11 @@ public class NetworkLobbyManager : MonoBehaviourPunCallbacks
             }
             else if (lobbyPanelContent.transform.Find(roomInfo.Name) != null)
             {
-                continue;
             }
             else
             {
                 _roomList.Add(roomInfo);
-                GameObject lineRoom = Instantiate(roomLine, lobbyPanelContent);
+                var lineRoom = Instantiate(roomLine, lobbyPanelContent);
                 if (lineRoom != null)
                 {
                     lineRoom.name = roomInfo.Name;
@@ -115,12 +107,13 @@ public class NetworkLobbyManager : MonoBehaviourPunCallbacks
         if (!PhotonNetwork.IsConnected || PhotonNetwork.InRoom)
             return;
         PhotonNetwork.LocalPlayer.NickName = playerName.text;
-        string now = DateTime.Now.ToString("T");
+        var now = DateTime.Now.ToString("T");
         PhotonNetwork.CreateRoom("[" + PhotonNetwork.LocalPlayer.NickName + "]" + now,
-            new RoomOptions() {MaxPlayers = 2, PublishUserId = true, BroadcastPropsChangeToAll = true},
-            TypedLobby.Default);
+                                 new RoomOptions
+                                 {MaxPlayers = 2, PublishUserId = true, BroadcastPropsChangeToAll = true},
+                                 TypedLobby.Default);
 
-        GameObject lineRoom = Instantiate(roomLine, lobbyPanelContent);
+        var lineRoom = Instantiate(roomLine, lobbyPanelContent);
 
         if (lineRoom != null)
         {

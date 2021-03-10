@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using Units;
 using UnityEngine;
@@ -27,8 +25,10 @@ public class ResourceRunOutException : ApplicationException
 
 public class Player : MonoBehaviour
 {
-    private GameObject _gameEventHandler;
-    [SerializeField] private int hp;
+    [SerializeField] private int        hp;
+    private                  GameObject _gameEventHandler;
+
+    public UnityAction updateEventHandler;
 
     public int HP
     {
@@ -37,42 +37,15 @@ public class Player : MonoBehaviour
         {
             // hp = value;
             if (value > 0)
+            {
                 hp = value;
+            }
             else
             {
                 Time.timeScale = 0;
-                _gameEventHandler.GetComponent<ResultUI>().ShowResult(this.gameObject.name[0] == 'B');
+                _gameEventHandler.GetComponent<ResultUI>().ShowResult(gameObject.name[0] == 'B');
             }
-            
         }
-    }
-
-
-    public virtual void Start()
-    {
-        _gameEventHandler = GameObject.Find("GameEventHandler").gameObject;
-        
-        this._top = this.gameObject.transform.Find("Positions").transform.Find("TopOri").transform;
-        this._mid = this.gameObject.transform.Find("Positions").transform.Find("MidOri").transform;
-        this._bot = this.gameObject.transform.Find("Positions").transform.Find("BotOri").transform;
-
-        this.Food = 0;
-        this.Wood = 0;
-        this.Gold = 0;
-
-        DispatchableFarmer = FarmerCount;
-    }
-
-    public UnityAction updateEventHandler;
-
-    private void FixedUpdate()
-    {
-        //生产任务
-        RegisterProduceFarmer();
-        RegisterProduceResource();
-
-        DispatchFarmer();
-        updateEventHandler?.Invoke();
     }
 
 
@@ -83,13 +56,9 @@ public class Player : MonoBehaviour
         protected set
         {
             if (value >= 0)
-            {
                 _food = value;
-            }
             else
-            {
                 throw new ResourceRunOutException(Resource.Food);
-            }
             //Debug.Log("Change Food");
 
             UpdateLocalPlayerProperties();
@@ -102,13 +71,9 @@ public class Player : MonoBehaviour
         protected set
         {
             if (value >= 0)
-            {
                 _wood = value;
-            }
             else
-            {
                 throw new ResourceRunOutException(Resource.Wood);
-            }
             //Debug.Log("Change Wood");
 
             UpdateLocalPlayerProperties();
@@ -121,17 +86,39 @@ public class Player : MonoBehaviour
         protected set
         {
             if (value >= 0)
-            {
                 _gold = value;
-            }
             else
-            {
                 throw new ResourceRunOutException(Resource.Gold);
-            }
             //Debug.Log("Change Gold");
 
             UpdateLocalPlayerProperties();
         }
+    }
+
+
+    public virtual void Start()
+    {
+        _gameEventHandler = GameObject.Find("GameEventHandler").gameObject;
+
+        _top = gameObject.transform.Find("Positions").transform.Find("TopOri").transform;
+        _mid = gameObject.transform.Find("Positions").transform.Find("MidOri").transform;
+        _bot = gameObject.transform.Find("Positions").transform.Find("BotOri").transform;
+
+        Food = 0;
+        Wood = 0;
+        Gold = 0;
+
+        DispatchableFarmer = FarmerCount;
+    }
+
+    private void FixedUpdate()
+    {
+        //生产任务
+        RegisterProduceFarmer();
+        RegisterProduceResource();
+
+        DispatchFarmer();
+        updateEventHandler?.Invoke();
     }
 
 
@@ -140,18 +127,26 @@ public class Player : MonoBehaviour
         switch (resource)
         {
             case Resource.Food:
-                this.Food += count;
+                Food += count;
                 break;
             case Resource.Wood:
-                this.Wood += count;
+                Wood += count;
                 break;
             case Resource.Gold:
-                this.Gold += count;
+                Gold += count;
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(resource), resource, null);
         }
     }
+
+    #region 网络支持
+
+    public virtual void UpdateLocalPlayerProperties()
+    {
+    }
+
+    #endregion
 
     #region 农民相关处理
 
@@ -161,12 +156,12 @@ public class Player : MonoBehaviour
 
     /**********农民派遣*********/
     //农民
-    public Farmer farmerPrefab;
-    private int _maxFarmerNumber = 5;
-    private int _farmerCount = 1;
-    private int _dispatchableFarmer;
-    private int[] _roadFarmers = new int[3];
-    private int[] _roadWorkingFarmers = new int[3];
+    public  Farmer farmerPrefab;
+    private int    _maxFarmerNumber = 5;
+    private int    _farmerCount     = 1;
+    private int    _dispatchableFarmer;
+    private int[]  _roadFarmers        = new int[3];
+    private int[]  _roadWorkingFarmers = new int[3];
 
     // 最大可用农民数量
 
@@ -239,18 +234,15 @@ public class Player : MonoBehaviour
     protected Transform _top;
     protected Transform _mid;
     protected Transform _bot;
-    private int _food;
-    private int _wood;
-    private int _gold;
+    private   int       _food;
+    private   int       _wood;
+    private   int       _gold;
 
 
     //增加一条路的农民分配
     public virtual void AddFarmer(Resource rs)
     {
-        if (FarmerCount > RoadFarmers.Sum())
-        {
-            RoadFarmers[(int) rs]++;
-        }
+        if (FarmerCount > RoadFarmers.Sum()) RoadFarmers[(int) rs]++;
     }
 
     //减少一条路的农民分配
@@ -262,7 +254,7 @@ public class Player : MonoBehaviour
 
 
     // 生成农民GameObject
-    private  void InstantiateFarmer(Road rd)
+    private void InstantiateFarmer(Road rd)
     {
         RoadWorkingFarmers[(int) rd]++;
         Transform bornPoint;
@@ -283,79 +275,83 @@ public class Player : MonoBehaviour
 
         //寻路设置
         LayerMask resourceLayerMask =
-            (1 << NavMesh.GetAreaFromName(LayerMask.LayerToName(this.gameObject.layer)[0] + "Walkable")) |
+            (1 << NavMesh.GetAreaFromName(LayerMask.LayerToName(gameObject.layer)[0] + "Walkable")) |
             (1 << NavMesh.GetAreaFromName("Walkable"));
 
         // Debug.Log(Resources.Load("Units/" + farmerPrefab.name + LayerMask.LayerToName(this.gameObject.layer)[0]));
-        
-        var farmerInstantiated = (Farmer) Instantiate<Farmer>(farmerPrefab, bornPoint.position,
-            farmerPrefab.transform.rotation,
-            this.gameObject.transform.Find(this.gameObject.name[0] + "Units").transform);
+
+        var farmerInstantiated = Instantiate(farmerPrefab, bornPoint.position,
+                                             farmerPrefab.transform.rotation,
+                                             gameObject.transform.Find(gameObject.name[0] + "Units").transform);
 
         //TODO 动态生成材质实例，需要优化
         farmerInstantiated.gameObject.transform.Find(farmerPrefab.name).gameObject.GetComponent<SpriteRenderer>()
-            .sharedMaterial = Instantiate<Material>(farmerPrefab.gameObject.transform.Find(farmerPrefab.name).gameObject
-            .GetComponent<SpriteRenderer>().sharedMaterial);
+                          .sharedMaterial = Instantiate(farmerPrefab
+                                                       .gameObject.transform.Find(farmerPrefab.name).gameObject
+                                                       .GetComponent<SpriteRenderer>().sharedMaterial);
         farmerInstantiated.gameObject.transform.Find(farmerPrefab.name).gameObject.GetComponent<SpriteRenderer>()
-            .sharedMaterial.SetTexture(
-                "_BaseMap",
-                Resources.Load("Units/" + farmerPrefab.name + LayerMask.LayerToName(this.gameObject.layer)[0]) as
-                    Texture
-            );
-        Debug.Log("TEX :" + "Units/" + farmerPrefab.name + LayerMask.LayerToName(this.gameObject.layer)[0]);
+                          .sharedMaterial.SetTexture(
+                                                     "_BaseMap",
+                                                     Resources.Load("Units/" + farmerPrefab.name +
+                                                                    LayerMask.LayerToName(gameObject.layer)[0]) as
+                                                         Texture
+                                                    );
+        Debug.Log("TEX :" + "Units/" + farmerPrefab.name + LayerMask.LayerToName(gameObject.layer)[0]);
 
         farmerInstantiated.GetComponent<NavMeshAgent>().areaMask = resourceLayerMask.value;
-        farmerInstantiated.tag = rd.ToString();
-        farmerInstantiated.sidePlayer = this;
+        farmerInstantiated.tag                                   = rd.ToString();
+        farmerInstantiated.sidePlayer                            = this;
 
 
-        farmerInstantiated.road = rd;
+        farmerInstantiated.road           = rd;
         farmerInstantiated.ResouceCarried = 0;
         //Debug.Log(this.gameObject.name + " Farmer Road :" + rd);
-        farmerInstantiated.gameObject.layer = this.gameObject.layer;
+        farmerInstantiated.gameObject.layer = gameObject.layer;
         DispatchableFarmer--;
 
         farmerInstantiated.enabled = true;
     }
 
-    public void InstantiateFarmer(Road rd,Transform transform,int resourceCarried)
+    public void InstantiateFarmer(Road rd, Transform transform, int resourceCarried)
     {
         RoadWorkingFarmers[(int) rd]++;
-        Transform bornPoint = transform;
+        var bornPoint = transform;
 
         //寻路设置
         LayerMask resourceLayerMask =
-            (1 << NavMesh.GetAreaFromName(LayerMask.LayerToName(this.gameObject.layer)[0] + "Walkable")) |
+            (1 << NavMesh.GetAreaFromName(LayerMask.LayerToName(gameObject.layer)[0] + "Walkable")) |
             (1 << NavMesh.GetAreaFromName("Walkable"));
 
         // Debug.Log(Resources.Load("Units/" + farmerPrefab.name + LayerMask.LayerToName(this.gameObject.layer)[0]));
-        
-        var farmerInstantiated = (Farmer) Instantiate<Farmer>(farmerPrefab, bornPoint.position,
-            farmerPrefab.transform.rotation,
-            this.gameObject.transform.Find(this.gameObject.name[0] + "Units").transform);
+
+        var farmerInstantiated = Instantiate(farmerPrefab, bornPoint.position,
+                                             farmerPrefab.transform.rotation,
+                                             gameObject.transform.Find(gameObject.name[0] + "Units").transform);
 
         //TODO 动态生成材质实例，需要优化
         farmerInstantiated.gameObject.transform.Find(farmerPrefab.name).gameObject.GetComponent<SpriteRenderer>()
-            .sharedMaterial = Instantiate<Material>(farmerPrefab.gameObject.transform.Find(farmerPrefab.name).gameObject
-            .GetComponent<SpriteRenderer>().sharedMaterial);
+                          .sharedMaterial = Instantiate(farmerPrefab
+                                                       .gameObject.transform.Find(farmerPrefab.name).gameObject
+                                                       .GetComponent<SpriteRenderer>().sharedMaterial);
         farmerInstantiated.gameObject.transform.Find(farmerPrefab.name).gameObject.GetComponent<SpriteRenderer>()
-            .sharedMaterial.SetTexture(
-                "_BaseMap",
-                Resources.Load("Units/" + farmerPrefab.name + LayerMask.LayerToName(this.gameObject.layer)[0]) as
-                    Texture
-            );
+                          .sharedMaterial.SetTexture(
+                                                     "_BaseMap",
+                                                     Resources.Load("Units/" + farmerPrefab.name +
+                                                                    LayerMask.LayerToName(gameObject.layer)[0]) as
+                                                         Texture
+                                                    );
 
         farmerInstantiated.GetComponent<NavMeshAgent>().areaMask = resourceLayerMask.value;
-        farmerInstantiated.tag = rd.ToString();
-        farmerInstantiated.sidePlayer = this;
+        farmerInstantiated.tag                                   = rd.ToString();
+        farmerInstantiated.sidePlayer                            = this;
 
         farmerInstantiated.road = rd;
-        farmerInstantiated.ResouceCarried = (resourceCarried > farmerInstantiated.maxLoad[(int) rd])
+        farmerInstantiated.ResouceCarried = resourceCarried > farmerInstantiated.maxLoad[(int) rd]
             ? farmerInstantiated.maxLoad[(int) rd]
             : resourceCarried;
 
         //Debug.Log(this.gameObject.name + " Farmer Road :" + rd);
-        farmerInstantiated.gameObject.layer = this.gameObject.layer;
+        farmerInstantiated.gameObject.layer = gameObject.layer;
         DispatchableFarmer--;
 
         farmerInstantiated.enabled = true;
@@ -376,15 +372,11 @@ public class Player : MonoBehaviour
     private void DispatchFarmer()
     {
         // bool isFixed = true;
-        for (int i = 0; i < 3; i++)
-        {
+        for (var i = 0; i < 3; i++)
             if (RoadFarmers[i] > RoadWorkingFarmers[i] && DispatchableFarmer > 0)
-            {
                 InstantiateFarmer((Road) i);
-                // 派遣之后人数是否满足要求
-                // if (RoadFarmers[i] > RoadWorkingFarmers[i]) isFixed = false;
-            }
-        }
+            // 派遣之后人数是否满足要求
+            // if (RoadFarmers[i] > RoadWorkingFarmers[i]) isFixed = false;
 
         // if (!isFixed)
         // {
@@ -396,12 +388,12 @@ public class Player : MonoBehaviour
 
     #region 农民生产
 
-    private bool _isProducingFarmer = false;
-    private float _farmerProducingTime = 5f;
+    private          bool  _isProducingFarmer;
+    private readonly float _farmerProducingTime = 5f;
 
     private void RegisterProduceFarmer()
     {
-        if (!_isProducingFarmer && this.FarmerCount < this.MaxFarmerNumber)
+        if (!_isProducingFarmer && FarmerCount < MaxFarmerNumber)
         {
             _isProducingFarmer = true;
             Invoke("ProduceFarmer", _farmerProducingTime);
@@ -410,8 +402,8 @@ public class Player : MonoBehaviour
 
     private void ProduceFarmer()
     {
-        this.FarmerCount++;
-        this.DispatchableFarmer++;
+        FarmerCount++;
+        DispatchableFarmer++;
         _isProducingFarmer = false;
     }
 
@@ -419,8 +411,8 @@ public class Player : MonoBehaviour
 
     #region 资源生产
 
-    private bool _isProducingResource = false;
-    private float _resourceProducingTime = 3f;
+    private          bool  _isProducingResource;
+    private readonly float _resourceProducingTime = 3f;
 
     private void RegisterProduceResource()
     {
@@ -433,8 +425,8 @@ public class Player : MonoBehaviour
 
     private void ProduceResource()
     {
-        this.ChangeResource(Resource.Food, 1);
-        this.ChangeResource(Resource.Wood, 1);
+        ChangeResource(Resource.Food, 1);
+        ChangeResource(Resource.Wood, 1);
 
         _isProducingResource = false;
     }
@@ -446,64 +438,98 @@ public class Player : MonoBehaviour
     #region 单位调遣
 
     public GameObject[] availableUnits;
+
     public void SetUnits(Vector3 tr, int chosenUnit, Road rd, int number)
     {
         // Debug.Log("NUMBER:" + number);
 
 
-        for (int i = 0; i < number; i++)
+        for (var i = 0; i < number; i++)
         {
             //随机生成点
-            Vector2 randomTr = Random.insideUnitCircle * 0.3f;
+            var randomTr = Random.insideUnitCircle * 0.3f;
             var oriPoint = new Vector3(tr.x + randomTr.x, 0, tr.z + randomTr.y);
-            Debug.Log("SET POINT:" + oriPoint);
-            
+            // Debug.Log("SET POINT:" + oriPoint);
+
             InstantiateUnit(chosenUnit, rd, oriPoint);
+        }
+    }
+    public void SetUnits(Vector3 tr, int chosenUnit, Road rd, int number,Vector3 oriVelocity)
+    {
+        // Debug.Log("NUMBER:" + number);
+
+        for (var i = 0; i < number; i++)
+        {
+            //随机生成点
+            var randomTr = Random.insideUnitCircle * 0.3f;
+            var oriPoint = new Vector3(tr.x + randomTr.x, 0, tr.z + randomTr.y);
+            // Debug.Log("SET POINT:" + oriPoint);
+
+            InstantiateUnit(chosenUnit, rd, oriPoint, oriVelocity);
         }
     }
 
     //生成单个单位
     public virtual void InstantiateUnit(int chosenUnit, Road rd, Vector3 oriPoint)
     {
-        GameObject unitGb = availableUnits[chosenUnit];
+        var unitInstantiated = InstantiateUnitBase(chosenUnit, rd, oriPoint);
+        unitInstantiated.GetComponent<Unit>().enabled = true;
+    }
+    
+    public virtual void InstantiateUnit(int chosenUnit, Road rd, Vector3 oriPoint,Vector3 oriVelocity)
+    {
+        var unitInstantiated = InstantiateUnitBase(chosenUnit, rd, oriPoint);        
+        try
+        {
+            ((IMilitaryUnit) (unitInstantiated.gameObject.GetComponent<Unit>())).OriginalVelocity = oriVelocity;
+            
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+        
+        unitInstantiated.GetComponent<Unit>().enabled = true;
+    }
+
+
+    private GameObject InstantiateUnitBase(int chosenUnit, Road rd, Vector3 oriPoint)
+    {
+        var unitGb = availableUnits[chosenUnit];
         //寻路设置
         LayerMask layerMask =
-            (1 << NavMesh.GetAreaFromName(LayerMask.LayerToName(this.gameObject.layer)[0] + "Walkable")) |
+            (1 << NavMesh.GetAreaFromName(LayerMask.LayerToName(gameObject.layer)[0] + "Walkable")) |
             (1 << NavMesh.GetAreaFromName("Walkable"));
 
         var unitInstantiated =
             Instantiate(unitGb, oriPoint, unitGb.transform.rotation,
-                this.gameObject.transform.Find(this.gameObject.name[0] + "Units").transform);
+                        gameObject.transform.Find(gameObject.name[0] + "Units").transform);
 
 
         //TODO 动态生成材质实例，需要优化
         unitInstantiated.gameObject.transform.Find(unitGb.name).gameObject.GetComponent<SpriteRenderer>()
-            .sharedMaterial = Instantiate<Material>(unitGb.gameObject.transform.Find(unitGb.name).gameObject
-            .GetComponent<SpriteRenderer>().sharedMaterial);
+                        .sharedMaterial = Instantiate(unitGb.gameObject.transform.Find(unitGb.name).gameObject
+                                                            .GetComponent<SpriteRenderer>().sharedMaterial);
 
         unitInstantiated.gameObject.transform.Find(unitGb.name).gameObject.GetComponent<SpriteRenderer>()
-            .sharedMaterial.SetTexture(
-                "_BaseMap",
-                Resources.Load("Units/" + unitGb.name + LayerMask.LayerToName(this.gameObject.layer)[0]) as Texture
-            );
+                        .sharedMaterial.SetTexture(
+                                                   "_BaseMap",
+                                                   Resources.Load("Units/" + unitGb.name +
+                                                                  LayerMask.LayerToName(gameObject.layer)[0]) as Texture
+                                                  );
 
-        unitInstantiated.gameObject.tag = rd.ToString();
-        unitInstantiated.gameObject.layer = this.gameObject.layer;
+        unitInstantiated.gameObject.tag                        = rd.ToString();
+        unitInstantiated.gameObject.layer                      = gameObject.layer;
         unitInstantiated.GetComponent<NavMeshAgent>().areaMask = layerMask.value;
 
-        unitInstantiated.gameObject.GetComponent<Unit>().road = rd;
+        unitInstantiated.gameObject.GetComponent<Unit>().road       = rd;
         unitInstantiated.gameObject.GetComponent<Unit>().sidePlayer = this;
 
-        unitInstantiated.GetComponent<Unit>().enabled = true;
+        
+        return unitInstantiated;
     }
 
-    #endregion
-
-    #region 网络支持
-
-    public virtual void UpdateLocalPlayerProperties()
-    {
-    }
 
     #endregion
 }

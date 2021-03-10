@@ -1,18 +1,75 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using Units;
+﻿using Units;
 using UnityEngine;
-using UnityEngine.AI;
-
 
 public class MeleeUnit : Unit, IMilitaryUnit
 {
-    
-    [SerializeField] private int attackPower;
-    [SerializeField] private float attackColdDownTime;
-    [SerializeField] private float attackRange;
+    [SerializeField] private int       attackPower;
+    [SerializeField] private float     attackColdDownTime;
+    [SerializeField] private float     attackRange;
+    public                   Vector3   originalVelocity;
+    public                   float     findEnemyRadius = 2.2f;
+
+    private                  bool      _isFoundEnemy;
+    private                  Unit      _enemyUnit;
+
+    private FindEnemyTrigger _attackTrigger;
+
+
+    /********寻敌********/
+    private float _giveUpRadius = 1.5f;
+
+    private float _timer;
+
+
+    public override void Start()
+    {
+        
+        InitTarget              = GetEnemySide();
+        _attackTrigger          = transform.Find("FindEnemyRange").GetComponent<FindEnemyTrigger>();
+        UnitRigidbody          = this.GetComponent<Rigidbody>();
+        UnitRigidbody.velocity = OriginalVelocity;
+        Debug.Log(this.GetComponent<Rigidbody>().velocity);
+        FindEnemy();
+        base.Start();
+    }
+
+    private void FixedUpdate()
+    {
+        _timer += Time.deltaTime;
+        // if(_enemyUnit!=null && Vector3.Distance( this.navMeshAgent.destination,this._enemyUnit.transform.position) > .1f)
+        // {
+        //     this.Goto(_enemyUnit.transform);
+        // }
+        // 寻敌攻击
+        if (!_isFoundEnemy || _enemyUnit == null || (_isFoundEnemy && _enemyUnit?.HP <= 0))
+        {
+            FindEnemy();
+            if (_enemyUnit != null)
+            {
+                Goto(_enemyUnit.transform);
+                _isFoundEnemy = true;
+            }
+            else
+            {
+                Goto(InitTarget);
+                _isFoundEnemy = false;
+            }
+        }
+        else if (_isFoundEnemy)
+        {
+            Goto(_enemyUnit.transform);
+            // Debug.DrawLine(this.transform.position,_enemyUnit.transform.position,this.sidePlayer.gameObject.name == "APlayer" ? Color.green : Color.magenta);
+            // Debug.DrawLine(this.transform.position,this.navMeshAgent.destination,this.sidePlayer.gameObject.name == "APlayer" ? Color.cyan : Color.yellow);
+            if (_timer                                                              > AttackColdDownTime &&
+                Vector3.Distance(transform.position, _enemyUnit.transform.position) < AttackRange)
+            {
+                Attack();
+                _timer = 0f;
+            }
+        }
+
+        // Debug.Log(this.navMeshAgent.destination);
+    }
 
     public int AttackValue
     {
@@ -44,63 +101,31 @@ public class MeleeUnit : Unit, IMilitaryUnit
         set => Speed = value;
     }
 
-    public override void Start()
+    public Vector3 OriginalVelocity
     {
-        this.InitTarget = GetEnemySide();
-        _attackTrigger = this.transform.Find("FindEnemyRange").GetComponent<FindEnemyTrigger>();
-        FindEnemy();
-        base.Start();
+        get => originalVelocity;
+        set => originalVelocity = value;
     }
 
-    private float _timer;
-    private void FixedUpdate()
+
+    /************战斗*****************/
+    public void Attack()
     {
-        _timer += Time.deltaTime;
-        // if(_enemyUnit!=null && Vector3.Distance( this.navMeshAgent.destination,this._enemyUnit.transform.position) > .1f)
-        // {
-        //     this.Goto(_enemyUnit.transform);
-        // }
-        // 寻敌攻击
-        if (!_isFoundEnemy || _enemyUnit == null || (_isFoundEnemy && _enemyUnit?.HP <= 0) )
-        {
-            FindEnemy();
-            if (_enemyUnit != null)
-            {
-                this.Goto(_enemyUnit.transform);
-                _isFoundEnemy = true;
-
-            }
-            else
-            {
-                this.Goto(this.InitTarget);
-                _isFoundEnemy = false;
-            }
-        }
-        else if (_isFoundEnemy)
-        {
-            if (_timer > AttackColdDownTime && Vector3.Distance(this.transform.position,_enemyUnit.transform.position) < AttackRange)
-            {
-                this.Attack();
-                _timer = 0f;
-            }
-        }
-
-        // Debug.Log(this.navMeshAgent.destination);
+        _enemyUnit.BeAttacked(this);
+        if (_enemyUnit.HP <= 0) _isFoundEnemy = false;
     }
 
-    private Transform GetEnemySide() =>
-        (LayerMask.LayerToName(this.gameObject.layer) == "ASide")
+    public Unit GetUnit()
+    {
+        return this;
+    }
+
+    private Transform GetEnemySide()
+    {
+        return LayerMask.LayerToName(gameObject.layer) == "ASide"
             ? GameObject.Find("BDoor").transform
             : GameObject.Find("ADoor").transform;
-
-
-    /********寻敌********/
-    private float _giveUpRadius = 1.5f;
-    public bool _isFoundEnemy = false;
-    public float findEnemyRadius = 2.2f;
-    public Unit _enemyUnit;
-
-    private FindEnemyTrigger _attackTrigger;
+    }
 
     private void FindEnemy()
     {
@@ -123,12 +148,11 @@ public class MeleeUnit : Unit, IMilitaryUnit
         //     Console.WriteLine(e);
         //     //throw;
         // }
-        
-        this._enemyUnit = _attackTrigger.GetEnemyInList();
+
+        _enemyUnit = _attackTrigger.GetEnemyInList();
         try
         {
-            Debug.Log( this.gameObject.name + " Find Enemy :: " + this._enemyUnit .gameObject.GetComponent<Unit>().gameObject.name);
-
+            Debug.Log(gameObject.name + " Find Enemy :: " + _enemyUnit.gameObject.GetComponent<Unit>().gameObject.name);
         }
         catch
         {
@@ -140,31 +164,16 @@ public class MeleeUnit : Unit, IMilitaryUnit
     }
 
 
-    private float GetAgentDistanceOnNavMesh(Vector3 targetPoint) =>
-        Unit.GetTwoPointDistanceOnNavMesh(this.transform.position, targetPoint,
-            LayerMask.LayerToName(this.gameObject.layer) == "ASide");
-    
-    
-    
-    /************战斗*****************/
-    public void Attack()
+    private float GetAgentDistanceOnNavMesh(Vector3 targetPoint)
     {
-        _enemyUnit.BeAttacked(this);
-        if (_enemyUnit.HP <= 0) _isFoundEnemy = false;
-    }
-
-    public Unit GetUnit()
-    {
-        return this;
+        return GetTwoPointDistanceOnNavMesh(transform.position, targetPoint,
+                                            LayerMask.LayerToName(gameObject.layer) == "ASide");
     }
 
     private void AttackedReact(Unit attacker)
     {
-        if (Vector3.Distance(this.transform.position, _enemyUnit.transform.position) >
-            Vector3.Distance(this.transform.position, attacker.transform.position))
-        {
-            this._enemyUnit = attacker;
-        }
+        if (Vector3.Distance(transform.position, _enemyUnit.transform.position) >
+            Vector3.Distance(transform.position, attacker.transform.position))
+            _enemyUnit = attacker;
     }
-
 }

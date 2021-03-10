@@ -1,17 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class PollutionPlayerAI : PlayerAI
+﻿public class PollutionPlayerAI : PlayerAI
 {
-    public void FixedUpdate()
-    {
-        updateEventHandler?.Invoke();
-    }
-
     public override void Start()
     {
         base.Start();
+    }
+
+    public void FixedUpdate()
+    {
+        updateEventHandler?.Invoke();
     }
 
     protected override void AIGaming()
@@ -20,6 +16,5 @@ public class PollutionPlayerAI : PlayerAI
         DispatchUnits();
         _isColdDown = true;
         Invoke("RestEnd", aiRestTime);
-
     }
 }

@@ -1,42 +1,71 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using Units;
 using UnityEngine;
-using Photon.Pun;
 
 public class UnitDispatchManagerUI : MonoBehaviour
 {
-     public UnitDispatchUI[] UnitDispatchUIs;
-     public Player player;
+    public UnitDispatchUI[] UnitDispatchUIs;
+    public Player           player;
 
-     public void SetClick(int rdInt)
-     {
-          Road rd = (Road) rdInt;
-          Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-          RaycastHit rayHit;
-          int layerMask = 1 << 11; 
-          Physics.Raycast(ray, out rayHit,50f,layerMask);
-        
-          Debug.DrawLine(ray.origin, rayHit.point);
-          // Debug.Log(rayHit.point);
-          Vector3 pos = new Vector3(rayHit.point.x,rayHit.point.y,rayHit.point.z+0.3f);
-          Debug.Log("HIT POINT:" + pos);
+    public void SetClick(int rdInt)
+    {
+        var        rd  = (Road) rdInt;
+        var        ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit rayHit;
+        var        layerMask = 1 << 11;
+        Physics.Raycast(ray, out rayHit, 50f, layerMask);
 
-          foreach (var unitDispatchUI in UnitDispatchUIs)
-          {
-               player.SetUnits(pos,unitDispatchUI.unitNumber,rd,unitDispatchUI.UnitDispatchNumber);
-               //Debug.Log("NUMBER:" + unitDispatchUI.UnitDispatchNumber);
+        // Debug.DrawLine(ray.origin, rayHit.point);
+        // Debug.Log(rayHit.point);
+        var pos = new Vector3(rayHit.point.x, rayHit.point.y, rayHit.point.z + 0.3f);
 
-               unitDispatchUI.UnitDispatchNumber = 0;
-               unitDispatchUI.unitNumberText.gameObject.SetActive(false);
-               unitDispatchUI.unitSetIndicator.gameObject.SetActive(false);
-               unitDispatchUI.unitRemoveButton.gameObject.SetActive(false);
+        foreach (var unitDispatchUI in UnitDispatchUIs)
+        {
+            player.SetUnits(pos, unitDispatchUI.unitNumber, rd, unitDispatchUI.UnitDispatchNumber);
+            //Debug.Log("NUMBER:" + unitDispatchUI.UnitDispatchNumber);
 
-          }
-        
+            unitDispatchUI.UnitDispatchNumber = 0;
+            unitDispatchUI.unitNumberText.gameObject.SetActive(false);
+            unitDispatchUI.unitSetIndicator.gameObject.SetActive(false);
+            unitDispatchUI.unitRemoveButton.gameObject.SetActive(false);
+        }
+    }
 
-     }
+    public void SetClickWithVelocity(int rdInt)
+    {
+        var        rd  = (Road) rdInt;
+        var        ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit rayHit;
+        var        layerMask = 1 << 11;
+        Physics.Raycast(ray, out rayHit, 50f, layerMask);
 
-    
-    
+        //初始位置
+        var pos = new Vector3(rayHit.point.x, rayHit.point.y, rayHit.point.z);
+        // Debug.Log("[Dispatch test]ori pos: " + pos);
+
+        StartCoroutine(WaitForVelocity(pos, rdInt));
+    }
+
+    private IEnumerator WaitForVelocity(Vector3 oriPos, int rdInt)
+    {
+        yield return new WaitUntil(() => Input.GetMouseButtonUp(0));
+        var        rd  = (Road) rdInt;
+        var        ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit rayHit;
+        var        layerMask = 1 << 11;
+        Physics.Raycast(ray, out rayHit, 50f, layerMask);
+        var newPos = new Vector3(rayHit.point.x, rayHit.point.y, rayHit.point.z);
+        // Debug.Log("[Dispatch test]new pos: " + newPos);
+        Vector3 oriVelocity = -(newPos - oriPos);
+
+        foreach (var unitDispatchUI in UnitDispatchUIs)
+        {
+            player.SetUnits(oriPos, unitDispatchUI.unitNumber, rd, unitDispatchUI.UnitDispatchNumber, oriVelocity);
+            
+            unitDispatchUI.UnitDispatchNumber = 0;
+            unitDispatchUI.unitNumberText.gameObject.SetActive(false);
+            unitDispatchUI.unitSetIndicator.gameObject.SetActive(false);
+            unitDispatchUI.unitRemoveButton.gameObject.SetActive(false);
+        }
+    }
 }

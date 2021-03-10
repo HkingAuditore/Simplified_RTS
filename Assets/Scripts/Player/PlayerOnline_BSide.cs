@@ -1,33 +1,25 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using Photon.Pun;
 using UnityEngine;
 
 public class PlayerOnline_BSide : Player
 {
-    public int PlayerID { get; set; }
-    public Photon.Realtime.Player PlayerPhoton { get; set; }
-    private Type _playerType;
-    public NetworkPlayerManager networkPlayerManager;
+    public  NetworkPlayerManager   networkPlayerManager;
+    private Type                   _playerType;
+    public  int                    PlayerID     { get; set; }
+    public  Photon.Realtime.Player PlayerPhoton { get; set; }
 
     private void Awake()
     {
-        _playerType = this.GetType();
+        _playerType = GetType();
         if (PhotonNetwork.IsConnected && PhotonNetwork.InRoom)
-        {
             foreach (var player in PhotonNetwork.CurrentRoom.Players)
-            {
                 if (!player.Value.IsLocal)
                 {
-                    PlayerID = player.Key;
+                    PlayerID     = player.Key;
                     PlayerPhoton = player.Value;
                     break;
                 }
-            }
-
-        }
-
     }
 
     public override void Start()
@@ -47,11 +39,11 @@ public class PlayerOnline_BSide : Player
             //     this.HP = (int) PlayerPhoton.CustomProperties["HP"];
 
             if (PlayerPhoton.CustomProperties.ContainsKey("Wood"))
-                this.Wood = (int) PlayerPhoton.CustomProperties["Wood"];
+                Wood = (int) PlayerPhoton.CustomProperties["Wood"];
             if (PlayerPhoton.CustomProperties.ContainsKey("Gold"))
-                this.Gold = (int) PlayerPhoton.CustomProperties["Gold"];
+                Gold = (int) PlayerPhoton.CustomProperties["Gold"];
             if (PlayerPhoton.CustomProperties.ContainsKey("Food"))
-                this.Food = (int) PlayerPhoton.CustomProperties["Food"];
+                Food = (int) PlayerPhoton.CustomProperties["Food"];
 
             // if (PlayerPhoton.CustomProperties.ContainsKey("FarmerCount"))
             //     this.FarmerCount = (int) PlayerPhoton.CustomProperties["FarmerCount"];
@@ -63,20 +55,16 @@ public class PlayerOnline_BSide : Player
             //     this.RoadWorkingFarmers = (int[]) PlayerPhoton.CustomProperties["RoadWorkingFarmers"];
             // if (PlayerPhoton.CustomProperties.ContainsKey("DispatchableFarmer"))
             //     this.DispatchableFarmer = (int) PlayerPhoton.CustomProperties["DispatchableFarmer"];
- 
         }
     }
 
     public void UpdateSingleRemotePlayerProperty(string propertyName, object value)
     {
-        _playerType.GetProperty(propertyName)?.SetValue(this,value);
+        _playerType.GetProperty(propertyName)?.SetValue(this, value);
     }
-    
-    
+
+
     #region 控制
 
-
-
     #endregion
-
 }

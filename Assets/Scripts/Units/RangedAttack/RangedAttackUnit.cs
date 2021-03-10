@@ -1,15 +1,82 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using Units;
+﻿using Units;
 using UnityEngine;
 
 public class RangedAttackUnit : Unit, IMilitaryUnit
 {
-    [SerializeField] private int attackPower;
-    [SerializeField] private float attackColdDownTime;
-    [SerializeField] private float attackRange;
+    [SerializeField] private int     attackPower;
+    [SerializeField] private float   attackColdDownTime;
+    [SerializeField] private float   attackRange;
+    public                   Vector3 originalVelocity;
+
+
+    public Transform shootTransform;
+
+    //子弹相关
+    public GameObject bulletObject;
+    public float      findEnemyRadius = 8.8f;
+
+
+    /************战斗*****************/
+    public float shootAngleOffset;
+
+    private FindEnemyTrigger _attackTrigger;
+    private Unit             _enemyUnit;
+
+
+    /********寻敌********/
+    private float _giveUpRadius = 8f;
+    private bool  _isFoundEnemy;
+    private float _maxShootSpeed;
+
+    private float   _timer;
+
+    public override void Start()
+    {
+        BeAttackedEventHandler += AttackedReact;
+        if (!isUnmovable)
+            StartEventHandler += () => navMeshAgent.stoppingDistance = attackRange * 0.8f;
+        InitTarget     = GetEnemySide();
+        _maxShootSpeed = Mathf.Sqrt(attackRange * Bullet.Gravity / Mathf.Sin(45f * 2 * Mathf.Deg2Rad));
+        _attackTrigger = transform.Find("FindEnemyRange").GetComponent<FindEnemyTrigger>();
+
+        FindEnemy();
+
+        base.Start();
+    }
+
+    private void FixedUpdate()
+    {
+        _timer += Time.deltaTime;
+        if (_enemyUnit != null)
+            Goto(_enemyUnit.transform);
+        // 寻敌攻击
+        if (!_isFoundEnemy || _enemyUnit == null || _isFoundEnemy && _enemyUnit.HP <= 0)
+        {
+            //Debug.Log("FIND NEW!");
+            FindEnemy();
+            if (_enemyUnit != null)
+            {
+                Goto(_enemyUnit.transform);
+                _isFoundEnemy = true;
+            }
+            else
+            {
+                Goto(InitTarget);
+                _isFoundEnemy = false;
+            }
+
+            if (!isUnmovable)
+                navMeshAgent.speed = Speed;
+        }
+        else if (_isFoundEnemy)
+        {
+            if (_timer > attackColdDownTime)
+            {
+                Attack();
+                _timer = 0f;
+            }
+        }
+    }
 
     public float AttackColdDownTime
     {
@@ -41,79 +108,69 @@ public class RangedAttackUnit : Unit, IMilitaryUnit
         set => Speed = value;
     }
 
-    public Transform shootTransform;
-    
-    //子弹相关
-    public GameObject bulletObject;
-    private float _maxShootSpeed;
-    
-    public override void Start()
+    public Vector3 OriginalVelocity
     {
-        this.BeAttackedEventHandler += AttackedReact;
-        if (!isUnmovable)
-            StartEventHandler += () => this.navMeshAgent.stoppingDistance = attackRange * 0.8f;
-        this.InitTarget = GetEnemySide();
-        _maxShootSpeed = Mathf.Sqrt(attackRange * Bullet.Gravity / (float) Mathf.Sin(45f * 2 * Mathf.Deg2Rad));
-        _attackTrigger = this.transform.Find("FindEnemyRange").GetComponent<FindEnemyTrigger>();
-        
-        FindEnemy();
-
-        base.Start();
-
+        get => originalVelocity;
+        set => originalVelocity = value;
     }
 
-    private float _timer;
-    private void FixedUpdate()
+    public void Attack()
     {
-        _timer += Time.deltaTime;
-        if(_enemyUnit!=null)
-            this.Goto(_enemyUnit.transform);
-        // 寻敌攻击
-        if (!_isFoundEnemy || _enemyUnit == null || (_isFoundEnemy && _enemyUnit.HP <= 0))
+        // Debug.Log(this.navMeshAgent.velocity.magnitude);
+        var distance = Vector3.Distance(transform.position, _enemyUnit.transform.position);
+        if (distance < attackRange && (isUnmovable || navMeshAgent.velocity.magnitude < 2f))
         {
-            //Debug.Log("FIND NEW!");
-            FindEnemy();
-            if (_enemyUnit != null)
-            {
-                this.Goto(_enemyUnit.transform);
-                _isFoundEnemy = true;
-            }
-            else
-            {
-                this.Goto(this.InitTarget);
-                _isFoundEnemy = false;
-            }
             if (!isUnmovable)
-                this.navMeshAgent.speed = this.Speed;
+                transform.LookAt(_enemyUnit.transform);
+            else
+                shootTransform.LookAt(_enemyUnit.transform);
+            if (!isUnmovable)
+                navMeshAgent.speed = 0f;
 
-        }
-        else if (_isFoundEnemy)
-        {
-            if (_timer > attackColdDownTime)
-            {
-                this.Attack();
-                _timer = 0f;
-            }
+            //射击角度 0~45
+            //两者距离为0时，出射角度为0,；距离到attackrange时，出射角度为45
+            //生成原因，需要再求一次余角
+            var shootAngle = 90 - Mathf.Clamp01(distance / attackRange) * 45 * 0.65f + shootAngleOffset;
+
+            var shootRotation = new Vector3(0f, shootTransform.eulerAngles.y - 90f, shootAngle);
+
+            bulletObject.gameObject.layer = gameObject.layer;
+
+
+            var bullet =
+                Instantiate(bulletObject, shootTransform.position, Quaternion.Euler(shootRotation),
+                            gameObject.transform.parent.parent
+                                      .Find(gameObject.transform.parent.gameObject.name[0] + "Item").transform);
+
+            var expectSpeed = Mathf.Clamp(
+                                          Mathf.Sqrt(
+                                                     Vector3.Distance(shootTransform.position,
+                                                                      _enemyUnit.transform.position) * 1.2f *
+                                                     Bullet.Gravity / Mathf.Sin(shootRotation.z * 2 * Mathf.Deg2Rad)),
+                                          0,
+                                          _maxShootSpeed);
+            if (double.IsNaN(expectSpeed)) expectSpeed = 0.01f;
+            var bulletComponent                        = bullet.GetComponent<Bullet>();
+            bulletComponent.initSpeed = expectSpeed;
+            bulletComponent.SetShooter(this);
+            bulletComponent.enabled = true;
         }
     }
 
-    private Transform GetEnemySide() =>
-        (LayerMask.LayerToName(this.gameObject.layer) == "ASide")
+    public Unit GetUnit()
+    {
+        return this;
+    }
+
+    private Transform GetEnemySide()
+    {
+        return LayerMask.LayerToName(gameObject.layer) == "ASide"
             ? GameObject.Find("BDoor").transform
             : GameObject.Find("ADoor").transform;
-
-
-    /********寻敌********/
-    private float _giveUpRadius = 8f;
-    private bool _isFoundEnemy = false;
-    public float findEnemyRadius = 8.8f;
-    private Unit _enemyUnit;
-    
-    private FindEnemyTrigger _attackTrigger;
+    }
 
     private void FindEnemy()
     {
-        
         // Collider[] enemiesCol = new Collider[10];
         // var size = Physics.OverlapSphereNonAlloc(this.transform.position, _findEnemyRadius, enemiesCol, 1 << LayerMask.NameToLayer(_enemyLayer));
         // if (size == 0) 
@@ -148,64 +205,17 @@ public class RangedAttackUnit : Unit, IMilitaryUnit
         //     Console.WriteLine(e);
         //     //throw;
         // }
-        
-        this._enemyUnit = _attackTrigger.GetEnemyInList();
+
+        _enemyUnit = _attackTrigger.GetEnemyInList();
 
         // Debug.Log("END FIND:" + this._enemyUnit.gameObject.name);
     }
 
 
-    private float GetAgentDistanceOnNavMesh(Vector3 targetPoint) =>
-        Unit.GetTwoPointDistanceOnNavMesh(this.transform.position, targetPoint,
-            LayerMask.LayerToName(this.gameObject.layer) == "ASide");
-    
-    
-    
-    /************战斗*****************/
-    public float shootAngleOffset = 0;
-    public void Attack()
+    private float GetAgentDistanceOnNavMesh(Vector3 targetPoint)
     {
-        // Debug.Log(this.navMeshAgent.velocity.magnitude);
-        float distance = Vector3.Distance(this.transform.position, _enemyUnit.transform.position);
-        if (distance < attackRange && (this.isUnmovable || this.navMeshAgent.velocity.magnitude < 2f))
-        {
-            if (!isUnmovable)
-                this.transform.LookAt(_enemyUnit.transform);
-            else
-                this.shootTransform.LookAt(_enemyUnit.transform);
-            if (!isUnmovable)
-                this.navMeshAgent.speed = 0f;
-            
-            //射击角度 0~45
-            //两者距离为0时，出射角度为0,；距离到attackrange时，出射角度为45
-            //生成原因，需要再求一次余角
-            float shootAngle = 90 - Mathf.Clamp01(distance / attackRange) * 45 * 0.65f + shootAngleOffset;
-
-            Vector3 shootRotation =  new Vector3(0f,shootTransform.eulerAngles.y-90f,shootAngle );
-            
-            bulletObject.gameObject.layer = this.gameObject.layer;
-            
-
-            var bullet = 
-                Instantiate(bulletObject, shootTransform.position, Quaternion.Euler(shootRotation), this.gameObject.transform.parent.parent.Find(this.gameObject.transform.parent.gameObject.name[0] + "Item").transform);
-
-            float expectSpeed = Mathf.Clamp(
-                (float) Mathf.Sqrt(
-                                Vector3.Distance(shootTransform.position, _enemyUnit.transform.position) * 1.2f *
-                                Bullet.Gravity / (float) Mathf.Sin(shootRotation.z * 2 * Mathf.Deg2Rad)),
-                        0,
-                            _maxShootSpeed);
-            if (double.IsNaN(expectSpeed)) expectSpeed = 0.01f;
-            Bullet bulletComponent = bullet.GetComponent<Bullet>();
-            bulletComponent.initSpeed = expectSpeed;
-            bulletComponent.SetShooter(this);
-            bulletComponent.enabled = true;
-        }
-    }
-
-    public Unit GetUnit()
-    {
-        return this;
+        return GetTwoPointDistanceOnNavMesh(transform.position, targetPoint,
+                                            LayerMask.LayerToName(gameObject.layer) == "ASide");
     }
 
 
@@ -214,21 +224,13 @@ public class RangedAttackUnit : Unit, IMilitaryUnit
         try
         {
             if (attacker != null)
-            {
-                if (Vector3.Distance(this.transform.position, _enemyUnit.transform.position) >
-                    Vector3.Distance(this.transform.position, attacker.GetUnit().transform.position))
-                {
-                    this._enemyUnit = attacker.GetUnit();
-                }
-
-            }
-
+                if (Vector3.Distance(transform.position, _enemyUnit.transform.position) >
+                    Vector3.Distance(transform.position, attacker.GetUnit().transform.position))
+                    _enemyUnit = attacker.GetUnit();
         }
         catch
         {
             // ignored
         }
     }
-
-
 }
