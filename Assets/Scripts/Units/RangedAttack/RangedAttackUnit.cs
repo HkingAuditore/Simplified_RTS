@@ -3,13 +3,14 @@ using UnityEngine;
 
 public class RangedAttackUnit : Unit, IMilitaryUnit
 {
-    [SerializeField] private int     attackPower;
-    [SerializeField] private float   attackColdDownTime;
-    [SerializeField] private float   attackRange;
-    public                   Vector3 originalVelocity;
+    [Header("战斗属性")] [Space(10)] [SerializeField]
+    private int attackPower;
 
+    [SerializeField]  private float   attackColdDownTime;
+    [SerializeField]  private float   attackRange;
+    [HideInInspector] public  Vector3 originalVelocity;
 
-    public Transform shootTransform;
+    [Header("射击属性")] [Space(10)] public Transform shootTransform;
 
     //子弹相关
     public GameObject bulletObject;
@@ -28,55 +29,8 @@ public class RangedAttackUnit : Unit, IMilitaryUnit
     private bool  _isFoundEnemy;
     private float _maxShootSpeed;
 
-    private float   _timer;
+    private float _timer;
 
-    public override void Start()
-    {
-        BeAttackedEventHandler += AttackedReact;
-        if (!isUnmovable)
-            StartEventHandler += () => navMeshAgent.stoppingDistance = attackRange * 0.8f;
-        InitTarget     = GetEnemySide();
-        _maxShootSpeed = Mathf.Sqrt(attackRange * Bullet.Gravity / Mathf.Sin(45f * 2 * Mathf.Deg2Rad));
-        _attackTrigger = transform.Find("FindEnemyRange").GetComponent<FindEnemyTrigger>();
-
-        FindEnemy();
-
-        base.Start();
-    }
-
-    private void FixedUpdate()
-    {
-        _timer += Time.deltaTime;
-        if (_enemyUnit != null)
-            Goto(_enemyUnit.transform);
-        // 寻敌攻击
-        if (!_isFoundEnemy || _enemyUnit == null || _isFoundEnemy && _enemyUnit.HP <= 0)
-        {
-            //Debug.Log("FIND NEW!");
-            FindEnemy();
-            if (_enemyUnit != null)
-            {
-                Goto(_enemyUnit.transform);
-                _isFoundEnemy = true;
-            }
-            else
-            {
-                Goto(InitTarget);
-                _isFoundEnemy = false;
-            }
-
-            if (!isUnmovable)
-                navMeshAgent.speed = Speed;
-        }
-        else if (_isFoundEnemy)
-        {
-            if (_timer > attackColdDownTime)
-            {
-                Attack();
-                _timer = 0f;
-            }
-        }
-    }
 
     public float AttackColdDownTime
     {
@@ -113,19 +67,106 @@ public class RangedAttackUnit : Unit, IMilitaryUnit
         get => originalVelocity;
         set => originalVelocity = value;
     }
+    public Player SidePlayer
+    {
+        get => sidePlayer;
+        set => sidePlayer = value;
+    }
+
+
+
+    public Unit GetUnit()
+    {
+        return this;
+    }
+
+    public override void Start()
+    {
+        BeAttackedEventHandler += AttackedReact;
+        if (!isUnmovable)
+        {
+            // TODO StartEventHandler += () => navMeshAgent.stoppingDistance = attackRange * 0.8f;
+
+            unitRigidbody.velocity = OriginalVelocity;
+        }
+        InitTarget = GetEnemySide();
+        _maxShootSpeed = Mathf.Sqrt(attackRange * Bullet.Gravity / Mathf.Sin(45f * 2 * Mathf.Deg2Rad));
+        _attackTrigger = transform.Find("FindEnemyRange").GetComponent<FindEnemyTrigger>();
+
+        FindEnemy();
+
+        base.Start();
+    }
+
+    private void FixedUpdate()
+    {
+        _timer += Time.deltaTime;
+        if (_enemyUnit != null)
+            Goto(_enemyUnit.transform);
+        // 寻敌攻击
+        if (!_isFoundEnemy || _enemyUnit == null || _isFoundEnemy && _enemyUnit.HP <= 0)
+        {
+            //Debug.Log("FIND NEW!");
+            FindEnemy();
+            if (_enemyUnit != null)
+            {
+                Goto(_enemyUnit.transform);
+                _isFoundEnemy = true;
+            }
+            else
+            {
+                Goto(InitTarget);
+                _isFoundEnemy = false;
+            }
+
+            // if (!isUnmovable)
+            // TODO navMeshAgent.speed = Speed;
+        }
+        else if (_isFoundEnemy)
+        {
+            if (_timer > attackColdDownTime)
+            {
+                Attack();
+                _timer = 0f;
+            }
+        }
+    }
+
+    #region 寻敌
+
+    private Transform GetEnemySide()
+    {
+        return LayerMask.LayerToName(gameObject.layer) == "ASide"
+            ? GameObject.Find("BDoor").transform
+            : GameObject.Find("ADoor").transform;
+    }
+
+    private void FindEnemy()
+    {
+        _enemyUnit = _attackTrigger.GetEnemyInList();
+    }
+
+    private float GetAgentDistanceOnNav(Vector3 targetPoint)
+    {
+        return GetTwoPointDistanceOnNav(transform.position, targetPoint);
+    }
+
+    #endregion
+
+    #region 战斗
 
     public void Attack()
     {
         // Debug.Log(this.navMeshAgent.velocity.magnitude);
         var distance = Vector3.Distance(transform.position, _enemyUnit.transform.position);
-        if (distance < attackRange && (isUnmovable || navMeshAgent.velocity.magnitude < 2f))
+        if (distance < attackRange && (isUnmovable || unitRigidbody.velocity.magnitude < 2f))
         {
             if (!isUnmovable)
                 transform.LookAt(_enemyUnit.transform);
             else
                 shootTransform.LookAt(_enemyUnit.transform);
-            if (!isUnmovable)
-                navMeshAgent.speed = 0f;
+            // if (!isUnmovable)
+            //     TODO navMeshAgent.speed = 0f;
 
             //射击角度 0~45
             //两者距离为0时，出射角度为0,；距离到attackrange时，出射角度为45
@@ -157,68 +198,6 @@ public class RangedAttackUnit : Unit, IMilitaryUnit
         }
     }
 
-    public Unit GetUnit()
-    {
-        return this;
-    }
-
-    private Transform GetEnemySide()
-    {
-        return LayerMask.LayerToName(gameObject.layer) == "ASide"
-            ? GameObject.Find("BDoor").transform
-            : GameObject.Find("ADoor").transform;
-    }
-
-    private void FindEnemy()
-    {
-        // Collider[] enemiesCol = new Collider[10];
-        // var size = Physics.OverlapSphereNonAlloc(this.transform.position, _findEnemyRadius, enemiesCol, 1 << LayerMask.NameToLayer(_enemyLayer));
-        // if (size == 0) 
-        //     return;
-        // Array.Resize(ref enemiesCol, size);
-        // try
-        // {
-        //     
-        //     this._enemyUnit = enemiesCol?.Where(
-        //                             enemy => ((enemy.gameObject.CompareTag(this.gameObject.tag))
-        //                                             ||
-        //                                             (enemy.gameObject.GetComponent<Unit>().IsAtEnemyDoor == true)
-        //                                             ||
-        //                                             (enemy.gameObject.CompareTag("Door"))
-        //                                             )
-        //                                         
-        //                                             
-        //                             )
-        //                         ?.OrderBy(enemy =>
-        //                         {
-        //                             if (this.isUnmovable)
-        //                                 return Vector3.Distance(this.transform.position, enemy.transform.position) * 3.5;
-        //                             return GetAgentDistanceOnNavMesh(enemy.transform.position);
-        //                         })
-        //                         ?.ToArray()?[0]
-        //                         .gameObject
-        //                         .GetComponent<Unit>();
-        //
-        // }
-        // catch (Exception e)
-        // {
-        //     Console.WriteLine(e);
-        //     //throw;
-        // }
-
-        _enemyUnit = _attackTrigger.GetEnemyInList();
-
-        // Debug.Log("END FIND:" + this._enemyUnit.gameObject.name);
-    }
-
-
-    private float GetAgentDistanceOnNavMesh(Vector3 targetPoint)
-    {
-        return GetTwoPointDistanceOnNavMesh(transform.position, targetPoint,
-                                            LayerMask.LayerToName(gameObject.layer) == "ASide");
-    }
-
-
     private void AttackedReact(IMilitaryUnit attacker)
     {
         try
@@ -233,4 +212,6 @@ public class RangedAttackUnit : Unit, IMilitaryUnit
             // ignored
         }
     }
+
+    #endregion
 }

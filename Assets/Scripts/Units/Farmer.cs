@@ -28,7 +28,7 @@ public class Farmer : Unit
         farmerBackEventHandler += sidePlayer.FarmerBack;
 
         //死亡处理
-        UnitDeathEventHandler += () =>
+        UnitDeathEventHandler += (p,m) =>
                                  {
                                      sidePlayer.FarmerCount--;
                                      sidePlayer.RoadFarmers[(int) road]--;

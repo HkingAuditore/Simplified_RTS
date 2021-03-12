@@ -26,10 +26,6 @@ public class ResourceRunOutException : ApplicationException
 public class Player : MonoBehaviour
 {
     [SerializeField] private int        hp;
-    private                  GameObject _gameEventHandler;
-
-    public UnityAction updateEventHandler;
-
     public int HP
     {
         get => hp;
@@ -48,8 +44,44 @@ public class Player : MonoBehaviour
         }
     }
 
+    private GameObject _gameEventHandler;
 
-    /*****资源**********/
+    public UnityAction updateEventHandler;
+
+
+
+    public virtual void Start()
+    {
+        _gameEventHandler = GameObject.Find("GameEventHandler").gameObject;
+
+        _top = gameObject.transform.Find("Positions").transform.Find("TopOri").transform;
+        _mid = gameObject.transform.Find("Positions").transform.Find("MidOri").transform;
+        _bot = gameObject.transform.Find("Positions").transform.Find("BotOri").transform;
+
+        Food = 0;
+        Wood = 0;
+        Gold = 0;
+
+        DispatchableFarmer = FarmerCount;
+    }
+
+    private void FixedUpdate()
+    {
+        //生产任务
+        if(enableFarmer)
+        {
+            RegisterProduceFarmer();
+            DispatchFarmer();
+        } 
+        RegisterProduceResource();
+
+        
+        updateEventHandler?.Invoke();
+    }
+
+
+    #region 资源
+
     public int Food
     {
         get => _food;
@@ -95,33 +127,6 @@ public class Player : MonoBehaviour
         }
     }
 
-
-    public virtual void Start()
-    {
-        _gameEventHandler = GameObject.Find("GameEventHandler").gameObject;
-
-        _top = gameObject.transform.Find("Positions").transform.Find("TopOri").transform;
-        _mid = gameObject.transform.Find("Positions").transform.Find("MidOri").transform;
-        _bot = gameObject.transform.Find("Positions").transform.Find("BotOri").transform;
-
-        Food = 0;
-        Wood = 0;
-        Gold = 0;
-
-        DispatchableFarmer = FarmerCount;
-    }
-
-    private void FixedUpdate()
-    {
-        //生产任务
-        RegisterProduceFarmer();
-        RegisterProduceResource();
-
-        DispatchFarmer();
-        updateEventHandler?.Invoke();
-    }
-
-
     public void ChangeResource(Resource resource, int count)
     {
         switch (resource)
@@ -140,6 +145,8 @@ public class Player : MonoBehaviour
         }
     }
 
+    #endregion
+
     #region 网络支持
 
     public virtual void UpdateLocalPlayerProperties()
@@ -150,22 +157,29 @@ public class Player : MonoBehaviour
 
     #region 农民相关处理
 
-    public Transform[] resourceTransform;
 
     #region 农民调遣
 
-    /**********农民派遣*********/
-    //农民
-    public  Farmer farmerPrefab;
-    private int    _maxFarmerNumber = 5;
-    private int    _farmerCount     = 1;
-    private int    _dispatchableFarmer;
-    private int[]  _roadFarmers        = new int[3];
-    private int[]  _roadWorkingFarmers = new int[3];
+    #region 字段和属性
+
+    [Header("农民")]
+    public bool enableFarmer;
+    public    Transform[] resourceTransform;
+    public    Farmer      farmerPrefab;
+    private   int         _maxFarmerNumber = 5;
+    private   int         _farmerCount     = 1;
+    private   int         _dispatchableFarmer;
+    private   int[]       _roadFarmers        = new int[3];
+    private   int[]       _roadWorkingFarmers = new int[3];
+    protected Transform   _top;
+    protected Transform   _mid;
+    protected Transform   _bot;
+    private   int         _food;
+    private   int         _wood;
+    private   int         _gold;
+    
 
     // 最大可用农民数量
-
-
     public int MaxFarmerNumber
     {
         get => _maxFarmerNumber;
@@ -231,13 +245,8 @@ public class Player : MonoBehaviour
         }
     }
 
-    protected Transform _top;
-    protected Transform _mid;
-    protected Transform _bot;
-    private   int       _food;
-    private   int       _wood;
-    private   int       _gold;
-
+    #endregion
+    
 
     //增加一条路的农民分配
     public virtual void AddFarmer(Resource rs)
@@ -298,7 +307,7 @@ public class Player : MonoBehaviour
                                                     );
         Debug.Log("TEX :" + "Units/" + farmerPrefab.name + LayerMask.LayerToName(gameObject.layer)[0]);
 
-        farmerInstantiated.GetComponent<NavMeshAgent>().areaMask = resourceLayerMask.value;
+        // farmerInstantiated.GetComponent<NavMeshAgent>().areaMask = resourceLayerMask.value;
         farmerInstantiated.tag                                   = rd.ToString();
         farmerInstantiated.sidePlayer                            = this;
 
@@ -425,8 +434,9 @@ public class Player : MonoBehaviour
 
     private void ProduceResource()
     {
-        ChangeResource(Resource.Food, 1);
-        ChangeResource(Resource.Wood, 1);
+        ChangeResource(Resource.Food, 10);
+        ChangeResource(Resource.Wood, 10);
+        ChangeResource(Resource.Gold, 10);
 
         _isProducingResource = false;
     }
@@ -436,7 +446,9 @@ public class Player : MonoBehaviour
     #endregion
 
     #region 单位调遣
-
+    
+    [Header("单位派遣")]
+    [Space(10)]
     public GameObject[] availableUnits;
 
     public void SetUnits(Vector3 tr, int chosenUnit, Road rd, int number)
@@ -521,7 +533,7 @@ public class Player : MonoBehaviour
 
         unitInstantiated.gameObject.tag                        = rd.ToString();
         unitInstantiated.gameObject.layer                      = gameObject.layer;
-        unitInstantiated.GetComponent<NavMeshAgent>().areaMask = layerMask.value;
+        // unitInstantiated.GetComponent<NavMeshAgent>().areaMask = layerMask.value;
 
         unitInstantiated.gameObject.GetComponent<Unit>().road       = rd;
         unitInstantiated.gameObject.GetComponent<Unit>().sidePlayer = this;

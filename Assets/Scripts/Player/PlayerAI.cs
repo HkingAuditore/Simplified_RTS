@@ -6,12 +6,13 @@ using Random = UnityEngine.Random;
 
 public class PlayerAI : Player
 {
-    public Unit[] aiAvailableUnits;
-
-    public           float      aiRestTime = 5f;
-    private          int        _botEnemy;
-    private readonly int        _botSend    = 0;
-    private          Collider[] _enemiesCol = new Collider[100];
+    private                             Unit[]     aiAvailableUnits;
+    [Header("AI相关")] [Space(15)]
+    public bool[]     enableRoads = new bool[3];
+    public                              float      aiRestTime  = 5f;
+    private                             int        _botEnemy;
+    private readonly                    int        _botSend    = 0;
+    private                             Collider[] _enemiesCol = new Collider[100];
 
     private LayerMask _enemyLayer;
 
@@ -27,6 +28,8 @@ public class PlayerAI : Player
     {
         _enemyLayer =
             LayerMask.NameToLayer(LayerMask.LayerToName(gameObject.layer) == "ASide" ? "BSide" : "ASide");
+        aiAvailableUnits = (from availableUnit in availableUnits
+                            select availableUnit.GetComponent<Unit>()).ToArray();
     }
 
     protected void Update()
@@ -39,7 +42,8 @@ public class PlayerAI : Player
     {
         CountEnemy();
         DispatchUnits();
-        AIDispatchFarmers();
+        if (enableFarmer)
+            AIDispatchFarmers();
         _isColdDown = true;
         Invoke("RestEnd", aiRestTime);
     }
@@ -53,7 +57,8 @@ public class PlayerAI : Player
 
     protected void DispatchUnits()
     {
-        var sendRoad = FindBiggestDisadvantageRoad();
+        //TODO mid
+        var sendRoad = Road.Mid;
 
         var sendArray = new int[aiAvailableUnits.Length];
         // int maxSendIndex = 0;

@@ -3,9 +3,12 @@ using UnityEngine;
 
 public class MeleeUnit : Unit, IMilitaryUnit
 {
+    [Header("战斗属性")]
+    [Space(10)]
     [SerializeField] private int       attackPower;
     [SerializeField] private float     attackColdDownTime;
     [SerializeField] private float     attackRange;
+    [HideInInspector]
     public                   Vector3   originalVelocity;
     public                   float     findEnemyRadius = 2.2f;
 
@@ -19,15 +22,61 @@ public class MeleeUnit : Unit, IMilitaryUnit
     private float _giveUpRadius = 1.5f;
 
     private float _timer;
+    
+    public int AttackValue
+    {
+        get => attackPower;
+        set => attackPower = value;
+    }
 
+    public float AttackColdDownTime
+    {
+        get => attackColdDownTime;
+        set => attackColdDownTime = value;
+    }
+
+    public float AttackRange
+    {
+        get => attackRange;
+        set => attackRange = value;
+    }
+
+    public int DefenceValue
+    {
+        get => defence;
+        set => defence = value;
+    }
+
+    public float SpeedValue
+    {
+        get => Speed;
+        set => Speed = value;
+    }
+
+    public Vector3 OriginalVelocity
+    {
+        get => originalVelocity;
+        set => originalVelocity = value;
+    }
+    
+    public Player SidePlayer
+    {
+        get => sidePlayer;
+        set => sidePlayer = value;
+    }
+
+
+    public Unit GetUnit()
+    {
+        return this;
+    }
 
     public override void Start()
     {
-        
-        InitTarget              = GetEnemySide();
-        _attackTrigger          = transform.Find("FindEnemyRange").GetComponent<FindEnemyTrigger>();
+        _attackTrigger = transform.Find("FindEnemyRange").GetComponent<FindEnemyTrigger>();
+        InitTarget     = GetEnemySide();
         // UnitRigidbody          = this.GetComponent<Rigidbody>();
-        UnitRigidbody.velocity = OriginalVelocity;
+        unitRigidbody.velocity = OriginalVelocity;
         // Debug.Log(this.GetComponent<Rigidbody>().velocity);
         FindEnemy();
         base.Start();
@@ -71,54 +120,26 @@ public class MeleeUnit : Unit, IMilitaryUnit
         // Debug.Log(this.navMeshAgent.destination);
     }
 
-    public int AttackValue
-    {
-        get => attackPower;
-        set => attackPower = value;
-    }
 
-    public float AttackColdDownTime
-    {
-        get => attackColdDownTime;
-        set => attackColdDownTime = value;
-    }
-
-    public float AttackRange
-    {
-        get => attackRange;
-        set => attackRange = value;
-    }
-
-    public int DefenceValue
-    {
-        get => defence;
-        set => defence = value;
-    }
-
-    public float SpeedValue
-    {
-        get => Speed;
-        set => Speed = value;
-    }
-
-    public Vector3 OriginalVelocity
-    {
-        get => originalVelocity;
-        set => originalVelocity = value;
-    }
+    #region 战斗
 
 
-    /************战斗*****************/
     public void Attack()
     {
         _enemyUnit.BeAttacked(this);
         if (_enemyUnit.HP <= 0) _isFoundEnemy = false;
     }
-
-    public Unit GetUnit()
+    private void AttackedReact(Unit attacker)
     {
-        return this;
+        if (Vector3.Distance(transform.position, _enemyUnit.transform.position) >
+            Vector3.Distance(transform.position, attacker.transform.position))
+            _enemyUnit = attacker;
     }
+
+    #endregion
+
+
+    #region 寻敌
 
     private Transform GetEnemySide()
     {
@@ -164,16 +185,11 @@ public class MeleeUnit : Unit, IMilitaryUnit
     }
 
 
-    private float GetAgentDistanceOnNavMesh(Vector3 targetPoint)
+    private float GetAgentDistanceOnNavM(Vector3 targetPoint)
     {
-        return GetTwoPointDistanceOnNavMesh(transform.position, targetPoint,
-                                            LayerMask.LayerToName(gameObject.layer) == "ASide");
+        return GetTwoPointDistanceOnNav(transform.position, targetPoint);
     }
 
-    private void AttackedReact(Unit attacker)
-    {
-        if (Vector3.Distance(transform.position, _enemyUnit.transform.position) >
-            Vector3.Distance(transform.position, attacker.transform.position))
-            _enemyUnit = attacker;
-    }
+    #endregion
+
 }

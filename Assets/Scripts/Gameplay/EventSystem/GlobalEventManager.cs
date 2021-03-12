@@ -18,18 +18,7 @@ namespace Gameplay.EventSystem
         {
             GetManager = this;
         }
-
-        // void Start()
-        // {
-        //     RegisterGlobalEvent(new GlobalEventArgs(true,
-        //         1f,
-        //         ((a, b, args) => { Debug.Log(args.Content + a.Food); }),
-        //         true,
-        //         3f,
-        //         ((a, b, args) => { Debug.Log(args.Content + b.Food); }),
-        //         new EventTransferArgs("Global Event Test: ")));
-        // }
-
+        
         public void RegisterGlobalEvent(GlobalEventArgs globalEventArgs)
         {
             //启动延时检查
