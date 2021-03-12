@@ -274,6 +274,7 @@ MonoBehaviour:
   road: 1
   sidePlayer: {fileID: 0}
   isUnmovable: 0
+  accelarateForce: 0
   _hp: 80
   defence: 3
   speed: 1
@@ -356,5 +357,5 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 1
-  m_Constraints: 80
+  m_Constraints: 84
   m_CollisionDetection: 0

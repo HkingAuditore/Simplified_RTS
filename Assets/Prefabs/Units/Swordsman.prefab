@@ -89,9 +89,10 @@ MonoBehaviour:
   road: 1
   sidePlayer: {fileID: 0}
   isUnmovable: 0
+  accelarateForce: 5
   _hp: 100
   defence: 5
-  speed: 5
+  speed: 10
   costFood: 4
   costWood: 2
   costGold: 2
@@ -168,7 +169,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 1
-  m_Constraints: 80
+  m_Constraints: 84
   m_CollisionDetection: 0
 --- !u!1 &3592866158266182377
 GameObject:
