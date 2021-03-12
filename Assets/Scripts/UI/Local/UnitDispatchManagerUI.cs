@@ -40,23 +40,20 @@ public class UnitDispatchManagerUI : MonoBehaviour
         Physics.Raycast(ray, out rayHit, 50f, layerMask);
 
         //初始位置
-        var pos = new Vector3(rayHit.point.x, rayHit.point.y, rayHit.point.z);
+        var pos       = new Vector3(rayHit.point.x, rayHit.point.y, rayHit.point.z);
+        var screenPos = Input.mousePosition;
         // Debug.Log("[Dispatch test]ori pos: " + pos);
 
-        StartCoroutine(WaitForVelocity(pos, rdInt));
+        StartCoroutine(WaitForVelocity(pos,screenPos, rdInt));
     }
 
-    private IEnumerator WaitForVelocity(Vector3 oriPos, int rdInt)
+    private IEnumerator WaitForVelocity(Vector3 oriPos,Vector3 oriScreenPos, int rdInt)
     {
         yield return new WaitUntil(() => Input.GetMouseButtonUp(0));
-        var        rd  = (Road) rdInt;
-        var        ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit rayHit;
-        var        layerMask = 1 << 11;
-        Physics.Raycast(ray, out rayHit, 50f, layerMask);
-        var newPos = new Vector3(rayHit.point.x, rayHit.point.y, rayHit.point.z);
-        // Debug.Log("[Dispatch test]new pos: " + newPos);
-        Vector3 oriVelocity = -(newPos - oriPos);
+        var     rd          = (Road) rdInt;
+        var     newPos      = Input.mousePosition;
+        Vector3 oriVelocity = -(newPos - oriScreenPos) * .1f;
+        oriVelocity = new Vector3(oriVelocity.x, 0, oriVelocity.y);
 
         foreach (var unitDispatchUI in UnitDispatchUIs)
         {

@@ -26,9 +26,9 @@ public class MeleeUnit : Unit, IMilitaryUnit
         
         InitTarget              = GetEnemySide();
         _attackTrigger          = transform.Find("FindEnemyRange").GetComponent<FindEnemyTrigger>();
-        UnitRigidbody          = this.GetComponent<Rigidbody>();
+        // UnitRigidbody          = this.GetComponent<Rigidbody>();
         UnitRigidbody.velocity = OriginalVelocity;
-        Debug.Log(this.GetComponent<Rigidbody>().velocity);
+        // Debug.Log(this.GetComponent<Rigidbody>().velocity);
         FindEnemy();
         base.Start();
     }

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
@@ -77,14 +79,19 @@ namespace Units
             }
         }
 
+        private void Awake()
+        {
+            UnitRigidbody = this.GetComponent<Rigidbody>();
+        }
+
         public virtual void Start()
         {
             
             if (!isUnmovable)
             {
-                navMeshAgent                = GetComponent<NavMeshAgent>();
                 navMeshAgent.updatePosition = false;
                 navMeshAgent.updateRotation = false;
+                
                 // navMeshAgent.speed = Speed;
             }
 
@@ -123,7 +130,8 @@ namespace Units
                 //     // navmesh agent will start moving again
                 // }
                 //TODO 这里会跳出"GetRemainingDistance" can only be called on an active agent that has been placed on a NavMesh.
-                if (!isUnmovable && navMeshAgent.remainingDistance < 0.2f && !_isAtTarget)
+                // if (!isUnmovable && navMeshAgent.remainingDistance < 0.2f && !_isAtTarget)
+                if (!isUnmovable &&  !_isAtTarget)
                 {
                     navStopEventHandler?.Invoke(gameObject, navMeshAgent.gameObject.transform);
                     _isAtTarget = true;
@@ -137,11 +145,11 @@ namespace Units
 
         private void LateUpdate()
         {
-            Debug.Log("is unmovable? "+this.isUnmovable);
-            Debug.Log("remaining distance "+this.navMeshAgent.destination);
-            if (!this.isUnmovable && this.navMeshAgent.remainingDistance > .01f)
+            // Debug.Log("is unmovable? "+this.isUnmovable);
+            // Debug.Log("remaining distance "+this.navMeshAgent.destination);
+            if (!this.isUnmovable)
             {
-                this.Move(this.navMeshAgent.nextPosition);
+                this.Move();
             }
         }
 
@@ -161,31 +169,52 @@ namespace Units
             set => _initTarget = value;
         }
 
-        protected                  NavMeshAgent navMeshAgent;
+        public NavMeshAgent navMeshAgent;
 
         private bool _isAtTarget;
         public  bool IsAtEnemyDoor { get; set; } = false;
 
-
+        private List<Vector3> _pathPos = new List<Vector3>();
         // 前往目的地
         protected void Goto(Transform tr)
         {
             if (!isUnmovable)
             {
-                Debug.Log("Target:" + tr.position);
+                // Debug.Log("Target:" + tr.position);
+                navMeshAgent.enabled = true;
                 navMeshAgent.SetDestination(tr.position);
+                NavMeshPath p = new NavMeshPath();
+                navMeshAgent.CalculatePath(tr.position, p);
+                _pathPos              = p.corners.ToList();
+                _pathPos.ForEach(v => v.y = this.transform.position.y);
+                for (int i = 1; i < _pathPos.Count; i++)
+                {
+                    Debug.DrawLine(_pathPos[i -1], _pathPos[i], Color.magenta);
+                }
+                navMeshAgent.enabled = false;
             } 
             _isAtTarget = false;
         }
 
-        public void Move(Vector3 destination)
+        public void Move()
         {
-            Vector3 dir = (destination - this.transform.position).normalized;
-            Debug.Log("I am moving!");
-            this.UnitRigidbody.MovePosition(this.transform.position + dir * speed);
+            if (Vector3.Distance(this.transform.position, _pathPos[0]) < .5f)
+            {
+                _pathPos.RemoveAt(0);
+            }
+            for (int i = 1; i < _pathPos.Count; i++)
+            {
+                Debug.DrawLine(_pathPos[i -1], _pathPos[i], Color.magenta);
+            }
+
+
+            Vector3 dir = (_pathPos[0] - this.transform.position).normalized;
+            Debug.DrawLine(this.transform.position, this.transform.position + dir * 10 ,Color.cyan);
+            this.transform.LookAt(_pathPos[0]);
+            this.UnitRigidbody.AddForce(transform.forward * speed);
         }
         
-        protected static float GetTwoPointDistanceOnNavMesh(Vector3 oriPoint, Vector3 targetPoint, bool isASide)
+        protected static float GetTwoPointDistanceOnNavMesh(Vector3 oriPoint, Vector3 targetPoint, bool isASide) 
         {
             var path = new NavMeshPath();
             var side = isASide ? "A" : "B";
