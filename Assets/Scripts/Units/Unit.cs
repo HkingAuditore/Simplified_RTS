@@ -110,13 +110,9 @@ namespace Units
  
 
         #endregion
-        
-
-        
-       
 
 
-        private void Awake()
+        protected virtual void Awake()
         {
             _enemyPlayer = this.sidePlayer == GameManager.GameManager.GetManager.aSide
                 ? GameManager.GameManager.GetManager.bSide
