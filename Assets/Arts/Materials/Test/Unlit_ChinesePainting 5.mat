@@ -55,10 +55,10 @@ Material:
     - _EnableEmission: 0
     - _InteriorNoiseLevel: 0.34
     - _MaxOutlineZOffset: 0.086
-    - _Outline: 0.044
-    - _OutlineCut: 0.205
+    - _Outline: 0.027
+    - _OutlineCut: 0.209
     - _OutlineMinWidth: 0.142
-    - _OutsideNoiseWidth: 1.463
+    - _OutsideNoiseWidth: 1.408
     - _Smoothness: 0
     - _Specular: 0.647
     - hstep: 0.696
