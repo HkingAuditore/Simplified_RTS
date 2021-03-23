@@ -54,16 +54,17 @@ Material:
     - _EnableBumpMap: 0
     - _EnableEmission: 0
     - _InteriorNoiseLevel: 0.356
-    - _MaxOutlineZOffset: 0.196
-    - _Outline: 0.145
-    - _OutlineCut: 0.322
-    - _OutsideNoiseWidth: 1.112
+    - _MaxOutlineZOffset: 0.565
+    - _Outline: 0.036
+    - _OutlineCut: 0.267
+    - _OutlineMinWidth: 0.074
+    - _OutsideNoiseWidth: 1.976
     - _Smoothness: 0
     - _Specular: 0.566
     - hstep: 0.681
     - radius: 35.2
     - resolution: 800
-    - vstep: 0.251
+    - vstep: 0.671
     m_Colors:
     - _BaseColor: {r: 0.9528302, g: 0.949615, b: 0.79552335, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 0}

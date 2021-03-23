@@ -37,7 +37,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _OutlineNoise:
         m_Texture: {fileID: 2800000, guid: 64d9a1350b54db544821668e8402b229, type: 3}
-        m_Scale: {x: 1, y: 1}
+        m_Scale: {x: 10, y: 10}
         m_Offset: {x: 0, y: 0}
     - _Ramp:
         m_Texture: {fileID: 2800000, guid: 0873fb4576c9e3b45bd17e5b86603924, type: 3}
@@ -53,19 +53,20 @@ Material:
     - _EnableAlphaTest: 0
     - _EnableBumpMap: 0
     - _EnableEmission: 0
-    - _InteriorNoiseLevel: 0.847
-    - _MaxOutlineZOffset: 0.881
-    - _Outline: 0.217
-    - _OutlineCut: 0.294
-    - _OutsideNoiseWidth: 1.288
+    - _InteriorNoiseLevel: 0.641
+    - _MaxOutlineZOffset: 0.644
+    - _Outline: 0.198
+    - _OutlineCut: 0.233
+    - _OutlineMinWidth: 0.211
+    - _OutsideNoiseWidth: 1.614
     - _Smoothness: 0
     - _Specular: 0.566
-    - hstep: 0.657
-    - radius: 32.4
+    - hstep: 0.37
+    - radius: 21.3
     - resolution: 800
-    - vstep: 0.547
+    - vstep: 0.397
     m_Colors:
-    - _BaseColor: {r: 0.8301887, g: 0.826906, b: 0.74012107, a: 1}
+    - _BaseColor: {r: 0.9339623, g: 0.9307061, b: 0.8590691, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 0}
     - _StrokeColor: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
