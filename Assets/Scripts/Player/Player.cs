@@ -420,6 +420,7 @@ public class Player : MonoBehaviour
 
     #region 资源生产
 
+    public           int   resourceProduct;
     private          bool  _isProducingResource;
     private readonly float _resourceProducingTime = 3f;
 
@@ -434,9 +435,9 @@ public class Player : MonoBehaviour
 
     private void ProduceResource()
     {
-        ChangeResource(Resource.Food, 10);
-        ChangeResource(Resource.Wood, 10);
-        ChangeResource(Resource.Gold, 10);
+        ChangeResource(Resource.Food, resourceProduct);
+        ChangeResource(Resource.Wood, resourceProduct);
+        ChangeResource(Resource.Gold, resourceProduct);
 
         _isProducingResource = false;
     }

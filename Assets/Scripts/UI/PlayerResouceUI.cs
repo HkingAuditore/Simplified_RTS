@@ -15,9 +15,9 @@ public class PlayerResouceUI : MonoBehaviour
 
     public void FixedUpdate()
     {
-        foodText.text = "食物:" + player.Food;
-        woodText.text = "木材:" + player.Wood;
-        goldText.text = "黄金:" + player.Gold;
+        foodText.text = player.Food.ToString();
+        woodText.text = player.Wood.ToString();
+        goldText.text = player.Gold.ToString();
 
         dispatchableFarmersText.text = "可调遣农夫:"   + player.DispatchableFarmer;
         maxFarmersText.text          = "最大农夫人口数:" + player.MaxFarmerNumber;
