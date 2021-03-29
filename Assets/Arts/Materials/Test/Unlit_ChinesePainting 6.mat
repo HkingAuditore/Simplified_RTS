@@ -57,7 +57,7 @@ Material:
     - _InteriorNoiseLevel: 1
     - _LightingAdjust: 0.24
     - _MaxOutlineZOffset: 0.021
-    - _Outline: 0.002
+    - _Outline: 0.0013
     - _OutlineCut: 0.239
     - _OutlineMinWidth: 0.2
     - _OutsideNoiseWidth: 1.675
