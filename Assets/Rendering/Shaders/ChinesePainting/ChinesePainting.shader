@@ -30,17 +30,21 @@
 		_OutlineMinWidth ("Outline Min Width", Range(0,1)) = 0.5
 
 		[Header(Interior)]
+
 		_Ramp ("Ramp Texture", 2D) = "white" {}
 		// Stroke Map
 		_StrokeTex ("Stroke Noise Tex", 2D) = "white" {}
 		_InteriorNoise ("Interior Noise Map", 2D) = "white" {}
+		_LightingAdjust("Light Adjust", Range(0, 1)) = 0.15
+		_BrightnessAdjust("Brightness Adjust", Range(-1, 1)) = 0.15
+		_RimPower("Rim Power", Range(0, 1)) = 0.15
 		// Interior Noise Level
 		_InteriorNoiseLevel ("Interior Noise Level", Range(0, 1)) = 0.15
 		// Guassian Blur
 		radius ("Guassian Blur Radius", Range(0,60)) = 30
         resolution ("Resolution", float) = 800
         hstep("HorizontalStep", Range(0,1)) = 0.5
-        vstep("VerticalStep", Range(0,1)) = 0.5  
+        vstep("VerticalStep",	Range(0,1)) = 0.5  
 	}
 	SubShader { 
 		Tags { "RenderType"="Opaque" "RenderPipeline"="UniversalPipeline" }
@@ -69,17 +73,20 @@
             //for example horizontaly blur equal:
             //float hstep = 1;
             //float vstep = 0;
-            float hstep;
-            float vstep;
-			float _InteriorNoiseLevel;
+            half hstep;
+            half vstep;
+			half _InteriorNoiseLevel;
 			sampler2D _InteriorNoise;
-			float _Outline;
+			half _Outline;
 			float4 _StrokeColor;
 			sampler2D _OutlineNoise;
 			float _OutsideNoiseWidth;
 			half _MaxOutlineZOffset;
 			half _OutlineCut;
+			half _LightingAdjust;
 			half _OutlineMinWidth;
+			half _RimPower;
+			half _BrightnessAdjust;
 			CBUFFER_END
 		ENDHLSL
  
@@ -304,13 +311,19 @@
 				// Perlin Noise
 				// For the bias of the coordiante
 				float3 worldNormal = normalize(IN.normalWS);
-
-				float4 burn = tex2D(_InteriorNoise, IN.uv);
+				float rim = 1 - saturate(dot(IN.normalWS, normalize(IN.viewDirWS)));
+				rim = pow(rim, _RimPower);
+				rim *= 0.5;
+				rim = clamp(rim,0.3,0.8);
+				// return rim;
+				float4 burn = tex2D(_InteriorNoise, IN.uv * 2.5);
 
 				half diff =  (color.r+color.b+color.g)*0.33;
-				diff = (diff * 0.5 + 0.5);
+				diff = (diff * 0.5 +_LightingAdjust);
+				diff = saturate(diff + rim);
+				diff = saturate(diff + _BrightnessAdjust);
 				float2 k = tex2D(_StrokeTex, IN.uv).xy;
-				float2 cuv = float2(diff, diff) + k * burn.xy * _InteriorNoiseLevel;
+				float2 cuv = float2(diff, diff) + clamp( k * burn.xy * _InteriorNoiseLevel,0.0,0.3);
 
 				// This iniminate the bias of the uv movement?
 				if (cuv.x > 0.95)
