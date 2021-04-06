@@ -9,7 +9,10 @@ public class ResultUI : MonoBehaviour
 
     public void ShowResult(bool isWin)
     {
-        resultUI.transform.Find("Text").GetComponent<Text>().text = isWin ? "你胜利了！" : "你败北了！";
+        resultUI.transform.Find("Text").GetComponent<Text>().text = isWin ? "胜利" : "失败";
+        resultUI.transform.Find("Win") .gameObject.SetActive(isWin);
+        resultUI.transform.Find("Lose").gameObject.SetActive(!isWin);
+        
         resultUI.SetActive(true);
     }
 

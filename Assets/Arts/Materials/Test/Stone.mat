@@ -1,0 +1,75 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Stone
+  m_Shader: {fileID: 4800000, guid: 3cbb837c2817e434b842a19eae7775ab, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BaseMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _InteriorNoise:
+        m_Texture: {fileID: 2800000, guid: 64d9a1350b54db544821668e8402b229, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OutlineNoise:
+        m_Texture: {fileID: 2800000, guid: 64d9a1350b54db544821668e8402b229, type: 3}
+        m_Scale: {x: 10, y: 10}
+        m_Offset: {x: 0, y: 0}
+    - _Ramp:
+        m_Texture: {fileID: 2800000, guid: c5763772c5772e14989e711461b83a69, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _StrokeTex:
+        m_Texture: {fileID: 2800000, guid: fa3075b2e5bd09f4090d3a623deb20f5, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _BrightnessAdjust: -0.3
+    - _BumpScale: 1
+    - _Cutoff: 0.5
+    - _EnableAlphaTest: 0
+    - _EnableBumpMap: 0
+    - _EnableEmission: 0
+    - _InteriorNoiseLevel: 1
+    - _LightingAdjust: 0.234
+    - _MaxOutlineZOffset: 0.067
+    - _Outline: 0.002
+    - _OutlineCut: 0.234
+    - _OutlineMinWidth: 0.2
+    - _OutsideNoiseWidth: 1.675
+    - _RimPower: 0.093
+    - _Smoothness: 0
+    - _Specular: 0.527
+    - hstep: 0.184
+    - radius: 26.6
+    - resolution: 600
+    - vstep: 0.175
+    m_Colors:
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 0}
+    - _StrokeColor: {r: 0, g: 0, b: 0, a: 1}
+  m_BuildTextureStacks: []
