@@ -1,0 +1,1078 @@
+fileFormatVersion: 2
+guid: f687c87de4b04d8498d0f3a106be1142
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 4188529464937676200
+    second: WalkSmoke_0
+  - first:
+      213: 7037299466587794490
+    second: WalkSmoke_1
+  - first:
+      213: -7529567586315355075
+    second: WalkSmoke_2
+  - first:
+      213: 3853672619848767055
+    second: WalkSmoke_3
+  - first:
+      213: -75872524083704326
+    second: WalkSmoke_4
+  - first:
+      213: -6145318125583433873
+    second: WalkSmoke_5
+  - first:
+      213: 3163377432870361385
+    second: WalkSmoke_6
+  - first:
+      213: 361812280966173856
+    second: WalkSmoke_7
+  - first:
+      213: -2798472882578909593
+    second: WalkSmoke_8
+  - first:
+      213: 1100068243144272863
+    second: WalkSmoke_9
+  - first:
+      213: -3943027811677941132
+    second: WalkSmoke_10
+  - first:
+      213: 6087122232476051890
+    second: WalkSmoke_11
+  - first:
+      213: -7630740741078412305
+    second: WalkSmoke_12
+  - first:
+      213: -7771847471761097592
+    second: WalkSmoke_13
+  - first:
+      213: 5213451544960854782
+    second: WalkSmoke_14
+  - first:
+      213: 7969580401825568434
+    second: WalkSmoke_15
+  - first:
+      213: 8617808891316734670
+    second: WalkSmoke_16
+  - first:
+      213: 6160437033271507374
+    second: WalkSmoke_17
+  - first:
+      213: -5190096706631092242
+    second: WalkSmoke_18
+  - first:
+      213: -4414982306442438066
+    second: WalkSmoke_19
+  - first:
+      213: -133334472743580043
+    second: WalkSmoke_20
+  - first:
+      213: 3643662668800710219
+    second: WalkSmoke_21
+  - first:
+      213: -1670659249499914980
+    second: WalkSmoke_22
+  - first:
+      213: -7619267127073036753
+    second: WalkSmoke_23
+  - first:
+      213: -8816205141677804890
+    second: WalkSmoke_24
+  - first:
+      213: -2044212349532455033
+    second: WalkSmoke_25
+  - first:
+      213: -6726092794251827053
+    second: WalkSmoke_26
+  - first:
+      213: -6841524321729263675
+    second: WalkSmoke_27
+  - first:
+      213: 8425147483857130256
+    second: WalkSmoke_28
+  - first:
+      213: 3689566436378903046
+    second: WalkSmoke_29
+  - first:
+      213: -8428918049792256144
+    second: WalkSmoke_30
+  - first:
+      213: 8362476095875070787
+    second: WalkSmoke_31
+  - first:
+      213: 1111323237854581250
+    second: WalkSmoke_32
+  - first:
+      213: -6586221619762268523
+    second: WalkSmoke_33
+  - first:
+      213: -741889214334944656
+    second: WalkSmoke_34
+  - first:
+      213: 3129489860817152012
+    second: WalkSmoke_35
+  - first:
+      213: -4216813289346571115
+    second: WalkSmoke_36
+  - first:
+      213: -2669586220983715479
+    second: WalkSmoke_37
+  - first:
+      213: 1965280552885991704
+    second: WalkSmoke_38
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: 2
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: WalkSmoke_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1260.8572
+        width: 682.6667
+        height: 210.14285
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8adfdd84b55a02a30800000000000000
+      internalID: 4188529464937676200
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WalkSmoke_1
+      rect:
+        serializedVersion: 2
+        x: 682
+        y: 1260.8572
+        width: 682.6667
+        height: 210.14285
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a3ce204649289a160800000000000000
+      internalID: 7037299466587794490
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WalkSmoke_2
+      rect:
+        serializedVersion: 2
+        x: 1364
+        y: 1260.8572
+        width: 682.6667
+        height: 210.14285
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d3cb0617c2a918790800000000000000
+      internalID: -7529567586315355075
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WalkSmoke_3
+      rect:
+        serializedVersion: 2
+        x: 2046
+        y: 1260.8572
+        width: 682.6667
+        height: 210.14285
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f461cb284defa7530800000000000000
+      internalID: 3853672619848767055
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WalkSmoke_4
+      rect:
+        serializedVersion: 2
+        x: 2728
+        y: 1260.8572
+        width: 682.6667
+        height: 210.14285
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: afd47c1675272fef0800000000000000
+      internalID: -75872524083704326
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WalkSmoke_5
+      rect:
+        serializedVersion: 2
+        x: 3410
+        y: 1260.8572
+        width: 682.6667
+        height: 210.14285
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f6f74dc59b177baa0800000000000000
+      internalID: -6145318125583433873
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WalkSmoke_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1050.8572
+        width: 682.6667
+        height: 210.14285
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 92999b0d30396eb20800000000000000
+      internalID: 3163377432870361385
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WalkSmoke_7
+      rect:
+        serializedVersion: 2
+        x: 682
+        y: 1050.8572
+        width: 682.6667
+        height: 210.14285
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a4dc524a5a650500800000000000000
+      internalID: 361812280966173856
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WalkSmoke_8
+      rect:
+        serializedVersion: 2
+        x: 1364
+        y: 1050.8572
+        width: 682.6667
+        height: 210.14285
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 76612508db3d929d0800000000000000
+      internalID: -2798472882578909593
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WalkSmoke_9
+      rect:
+        serializedVersion: 2
+        x: 2046
+        y: 1050.8572
+        width: 682.6667
+        height: 210.14285
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fdb6d4d1d3a344f00800000000000000
+      internalID: 1100068243144272863
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WalkSmoke_10
+      rect:
+        serializedVersion: 2
+        x: 2728
+        y: 1050.8572
+        width: 682.6667
+        height: 210.14285
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4725379a81d8749c0800000000000000
+      internalID: -3943027811677941132
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WalkSmoke_11
+      rect:
+        serializedVersion: 2
+        x: 3410
+        y: 1050.8572
+        width: 682.6667
+        height: 210.14285
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2b92e136b6dc97450800000000000000
+      internalID: 6087122232476051890
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WalkSmoke_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 840.8572
+        width: 682.6667
+        height: 210.14285
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fe39be2b9b92a1690800000000000000
+      internalID: -7630740741078412305
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WalkSmoke_13
+      rect:
+        serializedVersion: 2
+        x: 682
+        y: 840.8572
+        width: 682.6667
+        height: 210.14285
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 88c7925c6e9d42490800000000000000
+      internalID: -7771847471761097592
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WalkSmoke_14
+      rect:
+        serializedVersion: 2
+        x: 1364
+        y: 840.8572
+        width: 682.6667
+        height: 210.14285
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: efa6a1fde86e95840800000000000000
+      internalID: 5213451544960854782
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WalkSmoke_15
+      rect:
+        serializedVersion: 2
+        x: 2046
+        y: 840.8572
+        width: 682.6667
+        height: 210.14285
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2b65abb9623a99e60800000000000000
+      internalID: 7969580401825568434
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WalkSmoke_16
+      rect:
+        serializedVersion: 2
+        x: 2728
+        y: 840.8572
+        width: 682.6667
+        height: 210.14285
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eca032d078b989770800000000000000
+      internalID: 8617808891316734670
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WalkSmoke_17
+      rect:
+        serializedVersion: 2
+        x: 3410
+        y: 840.8572
+        width: 682.6667
+        height: 210.14285
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea93f45a7d44e7550800000000000000
+      internalID: 6160437033271507374
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WalkSmoke_18
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 630.8572
+        width: 682.6667
+        height: 210.14285
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee7345b2b8219f7b0800000000000000
+      internalID: -5190096706631092242
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WalkSmoke_19
+      rect:
+        serializedVersion: 2
+        x: 682
+        y: 630.8572
+        width: 682.6667
+        height: 210.14285
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e4a1ddedbf4dab2c0800000000000000
+      internalID: -4414982306442438066
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WalkSmoke_20
+      rect:
+        serializedVersion: 2
+        x: 1364
+        y: 630.8572
+        width: 682.6667
+        height: 210.14285
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 57e0ec3e00d462ef0800000000000000
+      internalID: -133334472743580043
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WalkSmoke_21
+      rect:
+        serializedVersion: 2
+        x: 2046
+        y: 630.8572
+        width: 682.6667
+        height: 210.14285
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b46d73f64e3e09230800000000000000
+      internalID: 3643662668800710219
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WalkSmoke_22
+      rect:
+        serializedVersion: 2
+        x: 2728
+        y: 630.8572
+        width: 682.6667
+        height: 210.14285
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c1d36dc9340a0d8e0800000000000000
+      internalID: -1670659249499914980
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WalkSmoke_23
+      rect:
+        serializedVersion: 2
+        x: 3410
+        y: 630.8572
+        width: 682.6667
+        height: 210.14285
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f262002aaece24690800000000000000
+      internalID: -7619267127073036753
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WalkSmoke_24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 420.85715
+        width: 682.6667
+        height: 210.14285
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6a27257422c86a580800000000000000
+      internalID: -8816205141677804890
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WalkSmoke_25
+      rect:
+        serializedVersion: 2
+        x: 682
+        y: 420.85715
+        width: 682.6667
+        height: 210.14285
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 78fb6a4e2bf71a3e0800000000000000
+      internalID: -2044212349532455033
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WalkSmoke_26
+      rect:
+        serializedVersion: 2
+        x: 1364
+        y: 420.85715
+        width: 682.6667
+        height: 210.14285
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3982e407d3e18a2a0800000000000000
+      internalID: -6726092794251827053
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WalkSmoke_27
+      rect:
+        serializedVersion: 2
+        x: 2046
+        y: 420.85715
+        width: 682.6667
+        height: 210.14285
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5c7c12990e50e01a0800000000000000
+      internalID: -6841524321729263675
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WalkSmoke_28
+      rect:
+        serializedVersion: 2
+        x: 2728
+        y: 420.85715
+        width: 682.6667
+        height: 210.14285
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 013949b8ff22ce470800000000000000
+      internalID: 8425147483857130256
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WalkSmoke_29
+      rect:
+        serializedVersion: 2
+        x: 3410
+        y: 420.85715
+        width: 682.6667
+        height: 210.14285
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 602819f2029f33330800000000000000
+      internalID: 3689566436378903046
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WalkSmoke_30
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 210.85715
+        width: 682.6667
+        height: 210.14285
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 077114921b7760b80800000000000000
+      internalID: -8428918049792256144
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WalkSmoke_31
+      rect:
+        serializedVersion: 2
+        x: 682
+        y: 210.85715
+        width: 682.6667
+        height: 210.14285
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 34b3451f3bb7d0470800000000000000
+      internalID: 8362476095875070787
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WalkSmoke_32
+      rect:
+        serializedVersion: 2
+        x: 1364
+        y: 210.85715
+        width: 682.6667
+        height: 210.14285
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 20295f6c8963c6f00800000000000000
+      internalID: 1111323237854581250
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WalkSmoke_33
+      rect:
+        serializedVersion: 2
+        x: 2046
+        y: 210.85715
+        width: 682.6667
+        height: 210.14285
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5967216055a0994a0800000000000000
+      internalID: -6586221619762268523
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WalkSmoke_34
+      rect:
+        serializedVersion: 2
+        x: 2728
+        y: 210.85715
+        width: 682.6667
+        height: 210.14285
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 07a3fd4b0b744b5f0800000000000000
+      internalID: -741889214334944656
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WalkSmoke_35
+      rect:
+        serializedVersion: 2
+        x: 3410
+        y: 210.85715
+        width: 682.6667
+        height: 210.14285
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c08613a927e2e6b20800000000000000
+      internalID: 3129489860817152012
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WalkSmoke_36
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0.8571472
+        width: 682.6667
+        height: 210.14285
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 594e95ca7aeda75c0800000000000000
+      internalID: -4216813289346571115
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WalkSmoke_37
+      rect:
+        serializedVersion: 2
+        x: 682
+        y: 0.8571472
+        width: 682.6667
+        height: 210.14285
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 969fcf0e979b3fad0800000000000000
+      internalID: -2669586220983715479
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WalkSmoke_38
+      rect:
+        serializedVersion: 2
+        x: 1364
+        y: 0.8571472
+        width: 682.6667
+        height: 210.14285
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 819b0c61044164b10800000000000000
+      internalID: 1965280552885991704
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: b9fdac7bd3372784d832aa9aa89f93a0
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

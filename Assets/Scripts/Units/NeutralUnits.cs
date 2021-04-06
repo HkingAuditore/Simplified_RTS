@@ -8,10 +8,10 @@ namespace Units
         protected override void Awake()
         {
             unitRigidbody      = GetComponent<Rigidbody>();
-            UnitDeathEventHandler += (p, m) =>
-                                     {
-                                         p.ChangeResource(Resource.Gold, this.deathReward);
-                                     };
+            UnitDeathEventHandler.AddListener((p, m) =>
+            {
+                p.ChangeResource(Resource.Gold, this.deathReward);
+            });
         }
 
 

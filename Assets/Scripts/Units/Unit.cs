@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Pathfinding;
@@ -46,10 +47,21 @@ namespace Units
 
         #region 属性封装
 
+        private bool _death = false;
+
         public int HP
         {
             get => _hp;
-            protected set => _hp = value >= 0 ? value : 0;
+            protected set
+            {
+                _hp = value >= 0 ? value : 0;
+                if(_hp == 0)
+                {
+                    UnitDeathEventHandler?.Invoke(_attacker.SidePlayer, _attacker);
+                    _death = true;
+                    Destroy(gameObject,2f);
+                }
+            }
         }
 
         public float Speed
@@ -82,11 +94,11 @@ namespace Units
         #region 事件
 
         // 目的地到达事件
-        public    UnityAction<GameObject, Transform> navStopEventHandler;
-        protected UnityAction                        StartEventHandler;
+        public    UnityEvent<GameObject, Transform> navStopEventHandler;
+        protected UnityEvent                        StartEventHandler;
         //收到攻击
-        protected UnityAction<IMilitaryUnit> BeAttackedEventHandler;
-        public    UnityAction<Player,IMilitaryUnit>                UnitDeathEventHandler;
+        protected UnityEvent<IMilitaryUnit>        BeAttackedEventHandler = new UnityEvent<IMilitaryUnit>();
+        public    UnityEvent<Player,IMilitaryUnit> UnitDeathEventHandler = new UnityEvent<Player, IMilitaryUnit>();
 
         
 
@@ -120,10 +132,10 @@ namespace Units
             unitRigidbody         =  GetComponent<Rigidbody>();
             _destinationSetter    =  this.GetComponent<AIDestinationSetter>();
             _pathFinder           =  this.GetComponent<AIPath>();
-            UnitDeathEventHandler += (p, m) =>
-                                     {
-                                         p.ChangeResource(Resource.Gold, this.deathReward);
-                                     };
+            UnitDeathEventHandler.AddListener((p, m) =>
+                                              {
+                                                  p.ChangeResource(Resource.Gold, this.deathReward);
+                                              }); 
         }
 
         public virtual void Start()
@@ -137,30 +149,32 @@ namespace Units
 
         public void Update()
         {
-            if (HP <= 0)
+            if(this.HP > 0)
             {
-                UnitDeathEventHandler?.Invoke(_attacker.SidePlayer,_attacker);
-                Destroy(gameObject);
-            }
-
-            _baseTimer += Time.deltaTime;
-            try
-            {
-                //TODO 这里会跳出"GetRemainingDistance" can only be called on an active agent that has been placed on a NavMesh.
-                // if (!isUnmovable && navMeshAgent.remainingDistance < 0.2f && !_isAtTarget)
-                if (!isUnmovable && !_isAtTarget && _pathFinder.reachedDestination)
+                _baseTimer += Time.deltaTime;
+                try
                 {
-                    navStopEventHandler?.Invoke(gameObject, transform);
-                    _isAtTarget = true;
+                    //TODO 这里会跳出"GetRemainingDistance" can only be called on an active agent that has been placed on a NavMesh.
+                    // if (!isUnmovable && navMeshAgent.remainingDistance < 0.2f && !_isAtTarget)
+                    if (!isUnmovable && !_isAtTarget && _pathFinder.reachedDestination)
+                    {
+                        navStopEventHandler?.Invoke(gameObject, transform);
+                        _isAtTarget = true;
+                    }
+                }
+                catch (Exception e)
+                {
+                    //Console.WriteLine(e);
                 }
             }
-            catch (Exception e)
-            {
-                //Console.WriteLine(e);
-            }
+            
         }
 
-
+        IEnumerator WaitForDeath() {
+            // TODO 死亡五秒消失
+            yield return new WaitForSeconds(2);
+            Destroy(gameObject);
+        }
 
         #region 寻路
 
@@ -183,6 +197,8 @@ namespace Units
 
         public void BeAttacked(IMilitaryUnit attacker)
         {
+            if (this._death)
+                throw new Exception("WAS DEAD");
             var damage = attacker.AttackValue - defence > 0 ? attacker.AttackValue - defence : 1;
             HP -= damage;
             this._attacker = attacker;

@@ -455,7 +455,8 @@ public class Player : MonoBehaviour
     public void SetUnits(Vector3 tr, int chosenUnit, Road rd, int number)
     {
         // Debug.Log("NUMBER:" + number);
-
+        if (this.gameObject.transform.Find(gameObject.name[0] + "Units").transform.childCount >= 10)
+            throw new Exception("MAX UNITS!");
 
         for (var i = 0; i < number; i++)
         {
@@ -521,16 +522,25 @@ public class Player : MonoBehaviour
 
 
         //TODO 动态生成材质实例，需要优化
-        unitInstantiated.gameObject.transform.Find(unitGb.name).gameObject.GetComponent<SpriteRenderer>()
-                        .sharedMaterial = Instantiate(unitGb.gameObject.transform.Find(unitGb.name).gameObject
-                                                            .GetComponent<SpriteRenderer>().sharedMaterial);
+        try
+        {
+            unitInstantiated.gameObject.transform.Find(unitGb.name).gameObject.GetComponent<SpriteRenderer>()
+                            .sharedMaterial = Instantiate(unitGb.gameObject.transform.Find(unitGb.name).gameObject
+                                                                .GetComponent<SpriteRenderer>().sharedMaterial);
 
-        unitInstantiated.gameObject.transform.Find(unitGb.name).gameObject.GetComponent<SpriteRenderer>()
-                        .sharedMaterial.SetTexture(
-                                                   "_BaseMap",
-                                                   Resources.Load("Units/" + unitGb.name +
-                                                                  LayerMask.LayerToName(gameObject.layer)[0]) as Texture
-                                                  );
+            unitInstantiated.gameObject.transform.Find(unitGb.name).gameObject.GetComponent<SpriteRenderer>()
+                            .sharedMaterial.SetTexture(
+                                                       "_BaseMap",
+                                                       Resources.Load("Units/" + unitGb.name +
+                                                                      LayerMask.LayerToName(gameObject.layer)[0]) as Texture
+                                                      );
+
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            // throw;
+        }
 
         unitInstantiated.gameObject.tag                        = rd.ToString();
         unitInstantiated.gameObject.layer                      = gameObject.layer;

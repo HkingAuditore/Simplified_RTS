@@ -79,7 +79,7 @@ Material:
     m_Floats:
     - _AlphaClip: 0
     - _Blend: 0
-    - _BrightnessAdjust: 0.16
+    - _BrightnessAdjust: -0.1
     - _BumpScale: 1
     - _Cull: 2
     - _Cutoff: 0.5
@@ -92,7 +92,7 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _InteriorNoiseLevel: 0.15
-    - _LightingAdjust: 0.089
+    - _LightingAdjust: 0.338
     - _MaxOutlineZOffset: 1
     - _Metallic: 0
     - _OcclusionStrength: 1
@@ -102,7 +102,7 @@ Material:
     - _OutsideNoiseWidth: 1
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _RimPower: 0
+    - _RimPower: 0.15
     - _Smoothness: 0
     - _SmoothnessTextureChannel: 0
     - _Specular: 0.5

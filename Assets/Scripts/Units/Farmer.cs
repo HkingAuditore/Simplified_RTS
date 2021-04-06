@@ -23,18 +23,18 @@ namespace Units
         public override void Start()
         {
             GenerateWorkPath();
-            navStopEventHandler += OnNavStop;
+            navStopEventHandler.AddListener(OnNavStop); ;
 
             farmerBackEventHandler += Drop;
             farmerBackEventHandler += sidePlayer.FarmerBack;
 
             //死亡处理
-            UnitDeathEventHandler += (p, m) =>
-                                     {
-                                         sidePlayer.FarmerCount--;
-                                         sidePlayer.RoadFarmers[(int) road]--;
-                                         sidePlayer.RoadWorkingFarmers[(int) road]--;
-                                     };
+            UnitDeathEventHandler.AddListener((p, m) =>
+                                              {
+                                                  sidePlayer.FarmerCount--;
+                                                  sidePlayer.RoadFarmers[(int) road]--;
+                                                  sidePlayer.RoadWorkingFarmers[(int) road]--;
+                                              });
 
 
             if (ResouceCarried > 0)

@@ -48,14 +48,14 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _BrightnessAdjust: -0.17
+    - _BrightnessAdjust: -0.24
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _EnableAlphaTest: 0
     - _EnableBumpMap: 0
     - _EnableEmission: 0
     - _InteriorNoiseLevel: 1
-    - _LightingAdjust: 0.24
+    - _LightingAdjust: 0.021
     - _MaxOutlineZOffset: 0.021
     - _Outline: 0.0013
     - _OutlineCut: 0.239

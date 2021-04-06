@@ -82,7 +82,7 @@ public class RangedAttackUnit : Unit, IMilitaryUnit
 
     public override void Start()
     {
-        BeAttackedEventHandler += AttackedReact;
+        BeAttackedEventHandler.AddListener(AttackedReact);
         if (!isUnmovable)
         {
             // TODO StartEventHandler += () => navMeshAgent.stoppingDistance = attackRange * 0.8f;

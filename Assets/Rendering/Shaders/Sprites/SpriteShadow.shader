@@ -11,6 +11,8 @@
         _Cutoff("Alpha Cutoff", Range(0.0, 1.0)) = 0.5
  
         _Smoothness("Smoothness", Range(0.0, 1.0)) = 0.5
+        _GIIntensity("GI Intensity", Range(0.0, 1.0)) = 0.5
+        _ShadowPow("Shadow Pow", Range(0.0, 1.0)) = 0.5
         _GlossMapScale("Smoothness Scale", Range(0.0, 1.0)) = 1.0
         _SmoothnessTextureChannel("Smoothness texture channel", Float) = 0
  
@@ -126,7 +128,105 @@
             #pragma vertex LitPassVertexCustom
             #pragma fragment LitPassFragmentCustom
  
-            #include "Packages/com.unity.render-pipelines.universal/Shaders/LitInput.hlsl"
+#ifndef UNIVERSAL_LIT_INPUT_INCLUDED
+#define UNIVERSAL_LIT_INPUT_INCLUDED
+
+#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/CommonMaterial.hlsl"
+#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/SurfaceInput.hlsl"
+
+            CBUFFER_START(UnityPerMaterial)
+                float4 _BaseMap_ST;
+                half4 _BaseColor;
+                half4 _SpecColor;
+                half4 _EmissionColor;
+                half _Cutoff;
+                half _Smoothness;
+                half _Metallic;
+                half _BumpScale;
+                half _OcclusionStrength;
+                half _Surface;
+                half _GIIntensity;
+                half _ShadowPow;
+            CBUFFER_END
+
+            TEXTURE2D(_OcclusionMap);       SAMPLER(sampler_OcclusionMap);
+            TEXTURE2D(_MetallicGlossMap);   SAMPLER(sampler_MetallicGlossMap);
+            TEXTURE2D(_SpecGlossMap);       SAMPLER(sampler_SpecGlossMap);
+
+#ifdef _SPECULAR_SETUP
+    #define SAMPLE_METALLICSPECULAR(uv) SAMPLE_TEXTURE2D(_SpecGlossMap, sampler_SpecGlossMap, uv)
+#else
+    #define SAMPLE_METALLICSPECULAR(uv) SAMPLE_TEXTURE2D(_MetallicGlossMap, sampler_MetallicGlossMap, uv)
+#endif
+
+half4 SampleMetallicSpecGloss(float2 uv, half albedoAlpha)
+{
+    half4 specGloss;
+
+#ifdef _METALLICSPECGLOSSMAP
+    specGloss = SAMPLE_METALLICSPECULAR(uv);
+    #ifdef _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
+        specGloss.a = albedoAlpha * _Smoothness;
+    #else
+        specGloss.a *= _Smoothness;
+    #endif
+#else // _METALLICSPECGLOSSMAP
+    #if _SPECULAR_SETUP
+        specGloss.rgb = _SpecColor.rgb;
+    #else
+        specGloss.rgb = _Metallic.rrr;
+    #endif
+
+    #ifdef _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
+        specGloss.a = albedoAlpha * _Smoothness;
+    #else
+        specGloss.a = _Smoothness;
+    #endif
+#endif
+
+    return specGloss;
+}
+
+half SampleOcclusion(float2 uv)
+{
+#ifdef _OCCLUSIONMAP
+// TODO: Controls things like these by exposing SHADER_QUALITY levels (low, medium, high)
+#if defined(SHADER_API_GLES)
+    return SAMPLE_TEXTURE2D(_OcclusionMap, sampler_OcclusionMap, uv).g;
+#else
+    half occ = SAMPLE_TEXTURE2D(_OcclusionMap, sampler_OcclusionMap, uv).g;
+    return LerpWhiteTo(occ, _OcclusionStrength);
+#endif
+#else
+    return 1.0;
+#endif
+}
+
+inline void InitializeStandardLitSurfaceData(float2 uv, out SurfaceData outSurfaceData)
+{
+    half4 albedoAlpha = SampleAlbedoAlpha(uv, TEXTURE2D_ARGS(_BaseMap, sampler_BaseMap));
+    outSurfaceData.alpha = Alpha(albedoAlpha.a, _BaseColor, _Cutoff);
+
+    half4 specGloss = SampleMetallicSpecGloss(uv, albedoAlpha.a);
+    outSurfaceData.albedo = albedoAlpha.rgb * _BaseColor.rgb;
+
+#if _SPECULAR_SETUP
+    outSurfaceData.metallic = 1.0h;
+    outSurfaceData.specular = specGloss.rgb;
+#else
+    outSurfaceData.metallic = specGloss.r;
+    outSurfaceData.specular = half3(0.0h, 0.0h, 0.0h);
+#endif
+
+    outSurfaceData.smoothness = specGloss.a;
+    outSurfaceData.normalTS = SampleNormal(uv, TEXTURE2D_ARGS(_BumpMap, sampler_BumpMap), _BumpScale);
+    outSurfaceData.occlusion = SampleOcclusion(uv);
+    outSurfaceData.emission = SampleEmission(uv, _EmissionColor.rgb, TEXTURE2D_ARGS(_EmissionMap, sampler_EmissionMap));
+}
+
+#endif // UNIVERSAL_INPUT_SURFACE_PBR_INCLUDED
+
             #include "Packages/com.unity.render-pipelines.universal/Shaders/LitForwardPass.hlsl"
 
             Varyings LitPassVertexCustom(Attributes input)
@@ -142,7 +242,8 @@
                     // normalWS and tangentWS already normalize.
                     // this is required to avoid skewing the direction during interpolation
                     // also required for per-vertex lighting and SH evaluation
-                    VertexNormalInputs normalInput = GetVertexNormalInputs(input.normalOS.z > 0 ? input.normalOS : -input.normalOS, input.tangentOS);
+                    half3 worldNormal = TransformObjectToWorldNormal(input.normalOS);
+                    VertexNormalInputs normalInput = GetVertexNormalInputs(input.normalOS.z * worldNormal.z > 0 ? -input.normalOS : input.normalOS, input.tangentOS);
                     float3 viewDirWS = GetCameraPositionWS() - vertexInput.positionWS;
                     half3 vertexLight = VertexLighting(vertexInput.positionWS, normalInput.normalWS);
                     half fogFactor = ComputeFogFactor(vertexInput.positionCS.z);
@@ -189,7 +290,7 @@
                 return LightingPhysicallyBasedCustom(brdfData,
                                                     light.color,
                                     light.direction,
-                                    light.distanceAttenuation * pow(light.shadowAttenuation,2.5),
+                                    light.distanceAttenuation * pow(light.shadowAttenuation,_ShadowPow),
                                                     normalWS, viewDirectionWS);
             }
 
@@ -202,7 +303,7 @@
                 Light mainLight = GetMainLight(inputData.shadowCoord);
                 MixRealtimeAndBakedGI(mainLight, inputData.normalWS, inputData.bakedGI, half4(0, 0, 0, 0));
 
-                half3 color = GlobalIllumination(brdfData, lerp(inputData.bakedGI,half3(1,1,1),0.6)*0.9, occlusion, inputData.normalWS, inputData.viewDirectionWS);
+                half3 color = GlobalIllumination(brdfData, lerp(inputData.bakedGI,half3(1,1,1),_GIIntensity), occlusion, inputData.normalWS, inputData.viewDirectionWS);
                 color += LightingPhysicallyBasedCustom(brdfData, mainLight, inputData.normalWS, inputData.viewDirectionWS);
 
             #ifdef _ADDITIONAL_LIGHTS
@@ -363,6 +464,6 @@
  
     }
     FallBack "Hidden/Universal Render Pipeline/FallbackError"
-    CustomEditor "UnityEditor.Rendering.Universal.ShaderGUI.LitShader"
+    CustomEditor "UnityEditor.Rendering.Universal.ShaderGUI.SpriteShaderEditor"
 }
  

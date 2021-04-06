@@ -1,0 +1,838 @@
+fileFormatVersion: 2
+guid: d6fbb835a8671764f88dd76d709eeb1c
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 9157651401261651929
+    second: FallSmoke_0
+  - first:
+      213: 413757545569096177
+    second: FallSmoke_1
+  - first:
+      213: 1843062248903379329
+    second: FallSmoke_2
+  - first:
+      213: -2526824769144907124
+    second: FallSmoke_3
+  - first:
+      213: -7033363843876157369
+    second: FallSmoke_4
+  - first:
+      213: 5181094525232243003
+    second: FallSmoke_5
+  - first:
+      213: 5893161834505004421
+    second: FallSmoke_6
+  - first:
+      213: 626162593460968983
+    second: FallSmoke_7
+  - first:
+      213: -3482255609425485515
+    second: FallSmoke_8
+  - first:
+      213: -4465693890755561010
+    second: FallSmoke_9
+  - first:
+      213: 7316078761095551396
+    second: FallSmoke_10
+  - first:
+      213: -4969071614148970395
+    second: FallSmoke_11
+  - first:
+      213: -7779946760371813936
+    second: FallSmoke_12
+  - first:
+      213: 8086400002662653670
+    second: FallSmoke_13
+  - first:
+      213: -9056827762023130749
+    second: FallSmoke_14
+  - first:
+      213: 7081466001513848150
+    second: FallSmoke_15
+  - first:
+      213: 950642578909055391
+    second: FallSmoke_16
+  - first:
+      213: 7490716652640959076
+    second: FallSmoke_17
+  - first:
+      213: -3951889402134560916
+    second: FallSmoke_18
+  - first:
+      213: -5590745207754930385
+    second: FallSmoke_19
+  - first:
+      213: 6736996030504164793
+    second: FallSmoke_20
+  - first:
+      213: -6327905473592239845
+    second: FallSmoke_21
+  - first:
+      213: -6768600506044386150
+    second: FallSmoke_22
+  - first:
+      213: -4758606104289716443
+    second: FallSmoke_23
+  - first:
+      213: -6181239286276564858
+    second: FallSmoke_24
+  - first:
+      213: -7489120978626857936
+    second: FallSmoke_25
+  - first:
+      213: 5238647610209456513
+    second: FallSmoke_26
+  - first:
+      213: 8244731809978873920
+    second: FallSmoke_27
+  - first:
+      213: -4878561439601269063
+    second: FallSmoke_28
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: 2
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: FallSmoke_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 4096.6665
+        width: 819.2
+        height: 819.3333
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9d71f0d1e63861f70800000000000000
+      internalID: 9157651401261651929
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FallSmoke_1
+      rect:
+        serializedVersion: 2
+        x: 819
+        y: 4096.6665
+        width: 819.2
+        height: 819.3333
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1f198c6ab46fdb500800000000000000
+      internalID: 413757545569096177
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FallSmoke_2
+      rect:
+        serializedVersion: 2
+        x: 1638
+        y: 4096.6665
+        width: 819.2
+        height: 819.3333
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 18981d4b95fd39910800000000000000
+      internalID: 1843062248903379329
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FallSmoke_3
+      rect:
+        serializedVersion: 2
+        x: 2457
+        y: 4096.6665
+        width: 819.2
+        height: 819.3333
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c8a9579924aeeecd0800000000000000
+      internalID: -2526824769144907124
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FallSmoke_4
+      rect:
+        serializedVersion: 2
+        x: 3276
+        y: 4096.6665
+        width: 819.2
+        height: 819.3333
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7488fad29d8746e90800000000000000
+      internalID: -7033363843876157369
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FallSmoke_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 3277.6667
+        width: 819.2
+        height: 819.3333
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b3160342502f6e740800000000000000
+      internalID: 5181094525232243003
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FallSmoke_6
+      rect:
+        serializedVersion: 2
+        x: 819
+        y: 3277.6667
+        width: 819.2
+        height: 819.3333
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5856f851777b8c150800000000000000
+      internalID: 5893161834505004421
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FallSmoke_7
+      rect:
+        serializedVersion: 2
+        x: 1638
+        y: 3277.6667
+        width: 819.2
+        height: 819.3333
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 71ed0eaaf8390b800800000000000000
+      internalID: 626162593460968983
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FallSmoke_8
+      rect:
+        serializedVersion: 2
+        x: 2457
+        y: 3277.6667
+        width: 819.2
+        height: 819.3333
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 531251719fa8cafc0800000000000000
+      internalID: -3482255609425485515
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FallSmoke_9
+      rect:
+        serializedVersion: 2
+        x: 3276
+        y: 3277.6667
+        width: 819.2
+        height: 819.3333
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec9f1ed011ba602c0800000000000000
+      internalID: -4465693890755561010
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FallSmoke_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2458.6667
+        width: 819.2
+        height: 819.3333
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a951e7fedee78560800000000000000
+      internalID: 7316078761095551396
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FallSmoke_11
+      rect:
+        serializedVersion: 2
+        x: 819
+        y: 2458.6667
+        width: 819.2
+        height: 819.3333
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5687c27b1bf4a0bb0800000000000000
+      internalID: -4969071614148970395
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FallSmoke_12
+      rect:
+        serializedVersion: 2
+        x: 1638
+        y: 2458.6667
+        width: 819.2
+        height: 819.3333
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0d1469034a3180490800000000000000
+      internalID: -7779946760371813936
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FallSmoke_13
+      rect:
+        serializedVersion: 2
+        x: 2457
+        y: 2458.6667
+        width: 819.2
+        height: 819.3333
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6eedc6675f9a83070800000000000000
+      internalID: 8086400002662653670
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FallSmoke_14
+      rect:
+        serializedVersion: 2
+        x: 3276
+        y: 2458.6667
+        width: 819.2
+        height: 819.3333
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 38917b4b22faf4280800000000000000
+      internalID: -9056827762023130749
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FallSmoke_15
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1639.6667
+        width: 819.2
+        height: 819.3333
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 65d1d352fcb664260800000000000000
+      internalID: 7081466001513848150
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FallSmoke_16
+      rect:
+        serializedVersion: 2
+        x: 819
+        y: 1639.6667
+        width: 819.2
+        height: 819.3333
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f994c38836c513d00800000000000000
+      internalID: 950642578909055391
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FallSmoke_17
+      rect:
+        serializedVersion: 2
+        x: 1638
+        y: 1639.6667
+        width: 819.2
+        height: 819.3333
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 46a74c9ab1f54f760800000000000000
+      internalID: 7490716652640959076
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FallSmoke_18
+      rect:
+        serializedVersion: 2
+        x: 2457
+        y: 1639.6667
+        width: 819.2
+        height: 819.3333
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c6f732ad6811829c0800000000000000
+      internalID: -3951889402134560916
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FallSmoke_19
+      rect:
+        serializedVersion: 2
+        x: 3276
+        y: 1639.6667
+        width: 819.2
+        height: 819.3333
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f27cc06cadea962b0800000000000000
+      internalID: -5590745207754930385
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FallSmoke_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 820.6667
+        width: 819.2
+        height: 819.3333
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9bdda63123e9e7d50800000000000000
+      internalID: 6736996030504164793
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FallSmoke_21
+      rect:
+        serializedVersion: 2
+        x: 819
+        y: 820.6667
+        width: 819.2
+        height: 819.3333
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b19d84a9f73ce28a0800000000000000
+      internalID: -6327905473592239845
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FallSmoke_22
+      rect:
+        serializedVersion: 2
+        x: 1638
+        y: 820.6667
+        width: 819.2
+        height: 819.3333
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a94f1ba83b91112a0800000000000000
+      internalID: -6768600506044386150
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FallSmoke_23
+      rect:
+        serializedVersion: 2
+        x: 2457
+        y: 820.6667
+        width: 819.2
+        height: 819.3333
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5275ec7d5f806fdb0800000000000000
+      internalID: -4758606104289716443
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FallSmoke_24
+      rect:
+        serializedVersion: 2
+        x: 3276
+        y: 820.6667
+        width: 819.2
+        height: 819.3333
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 688dbc56e93d73aa0800000000000000
+      internalID: -6181239286276564858
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FallSmoke_25
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1.666687
+        width: 819.2
+        height: 819.3333
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0343505262c411890800000000000000
+      internalID: -7489120978626857936
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FallSmoke_26
+      rect:
+        serializedVersion: 2
+        x: 819
+        y: 1.666687
+        width: 819.2
+        height: 819.3333
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 181dbf5fe3a63b840800000000000000
+      internalID: 5238647610209456513
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FallSmoke_27
+      rect:
+        serializedVersion: 2
+        x: 1638
+        y: 1.666687
+        width: 819.2
+        height: 819.3333
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 048772216eb2b6270800000000000000
+      internalID: 8244731809978873920
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FallSmoke_28
+      rect:
+        serializedVersion: 2
+        x: 2457
+        y: 1.666687
+        width: 819.2
+        height: 819.3333
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b6e5a9e73edb4cb0800000000000000
+      internalID: -4878561439601269063
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 44cb9a6d4efb9634f8d45d6287cc75b0
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

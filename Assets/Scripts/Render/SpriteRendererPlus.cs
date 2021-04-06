@@ -6,7 +6,7 @@ using UnityEngine.Rendering;
 public class SpriteRendererPlus : MonoBehaviour
 {
     public  bool isUnit;
-    private int  _isAside;
+    public  int  _isAside;
     private Unit _parentUnit;
 
     private void Start()
@@ -20,16 +20,18 @@ public class SpriteRendererPlus : MonoBehaviour
         GetComponent<SpriteRenderer>().shadowCastingMode = ShadowCastingMode.On;
     }
 
+    public bool faceRight;
     private void Update()
     {
         if (isUnit)
         {
-            var isForward = _parentUnit.unitRigidbody.velocity.x < 0 ? 1 : -1;
-            // Debug.Log(isForward);
-            transform.eulerAngles =
-                new Vector3(0,
-                            isForward * 180 * (_isAside == 1 ? 0 : -1) - transform.parent.transform.eulerAngles.y +
-                            _isAside * 90f, 0);
+            float yDir = _parentUnit.transform.rotation.y;
+           faceRight = ((int) yDir % 360 < 180) ? true : false;
+            if (_isAside == -1)
+            {
+                faceRight = !faceRight;
+            }
+            transform.rotation = Quaternion.Euler(25f * (faceRight ? 1 : -1), faceRight ? 0 : 180, 0);
         }
     }
 }

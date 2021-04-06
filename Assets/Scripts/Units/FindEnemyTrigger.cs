@@ -44,9 +44,10 @@ public class FindEnemyTrigger : MonoBehaviour
             Component unitComponent;
             if (other.gameObject.TryGetComponent(typeof(Unit), out unitComponent))
                 // Debug.Log( _baseUnit.gameObject.name + " New Enemy In Layer!");
-                if (other.gameObject.CompareTag(_thisRoadTag)           ||
-                    other.gameObject.GetComponent<Unit>().IsAtEnemyDoor ||
-                    other.gameObject.CompareTag("Door"))
+                if ((other.gameObject.CompareTag(_thisRoadTag)           ||
+                     other.gameObject.GetComponent<Unit>().IsAtEnemyDoor ||
+                     other.gameObject.CompareTag("Door")) &&(
+                    other.gameObject.GetComponent<Unit>().HP > 0))
                 {
                     _enemyList.Add(other.gameObject.GetComponent<Unit>());
                     Debug.Log(_baseUnit.sidePlayer.gameObject.name + "::"+_baseUnit.gameObject.name + " New Enemy In!:: " +
@@ -77,7 +78,7 @@ public class FindEnemyTrigger : MonoBehaviour
         try
         {
             _enemyList = (from unit in _enemyList
-                          where unit != null
+                          where (unit != null && unit.HP > 0)
                           orderby Vector3.Distance(_baseUnit.transform.position, unit.transform.position)
                           select unit).ToList();
             return _enemyList.First();

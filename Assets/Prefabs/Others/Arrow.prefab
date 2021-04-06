@@ -127,6 +127,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isUnit: 0
+  _isAside: 0
+  faceRight: 0
 --- !u!54 &5415613320471745757
 Rigidbody:
   m_ObjectHideFlags: 0
