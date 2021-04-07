@@ -7,9 +7,11 @@ using UnityEngine.UI;
 [ExecuteInEditMode]
 public class ItemUI : MonoBehaviour
 {
-   public Image itemImage;
-   public Text  itemNameText;
-   public Color unrevealedColor;
+   public Image  itemImage;
+   public Text   itemNameText;
+   public Color  unrevealedColor;
+   public Button button;
+   public int    itemIndex;
    
    [SerializeField]
    [ContextMenuItem("SetName","Set")]
@@ -44,9 +46,13 @@ public class ItemUI : MonoBehaviour
       Set();
    }
 
-
-   private void Set()
+[ContextMenu("Set")]
+   public void Set()
    {
+      if (button != null)
+      {
+         button.interactable = _isRevealed;
+      }
       itemImage.color   = _isRevealed ? Color.white : unrevealedColor;
       itemNameText.text = _isRevealed ? itemName : "???";
    }
