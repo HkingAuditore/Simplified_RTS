@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ScrollUI : MonoBehaviour
@@ -9,6 +10,7 @@ public class ScrollUI : MonoBehaviour
     [Range(0,1)]
     public float     fillAmount;
     public FillBarUI bar;
+    public string    sceneName;
 
 
     private void Start()
@@ -42,5 +44,10 @@ public class ScrollUI : MonoBehaviour
         Debug.Log("Animation End!");
         this.gameObject.SetActive(false);
 
+    }
+
+    public void LoadBattle()
+    {
+        SceneManager.LoadScene(sceneName);
     }
 }

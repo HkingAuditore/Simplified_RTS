@@ -6,8 +6,9 @@ using UnityEngine.UI;
 
 public class LevelUI : MonoBehaviour
 {
-    public  Button levelButton;
-    public  Image  cloud;
+    public Button levelButton;
+    public Image  cloud;
+    public string battleSceneName;
     
     [SerializeField]
     private bool   _isRevealed;
@@ -33,4 +34,6 @@ public class LevelUI : MonoBehaviour
     {
         SetCloud();
     }
+    
+    
 }

@@ -19,9 +19,20 @@ public class UnitAnimatonController : MonoBehaviour
                                                      characterAnimator.SetTrigger("Die");
                                                      smokeAnimator.SetTrigger("Die");
                                                  }));
+        ((IMilitaryUnit) unit).AttackEvent.AddListener(m =>
+                                                       {
+                                                           try
+                                                           {
+                                                               characterAnimator.SetTrigger("Attack");
+                                                           }
+                                                           catch (Exception e)
+                                                           {
+                                                               Console.WriteLine(e);
+                                                           }
+                                                       });
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         smokeRenderer.color = new Color(1, 1, 1, Mathf.Clamp01(unit.unitRigidbody.velocity.magnitude - fastThreshold));
     }

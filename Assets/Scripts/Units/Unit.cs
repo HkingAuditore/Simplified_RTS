@@ -18,13 +18,16 @@ namespace Units
 
     public interface IMilitaryUnit
     {
-        int     AttackValue        { get; set; }
-        float   AttackColdDownTime { get; set; }
-        float   AttackRange        { get; set; }
-        int     DefenceValue       { get; set; }
-        float   SpeedValue         { get; set; }
-        Vector3 OriginalVelocity   { get; set; }
-        Player  SidePlayer         { get; set; }
+        int              AttackValue        { get; set; }
+        float            AttackColdDownTime { get; set; }
+        float            AttackRange        { get; set; }
+        int              DefenceValue       { get; set; }
+        float            SpeedValue         { get; set; }
+        Vector3          OriginalVelocity   { get; set; }
+        Player           SidePlayer         { get; set; }
+        UnityEvent<Unit> AttackEvent        { get; }
+        UnityEvent<IMilitaryUnit>       UnderAttackedEvent { get; }
+        
 
 
         void Attack();

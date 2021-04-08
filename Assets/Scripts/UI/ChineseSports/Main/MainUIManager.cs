@@ -7,9 +7,10 @@ using UnityEngine.UI;
 
 public class MainUIManager : MonoBehaviour
 {
-    public GameObject    itemUI;
-    public ScrollUI      scrollUI;
-    public SettingUI     settingUI;
+    public GameObject      itemUI;
+    public ScrollUI        scrollUI;
+    public SettingUI       settingUI;
+    public CharacterViewUI characterViewUI;
     [Header("Map Roll")]
     public RectTransform backGround;
     public                       float              rollSpeed;
@@ -34,10 +35,24 @@ public class MainUIManager : MonoBehaviour
 
     }
     
-    public void ShowScrollUI()
+    public void ShowCharacterViewUI()
+    {
+        characterViewUI.gameObject.SetActive(true);
+        _isOpenPanel = true;
+    }
+
+    public void CloseCharacterViewUI()
+    {
+        characterViewUI.gameObject.SetActive(false);
+        _isOpenPanel = false;
+
+    }
+    
+    public void ShowScrollUI(string battleSceneName)
     {
         scrollUI.gameObject.SetActive(true);
-        _isOpenPanel = true;
+        scrollUI.sceneName = battleSceneName;
+        _isOpenPanel       = true;
 
     }
 
@@ -64,7 +79,7 @@ public class MainUIManager : MonoBehaviour
 
     private void Update()
     {
-        if(_isOpenPanel)
+        if(!_isOpenPanel)
         {
             Vector2 mouseOffset = new Vector2(Input.mousePosition.x, Input.mousePosition.y) -
                                   new Vector2(Screen.width / 2f,     Screen.height / 2f);

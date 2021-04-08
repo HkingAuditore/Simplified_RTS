@@ -1,5 +1,6 @@
 ﻿using Units;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class MeleeUnit : Unit, IMilitaryUnit
 {
@@ -21,8 +22,8 @@ public class MeleeUnit : Unit, IMilitaryUnit
     /********寻敌********/
     private float _giveUpRadius = 1.5f;
 
-    private float _timer;
-    
+    private          float                     _timer;
+
     public int AttackValue
     {
         get => attackPower;
@@ -64,6 +65,10 @@ public class MeleeUnit : Unit, IMilitaryUnit
         get => sidePlayer;
         set => sidePlayer = value;
     }
+
+    public UnityEvent<Unit> AttackEvent { get; } = new UnityEvent<Unit>();
+
+    public UnityEvent<IMilitaryUnit> UnderAttackedEvent { get; } = new UnityEvent<IMilitaryUnit>();
 
 
     public Unit GetUnit()
@@ -126,14 +131,16 @@ public class MeleeUnit : Unit, IMilitaryUnit
 
     public void Attack()
     {
+        AttackEvent.Invoke(_enemyUnit);
         _enemyUnit.BeAttacked(this);
         if (_enemyUnit.HP <= 0) _isFoundEnemy = false;
     }
-    private void AttackedReact(Unit attacker)
+    private void AttackedReact(IMilitaryUnit attacker)
     {
+        UnderAttackedEvent.Invoke(attacker);
         if (Vector3.Distance(transform.position, _enemyUnit.transform.position) >
-            Vector3.Distance(transform.position, attacker.transform.position))
-            _enemyUnit = attacker;
+            Vector3.Distance(transform.position, attacker.GetUnit().transform.position))
+            _enemyUnit = attacker.GetUnit();
     }
 
     #endregion

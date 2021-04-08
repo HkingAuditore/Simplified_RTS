@@ -1,5 +1,6 @@
 ﻿using Units;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class RangedAttackUnit : Unit, IMilitaryUnit
 {
@@ -29,7 +30,7 @@ public class RangedAttackUnit : Unit, IMilitaryUnit
     private bool  _isFoundEnemy;
     private float _maxShootSpeed;
 
-    private float _timer;
+    private          float                     _timer;
 
 
     public float AttackColdDownTime
@@ -73,6 +74,9 @@ public class RangedAttackUnit : Unit, IMilitaryUnit
         set => sidePlayer = value;
     }
 
+    public UnityEvent<Unit> AttackEvent { get; } = new UnityEvent<Unit>();
+
+    public UnityEvent<IMilitaryUnit> UnderAttackedEvent { get; } = new UnityEvent<IMilitaryUnit>();
 
 
     public Unit GetUnit()
@@ -157,6 +161,7 @@ public class RangedAttackUnit : Unit, IMilitaryUnit
 
     public void Attack()
     {
+        AttackEvent.Invoke(_enemyUnit);
         // Debug.Log(this.navMeshAgent.velocity.magnitude);
         var distance = Vector3.Distance(transform.position, _enemyUnit.transform.position);
         if (distance < attackRange && (isUnmovable || unitRigidbody.velocity.magnitude < 2f))
@@ -200,6 +205,7 @@ public class RangedAttackUnit : Unit, IMilitaryUnit
 
     private void AttackedReact(IMilitaryUnit attacker)
     {
+        UnderAttackedEvent.Invoke(attacker);
         try
         {
             if (attacker != null)

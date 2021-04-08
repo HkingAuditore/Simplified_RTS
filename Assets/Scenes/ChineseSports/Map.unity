@@ -1241,7 +1241,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: ???
+  m_Text: "\u706F\u7B3C\u7537"
 --- !u!222 &231653847
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1428,7 +1428,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 241195365}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -1538,6 +1538,101 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 245307856}
   m_CullTransparentMesh: 0
+--- !u!1 &259854457
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 259854458}
+  - component: {fileID: 259854461}
+  - component: {fileID: 259854460}
+  - component: {fileID: 259854459}
+  m_Layer: 5
+  m_Name: Lantern
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &259854458
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 259854457}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2056515023}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 34.848145, y: -56.452545}
+  m_SizeDelta: {x: 65.878784, y: 117.09491}
+  m_Pivot: {x: 0.27, y: 1}
+--- !u!95 &259854459
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 259854457}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 123cd9b255dea684e9e17729d524ca22, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &259854460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 259854457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: b94f3585ed354094da20ed73887e2e70, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &259854461
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 259854457}
+  m_CullTransparentMesh: 0
 --- !u!1 &266418060
 GameObject:
   m_ObjectHideFlags: 0
@@ -1573,9 +1668,9 @@ RectTransform:
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 20}
+  m_SizeDelta: {x: -5.136982, y: 20}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &266418062
 MonoBehaviour:
@@ -1984,7 +2079,7 @@ MonoBehaviour:
       - m_Target: {fileID: 650580144}
         m_TargetAssemblyTypeName: MainUIManager, Assembly-CSharp
         m_MethodName: ShowScrollUI
-        m_Mode: 1
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2045,6 +2140,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelButton: {fileID: 362256927}
   cloud: {fileID: 902473078}
+  battleSceneName: 
   _isRevealed: 1
 --- !u!1 &376953860
 GameObject:
@@ -2081,9 +2177,9 @@ RectTransform:
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -5.9299927, y: 0}
-  m_SizeDelta: {x: 8.136982, y: 0}
+  m_SizeDelta: {x: 8.136982, y: -17}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &376953862
 MonoBehaviour:
@@ -2880,6 +2976,7 @@ MonoBehaviour:
   scrollAnimator: {fileID: 495591996}
   fillAmount: 0.484
   bar: {fileID: 2143432187}
+  sceneName: 
 --- !u!95 &495591996
 Animator:
   serializedVersion: 3
@@ -3022,7 +3119,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -3869,6 +3966,7 @@ MonoBehaviour:
   itemUI: {fileID: 980053324}
   scrollUI: {fileID: 495591995}
   settingUI: {fileID: 97302902}
+  characterViewUI: {fileID: 2056515026}
   backGround: {fileID: 1905286338}
   rollSpeed: 200
   bound: 274
@@ -3953,7 +4051,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 667955426}
   m_OnClick:
     m_PersistentCalls:
@@ -4870,7 +4968,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 870480354}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 650580144}
+        m_TargetAssemblyTypeName: MainUIManager, Assembly-CSharp
+        m_MethodName: ShowCharacterViewUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &870480354
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5972,7 +6082,7 @@ MonoBehaviour:
       - m_Target: {fileID: 650580144}
         m_TargetAssemblyTypeName: MainUIManager, Assembly-CSharp
         m_MethodName: ShowScrollUI
-        m_Mode: 1
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -6033,6 +6143,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelButton: {fileID: 1033665909}
   cloud: {fileID: 110611481}
+  battleSceneName: 
   _isRevealed: 1
 --- !u!1 &1088993540
 GameObject:
@@ -6238,7 +6349,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.9647059}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -6356,9 +6467,9 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: -5.136982, y: -17}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1194728709
 MonoBehaviour:
@@ -6545,7 +6656,7 @@ MonoBehaviour:
   button: {fileID: 1874291952}
   itemIndex: 0
   itemName: "\u706F\u7B3C\u7537"
-  _isRevealed: 0
+  _isRevealed: 1
 --- !u!1 &1264174212
 GameObject:
   m_ObjectHideFlags: 0
@@ -7500,6 +7611,7 @@ GameObject:
   - component: {fileID: 1518615979}
   - component: {fileID: 1518615981}
   - component: {fileID: 1518615980}
+  - component: {fileID: 1518615982}
   m_Layer: 5
   m_Name: StartGame
   m_TagString: Untagged
@@ -7564,6 +7676,61 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1518615978}
   m_CullTransparentMesh: 0
+--- !u!114 &1518615982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1518615978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1518615980}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 495591995}
+        m_TargetAssemblyTypeName: ScrollUI, Assembly-CSharp
+        m_MethodName: LoadBattle
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1551388768
 GameObject:
   m_ObjectHideFlags: 0
@@ -8342,7 +8509,7 @@ MonoBehaviour:
       - m_Target: {fileID: 650580144}
         m_TargetAssemblyTypeName: MainUIManager, Assembly-CSharp
         m_MethodName: ShowScrollUI
-        m_Mode: 1
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -8403,6 +8570,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelButton: {fileID: 1672439692}
   cloud: {fileID: 713330732}
+  battleSceneName: 
   _isRevealed: 1
 --- !u!1 &1685122476
 GameObject:
@@ -8780,13 +8948,13 @@ MonoBehaviour:
       - m_Target: {fileID: 650580144}
         m_TargetAssemblyTypeName: MainUIManager, Assembly-CSharp
         m_MethodName: ShowScrollUI
-        m_Mode: 1
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Battlefield 1
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1710931690
@@ -8841,6 +9009,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelButton: {fileID: 1710931689}
   cloud: {fileID: 0}
+  battleSceneName: 
   _isRevealed: 1
 --- !u!1 &1715337938
 GameObject:
@@ -8874,8 +9043,8 @@ RectTransform:
   m_Father: {fileID: 1956807153}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 0.082859516}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -9362,6 +9531,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1774550178}
+  - component: {fileID: 1774550179}
   m_Layer: 5
   m_Name: Bird
   m_TagString: Untagged
@@ -9383,13 +9553,32 @@ RectTransform:
   - {fileID: 983486919}
   - {fileID: 737817017}
   m_Father: {fileID: 2056515023}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 284, y: -191}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!95 &1774550179
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1774550177}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d6b580c1fde73d5459ff5066b4386293, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1789222276
 GameObject:
   m_ObjectHideFlags: 0
@@ -9663,7 +9852,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1802053277}
   m_OnClick:
     m_PersistentCalls:
@@ -10635,7 +10824,7 @@ MonoBehaviour:
       - m_Target: {fileID: 650580144}
         m_TargetAssemblyTypeName: MainUIManager, Assembly-CSharp
         m_MethodName: ShowScrollUI
-        m_Mode: 1
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -10696,6 +10885,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelButton: {fileID: 1954967268}
   cloud: {fileID: 767788493}
+  battleSceneName: 
   _isRevealed: 1
 --- !u!1 &1956807152
 GameObject:
@@ -10816,7 +11006,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 650580144}
         m_TargetAssemblyTypeName: MainUIManager, Assembly-CSharp
-        m_MethodName: CloseSettingUI
+        m_MethodName: CloseCharacterViewUI
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -11378,7 +11568,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2056515023
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11393,6 +11583,7 @@ RectTransform:
   - {fileID: 1747840906}
   - {fileID: 613242904}
   - {fileID: 1971546813}
+  - {fileID: 259854458}
   - {fileID: 1774550178}
   m_Father: {fileID: 898802313}
   m_RootOrder: 4
@@ -11459,7 +11650,7 @@ MonoBehaviour:
   - {fileID: 0}
   militaryUnits:
   - {fileID: 2546485736200557784, guid: e0d9ec16f93e59f49bac000c3af8a54e, type: 3}
-  - {fileID: 6396471347349537946, guid: 0f5872902d2856f418c7a82342040fdc, type: 3}
+  - {fileID: 2546485736200557784, guid: 47e1b8ec3b10f174f8597346e3b706cf, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   propertyLines:

@@ -23,7 +23,7 @@ public class CharacterViewUI : MonoBehaviour
 
     private void Start()
     {
-        Set(1);
+        Set(0);
     }
 
     public void Set(int index)
