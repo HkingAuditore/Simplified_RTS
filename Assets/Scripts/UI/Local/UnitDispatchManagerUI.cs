@@ -60,9 +60,10 @@ public class UnitDispatchManagerUI : MonoBehaviour
             player.SetUnits(oriPos, unitDispatchUI.unitNumber, rd, unitDispatchUI.UnitDispatchNumber, oriVelocity);
             
             unitDispatchUI.UnitDispatchNumber = 0;
-            unitDispatchUI.unitNumberText.gameObject.SetActive(false);
+            unitDispatchUI.unitNumberText?.gameObject.SetActive(false);
             unitDispatchUI.unitSetIndicator.gameObject.SetActive(false);
             unitDispatchUI.unitRemoveButton.gameObject.SetActive(false);
+            unitDispatchUI.UnitSelectStack.Clear();
         }
     }
 }

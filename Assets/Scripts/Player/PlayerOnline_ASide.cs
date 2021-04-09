@@ -37,7 +37,7 @@ public class PlayerOnline_ASide : Player
 
     #region 控制信息传输
 
-    public override void AddFarmer(Resource rs)
+    public override void AddFarmer(GameResourceType rs)
     {
         if (FarmerCount > RoadFarmers.Sum())
         {
@@ -47,7 +47,7 @@ public class PlayerOnline_ASide : Player
     }
 
 
-    public override void SubtractFarmer(Resource rs)
+    public override void SubtractFarmer(GameResourceType rs)
     {
         if (RoadFarmers[(int) rs] > 0)
         {

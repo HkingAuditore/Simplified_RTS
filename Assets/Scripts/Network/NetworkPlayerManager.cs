@@ -23,26 +23,26 @@ public class NetworkPlayerManager : MonoBehaviourPunCallbacks
     #region 农民调遣
 
     //A发送过来，传输给另一个端的B
-    public void SendAddFarmer(Resource rs)
+    public void SendAddFarmer(GameResourceType rs)
     {
         // Debug.Log("Call PRC!");
         photonView.RPC("RPC_AddFarmer", RpcTarget.Others, rs);
     }
 
     [PunRPC]
-    public void RPC_AddFarmer(Resource rs)
+    public void RPC_AddFarmer(GameResourceType rs)
     {
         // Debug.Log("On PRC!");
         playerBSideOnline.AddFarmer(rs);
     }
 
-    public void SendSubtractFarmer(Resource rs)
+    public void SendSubtractFarmer(GameResourceType rs)
     {
         photonView.RPC("RPC_SubtractFarmer", RpcTarget.Others, rs);
     }
 
     [PunRPC]
-    public void RPC_SubtractFarmer(Resource rs)
+    public void RPC_SubtractFarmer(GameResourceType rs)
     {
         playerBSideOnline.SubtractFarmer(rs);
     }

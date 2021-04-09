@@ -8,24 +8,24 @@ public class FarmerDispatchUI : MonoBehaviour
     public void DispatchFood(bool isAdd)
     {
         if (isAdd)
-            player.AddFarmer(Resource.Food);
+            player.AddFarmer(GameResourceType.Food);
         else
-            player.SubtractFarmer(Resource.Food);
+            player.SubtractFarmer(GameResourceType.Food);
     }
 
     public void DispatchGold(bool isAdd)
     {
         if (isAdd)
-            player.AddFarmer(Resource.Gold);
+            player.AddFarmer(GameResourceType.Gold);
         else
-            player.SubtractFarmer(Resource.Gold);
+            player.SubtractFarmer(GameResourceType.Gold);
     }
 
     public void DispatchWood(bool isAdd)
     {
         if (isAdd)
-            player.AddFarmer(Resource.Wood);
+            player.AddFarmer(GameResourceType.Wood);
         else
-            player.SubtractFarmer(Resource.Wood);
+            player.SubtractFarmer(GameResourceType.Wood);
     }
 }

@@ -1,12 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Units;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
-public enum Resource
+public enum GameResourceType
 {
     Food,
     Gold,
@@ -15,11 +17,11 @@ public enum Resource
 
 public class ResourceRunOutException : ApplicationException
 {
-    public Resource resource;
+    public GameResourceType GameResourceType;
 
-    public ResourceRunOutException(Resource rs, string message = "Run Out") : base(message)
+    public ResourceRunOutException(GameResourceType rs, string message = "Run Out") : base(message)
     {
-        resource = rs;
+        GameResourceType = rs;
     }
 }
 
@@ -54,9 +56,9 @@ public class Player : MonoBehaviour
     {
         _gameEventHandler = GameObject.Find("GameEventHandler").gameObject;
 
-        _top = gameObject.transform.Find("Positions").transform.Find("TopOri").transform;
-        _mid = gameObject.transform.Find("Positions").transform.Find("MidOri").transform;
-        _bot = gameObject.transform.Find("Positions").transform.Find("BotOri").transform;
+        Top = gameObject.transform.Find("Positions").transform.Find("TopOri").transform;
+        Mid = gameObject.transform.Find("Positions").transform.Find("MidOri").transform;
+        Bot = gameObject.transform.Find("Positions").transform.Find("BotOri").transform;
 
         Food = 0;
         Wood = 0;
@@ -90,7 +92,7 @@ public class Player : MonoBehaviour
             if (value >= 0)
                 _food = value;
             else
-                throw new ResourceRunOutException(Resource.Food);
+                throw new ResourceRunOutException(GameResourceType.Food);
             //Debug.Log("Change Food");
 
             UpdateLocalPlayerProperties();
@@ -105,7 +107,7 @@ public class Player : MonoBehaviour
             if (value >= 0)
                 _wood = value;
             else
-                throw new ResourceRunOutException(Resource.Wood);
+                throw new ResourceRunOutException(GameResourceType.Wood);
             //Debug.Log("Change Wood");
 
             UpdateLocalPlayerProperties();
@@ -120,28 +122,51 @@ public class Player : MonoBehaviour
             if (value >= 0)
                 _gold = value;
             else
-                throw new ResourceRunOutException(Resource.Gold);
+                throw new ResourceRunOutException(GameResourceType.Gold);
             //Debug.Log("Change Gold");
 
             UpdateLocalPlayerProperties();
         }
     }
 
-    public void ChangeResource(Resource resource, int count)
+    public void ChangeResource(GameResourceType gameResourceType, int count)
     {
-        switch (resource)
+        switch (gameResourceType)
         {
-            case Resource.Food:
+            case GameResourceType.Food:
                 Food += count;
                 break;
-            case Resource.Wood:
+            case GameResourceType.Wood:
                 Wood += count;
                 break;
-            case Resource.Gold:
+            case GameResourceType.Gold:
                 Gold += count;
                 break;
             default:
-                throw new ArgumentOutOfRangeException(nameof(resource), resource, null);
+                throw new ArgumentOutOfRangeException(nameof(gameResourceType), gameResourceType, null);
+        }
+    }
+
+    public bool IsEnoughForUnit(Unit unit)
+    {
+        return this.Gold >= unit.costGold && this.Wood >= unit.costWood && this.Food >= unit.costFood;
+    }
+    
+    public bool IsEnoughForUnit(Unit unit,GameResourceType gameResourceType)
+    {
+        switch (gameResourceType)
+        {
+            case GameResourceType.Food:
+                return this.Food >= unit.costFood;
+                break;
+            case GameResourceType.Gold:
+                return  this.Gold >= unit.costGold;
+                break;
+            case GameResourceType.Wood:
+                return this.Wood >= unit.costWood;
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(gameResourceType), gameResourceType, null);
         }
     }
 
@@ -164,19 +189,19 @@ public class Player : MonoBehaviour
 
     [Header("农民")]
     public bool enableFarmer;
-    public    Transform[] resourceTransform;
-    public    Farmer      farmerPrefab;
-    private   int         _maxFarmerNumber = 5;
-    private   int         _farmerCount     = 1;
-    private   int         _dispatchableFarmer;
-    private   int[]       _roadFarmers        = new int[3];
-    private   int[]       _roadWorkingFarmers = new int[3];
-    protected Transform   _top;
-    protected Transform   _mid;
-    protected Transform   _bot;
-    private   int         _food;
-    private   int         _wood;
-    private   int         _gold;
+    public  Transform[] resourceTransform;
+    public  Farmer      farmerPrefab;
+    private int         _maxFarmerNumber = 5;
+    private int         _farmerCount     = 1;
+    private int         _dispatchableFarmer;
+    private int[]       _roadFarmers        = new int[3];
+    private int[]       _roadWorkingFarmers = new int[3];
+    public  Transform   Top { get; set; }
+    public  Transform   Mid { get; set; }
+    public  Transform   Bot { get; set; }
+    private int         _food;
+    private int         _wood;
+    private int         _gold;
     
 
     // 最大可用农民数量
@@ -249,13 +274,13 @@ public class Player : MonoBehaviour
     
 
     //增加一条路的农民分配
-    public virtual void AddFarmer(Resource rs)
+    public virtual void AddFarmer(GameResourceType rs)
     {
         if (FarmerCount > RoadFarmers.Sum()) RoadFarmers[(int) rs]++;
     }
 
     //减少一条路的农民分配
-    public virtual void SubtractFarmer(Resource rs)
+    public virtual void SubtractFarmer(GameResourceType rs)
     {
         if (RoadFarmers[(int) rs] > 0)
             RoadFarmers[(int) rs]--;
@@ -270,13 +295,13 @@ public class Player : MonoBehaviour
         switch (rd)
         {
             case Road.Top:
-                bornPoint = _top;
+                bornPoint = Top;
                 break;
             case Road.Mid:
-                bornPoint = _mid;
+                bornPoint = Mid;
                 break;
             case Road.Bot:
-                bornPoint = _bot;
+                bornPoint = Bot;
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(rd), rd, null);
@@ -435,9 +460,9 @@ public class Player : MonoBehaviour
 
     private void ProduceResource()
     {
-        ChangeResource(Resource.Food, resourceProduct);
-        ChangeResource(Resource.Wood, resourceProduct);
-        ChangeResource(Resource.Gold, resourceProduct);
+        ChangeResource(GameResourceType.Food, resourceProduct);
+        ChangeResource(GameResourceType.Wood, resourceProduct);
+        ChangeResource(GameResourceType.Gold, resourceProduct);
 
         _isProducingResource = false;
     }
@@ -452,10 +477,13 @@ public class Player : MonoBehaviour
     [Space(10)]
     public GameObject[] availableUnits;
 
+    public readonly List<Unit> UnitsList = new List<Unit>();
+
     public void SetUnits(Vector3 tr, int chosenUnit, Road rd, int number)
     {
         // Debug.Log("NUMBER:" + number);
-        if (this.gameObject.transform.Find(gameObject.name[0] + "Units").transform.childCount >= 10)
+        //TODO 人数检测
+        if (UnitsList.Count + number >= 10)
             throw new Exception("MAX UNITS!");
 
         for (var i = 0; i < number; i++)
@@ -487,7 +515,13 @@ public class Player : MonoBehaviour
     public virtual void InstantiateUnit(int chosenUnit, Road rd, Vector3 oriPoint)
     {
         var unitInstantiated = InstantiateUnitBase(chosenUnit, rd, oriPoint);
-        unitInstantiated.GetComponent<Unit>().enabled = true;
+        var unit = unitInstantiated.GetComponent<Unit>();
+        unit.enabled = true;
+        UnitsList.Add(unit);
+        unit.UnitDeathEventHandler.AddListener(((p, m) =>
+                                                {
+                                                    this.UnitsList.Remove(unit);
+                                                }));
     }
     
     public virtual void InstantiateUnit(int chosenUnit, Road rd, Vector3 oriPoint,Vector3 oriVelocity)

@@ -4,15 +4,15 @@ using Units;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class PlayerAI : Player
+public class PlayerAI : MonoBehaviour
 {
-    private                             Unit[]     aiAvailableUnits;
+    private Unit[] aiAvailableUnits;
+    public  Player aiPlayer;
     [Header("AI相关")] [Space(15)]
     public bool[]     enableRoads = new bool[3];
     public                              float      aiRestTime  = 5f;
     private                             int        _botEnemy;
     private readonly                    int        _botSend    = 0;
-    private                             Collider[] _enemiesCol = new Collider[100];
 
     private LayerMask _enemyLayer;
 
@@ -28,7 +28,7 @@ public class PlayerAI : Player
     {
         _enemyLayer =
             LayerMask.NameToLayer(LayerMask.LayerToName(gameObject.layer) == "ASide" ? "BSide" : "ASide");
-        aiAvailableUnits = (from availableUnit in availableUnits
+        aiAvailableUnits = (from availableUnit in aiPlayer.availableUnits
                             select availableUnit.GetComponent<Unit>()).ToArray();
     }
 
@@ -42,7 +42,7 @@ public class PlayerAI : Player
     {
         CountEnemy();
         DispatchUnits();
-        if (enableFarmer)
+        if (aiPlayer.enableFarmer)
             AIDispatchFarmers();
         _isColdDown = true;
         Invoke("RestEnd", aiRestTime);
@@ -73,14 +73,14 @@ public class PlayerAI : Player
 
 
         //消耗木材、食物资源计算
-        var foodAndWoodSend = Food / sendUnit.costFood > Wood / sendUnit.costWood
-            ? Wood / sendUnit.costWood
-            : Food / sendUnit.costFood;
+        var foodAndWoodSend = aiPlayer.Food / sendUnit.costFood > aiPlayer.Wood / sendUnit.costWood
+                                  ? aiPlayer.Wood / sendUnit.costWood
+                                  : aiPlayer.Food / sendUnit.costFood;
         //派遣数量随机
         var foodAndWoodSendNumber = Random.Range((int) Mathf.Ceil(foodAndWoodSend * 0.5f), foodAndWoodSend);
 
         //消耗金矿资源计算
-        var goldSend = Gold / sendUnit.costGold;
+        var goldSend = aiPlayer.Gold / sendUnit.costGold;
         //派遣数量随机
         var goldSendNumber = Random.Range((int) Mathf.Ceil(goldSend * 0.5f), goldSend);
 
@@ -90,12 +90,12 @@ public class PlayerAI : Player
         var costGold = goldSendNumber        * sendUnit.costGold;
 
 
-        ChangeResource(Resource.Food, -costFood);
-        ChangeResource(Resource.Wood, -costWood);
-        ChangeResource(Resource.Gold, -costGold);
+        aiPlayer.ChangeResource(GameResourceType.Food, -costFood);
+        aiPlayer.ChangeResource(GameResourceType.Wood, -costWood);
+        aiPlayer.ChangeResource(GameResourceType.Gold, -costGold);
 
-        SetUnits(RoadToTransform(sendRoad).position, Array.IndexOf(aiAvailableUnits, sendUnit), sendRoad,
-                 goldSendNumber + foodAndWoodSendNumber);
+        aiPlayer.SetUnits(RoadToTransform(sendRoad).position, Array.IndexOf(aiAvailableUnits, sendUnit), sendRoad,
+                         goldSendNumber + foodAndWoodSendNumber);
     }
 
     private void RestEnd()
@@ -105,10 +105,10 @@ public class PlayerAI : Player
 
     private void AIDispatchFarmers()
     {
-        if (DispatchableFarmer > 0)
+        if (aiPlayer.DispatchableFarmer > 0)
         {
-            var leastFarmerResource = (Resource) Array.IndexOf(RoadFarmers, RoadFarmers.Min());
-            AddFarmer(leastFarmerResource);
+            var leastFarmerResource = (GameResourceType) Array.IndexOf(aiPlayer.RoadFarmers, aiPlayer.RoadFarmers.Min());
+            aiPlayer.AddFarmer(leastFarmerResource);
         }
     }
 
@@ -137,11 +137,11 @@ public class PlayerAI : Player
         switch (road)
         {
             case Road.Top:
-                return _top;
+                return aiPlayer.Top;
             case Road.Mid:
-                return _mid;
+                return aiPlayer.Mid;
             case Road.Bot:
-                return _bot;
+                return aiPlayer.Bot;
             default:
                 throw new ArgumentOutOfRangeException(nameof(road), road, null);
         }
@@ -149,10 +149,10 @@ public class PlayerAI : Player
 
     private int GetUnitMaxSend(Unit unit)
     {
-        var maxFoodAndWoodCost = Food / unit.costFood > Wood / unit.costWood
-            ? Wood / unit.costWood
-            : Food / unit.costFood;
-        var maxGoldCost = Gold / unit.costGold;
+        var maxFoodAndWoodCost = aiPlayer.Food / unit.costFood > aiPlayer.Wood / unit.costWood
+                                     ? aiPlayer.Wood / unit.costWood
+                                     : aiPlayer.Food / unit.costFood;
+        var maxGoldCost = aiPlayer.Gold / unit.costGold;
 
         return maxFoodAndWoodCost + maxGoldCost;
     }

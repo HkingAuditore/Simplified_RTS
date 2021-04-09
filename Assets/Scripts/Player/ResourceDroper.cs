@@ -4,17 +4,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.AccessControl;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class ResourceDroper : MonoBehaviour
 {
-   public float      dropColdTime;
-   public int        dropValue;
-   public int        dropCountMax;
-   public int        dropCountMin;
-   public Resource   resourceType;
-   public GameObject dropPrefab;
-   public GameObject dropArea;
+   public                                        float            dropColdTime;
+   public                                        int              dropValue;
+   public                                        int              dropCountMax;
+   public                                        int              dropCountMin;
+   [FormerlySerializedAs("resourceType")] public GameResourceType gameResourceTypeType;
+   public                                        GameObject       dropPrefab;
+   public                                        GameObject       dropArea;
 
    private Vector3[] _dropArea;
    private float     _xMin;
@@ -74,6 +75,6 @@ public class ResourceDroper : MonoBehaviour
 
    public void CollectResource()
    {
-      GameManager.GameManager.GetManager.aSide.ChangeResource(resourceType,dropValue);
+      GameManager.GameManager.GetManager.aSide.ChangeResource(gameResourceTypeType,dropValue);
    }
 }

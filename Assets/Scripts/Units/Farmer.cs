@@ -10,7 +10,7 @@ namespace Units
         public    int[]     maxLoad  = {10, 5, 10};
         protected Transform _home;
 
-        private Resource _resouceType;
+        private GameResourceType _resouceType;
 
         protected Transform _targerResource;
 
@@ -78,15 +78,15 @@ namespace Units
             {
                 case Road.Top:
                     //this._targerResource = sideResource[0].transform;
-                    _resouceType = Resource.Food;
+                    _resouceType = GameResourceType.Food;
                     break;
                 case Road.Mid:
                     //this._targerResource = sideResource[1].transform;
-                    _resouceType = Resource.Gold;
+                    _resouceType = GameResourceType.Gold;
                     break;
                 case Road.Bot:
                     //this._targerResource = sideResource[2].transform;
-                    _resouceType = Resource.Wood;
+                    _resouceType = GameResourceType.Wood;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

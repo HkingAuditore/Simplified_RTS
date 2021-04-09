@@ -137,7 +137,7 @@ namespace Units
             _pathFinder           =  this.GetComponent<AIPath>();
             UnitDeathEventHandler.AddListener((p, m) =>
                                               {
-                                                  p.ChangeResource(Resource.Gold, this.deathReward);
+                                                  p.ChangeResource(GameResourceType.Gold, this.deathReward);
                                               }); 
         }
 

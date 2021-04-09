@@ -10,7 +10,7 @@ namespace Units
             unitRigidbody      = GetComponent<Rigidbody>();
             UnitDeathEventHandler.AddListener((p, m) =>
             {
-                p.ChangeResource(Resource.Gold, this.deathReward);
+                p.ChangeResource(GameResourceType.Gold, this.deathReward);
             });
         }
 
