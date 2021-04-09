@@ -15,13 +15,17 @@ public enum GameResourceType
     Wood
 }
 
-public class ResourceRunOutException : ApplicationException
+public class GameException : ApplicationException
 {
     public GameResourceType GameResourceType;
 
-    public ResourceRunOutException(GameResourceType rs, string message = "Run Out") : base(message)
+    public GameException(GameResourceType rs, string message = "Run Out") : base(message)
     {
         GameResourceType = rs;
+    }
+    public GameException(string message) : base(message)
+    {
+        
     }
 }
 
@@ -92,7 +96,7 @@ public class Player : MonoBehaviour
             if (value >= 0)
                 _food = value;
             else
-                throw new ResourceRunOutException(GameResourceType.Food);
+                throw new GameException(GameResourceType.Food);
             //Debug.Log("Change Food");
 
             UpdateLocalPlayerProperties();
@@ -107,7 +111,7 @@ public class Player : MonoBehaviour
             if (value >= 0)
                 _wood = value;
             else
-                throw new ResourceRunOutException(GameResourceType.Wood);
+                throw new GameException(GameResourceType.Wood);
             //Debug.Log("Change Wood");
 
             UpdateLocalPlayerProperties();
@@ -122,7 +126,7 @@ public class Player : MonoBehaviour
             if (value >= 0)
                 _gold = value;
             else
-                throw new ResourceRunOutException(GameResourceType.Gold);
+                throw new GameException(GameResourceType.Gold);
             //Debug.Log("Change Gold");
 
             UpdateLocalPlayerProperties();
@@ -445,7 +449,7 @@ public class Player : MonoBehaviour
 
     #region 资源生产
 
-    public           int   resourceProduct;
+    public      readonly     int[]   resourceProduct = new int[]{0,0,3};
     private          bool  _isProducingResource;
     private readonly float _resourceProducingTime = 3f;
 
@@ -460,9 +464,9 @@ public class Player : MonoBehaviour
 
     private void ProduceResource()
     {
-        ChangeResource(GameResourceType.Food, resourceProduct);
-        ChangeResource(GameResourceType.Wood, resourceProduct);
-        ChangeResource(GameResourceType.Gold, resourceProduct);
+        ChangeResource(GameResourceType.Food, resourceProduct[0]);
+        ChangeResource(GameResourceType.Wood, resourceProduct[1]);
+        ChangeResource(GameResourceType.Gold, resourceProduct[2]);
 
         _isProducingResource = false;
     }
@@ -477,14 +481,21 @@ public class Player : MonoBehaviour
     [Space(10)]
     public GameObject[] availableUnits;
 
-    public readonly List<Unit> UnitsList = new List<Unit>();
+    public  List<Unit> UnitsList = new List<Unit>();
 
+    public int CountUnits(UnitType type)
+    {
+        return (from unit in UnitsList
+                 where unit.unitType == type
+                 select unit).Count();
+    }
     public void SetUnits(Vector3 tr, int chosenUnit, Road rd, int number)
     {
         // Debug.Log("NUMBER:" + number);
         //TODO 人数检测
-        if (UnitsList.Count + number >= 10)
-            throw new Exception("MAX UNITS!");
+        var unit = availableUnits[chosenUnit].GetComponent<Unit>();
+        if (this.CountUnits(unit.unitType) + number > unit.playerOwnMax)
+            throw new GameException("MAX UNITS!");
 
         for (var i = 0; i < number; i++)
         {
@@ -496,9 +507,16 @@ public class Player : MonoBehaviour
             InstantiateUnit(chosenUnit, rd, oriPoint);
         }
     }
+    
+    
     public void SetUnits(Vector3 tr, int chosenUnit, Road rd, int number,Vector3 oriVelocity)
     {
         // Debug.Log("NUMBER:" + number);
+        //TODO 人数检测
+        var unit = availableUnits[chosenUnit].GetComponent<Unit>();
+        if (this.CountUnits(unit.unitType) + number > unit.playerOwnMax)
+            throw new GameException("MAX UNITS!");
+
 
         for (var i = 0; i < number; i++)
         {
@@ -537,8 +555,15 @@ public class Player : MonoBehaviour
             Console.WriteLine(e);
             throw;
         }
-        
-        unitInstantiated.GetComponent<Unit>().enabled = true;
+
+        Unit unit = unitInstantiated.GetComponent<Unit>();
+        unit.enabled = true;
+        UnitsList.Add(unit);
+        unit.UnitDeathEventHandler.AddListener(((p, m) =>
+                                                {
+                                                    this.UnitsList.Remove(unit);
+                                                }));
+
     }
 
 

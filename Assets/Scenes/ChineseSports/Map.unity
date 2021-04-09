@@ -987,7 +987,8 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 2056412538}
   m_Father: {fileID: 1906483520}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1016,7 +1017,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d1a2cf3f485c8b44fbeaf525771ef654, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 55b23686df848fd4ebc5f1c00c949a32, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2079,11 +2080,11 @@ MonoBehaviour:
       - m_Target: {fileID: 650580144}
         m_TargetAssemblyTypeName: MainUIManager, Assembly-CSharp
         m_MethodName: ShowScrollUI
-        m_Mode: 5
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -2140,7 +2141,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelButton: {fileID: 362256927}
   cloud: {fileID: 902473078}
-  battleSceneName: 
   _isRevealed: 1
 --- !u!1 &376953860
 GameObject:
@@ -2977,6 +2977,9 @@ MonoBehaviour:
   fillAmount: 0.484
   bar: {fileID: 2143432187}
   sceneName: 
+  titleText: {fileID: 2056412539}
+  titleImage: {fileID: 1349738934}
+  titleSprite: {fileID: 21300000, guid: 3e21b3db1b99bd94390c8da1bea52cef, type: 3}
 --- !u!95 &495591996
 Animator:
   serializedVersion: 3
@@ -3972,6 +3975,24 @@ MonoBehaviour:
   bound: 274
   threshold: 0
   LevelMapDicts: []
+  titles:
+  - "\u97A0\u8E74\u98DE\u9E1F"
+  - "\u8E0F\u96EA\u75BE\u884C"
+  - "\u6708\u6756\u4E89\u6572"
+  - "\u9A91\u9010\u98DE\u7403"
+  - "\u4E94\u79BD\u4E00\u620F"
+  titleSprites:
+  - {fileID: 21300000, guid: 3e21b3db1b99bd94390c8da1bea52cef, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 21300000, guid: 648d53bcadbae7e479b6a1f78ba321ca, type: 3}
+  battleSceneNames:
+  - Battlefield 1
+  - 
+  - 
+  - 
+  - 
 --- !u!1 &667955423
 GameObject:
   m_ObjectHideFlags: 0
@@ -6082,11 +6103,11 @@ MonoBehaviour:
       - m_Target: {fileID: 650580144}
         m_TargetAssemblyTypeName: MainUIManager, Assembly-CSharp
         m_MethodName: ShowScrollUI
-        m_Mode: 5
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 3
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -6143,7 +6164,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelButton: {fileID: 1033665909}
   cloud: {fileID: 110611481}
-  battleSceneName: 
   _isRevealed: 1
 --- !u!1 &1088993540
 GameObject:
@@ -8509,11 +8529,11 @@ MonoBehaviour:
       - m_Target: {fileID: 650580144}
         m_TargetAssemblyTypeName: MainUIManager, Assembly-CSharp
         m_MethodName: ShowScrollUI
-        m_Mode: 5
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -8570,7 +8590,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelButton: {fileID: 1672439692}
   cloud: {fileID: 713330732}
-  battleSceneName: 
   _isRevealed: 1
 --- !u!1 &1685122476
 GameObject:
@@ -8948,7 +8967,7 @@ MonoBehaviour:
       - m_Target: {fileID: 650580144}
         m_TargetAssemblyTypeName: MainUIManager, Assembly-CSharp
         m_MethodName: ShowScrollUI
-        m_Mode: 5
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -9009,7 +9028,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelButton: {fileID: 1710931689}
   cloud: {fileID: 0}
-  battleSceneName: 
   _isRevealed: 1
 --- !u!1 &1715337938
 GameObject:
@@ -10824,11 +10842,11 @@ MonoBehaviour:
       - m_Target: {fileID: 650580144}
         m_TargetAssemblyTypeName: MainUIManager, Assembly-CSharp
         m_MethodName: ShowScrollUI
-        m_Mode: 5
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 4
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -10885,7 +10903,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelButton: {fileID: 1954967268}
   cloud: {fileID: 767788493}
-  battleSceneName: 
   _isRevealed: 1
 --- !u!1 &1956807152
 GameObject:
@@ -11550,6 +11567,85 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &2056412537
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2056412538}
+  - component: {fileID: 2056412540}
+  - component: {fileID: 2056412539}
+  m_Layer: 5
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2056412538
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2056412537}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 191329053}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 2.5}
+  m_SizeDelta: {x: -64, y: -69.25647}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2056412539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2056412537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: c69bc61084d384242be307b3fdb23f49, type: 3}
+    m_FontSize: 176
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 194
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: "\u97A0\u8E74\u98DE\u9E1F"
+--- !u!222 &2056412540
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2056412537}
+  m_CullTransparentMesh: 0
 --- !u!1 &2056515022
 GameObject:
   m_ObjectHideFlags: 0

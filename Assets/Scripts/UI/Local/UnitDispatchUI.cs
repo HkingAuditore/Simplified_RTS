@@ -6,15 +6,16 @@ using UnityEngine.UI;
 
 public class UnitDispatchUI : MonoBehaviour
 {
-    public          Text        unitNumberText;
-    public          Button      unitRemoveButton;
-    public          GameObject  unitSetIndicator;
-    public          Unit        unit;
-    public          int         unitNumber;
-    public          Player      player;
-    public          int         onceMax;
-    public          Text        resourceText;
-    public readonly Stack<bool> UnitSelectStack = new Stack<bool>();
+    public          Text                  unitNumberText;
+    public          Button                unitRemoveButton;
+    public          GameObject            unitSetIndicator;
+    public          Unit                  unit;
+    public          int                   unitNumber;
+    public          Player                player;
+    public          int                   onceMax;
+    public          Text                  resourceText;
+    public          UnitDispatchManagerUI dispatchManagerUI;
+    public readonly Stack<bool>           UnitSelectStack = new Stack<bool>();
 
 
     private         Text        _foodWoodRequiredText;
@@ -37,6 +38,7 @@ public class UnitDispatchUI : MonoBehaviour
     public void AddClick(bool isFoodAndWood)
     {
         if (UnitDispatchNumber >= onceMax) return;
+        dispatchManagerUI.IsInDispatching = true;
         // 尝试分配资源
         if (isFoodAndWood)
             try
@@ -44,7 +46,7 @@ public class UnitDispatchUI : MonoBehaviour
                 player.ChangeResource(GameResourceType.Food, -unit.costFood);
                 player.ChangeResource(GameResourceType.Wood, -unit.costWood);
             }
-            catch (ResourceRunOutException e)
+            catch (GameException e)
             {
                 if (e.GameResourceType == GameResourceType.Wood) player.ChangeResource(GameResourceType.Food, unit.costFood);
 
@@ -55,7 +57,7 @@ public class UnitDispatchUI : MonoBehaviour
             {
                 player.ChangeResource(GameResourceType.Gold, -unit.costGold);
             }
-            catch (ResourceRunOutException)
+            catch (GameException)
             {
                 return;
             }
@@ -94,7 +96,7 @@ public class UnitDispatchUI : MonoBehaviour
         {
             player.ChangeResource(GameResourceType.Gold, unit.costGold);
         }
-
+        dispatchManagerUI.IsInDispatching = false;
 
         if (UnitDispatchNumber <= 0)
         {
@@ -106,7 +108,7 @@ public class UnitDispatchUI : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (UnitDispatchNumber < onceMax && player.IsEnoughForUnit(this.unit, GameResourceType.Gold))
+        if (UnitDispatchNumber < onceMax && player.IsEnoughForUnit(this.unit, GameResourceType.Gold) && !dispatchManagerUI.IsInDispatching && (player.CountUnits(this.unit.unitType) + UnitDispatchNumber)< this.unit.playerOwnMax)
         {
             this._dispatchButton.interactable = true;
         }

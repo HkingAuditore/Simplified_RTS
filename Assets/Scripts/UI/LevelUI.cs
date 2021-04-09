@@ -8,8 +8,7 @@ public class LevelUI : MonoBehaviour
 {
     public Button levelButton;
     public Image  cloud;
-    public string battleSceneName;
-    
+
     [SerializeField]
     private bool   _isRevealed;
 
@@ -27,7 +26,7 @@ public class LevelUI : MonoBehaviour
     public void SetCloud()
     {
         levelButton.interactable = IsRevealed;
-        cloud.gameObject.SetActive(!IsRevealed);
+        cloud?.gameObject.SetActive(!IsRevealed);
     }
 
     private void Start()

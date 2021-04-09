@@ -38,7 +38,7 @@ public class DispatchUnitChineseUI : MonoBehaviour
                 player.ChangeResource(GameResourceType.Food, -unit.costFood);
                 player.ChangeResource(GameResourceType.Wood, -unit.costWood);
             }
-            catch (ResourceRunOutException e)
+            catch (GameException e)
             {
                 if (e.GameResourceType == GameResourceType.Wood) player.ChangeResource(GameResourceType.Food, unit.costFood);
 
@@ -49,7 +49,7 @@ public class DispatchUnitChineseUI : MonoBehaviour
             {
                 player.ChangeResource(GameResourceType.Gold, -unit.costGold);
             }
-            catch (ResourceRunOutException)
+            catch (GameException)
             {
                 return;
             }

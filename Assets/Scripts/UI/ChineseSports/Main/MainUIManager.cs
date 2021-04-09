@@ -19,6 +19,10 @@ public class MainUIManager : MonoBehaviour
     [Header("Map Cloud")] 
     public List<LevelUI> LevelMapDicts = new List<LevelUI>();
 
+    [Header("Scroll")] public List<string> titles           = new List<string>();
+    public                    List<Sprite> titleSprites     = new List<Sprite>();
+    public                    List<string> battleSceneNames = new List<string>();
+
 
     private bool _isOpenPanel = false;
 
@@ -48,11 +52,13 @@ public class MainUIManager : MonoBehaviour
 
     }
     
-    public void ShowScrollUI(string battleSceneName)
+    public void ShowScrollUI(int index)
     {
         scrollUI.gameObject.SetActive(true);
-        scrollUI.sceneName = battleSceneName;
-        _isOpenPanel       = true;
+        scrollUI.sceneName   = battleSceneNames[index];
+        scrollUI.TitleName   = titles[index];
+        scrollUI.TitleSprite = titleSprites[index];
+        _isOpenPanel         = true;
 
     }
 

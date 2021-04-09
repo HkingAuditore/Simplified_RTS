@@ -16,6 +16,14 @@ namespace Units
         Bot
     }
 
+    public enum UnitType
+    {
+        LanternBoy,
+        Archer,
+        KiteGirl,
+        Enemy0
+    }
+
     public interface IMilitaryUnit
     {
         int              AttackValue        { get; set; }
@@ -42,11 +50,13 @@ namespace Units
         [Header("基本属性")]
         // 能力属性
         [SerializeField] private int _hp;
-        public                   int    defence;
-        public                   bool   isUnmovable;
-        [SerializeField] private float  speed = 1;
-        public                   Road   road;
-        public                   Player sidePlayer;
+        public                   int      defence;
+        public                   bool     isUnmovable;
+        public                   int      playerOwnMax = 5;
+        [SerializeField] private float    speed        = 1;
+        public                   Road     road;
+        public                   Player   sidePlayer;
+        public                   UnitType unitType;
 
         #region 属性封装
 
@@ -76,6 +86,8 @@ namespace Units
                 _pathFinder.maxSpeed = value;
             }
         }
+        
+
 
         #endregion
 

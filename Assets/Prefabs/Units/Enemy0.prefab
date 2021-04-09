@@ -308,9 +308,11 @@ MonoBehaviour:
   _hp: 100
   defence: 5
   isUnmovable: 0
+  playerOwnMax: 15
   speed: 10
   road: 1
   sidePlayer: {fileID: 0}
+  unitType: 3
   costFood: 4
   costWood: 2
   costGold: 2

@@ -184,6 +184,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isUnit: 1
+  _isAside: 0
+  faceRight: 0
 --- !u!1 &5051234519974670922
 GameObject:
   m_ObjectHideFlags: 0
@@ -254,14 +256,22 @@ MonoBehaviour:
   _hp: 80
   defence: 3
   isUnmovable: 0
+  playerOwnMax: 5
   speed: 1
   road: 1
   sidePlayer: {fileID: 0}
+  unitType: 1
   costFood: 12
   costWood: 16
   costGold: 5
   deathReward: 10
   unitRigidbody: {fileID: 0}
+  navStopEventHandler:
+    m_PersistentCalls:
+      m_Calls: []
+  UnitDeathEventHandler:
+    m_PersistentCalls:
+      m_Calls: []
   attackPower: 10
   attackColdDownTime: 1.2
   attackRange: 4.5

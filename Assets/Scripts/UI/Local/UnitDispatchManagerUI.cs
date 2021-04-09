@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using Units;
 using UnityEngine;
 
@@ -6,6 +7,7 @@ public class UnitDispatchManagerUI : MonoBehaviour
 {
     public UnitDispatchUI[] UnitDispatchUIs;
     public Player           player;
+    public bool             IsInDispatching { get; set; } = false;
 
     public void SetClick(int rdInt)
     {
@@ -57,13 +59,27 @@ public class UnitDispatchManagerUI : MonoBehaviour
 
         foreach (var unitDispatchUI in UnitDispatchUIs)
         {
-            player.SetUnits(oriPos, unitDispatchUI.unitNumber, rd, unitDispatchUI.UnitDispatchNumber, oriVelocity);
-            
-            unitDispatchUI.UnitDispatchNumber = 0;
-            unitDispatchUI.unitNumberText?.gameObject.SetActive(false);
-            unitDispatchUI.unitSetIndicator.gameObject.SetActive(false);
-            unitDispatchUI.unitRemoveButton.gameObject.SetActive(false);
-            unitDispatchUI.UnitSelectStack.Clear();
+            try
+            {
+                player.SetUnits(oriPos, unitDispatchUI.unitNumber, rd, unitDispatchUI.UnitDispatchNumber, oriVelocity);
+
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+            finally
+            {
+                unitDispatchUI.UnitDispatchNumber = 0;
+                unitDispatchUI.unitNumberText?.gameObject.SetActive(false);
+                unitDispatchUI.unitSetIndicator.gameObject.SetActive(false);
+                unitDispatchUI.unitRemoveButton.gameObject.SetActive(false);
+                unitDispatchUI.UnitSelectStack.Clear();
+
+            }
         }
+
+        this.IsInDispatching = false;
     }
 }
