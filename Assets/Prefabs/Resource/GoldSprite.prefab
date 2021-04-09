@@ -105,6 +105,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isUnit: 0
+  _isAside: 0
+  faceRight: 0
 --- !u!135 &315225347388487930
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -132,7 +134,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 48
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!114 &949663781939011819
 MonoBehaviour:

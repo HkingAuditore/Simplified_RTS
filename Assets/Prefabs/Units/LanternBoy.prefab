@@ -28,8 +28,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4219854406580097859}
   m_LocalRotation: {x: 0.15159778, y: -0.69066405, z: 0.15159734, w: 0.6906661}
-  m_LocalPosition: {x: 0, y: 0.549, z: 0.506}
-  m_LocalScale: {x: 0.4876119, y: 0.48761198, z: 0.4876119}
+  m_LocalPosition: {x: -0, y: 0.471, z: 0.449}
+  m_LocalScale: {x: 0.3381494, y: 0.33814946, z: 0.3381494}
   m_Children:
   - {fileID: 4219854407568194172}
   m_Father: {fileID: 4089572768417318978}
@@ -136,7 +136,7 @@ MonoBehaviour:
   characterAnimator: {fileID: 4219854406580097884}
   smokeAnimator: {fileID: 4219854407568194175}
   smokeRenderer: {fileID: 4219854407568194174}
-  fastThreshold: 4
+  fastThreshold: 5
 --- !u!1 &4219854407568194173
 GameObject:
   m_ObjectHideFlags: 0
@@ -375,7 +375,7 @@ CapsuleCollider:
   m_Material: {fileID: 13400000, guid: 17d87b79d3e691a48b2ab6916a393374, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.38
+  m_Radius: 0.2
   m_Height: 1.77
   m_Direction: 1
   m_Center: {x: 0, y: 0.71, z: 0}
@@ -436,7 +436,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 2
-  radius: 0.44
+  radius: 0.2
   height: 1.12
   repathRate: 0.5
   canSearch: 1
