@@ -41,7 +41,7 @@ public class PlayerAI : MonoBehaviour
     protected virtual void AIGaming()
     {
         CountEnemy();
-        DispatchUnits();
+        DispatchUnits(1);
         if (aiPlayer.enableFarmer)
             AIDispatchFarmers();
         _isColdDown = true;
@@ -83,6 +83,50 @@ public class PlayerAI : MonoBehaviour
         var goldSend = aiPlayer.Gold / sendUnit.costGold;
         //派遣数量随机
         var goldSendNumber = Random.Range((int) Mathf.Ceil(goldSend * 0.5f), goldSend);
+
+
+        var costFood = foodAndWoodSendNumber * sendUnit.costFood;
+        var costWood = foodAndWoodSendNumber * sendUnit.costWood;
+        var costGold = goldSendNumber        * sendUnit.costGold;
+
+
+        aiPlayer.ChangeResource(GameResourceType.Food, -costFood);
+        aiPlayer.ChangeResource(GameResourceType.Wood, -costWood);
+        aiPlayer.ChangeResource(GameResourceType.Gold, -costGold);
+
+        aiPlayer.SetUnits(RoadToTransform(sendRoad).position, Array.IndexOf(aiAvailableUnits, sendUnit), sendRoad,
+                         goldSendNumber + foodAndWoodSendNumber);
+    }
+    protected void DispatchUnits(int num)
+    {
+        //TODO mid
+        var sendRoad = Road.Mid;
+
+        var sendArray = new int[aiAvailableUnits.Length];
+        // int maxSendIndex = 0;
+        for (var i = 0; i < sendArray.Length; i++) sendArray[i] = GetUnitMaxSend(aiAvailableUnits[i]);
+
+        Unit sendUnit;
+        var  probability = Random.Range(0f, 1f);
+        if (probability < 0.5f)
+            sendUnit = aiAvailableUnits[Array.IndexOf(sendArray, sendArray.Max())];
+        else
+            sendUnit = aiAvailableUnits[Random.Range(0, aiAvailableUnits.Length)];
+
+
+        //消耗木材、食物资源计算
+        var foodAndWoodSend = aiPlayer.Food / sendUnit.costFood > aiPlayer.Wood / sendUnit.costWood
+                                  ? aiPlayer.Wood / sendUnit.costWood
+                                  : aiPlayer.Food / sendUnit.costFood;
+        //派遣数量随机
+        var foodAndWoodSendNumber = Random.Range((int) Mathf.Ceil(foodAndWoodSend * 0.5f), foodAndWoodSend);
+        foodAndWoodSendNumber = foodAndWoodSendNumber > num ? num : foodAndWoodSend;
+
+        //消耗金矿资源计算
+        var goldSend = aiPlayer.Gold / sendUnit.costGold;
+        //派遣数量随机
+        var goldSendNumber = Random.Range((int) Mathf.Ceil(goldSend * 0.5f), goldSend);
+        goldSendNumber = goldSendNumber > num ? num : goldSendNumber;
 
 
         var costFood = foodAndWoodSendNumber * sendUnit.costFood;
