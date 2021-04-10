@@ -120,13 +120,22 @@ MonoBehaviour:
   _hp: 50
   defence: 5
   isUnmovable: 0
+  playerOwnMax: 5
+  unitRigidbody: {fileID: 4659025311568824802}
   speed: 10
   road: 1
   sidePlayer: {fileID: 0}
+  unitType: 0
   costFood: 0
   costWood: 0
   costGold: 0
-  unitRigidbody: {fileID: 0}
+  deathReward: 10
+  navStopEventHandler:
+    m_PersistentCalls:
+      m_Calls: []
+  UnitDeathEventHandler:
+    m_PersistentCalls:
+      m_Calls: []
   workTime: 1
   maxLoad: 080000000500000008000000
 --- !u!54 &4659025311568824802
@@ -319,3 +328,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isUnit: 1
+  _isAside: 0
+  faceRight: 0

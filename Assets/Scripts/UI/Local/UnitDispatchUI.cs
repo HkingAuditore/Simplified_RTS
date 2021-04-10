@@ -16,6 +16,7 @@ public class UnitDispatchUI : MonoBehaviour
     public          Text                  resourceText;
     public          UnitDispatchManagerUI dispatchManagerUI;
     public readonly Stack<bool>           UnitSelectStack = new Stack<bool>();
+    public          SpriteIndicatorUI     spriteIndicatorUI;
 
 
     private         Text        _foodWoodRequiredText;
@@ -38,7 +39,20 @@ public class UnitDispatchUI : MonoBehaviour
     public void AddClick(bool isFoodAndWood)
     {
         if (UnitDispatchNumber >= onceMax) return;
+        
         dispatchManagerUI.IsInDispatching = true;
+        try
+        {
+            spriteIndicatorUI.UnitSprite =
+                unit.gameObject.transform.Find("Character").GetComponent<SpriteRenderer>().sprite;
+
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+        spriteIndicatorUI.gameObject.SetActive(true);
+
         // 尝试分配资源
         if (isFoodAndWood)
             try
@@ -103,6 +117,7 @@ public class UnitDispatchUI : MonoBehaviour
             unitNumberText?.gameObject.SetActive(false);
             unitSetIndicator.gameObject.SetActive(false);
             unitRemoveButton.gameObject.SetActive(false);
+            spriteIndicatorUI.gameObject.SetActive(false);
         }
     }
 
@@ -117,4 +132,5 @@ public class UnitDispatchUI : MonoBehaviour
             this._dispatchButton.interactable = false;
         }
     }
+    
 }

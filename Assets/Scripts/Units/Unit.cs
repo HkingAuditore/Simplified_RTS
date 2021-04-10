@@ -50,9 +50,11 @@ namespace Units
         [Header("基本属性")]
         // 能力属性
         [SerializeField] private int _hp;
-        public                   int      defence;
-        public                   bool     isUnmovable;
-        public                   int      playerOwnMax = 5;
+        public int       defence;
+        public bool      isUnmovable;
+        public int       playerOwnMax = 5;
+        public Rigidbody unitRigidbody;
+
         [SerializeField] private float    speed        = 1;
         public                   Road     road;
         public                   Player   sidePlayer;
@@ -103,8 +105,7 @@ namespace Units
         private Player        _enemyPlayer;
         private IMilitaryUnit _attacker;
 
-        [HideInInspector]
-       public Rigidbody unitRigidbody;
+
 
         #region 事件
 

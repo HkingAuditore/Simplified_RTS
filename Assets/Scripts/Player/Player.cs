@@ -479,7 +479,7 @@ public class Player : MonoBehaviour
     
     [Header("单位派遣")]
     [Space(10)]
-    public GameObject[] availableUnits;
+    public int[] availableUnits;
 
     public  List<Unit> UnitsList = new List<Unit>();
 
@@ -493,7 +493,7 @@ public class Player : MonoBehaviour
     {
         // Debug.Log("NUMBER:" + number);
         //TODO 人数检测
-        var unit = availableUnits[chosenUnit].GetComponent<Unit>();
+        Unit unit =  GameManager.GameManager.GetManager.unitsList[availableUnits[chosenUnit]];
         if (this.CountUnits(unit.unitType) + number > unit.playerOwnMax)
             throw new GameException("MAX UNITS!");
 
@@ -509,11 +509,11 @@ public class Player : MonoBehaviour
     }
     
     
-    public void SetUnits(Vector3 tr, int chosenUnit, Road rd, int number,Vector3 oriVelocity)
+    public void   SetUnits(Vector3 tr, int chosenUnit, Road rd, int number,Vector3 oriVelocity)
     {
         // Debug.Log("NUMBER:" + number);
         //TODO 人数检测
-        var unit = availableUnits[chosenUnit].GetComponent<Unit>();
+        Unit unit =  GameManager.GameManager.GetManager.unitsList[availableUnits[chosenUnit]];
         if (this.CountUnits(unit.unitType) + number > unit.playerOwnMax)
             throw new GameException("MAX UNITS!");
 
@@ -542,7 +542,7 @@ public class Player : MonoBehaviour
                                                 }));
     }
     
-    public virtual void InstantiateUnit(int chosenUnit, Road rd, Vector3 oriPoint,Vector3 oriVelocity)
+    public virtual void  InstantiateUnit(int chosenUnit, Road rd, Vector3 oriPoint,Vector3 oriVelocity)
     {
         var unitInstantiated = InstantiateUnitBase(chosenUnit, rd, oriPoint);        
         try
@@ -569,7 +569,7 @@ public class Player : MonoBehaviour
 
     private GameObject InstantiateUnitBase(int chosenUnit, Road rd, Vector3 oriPoint)
     {
-        var unitGb = availableUnits[chosenUnit];
+        GameObject unitGb = GameManager.GameManager.GetManager.unitsList[ availableUnits[chosenUnit]].gameObject;
         //寻路设置
         LayerMask layerMask =
             (1 << NavMesh.GetAreaFromName(LayerMask.LayerToName(gameObject.layer)[0] + "Walkable")) |

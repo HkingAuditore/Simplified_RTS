@@ -265,7 +265,7 @@ MonoBehaviour:
   costWood: 16
   costGold: 5
   deathReward: 10
-  unitRigidbody: {fileID: 0}
+  unitRigidbody: {fileID: 8201288632642821626}
   navStopEventHandler:
     m_PersistentCalls:
       m_Calls: []

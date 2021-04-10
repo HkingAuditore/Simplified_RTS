@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections;
+using System.Linq;
 using Units;
 using UnityEngine;
 
 public class UnitDispatchManagerUI : MonoBehaviour
 {
-    public UnitDispatchUI[] UnitDispatchUIs;
-    public Player           player;
-    public bool             IsInDispatching { get; set; } = false;
+    public UnitDispatchUI[]  UnitDispatchUIs;
+    public Player            player;
+    public ShootCalculatorUI shootCalculatorUI;
+    public bool              IsInDispatching { get; set; } = false;
 
     public void SetClick(int rdInt)
     {
@@ -44,8 +46,16 @@ public class UnitDispatchManagerUI : MonoBehaviour
         //初始位置
         var pos       = new Vector3(rayHit.point.x, rayHit.point.y, rayHit.point.z);
         var screenPos = Input.mousePosition;
+        
         // Debug.Log("[Dispatch test]ori pos: " + pos);
+        shootCalculatorUI.gameObject.SetActive(true);
+        shootCalculatorUI.oriPos       = pos;
+        shootCalculatorUI.oriScreenPos = screenPos;
 
+        shootCalculatorUI.shootRigidbody = (from dispatchUI in UnitDispatchUIs
+                                            where dispatchUI.unitNumber > 0
+                                            select dispatchUI.unit.unitRigidbody).First();
+        Debug.Log(shootCalculatorUI.shootRigidbody);
         StartCoroutine(WaitForVelocity(pos,screenPos, rdInt));
     }
 
@@ -56,7 +66,7 @@ public class UnitDispatchManagerUI : MonoBehaviour
         var     newPos      = Input.mousePosition;
         Vector3 oriVelocity = -(newPos - oriScreenPos) * .1f;
         oriVelocity = new Vector3(oriVelocity.x, 0, oriVelocity.y);
-
+        // Debug.DrawLine(oriPos, oriPos+oriVelocity,Color.cyan,60f);
         foreach (var unitDispatchUI in UnitDispatchUIs)
         {
             try
@@ -76,10 +86,13 @@ public class UnitDispatchManagerUI : MonoBehaviour
                 unitDispatchUI.unitSetIndicator.gameObject.SetActive(false);
                 unitDispatchUI.unitRemoveButton.gameObject.SetActive(false);
                 unitDispatchUI.UnitSelectStack.Clear();
+                unitDispatchUI.spriteIndicatorUI.gameObject.SetActive(false);
 
             }
         }
 
         this.IsInDispatching = false;
+        
+        shootCalculatorUI.gameObject.SetActive(false);
     }
 }

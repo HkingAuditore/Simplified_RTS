@@ -24,12 +24,13 @@ public class PlayerAI : MonoBehaviour
     private readonly int _topSend = 0;
 
 
-    public void Awake()
+    public void Start()
     {
         _enemyLayer =
             LayerMask.NameToLayer(LayerMask.LayerToName(gameObject.layer) == "ASide" ? "BSide" : "ASide");
+        // Debug.Log(GameManager.GameManager.GetManager.unitsList.Count);
         aiAvailableUnits = (from availableUnit in aiPlayer.availableUnits
-                            select availableUnit.GetComponent<Unit>()).ToArray();
+                            select GameManager.GameManager.GetManager.unitsList[availableUnit]).ToArray();
     }
 
     protected void Update()
