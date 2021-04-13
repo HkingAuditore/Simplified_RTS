@@ -18,7 +18,7 @@ public class ItemContentUI : MonoBehaviour
         set
         {
             itemName          = value;
-            itemNameText.name = ItemName;
+            itemNameText.text = ItemName;
 
         }
     }
@@ -47,7 +47,7 @@ public class ItemContentUI : MonoBehaviour
     public void SetContent()
     {
         itemImage.sprite     = ItemSprite;
-        itemNameText.name    = ItemName;
+        itemNameText.text    = ItemName;
         itemContentText.text = ItemContent;
     }
 }
