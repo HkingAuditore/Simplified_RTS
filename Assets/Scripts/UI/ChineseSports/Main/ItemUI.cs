@@ -13,6 +13,7 @@ public class ItemUI : MonoBehaviour
    public Color         unrevealedColor;
    public Button        button;
    public ItemContentUI itemContentUI;
+   public GameObject    unrevealedGameObject;
    
    public int    itemIndex;
    
@@ -37,6 +38,7 @@ public class ItemUI : MonoBehaviour
       {
          _isRevealed     = value;
          itemImage.color = value ? Color.white : unrevealedColor;
+         if(unrevealedGameObject != null)unrevealedGameObject.SetActive(!value);
       }
    }
 
@@ -65,6 +67,7 @@ public class ItemUI : MonoBehaviour
       }
       itemImage.color   = _isRevealed ? Color.white : unrevealedColor;
       itemNameText.text = _isRevealed ? itemName : "???";
+      if(unrevealedGameObject != null)unrevealedGameObject.SetActive(!IsRevealed);
    }
 
    public void ShowContent()

@@ -50,4 +50,9 @@ public class ItemContentUI : MonoBehaviour
         itemNameText.text    = ItemName;
         itemContentText.text = ItemContent;
     }
+
+    public void Close()
+    {
+        this.gameObject.SetActive(false);
+    }
 }
