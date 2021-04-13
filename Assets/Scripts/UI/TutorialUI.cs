@@ -11,6 +11,7 @@ public class TutorialUI : MonoBehaviour
     public List<Sprite> tutorialAvatars = new List<Sprite>();
 
     public Button nextButton;
+    public Button previousButton;
     public Image  image;
     public Text   nameText;
     public Text   contentText;
@@ -22,12 +23,12 @@ public class TutorialUI : MonoBehaviour
         get => _curStage;
         set
         {
-            if(value < tutorialAvatars.Count)
+            if(value < tutorialAvatars.Count && value >= 0)
             {
                 _curStage = value;
                 SetStage(CurStage);
             }
-            else
+            else if(value >= tutorialAvatars.Count)
             {
                 Quit();
             }
@@ -37,11 +38,14 @@ public class TutorialUI : MonoBehaviour
     private void Start()
     {
         SetStage(CurStage);
+        nextButton.onClick.AddListener(OnNextClick);
+        previousButton.onClick.AddListener(OnPreviousButtonClick);
+        Time.timeScale = 0;
     }
 
     public void SetStage(int index)
     {
-        nameText.text = tutorialNames[index];
+        nameText.text = tutorialNames[index] + ":";
         image.sprite = tutorialAvatars[index];
         contentText.text    = tutorialTexts[index];
     }
@@ -50,9 +54,15 @@ public class TutorialUI : MonoBehaviour
     {
         CurStage++;
     }
+    public void OnPreviousButtonClick()
+    {
+        CurStage--;
+    }
 
     public void Quit()
     {
         this.gameObject.SetActive(false);
+        Time.timeScale = 1;
+
     }
 }

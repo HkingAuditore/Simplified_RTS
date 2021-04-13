@@ -7,15 +7,24 @@ using UnityEngine.UI;
 [ExecuteInEditMode]
 public class ItemUI : MonoBehaviour
 {
-   public Image  itemImage;
-   public Text   itemNameText;
-   public Color  unrevealedColor;
-   public Button button;
+   public Sprite        itemSprite;
+   public Image         itemImage;
+   public Text          itemNameText;
+   public Color         unrevealedColor;
+   public Button        button;
+   public ItemContentUI itemContentUI;
+   
    public int    itemIndex;
    
    [SerializeField]
    [ContextMenuItem("SetName","Set")]
    private string itemName;
+   
+   [SerializeField]
+   [TextArea(2,10)]
+   private string itemContent;
+   
+   
    [SerializeField]
    [ContextMenuItem("SetReveal", "Set")]
    private bool   _isRevealed;
@@ -49,11 +58,21 @@ public class ItemUI : MonoBehaviour
 [ContextMenu("Set")]
    public void Set()
    {
+      itemImage.sprite = this.itemSprite;
       if (button != null)
       {
          button.interactable = _isRevealed;
       }
       itemImage.color   = _isRevealed ? Color.white : unrevealedColor;
       itemNameText.text = _isRevealed ? itemName : "???";
+   }
+
+   public void ShowContent()
+   {
+      itemContentUI.ItemSprite  = this.itemSprite;
+      itemContentUI.ItemName    = this.ItemName;
+      itemContentUI.ItemContent = this.itemContent;
+      itemContentUI.gameObject.SetActive(true);
+
    }
 }
