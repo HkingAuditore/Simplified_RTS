@@ -72,7 +72,15 @@ namespace Units
                 _hp = value >= 0 ? value : 0;
                 if(_hp == 0)
                 {
-                    UnitDeathEventHandler?.Invoke(_attacker.SidePlayer, _attacker);
+                    try
+                    {
+                        UnitDeathEventHandler?.Invoke(_attacker.SidePlayer, _attacker);
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e);
+                        // throw;
+                    }
                     _death = true;
                     Destroy(gameObject,2f);
                 }

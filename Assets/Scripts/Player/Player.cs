@@ -31,7 +31,8 @@ public class GameException : ApplicationException
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private int        hp;
+    [SerializeField] private int  hp;
+    private                  bool _isDead = false;
     public int HP
     {
         get => hp;
@@ -45,12 +46,16 @@ public class Player : MonoBehaviour
             else
             {
                 Time.timeScale = 0;
-                _gameEventHandler.GetComponent<ResultUI>().ShowResult(gameObject.name[0] == 'B');
+                if(!_isDead)
+                {
+                    GameManager.GameManager.GetManager.resultUI.ShowResult(gameObject.name[0] == 'B');
+                    _isDead = true;
+                }
+                
             }
         }
     }
-
-    private GameObject _gameEventHandler;
+    
 
     public UnityAction updateEventHandler;
 
@@ -58,7 +63,6 @@ public class Player : MonoBehaviour
 
     public virtual void Start()
     {
-        _gameEventHandler = GameObject.Find("GameEventHandler").gameObject;
 
         Top = gameObject.transform.Find("Positions").transform.Find("TopOri").transform;
         Mid = gameObject.transform.Find("Positions").transform.Find("MidOri").transform;
