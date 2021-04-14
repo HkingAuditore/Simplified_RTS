@@ -11,6 +11,7 @@ public class ItemDict
 {
     public Sprite itemSprite;
     public string itemName;
+    public int    itemIndex;
 }
 public class ResultUI : MonoBehaviour
 {
@@ -76,6 +77,7 @@ public class ResultUI : MonoBehaviour
         itemPanel.SetActive(true);
         itemImage.sprite  = itemDicts[CurState-1].itemSprite;
         itemNameText.text = itemDicts[CurState-1].itemName;
+        DataTransfer.GetDataTransfer.itemRevealedList[itemDicts[CurState - 1].itemIndex] = true;
         
 
     }
@@ -93,6 +95,12 @@ public class ResultUI : MonoBehaviour
         }
     }
 
+    public void BackToMap()
+    {
+        DataTransfer.GetDataTransfer.xmlSaver.SaveData();
+        SceneManager.LoadScene("Map");
+    }
+
     public void OnNextClick()
     {
         CurState++;
@@ -100,7 +108,7 @@ public class ResultUI : MonoBehaviour
 
     public void ShowButton()
     {
-        if (_curState == itemDicts.Count)
+        if (_curState >= itemDicts.Count)
         {
             backButton.SetActive(true);
             nextButton.SetActive(false);
@@ -113,11 +121,7 @@ public class ResultUI : MonoBehaviour
 
         }
     }
-
-    public void Back()
-    {
-        
-    }
+    
     
 
 

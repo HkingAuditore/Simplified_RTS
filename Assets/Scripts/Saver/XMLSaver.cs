@@ -19,7 +19,7 @@ public class XMLSaver : MonoBehaviour
     private void Start()
     {
         _dataTransfer = DataTransfer.GetDataTransfer;
-        AutoSave();
+        StartCoroutine(WaitForSave());
     }
 
     public XmlDocument GetDataXmlDocument()
@@ -51,8 +51,7 @@ public class XMLSaver : MonoBehaviour
     private void SaveDataFile(XmlDocument doc, string fileName)
     {
         var path = XMLDataBase.XMLPath + fileName + ".xml";
-        if (!File.Exists(path))
-            doc.Save(path);
+        doc.Save(path);
         AssetDatabase.Refresh();
     }
 
@@ -63,7 +62,9 @@ public class XMLSaver : MonoBehaviour
     
     public void SaveData()
     {
+
         SaveData(XMLDataBase.DataName);
+        Debug.Log("Save!");
     }
 
     public void AutoSave()
