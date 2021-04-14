@@ -989,6 +989,10 @@ PrefabInstance:
       value: "\u51B0\u5B09\u56FE"
       objectReference: {fileID: 0}
     - target: {fileID: 4845960079477139454, guid: 033c8555c5a848c4fafa11c41c011a66, type: 3}
+      propertyPath: itemIndex
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4845960079477139454, guid: 033c8555c5a848c4fafa11c41c011a66, type: 3}
       propertyPath: itemSprite
       value: 
       objectReference: {fileID: 21300000, guid: 798214ee3b45c1a49a4d9fc47e9ba5b3, type: 3}
@@ -1738,6 +1742,10 @@ PrefabInstance:
       value: "\u97A0"
       objectReference: {fileID: 0}
     - target: {fileID: 4845960079477139454, guid: 033c8555c5a848c4fafa11c41c011a66, type: 3}
+      propertyPath: itemIndex
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4845960079477139454, guid: 033c8555c5a848c4fafa11c41c011a66, type: 3}
       propertyPath: itemSprite
       value: 
       objectReference: {fileID: 21300000, guid: ab4a8fdd059afca419624510e7aab2a8, type: 3}
@@ -2068,6 +2076,10 @@ PrefabInstance:
       value: "\u4E38\u7ECF"
       objectReference: {fileID: 0}
     - target: {fileID: 4845960079477139454, guid: 033c8555c5a848c4fafa11c41c011a66, type: 3}
+      propertyPath: itemIndex
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4845960079477139454, guid: 033c8555c5a848c4fafa11c41c011a66, type: 3}
       propertyPath: itemSprite
       value: 
       objectReference: {fileID: 21300000, guid: b6f17483e056ac047871934cbc408f0b, type: 3}
@@ -2236,6 +2248,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelButton: {fileID: 362256927}
   cloud: {fileID: 902473078}
+  levelIndex: 2
   _isRevealed: 1
 --- !u!1 &376953860
 GameObject:
@@ -3271,6 +3284,10 @@ PrefabInstance:
     - target: {fileID: 4845960079477139454, guid: 033c8555c5a848c4fafa11c41c011a66, type: 3}
       propertyPath: itemName
       value: "\u4E38\u7ECF"
+      objectReference: {fileID: 0}
+    - target: {fileID: 4845960079477139454, guid: 033c8555c5a848c4fafa11c41c011a66, type: 3}
+      propertyPath: itemIndex
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 4845960079477139454, guid: 033c8555c5a848c4fafa11c41c011a66, type: 3}
       propertyPath: itemSprite
@@ -4473,7 +4490,8 @@ MonoBehaviour:
   button: {fileID: 1802053276}
   itemContentUI: {fileID: 0}
   unrevealedGameObject: {fileID: 0}
-  itemIndex: 0
+  objectType: 1
+  itemIndex: 2
   itemName: "\u98CE\u7B5D\u5973"
   itemContent: 
   _isRevealed: 0
@@ -5239,6 +5257,7 @@ MonoBehaviour:
   button: {fileID: 241195367}
   itemContentUI: {fileID: 0}
   unrevealedGameObject: {fileID: 0}
+  objectType: 1
   itemIndex: 0
   itemName: "\u98CE\u7B5D\u5973"
   itemContent: 
@@ -5523,6 +5542,10 @@ PrefabInstance:
     - target: {fileID: 4845960079477139454, guid: 033c8555c5a848c4fafa11c41c011a66, type: 3}
       propertyPath: itemName
       value: "\u5C0F\u9A6C\u9A79"
+      objectReference: {fileID: 0}
+    - target: {fileID: 4845960079477139454, guid: 033c8555c5a848c4fafa11c41c011a66, type: 3}
+      propertyPath: itemIndex
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4845960079477139454, guid: 033c8555c5a848c4fafa11c41c011a66, type: 3}
       propertyPath: itemSprite
@@ -5938,6 +5961,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelButton: {fileID: 1033665909}
   cloud: {fileID: 110611481}
+  levelIndex: 3
   _isRevealed: 1
 --- !u!1 &1088993540
 GameObject:
@@ -6272,6 +6296,10 @@ PrefabInstance:
       value: "\u6696\u51AC\u68C9\u670D"
       objectReference: {fileID: 0}
     - target: {fileID: 4845960079477139454, guid: 033c8555c5a848c4fafa11c41c011a66, type: 3}
+      propertyPath: itemIndex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4845960079477139454, guid: 033c8555c5a848c4fafa11c41c011a66, type: 3}
       propertyPath: itemSprite
       value: 
       objectReference: {fileID: 21300000, guid: 96898e664a7320d4cbb7fce7d7f502b8, type: 3}
@@ -6484,6 +6512,10 @@ PrefabInstance:
       value: "\u5B8B\u4EE3\u7259\u96D5\u97A0\u8E74\u56FE\u7B14\u7B52"
       objectReference: {fileID: 0}
     - target: {fileID: 4845960079477139454, guid: 033c8555c5a848c4fafa11c41c011a66, type: 3}
+      propertyPath: itemIndex
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4845960079477139454, guid: 033c8555c5a848c4fafa11c41c011a66, type: 3}
       propertyPath: itemSprite
       value: 
       objectReference: {fileID: 21300000, guid: 72f547931d473a94b83e2805eb9ff143, type: 3}
@@ -6558,7 +6590,8 @@ MonoBehaviour:
   button: {fileID: 1874291952}
   itemContentUI: {fileID: 0}
   unrevealedGameObject: {fileID: 0}
-  itemIndex: 0
+  objectType: 1
+  itemIndex: 1
   itemName: "\u706F\u7B3C\u7537"
   itemContent: 
   _isRevealed: 1
@@ -6941,6 +6974,10 @@ PrefabInstance:
       value: "\u4E94\u79BD\u620F"
       objectReference: {fileID: 0}
     - target: {fileID: 4845960079477139454, guid: 033c8555c5a848c4fafa11c41c011a66, type: 3}
+      propertyPath: itemIndex
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4845960079477139454, guid: 033c8555c5a848c4fafa11c41c011a66, type: 3}
       propertyPath: itemSprite
       value: 
       objectReference: {fileID: 21300000, guid: 36055aa452186b8489a575fa84a151a5, type: 3}
@@ -7199,7 +7236,8 @@ MonoBehaviour:
   button: {fileID: 667955425}
   itemContentUI: {fileID: 0}
   unrevealedGameObject: {fileID: 0}
-  itemIndex: 0
+  objectType: 1
+  itemIndex: 3
   itemName: "\u706F\u7B3C\u7537"
   itemContent: 
   _isRevealed: 0
@@ -7460,6 +7498,10 @@ PrefabInstance:
     - target: {fileID: 4845960079477139454, guid: 033c8555c5a848c4fafa11c41c011a66, type: 3}
       propertyPath: itemName
       value: "\u51B0\u978B"
+      objectReference: {fileID: 0}
+    - target: {fileID: 4845960079477139454, guid: 033c8555c5a848c4fafa11c41c011a66, type: 3}
+      propertyPath: itemIndex
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4845960079477139454, guid: 033c8555c5a848c4fafa11c41c011a66, type: 3}
       propertyPath: itemSprite
@@ -7818,6 +7860,10 @@ PrefabInstance:
     - target: {fileID: 4845960079477139454, guid: 033c8555c5a848c4fafa11c41c011a66, type: 3}
       propertyPath: itemName
       value: "\u4E38\u7ECF"
+      objectReference: {fileID: 0}
+    - target: {fileID: 4845960079477139454, guid: 033c8555c5a848c4fafa11c41c011a66, type: 3}
+      propertyPath: itemIndex
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 4845960079477139454, guid: 033c8555c5a848c4fafa11c41c011a66, type: 3}
       propertyPath: itemSprite
@@ -8604,6 +8650,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelButton: {fileID: 1672439692}
   cloud: {fileID: 713330732}
+  levelIndex: 1
   _isRevealed: 1
 --- !u!1 &1685122476
 GameObject:
@@ -9042,6 +9089,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelButton: {fileID: 1710931689}
   cloud: {fileID: 0}
+  levelIndex: 0
   _isRevealed: 1
 --- !u!1 &1715337938
 GameObject:
@@ -9644,6 +9692,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1795940042}
   - component: {fileID: 1795940041}
+  - component: {fileID: 1795940043}
+  - component: {fileID: 1795940045}
+  - component: {fileID: 1795940044}
   m_Layer: 0
   m_Name: Transformer
   m_TagString: Untagged
@@ -9678,6 +9729,48 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1795940043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1795940040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b76afe8b53de48438f701817aedd54f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemRevealedList: 010101000000000000000000
+  characterRevealedList: 01010000
+  levelRevealedList: 0101010100
+  xmlSaver: {fileID: 1795940044}
+  xmlReader: {fileID: 1795940045}
+--- !u!114 &1795940044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1795940040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b419c9ff64f1815478418c498bcd83e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  autoSaveTime: 10
+--- !u!114 &1795940045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1795940040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b0514e76bdda3b40857967bbb2dafe6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1799960720
 GameObject:
   m_ObjectHideFlags: 0
@@ -10463,6 +10556,10 @@ PrefabInstance:
       value: "\u6376\u4E38"
       objectReference: {fileID: 0}
     - target: {fileID: 4845960079477139454, guid: 033c8555c5a848c4fafa11c41c011a66, type: 3}
+      propertyPath: itemIndex
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4845960079477139454, guid: 033c8555c5a848c4fafa11c41c011a66, type: 3}
       propertyPath: itemSprite
       value: 
       objectReference: {fileID: 21300000, guid: e99d84b591a3ea744989d01a152124d0, type: 3}
@@ -10910,6 +11007,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelButton: {fileID: 1954967268}
   cloud: {fileID: 767788493}
+  levelIndex: 4
   _isRevealed: 1
 --- !u!1 &1956807152
 GameObject:

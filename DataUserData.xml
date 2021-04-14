@@ -1,0 +1,29 @@
+<Saver>
+  <ItemRevealedList>
+    <Item Index="0" IsRevealed="True" />
+    <Item Index="1" IsRevealed="True" />
+    <Item Index="2" IsRevealed="True" />
+    <Item Index="3" IsRevealed="False" />
+    <Item Index="4" IsRevealed="False" />
+    <Item Index="5" IsRevealed="False" />
+    <Item Index="6" IsRevealed="False" />
+    <Item Index="7" IsRevealed="False" />
+    <Item Index="8" IsRevealed="False" />
+    <Item Index="9" IsRevealed="False" />
+    <Item Index="10" IsRevealed="False" />
+    <Item Index="11" IsRevealed="False" />
+  </ItemRevealedList>
+  <CharacterRevealedList>
+    <Character Index="0" IsRevealed="True" />
+    <Character Index="1" IsRevealed="True" />
+    <Character Index="2" IsRevealed="False" />
+    <Character Index="3" IsRevealed="False" />
+  </CharacterRevealedList>
+  <LevelRevealedList>
+    <Item Index="0" IsRevealed="True" />
+    <Item Index="1" IsRevealed="False" />
+    <Item Index="2" IsRevealed="False" />
+    <Item Index="3" IsRevealed="False" />
+    <Item Index="4" IsRevealed="False" />
+  </LevelRevealedList>
+</Saver>

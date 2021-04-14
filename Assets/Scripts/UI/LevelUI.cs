@@ -8,6 +8,7 @@ public class LevelUI : MonoBehaviour
 {
     public Button levelButton;
     public Image  cloud;
+    public int    levelIndex;
 
     [SerializeField]
     private bool   _isRevealed;
@@ -31,6 +32,7 @@ public class LevelUI : MonoBehaviour
 
     private void Start()
     {
+        this.IsRevealed = DataTransfer.GetDataTransfer.levelRevealedList[this.levelIndex];
         SetCloud();
     }
     

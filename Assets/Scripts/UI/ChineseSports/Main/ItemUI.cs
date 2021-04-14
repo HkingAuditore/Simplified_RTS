@@ -4,6 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+public enum ObjectType
+{
+   Item,
+   Character
+}
+
 [ExecuteInEditMode]
 public class ItemUI : MonoBehaviour
 {
@@ -14,8 +20,8 @@ public class ItemUI : MonoBehaviour
    public Button        button;
    public ItemContentUI itemContentUI;
    public GameObject    unrevealedGameObject;
-   
-   public int    itemIndex;
+   public ObjectType    objectType;
+   public int           itemIndex;
    
    [SerializeField]
    [ContextMenuItem("SetName","Set")]
@@ -52,8 +58,21 @@ public class ItemUI : MonoBehaviour
       }
    }
 
-   private void Awake()
+   private void Start()
    {
+      switch (objectType)
+      {
+         case ObjectType.Item:
+            this.IsRevealed = DataTransfer.GetDataTransfer.itemRevealedList[this.itemIndex];
+
+            break;
+         case ObjectType.Character:
+            this.IsRevealed = DataTransfer.GetDataTransfer.characterRevealedList[this.itemIndex];
+
+            break;
+         default:
+            throw new ArgumentOutOfRangeException();
+      }
       Set();
    }
 
