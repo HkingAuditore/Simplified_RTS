@@ -9,6 +9,7 @@ public class SpriteRendererPlus : MonoBehaviour
     public  int  _isAside;
     private Unit _parentUnit;
 
+    [ExecuteAlways]
     private void Start()
     {
         if (isUnit)

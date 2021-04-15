@@ -329,18 +329,61 @@ inline void InitializeStandardLitSurfaceData(float2 uv, out SurfaceData outSurfa
                 return LightingPhysicallyBasedCustom(brdfData,
                                                     light.color,
                                     light.direction,
-                                    lightAttenuation,
+                                    lightAttenuation - saturate(0.5 - lightAttenuation) * 0.8,
                                                     normalWS, viewDirectionWS);
             }
 
+            void MixRealtimeAndBakedGICustom(inout Light light, half3 normalWS, inout half3 bakedGI, half4 shadowMask)
+            {
+            #if defined(_MIXED_LIGHTING_SUBTRACTIVE) && defined(LIGHTMAP_ON)
+                bakedGI = SubtractDirectMainLightFromLightmapCustom(light, normalWS, bakedGI);
+            #endif
+            }
+
+            half3 SubtractDirectMainLightFromLightmapCustom(Light mainLight, half3 normalWS, half3 bakedGI)
+            {
+                // Let's try to make realtime shadows work on a surface, which already contains
+                // baked lighting and shadowing from the main sun light.
+                // Summary:
+                // 1) Calculate possible value in the shadow by subtracting estimated light contribution from the places occluded by realtime shadow:
+                //      a) preserves other baked lights and light bounces
+                //      b) eliminates shadows on the geometry facing away from the light
+                // 2) Clamp against user defined ShadowColor.
+                // 3) Pick original lightmap value, if it is the darkest one.
+
+
+                // 1) Gives good estimate of illumination as if light would've been shadowed during the bake.
+                // We only subtract the main direction light. This is accounted in the contribution term below.
+                half shadowStrength = GetMainLightShadowStrength();
+                half contributionTerm = saturate(dot(mainLight.direction, normalWS));
+                half3 lambert = mainLight.color * contributionTerm;
+                half3 estimatedLightContributionMaskedByInverseOfShadow = lambert * (1.0 - mainLight.shadowAttenuation);
+                half3 subtractedLightmap = bakedGI - estimatedLightContributionMaskedByInverseOfShadow;
+
+                // 2) Allows user to define overall ambient of the scene and control situation when realtime shadow becomes too dark.
+                half3 realtimeShadow = max(subtractedLightmap, _SubtractiveShadowColor.xyz);
+                realtimeShadow = lerp(bakedGI, realtimeShadow, shadowStrength);
+
+                // 3) Pick darkest color
+                return min(bakedGI, realtimeShadow);
+            }
+
+
+            Light GetMainLightCustom(float4 shadowCoord)
+            {
+                Light light = GetMainLight();
+                half shadow = MainLightRealtimeShadow(shadowCoord);
+                light.shadowAttenuation = saturate(shadow - 20 * saturate(0.5-shadow));
+                return light;
+            }
             half4 UniversalFragmentPBRCustom(InputData inputData, half3 albedo, half metallic, half3 specular,
             half smoothness, half occlusion, half3 emission, half alpha)
             {
                 BRDFData brdfData;
                 InitializeBRDFData(albedo, metallic, specular, smoothness, alpha, brdfData);
                 
-                Light mainLight = GetMainLight(inputData.shadowCoord);
-                MixRealtimeAndBakedGI(mainLight, inputData.normalWS, inputData.bakedGI, half4(0, 0, 0, 0));
+                Light mainLight = GetMainLightCustom(inputData.shadowCoord);
+                MixRealtimeAndBakedGICustom(mainLight, inputData.normalWS, inputData.bakedGI, half4(0, 0, 0, 0));
 
                 half3 color = GlobalIllumination(brdfData, lerp(inputData.bakedGI,half3(1,1,1),_GIIntensity), occlusion, inputData.normalWS, inputData.viewDirectionWS);
                 color += LightingPhysicallyBasedCustom(brdfData, mainLight, inputData.normalWS, inputData.viewDirectionWS);

@@ -33,7 +33,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: 58245834198ef624896c922bdf668f31, type: 3}
+        m_Texture: {fileID: 2800000, guid: 5a6aaae77439c84418873dd729990bd9, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -65,7 +65,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Ramp:
-        m_Texture: {fileID: 2800000, guid: c5763772c5772e14989e711461b83a69, type: 3}
+        m_Texture: {fileID: 2800000, guid: cbb8d6f2d44371f4bbd6a3d0b50c02a2, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
@@ -79,7 +79,7 @@ Material:
     m_Floats:
     - _AlphaClip: 0
     - _Blend: 0
-    - _BrightnessAdjust: 0.143
+    - _BrightnessAdjust: 0.91
     - _BumpScale: 1
     - _Cull: 2
     - _Cutoff: 0.5
@@ -92,7 +92,7 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _InteriorNoiseLevel: 0.15
-    - _LightingAdjust: 0.46
+    - _LightingAdjust: 0.931
     - _MaxOutlineZOffset: 1
     - _Metallic: 0
     - _OcclusionStrength: 1
