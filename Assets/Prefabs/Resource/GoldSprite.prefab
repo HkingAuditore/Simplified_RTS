@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 315225347388487924}
   - component: {fileID: 315225347388487928}
   - component: {fileID: 315225347388487931}
-  - component: {fileID: 315225347388487930}
   - component: {fileID: 315225347388487925}
   - component: {fileID: 949663781939011819}
+  - component: {fileID: 3098458182762437728}
   m_Layer: 10
   m_Name: GoldSprite
   m_TagString: Untagged
@@ -107,19 +107,6 @@ MonoBehaviour:
   isUnit: 0
   _isAside: 0
   faceRight: 0
---- !u!135 &315225347388487930
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 315225347388487927}
-  m_Material: {fileID: 13400000, guid: 17d87b79d3e691a48b2ab6916a393374, type: 2}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 2.17
-  m_Center: {x: 0, y: -0.00000035762787, z: 0}
 --- !u!54 &315225347388487925
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -149,6 +136,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   resourceDroper: {fileID: 0}
+--- !u!65 &3098458182762437728
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 315225347388487927}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 8.42, y: 6.6, z: 0.2}
+  m_Center: {x: 0, y: -0.00024414062, z: 0}
 --- !u!1 &315225347748523025
 GameObject:
   m_ObjectHideFlags: 0
