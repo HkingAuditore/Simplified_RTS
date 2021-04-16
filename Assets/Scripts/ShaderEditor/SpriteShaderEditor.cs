@@ -52,6 +52,7 @@ namespace UnityEditor.Rendering.Universal.ShaderGUI
         // material main surface inputs
         private float _giIntensity = .5f;
         private float _shadowPow = 2.5f;
+        private Color _shadowColor = Color.black;
 
         public override void DrawSurfaceInputs(Material material)
         {
@@ -59,17 +60,25 @@ namespace UnityEditor.Rendering.Universal.ShaderGUI
             LitGUI.Inputs(litProperties, materialEditor, material);
             DrawEmissionProperties(material, true);
             DrawTileOffset(materialEditor, baseMapProp);
+            _giIntensity = material.GetFloat("_GIIntensity");
+            _shadowPow   = material.GetFloat("_ShadowPow");
+            _shadowColor = material.GetColor("_ShadowColor");
             
             
             EditorGUI.BeginChangeCheck();
-            _giIntensity = EditorGUILayout.Slider("GI Intensity", _giIntensity, 0, 1);
-            _shadowPow   = EditorGUILayout.Slider("Shadow Pow",   _shadowPow, 0.01f, 50);
+            _giIntensity = EditorGUILayout.Slider("GI Intensity", _giIntensity, 0,     1);
+            _shadowPow   = EditorGUILayout.Slider("Shadow Pow",   _shadowPow,   0.01f, 50);
+            _shadowColor = EditorGUILayout.ColorField("Shadow Color", _shadowColor);
             if (EditorGUI.EndChangeCheck())
             {
                 material.SetFloat("_GIIntensity", _giIntensity);
                 material.SetFloat("_ShadowPow",   _shadowPow);
+                material.SetColor("_ShadowColor", _shadowColor);
                 EditorUtility.SetDirty(material);
             }
+            
+            
+
 
         }
 

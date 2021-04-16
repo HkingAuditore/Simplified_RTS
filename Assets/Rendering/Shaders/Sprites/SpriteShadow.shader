@@ -13,6 +13,7 @@
         _Smoothness("Smoothness", Range(0.0, 1.0)) = 0.5
         _GIIntensity("GI Intensity", Range(0.0, 1.0)) = 0.5
         _ShadowPow("Shadow Pow", Range(0.0, 1.0)) = 0.5
+        _ShadowColor("Shadow Color", Color) = (0,0,0)
         _GlossMapScale("Smoothness Scale", Range(0.0, 1.0)) = 1.0
         _SmoothnessTextureChannel("Smoothness texture channel", Float) = 0
  
@@ -138,6 +139,7 @@
             CBUFFER_START(UnityPerMaterial)
                 float4 _BaseMap_ST;
                 half4 _BaseColor;
+                half4 _ShadowColor;
                 half4 _SpecColor;
                 half4 _EmissionColor;
                 half _Cutoff;
@@ -329,6 +331,7 @@ inline void InitializeStandardLitSurfaceData(float2 uv, out SurfaceData outSurfa
                 return LightingPhysicallyBasedCustom(brdfData,
                                                     light.color,
                                     light.direction,
+                                    //Edit Shadow Strength
                                     lightAttenuation - saturate(0.5 - lightAttenuation) * 0.8,
                                                     normalWS, viewDirectionWS);
             }
@@ -361,11 +364,11 @@ inline void InitializeStandardLitSurfaceData(float2 uv, out SurfaceData outSurfa
                 half3 subtractedLightmap = bakedGI - estimatedLightContributionMaskedByInverseOfShadow;
 
                 // 2) Allows user to define overall ambient of the scene and control situation when realtime shadow becomes too dark.
-                half3 realtimeShadow = max(subtractedLightmap, _SubtractiveShadowColor.xyz);
+                half3 realtimeShadow = max(subtractedLightmap, _SubtractiveShadowColor.xyz) * _ShadowColor;
                 realtimeShadow = lerp(bakedGI, realtimeShadow, shadowStrength);
 
                 // 3) Pick darkest color
-                return min(bakedGI, realtimeShadow);
+                return min(bakedGI, realtimeShadow) ;
             }
 
 
@@ -373,7 +376,7 @@ inline void InitializeStandardLitSurfaceData(float2 uv, out SurfaceData outSurfa
             {
                 Light light = GetMainLight();
                 half shadow = MainLightRealtimeShadow(shadowCoord);
-                light.shadowAttenuation = saturate(shadow - 20 * saturate(0.5-shadow));
+                light.shadowAttenuation = saturate(shadow - 200 * saturate(0.5-shadow));
                 return light;
             }
             half4 UniversalFragmentPBRCustom(InputData inputData, half3 albedo, half metallic, half3 specular,

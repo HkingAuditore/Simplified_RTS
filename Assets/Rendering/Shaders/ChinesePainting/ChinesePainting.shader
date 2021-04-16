@@ -37,6 +37,7 @@
 		_InteriorNoise ("Interior Noise Map", 2D) = "white" {}
 		_LightingAdjust("Light Adjust", Range(0, 1)) = 0.15
 		_BrightnessAdjust("Brightness Adjust", Range(-1, 1)) = 0.15
+		_GlobalBrightness("Global Brightness", Range(-1, 1)) = 0.15
 		_RimPower("Rim Power", Range(0, 1)) = 0.15
 		// Interior Noise Level
 		_InteriorNoiseLevel ("Interior Noise Level", Range(0, 1)) = 0.15
@@ -87,6 +88,7 @@
 			half _OutlineMinWidth;
 			half _RimPower;
 			half _BrightnessAdjust;
+			half _GlobalBrightness;
 			CBUFFER_END
 		ENDHLSL
  
@@ -354,6 +356,9 @@
                 sum += tex2D(_Ramp, float2(tc.x + 4.0*blur*hstep, tc.y + 4.0*blur*vstep)) * 0.0162162162;
 				sum *= half4(surfaceData.albedo,1);
 				color.a = saturate(color.a);
+				sum.r = saturate(sum.r - _GlobalBrightness);
+				sum.g = saturate(sum.g - _GlobalBrightness);
+				sum.b = saturate(sum.b - _GlobalBrightness);
 				return float4(sum.rgb, 1.0);
 				return float4(diff,diff,diff, 1.0);
 				return color; // float4(inputData.bakedGI,1);

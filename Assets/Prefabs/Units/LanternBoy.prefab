@@ -316,7 +316,7 @@ MonoBehaviour:
   unitType: 0
   costFood: 13
   costWood: 9
-  costGold: 3
+  costGold: 7
   deathReward: 10
   navStopEventHandler:
     m_PersistentCalls:

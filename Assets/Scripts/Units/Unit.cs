@@ -82,7 +82,7 @@ namespace Units
                         // throw;
                     }
                     _death = true;
-                    Destroy(gameObject,2f);
+                    Destroy(gameObject,.5f);
                 }
             }
         }
