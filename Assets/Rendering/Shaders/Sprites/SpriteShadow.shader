@@ -332,7 +332,7 @@ inline void InitializeStandardLitSurfaceData(float2 uv, out SurfaceData outSurfa
                                                     light.color,
                                     light.direction,
                                     //Edit Shadow Strength
-                                    lightAttenuation - saturate(0.5 - lightAttenuation) * 0.8,
+                                    lightAttenuation - saturate(0.3 - lightAttenuation) * 0.5,
                                                     normalWS, viewDirectionWS);
             }
 

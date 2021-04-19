@@ -62,7 +62,7 @@ namespace Units
 
         #region 属性封装
 
-        private bool _death = false;
+        private protected bool Death = false;
 
         public int HP
         {
@@ -81,8 +81,8 @@ namespace Units
                         Console.WriteLine(e);
                         // throw;
                     }
-                    _death = true;
-                    Destroy(gameObject,.5f);
+                    Death = true;
+                    Destroy(gameObject);
                 }
             }
         }
@@ -110,8 +110,8 @@ namespace Units
         
         [Header("死亡奖励")]
         public int deathReward = 10;
-        private Player        _enemyPlayer;
-        private IMilitaryUnit _attacker;
+        private           Player        _enemyPlayer;
+        private protected IMilitaryUnit _attacker;
 
 
 
@@ -194,11 +194,11 @@ namespace Units
             
         }
 
-        IEnumerator WaitForDeath() {
-            // TODO 死亡五秒消失
-            yield return new WaitForSeconds(2);
-            Destroy(gameObject);
-        }
+        // IEnumerator WaitForDeath() {
+        //     // TODO 死亡五秒消失
+        //     yield return new WaitForSeconds(2);
+        //     Destroy(gameObject);
+        // }
 
         #region 寻路
 
@@ -219,9 +219,9 @@ namespace Units
         #region 战斗
 
 
-        public void BeAttacked(IMilitaryUnit attacker)
+        public virtual void BeAttacked(IMilitaryUnit attacker)
         {
-            if (this._death)
+            if (this.Death)
                 throw new Exception("WAS DEAD");
             var damage = attacker.AttackValue - defence > 0 ? attacker.AttackValue - defence : 1;
             HP -= damage;

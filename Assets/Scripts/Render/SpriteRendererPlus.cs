@@ -5,13 +5,15 @@ using UnityEngine.Rendering;
 
 public class SpriteRendererPlus : MonoBehaviour
 {
-    public  bool isUnit;
-    public  int  _isAside;
-    private Unit _parentUnit;
-
+    public  bool   isUnit;
+    public  bool   isArrow;
+    private int    _isAside;
+    private Unit   _parentUnit;
+    private Camera _mainCamera;
     [ExecuteAlways]
     private void Start()
     {
+        _mainCamera = GameManager.GameManager.GetManager.mainCamera;
         if (isUnit)
         {
             _parentUnit = transform.parent.GetComponent<Unit>();
@@ -33,6 +35,12 @@ public class SpriteRendererPlus : MonoBehaviour
                 faceRight = !faceRight;
             }
             transform.rotation = Quaternion.Euler(25f * (faceRight ? 1 : -1), faceRight ? 0 : 180, 0);
+        }
+
+        if (isArrow)
+        {
+            this.transform.forward  = _mainCamera.transform.forward;
+            this.transform.rotation = _mainCamera.transform.rotation;
         }
     }
 }

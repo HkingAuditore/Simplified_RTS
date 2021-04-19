@@ -45,6 +45,7 @@ public class UnitDispatchUI : MonoBehaviour
         {
             spriteIndicatorUI.UnitSprite =
                 unit.gameObject.transform.Find("Character").GetComponent<SpriteRenderer>().sprite;
+            spriteIndicatorUI.transform.localScale = unit.gameObject.transform.Find("Character").transform.localScale;
 
         }
         catch (Exception e)

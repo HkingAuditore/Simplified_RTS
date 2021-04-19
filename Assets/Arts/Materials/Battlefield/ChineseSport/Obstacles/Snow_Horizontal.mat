@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Snow_Horizontal
   m_Shader: {fileID: 4800000, guid: 5a788d0ceb8ae244487dc1212c0a8930, type: 3}
-  m_ShaderKeywords: _ALPHATEST_ON
+  m_ShaderKeywords: ETC1_EXTERNAL_ALPHA _ALPHATEST_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 1

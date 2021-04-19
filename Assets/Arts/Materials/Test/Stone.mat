@@ -48,25 +48,25 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _BrightnessAdjust: -0.17
+    - _BrightnessAdjust: -0.27
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _EnableAlphaTest: 0
     - _EnableBumpMap: 0
     - _EnableEmission: 0
     - _GlobalBrightness: 0
-    - _InteriorNoiseLevel: 0.43
+    - _InteriorNoiseLevel: 1
     - _LightingAdjust: 0
     - _MaxOutlineZOffset: 0.067
     - _Outline: 0.0025
     - _OutlineCut: 0.234
     - _OutlineMinWidth: 0.2
     - _OutsideNoiseWidth: 1.97
-    - _RimPower: 0.69
+    - _RimPower: 0.89
     - _Smoothness: 0
     - _Specular: 1
     - hstep: 0.184
-    - radius: 26.6
+    - radius: 22
     - resolution: 600
     - vstep: 0.175
     m_Colors:
