@@ -6,9 +6,9 @@ public class DataTransfer : MonoBehaviour
 {
     public TutorialManager tutorialManager;
 
-    public List<bool> itemRevealedList = new List<bool>();
+    public List<bool> itemRevealedList      = new List<bool>();
     public List<bool> characterRevealedList = new List<bool>();
-    public List<bool> levelRevealedList = new List<bool>();
+    public List<bool> levelRevealedList     = new List<bool>();
 
     public XMLSaver  xmlSaver;
     public XMLReader xmlReader;
@@ -21,7 +21,7 @@ public class DataTransfer : MonoBehaviour
     
     private void Start()
     {
-        xmlReader.LoadSaver();
+        xmlReader.LoadSaver(true);
         GameObject.DontDestroyOnLoad(gameObject);
     }
 }

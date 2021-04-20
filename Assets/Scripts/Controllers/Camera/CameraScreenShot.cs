@@ -2,15 +2,48 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class CameraScreenShot : MonoBehaviour
 {
-    private Camera _camera;
+    public  Texture  mixTexture;
+    public  Shader   mixShader;
+    public  Color    baseColor;
+    public  Color    mixColor;
+    private Camera   _camera;
+    private Material _mixMaterial;
+
+    private Material MixMaterial
+    {
+        get
+        {
+            if (_mixMaterial == null)
+            {
+                _mixMaterial = GenerateMaterial(mixShader, ref _mixMaterial);
+            };
+
+            return _mixMaterial;
+        }
+    }
 
     private void Awake()
     {
         _camera = this.GetComponent<Camera>();
     }
+
+    private Material GenerateMaterial(Shader shader, ref Material targetMaterial)
+    {
+        Material nullMat = null;
+        if (shader != null)
+            if (shader.isSupported)
+            {
+                if (targetMaterial == null) targetMaterial = new Material(shader);
+                return targetMaterial;
+            }
+
+        return nullMat;
+    }
+
     
     public Texture2D CaptureCamera(Rect rect)   
     {  
@@ -32,7 +65,8 @@ public class CameraScreenShot : MonoBehaviour
         return screenShot;      
     }
 
-    public Texture2D tex        = new Texture2D (Screen.width, Screen.height);
+    public Texture2D screenShot = new Texture2D (Screen.width, Screen.height);
+    public Texture2D RenderResultTex;
     public bool      isShotDone = false;
     public IEnumerator MyCaptureScreen()
     {
@@ -44,10 +78,33 @@ public class CameraScreenShot : MonoBehaviour
         tex.ReadPixels (new Rect (0, 0, Screen.width, Screen.height), 0, 0);
         //图片应用（此时图片已经绘制完成）
         tex.Apply ();
-        this.tex   = tex;
+        this.screenShot   = tex;
+        RenderTexture renderResult = RenderTexture.GetTemporary(Screen.width, Screen.height);
+        if (MixMaterial != null)
+        {
+            // Debug.Log(renderTexOuter.GetRenderResult());
+            MixMaterial.SetTexture("_BaseMap", this.screenShot);
+            MixMaterial.SetTexture("_MixMap", mixTexture);
+            // MixMaterial.SetTexture("_MixTex1", layerCamera.GetRenderResult());
+            MixMaterial.SetColor("_BaseColor", baseColor);
+            MixMaterial.SetColor("_MixColor", mixColor);
+            // MixMaterial.SetTexture("MixTex", renderTexture);
+
+            Graphics.Blit(this.screenShot, renderResult, MixMaterial);
+        }
+        else
+        {
+            Graphics.Blit(this.screenShot, renderResult);
+        }
         isShotDone = true;
         //将图片装换成jpg的二进制格式，保存在byte数组中（计算机是以二进制的方式存储数据）
-        byte[] result = tex.EncodeToJPG ();
+        
+        Texture2D renderResultTex2D = new Texture2D(renderResult.width, renderResult.height, TextureFormat.ARGB32, false);
+        RenderTexture.active = renderResult;
+        renderResultTex2D.ReadPixels(new Rect(0, 0, renderResult.width, renderResult.height), 0, 0);
+        renderResultTex2D.Apply();
+        this.RenderResultTex = renderResultTex2D;
+        byte[] result = renderResultTex2D.EncodeToJPG ();
         //文件保存，创建一个新文件，在其中写入指定的字节数组（要写入的文件的路径，要写入文件的字节。）
         System.IO.File.WriteAllBytes (Application.streamingAssetsPath +"/ScreenShot.JPG", result);
     }

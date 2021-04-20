@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Xml;
+using StaticClasses;
 using UnityEditor;
 using UnityEngine;
 
@@ -42,7 +43,14 @@ public class XMLReader : MonoBehaviour
         return nodeList;
     }
 
-    public void LoadSaver(string fileName)
+ 
+    private T ConvertXmlElementToNumber<T>(XmlElement xmlElement) where T : IComparable<T>
+    {
+        T number =  xmlElement.Attributes["Content"].Value.ChangeType<T>();
+        return number;
+    }
+
+    private void LoadSaver(string fileName)
     {
         XmlDocument doc = LoadXml(fileName);
         _dataTransfer.characterRevealedList = ConvertXmlElementToBoolList(doc.DocumentElement?["CharacterRevealedList"], "Character");
@@ -50,8 +58,21 @@ public class XMLReader : MonoBehaviour
         _dataTransfer.levelRevealedList = ConvertXmlElementToBoolList(doc.DocumentElement?["LevelRevealedList"], "Level");
     }
 
-    public void LoadSaver()
+    private void LoadSaverCompletely(string fileName)
     {
-        LoadSaver(XMLDataBase.DataName);
+        XmlDocument doc = LoadXml(fileName);
+        _dataTransfer.characterRevealedList = ConvertXmlElementToBoolList(doc.DocumentElement?["CharacterRevealedList"], "Character");
+        _dataTransfer.itemRevealedList = ConvertXmlElementToBoolList(doc.DocumentElement?["ItemRevealedList"], "Item");
+        _dataTransfer.levelRevealedList = ConvertXmlElementToBoolList(doc.DocumentElement?["LevelRevealedList"], "Level");
+        _dataTransfer.tutorialManager.NextTutorialIndex =
+            ConvertXmlElementToNumber<int>(doc.DocumentElement?["NextTutorialIndex"]);
+    }
+
+    public void LoadSaver(bool isCompletely)
+    {
+        if(isCompletely)
+            LoadSaverCompletely(XMLDataBase.DataName);
+        else
+            LoadSaver(XMLDataBase.DataName);
     }
 }

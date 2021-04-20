@@ -29,6 +29,7 @@ public class XMLSaver : MonoBehaviour
         saver.AppendChild(ConvertListToXmlElement<bool>(_dataTransfer.itemRevealedList, "ItemRevealedList", "Item"));
         saver.AppendChild(ConvertListToXmlElement<bool>(_dataTransfer.characterRevealedList, "CharacterRevealedList", "Character"));
         saver.AppendChild(ConvertListToXmlElement<bool>(_dataTransfer.levelRevealedList, "LevelRevealedList", "Level"));
+        saver.AppendChild(ConvertNumberToXmlElement<int>(_dataTransfer.tutorialManager.NextTutorialIndex,"NextTutorialIndex"));
         _xmlDoc.AppendChild(saver);
         return _xmlDoc;
     }
@@ -44,6 +45,13 @@ public class XMLSaver : MonoBehaviour
             bXml.SetAttribute("IsRevealed", b.ToString());
             element.AppendChild(bXml);
         }
+
+        return element;
+    }
+    private XmlElement ConvertNumberToXmlElement<T>(T number, string elementName) where T : IComparable<T>
+    {
+        var element = _xmlDoc.CreateElement(elementName);
+        element.SetAttribute("Content",      number.ToString());
 
         return element;
     }

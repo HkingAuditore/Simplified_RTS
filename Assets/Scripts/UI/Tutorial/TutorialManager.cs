@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TutorialManager : MonoBehaviour
 {
@@ -13,10 +15,17 @@ public class TutorialManager : MonoBehaviour
         set => _nextTutorialIndex = value >= 0 ? value : 0;
     }
 
+    private void Start()
+    {
+        SceneManager.activeSceneChanged += (scene0, scene1) =>
+                                           {
+                                                this.tutorialDict.Clear();
+                                           };
+    }
+
     private void Update()
     {
         Debug.Log("Dict Count:" + tutorialDict.Count);
-        Debug.Log("Cur Count:" + NextTutorialIndex);
         if (tutorialDict.Count <= 0 || !tutorialDict.ContainsKey(NextTutorialIndex) ) return;
         if (tutorialDict[NextTutorialIndex].awakeGameObject.activeInHierarchy)
         {
@@ -36,10 +45,14 @@ public class TutorialManager : MonoBehaviour
 
     public void RemoveTutorialClip(TutorialClipUI tutorialClip)
     {
-        if (tutorialDict.ContainsKey(tutorialClip.tutorialIndex))
+        RemoveTutorialClip(tutorialClip.tutorialIndex);
+    }
+    public void RemoveTutorialClip(int tutorialClipIndex)
+    {
+        if (tutorialDict.ContainsKey(tutorialClipIndex))
         {
-            tutorialDict[tutorialClip.tutorialIndex].gameObject.SetActive(false);
-            tutorialDict.Remove(tutorialClip.tutorialIndex);
+            tutorialDict[tutorialClipIndex].gameObject.SetActive(false);
+            tutorialDict.Remove(tutorialClipIndex);
             // Debug.Log("Remove:" +tutorialClip.tutorialIndex);
         }
     }
