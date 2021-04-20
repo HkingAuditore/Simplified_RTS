@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class Transformer : MonoBehaviour
 {
-    private static Transformer transformer;
+    public         TutorialManager tutorialManager;
+    private static Transformer     _transformer;
 
-    public static Transformer getTransformer => transformer;
+    public static Transformer getTransformer => _transformer;
 
     public bool isSoundsActive;
 
     void Awake () {
-        transformer = this;
+        _transformer = this;
     }
 }
