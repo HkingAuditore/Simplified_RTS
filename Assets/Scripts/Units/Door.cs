@@ -1,4 +1,5 @@
-﻿using Units;
+﻿using System;
+using Units;
 using UnityEngine;
 
 public class Door : Unit
@@ -10,9 +11,13 @@ public class Door : Unit
         base.Start();
         HP          = sidePlayer.HP;
         _enemyLayer = LayerMask.LayerToName(gameObject.layer) == "ASide" ? "BSide" : "ASide";
+        // this.UnitDeathEventHandler.AddListener(((p, iM) =>
+        //                                         {
+        //                                             sidePlayer.HP = 0;
+        //                                         }));
     }
 
-    private new void Update()
+    public override void Update()
     {
         sidePlayer.HP = HP;
     }
@@ -33,5 +38,10 @@ public class Door : Unit
         var unit = other.transform.parent;
         if (unit.gameObject.layer == 1 << LayerMask.NameToLayer(_enemyLayer))
             unit.gameObject.GetComponent<Unit>().IsAtEnemyDoor = false;
+    }
+
+    private void OnDestroy()
+    {
+        sidePlayer.HP = 0;
     }
 }

@@ -8235,8 +8235,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 22.381088, y: 1, z: 0.21521974}
-  m_Center: {x: 0.97085965, y: 0, z: -0.39239013}
+  m_Size: {x: 22.381088, y: 1, z: 0.8041217}
+  m_Center: {x: 0.97085965, y: 0, z: -0.097939156}
 --- !u!1 &679839030
 GameObject:
   m_ObjectHideFlags: 0
@@ -8961,8 +8961,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 4.686694, y: 12.964342, z: 3.4030516}
-  m_Center: {x: 0, y: 0.017999645, z: 0.70152557}
+  m_Size: {x: 4.706685, y: 12.964341, z: 3.4030516}
+  m_Center: {x: -0.009994825, y: 0.017999645, z: 0.70152557}
 --- !u!1 &772633530
 GameObject:
   m_ObjectHideFlags: 0
@@ -9470,7 +9470,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 1.47
+  m_Radius: 1.26
   m_Height: 1.76
   m_Direction: 1
   m_Center: {x: 0.09, y: 0, z: -0.3}
@@ -10269,7 +10269,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   version: 1
   data:
-    dataString: UEsDBBQAAAgIAABAIez8tz6C7gEAANQDAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQF1U8uS2jAQ/BXK54Tyg2eOYanNIUAKc9jaVA5jaWyrVpaIHsBC8e+RjBxMHlyEutU9mtb4EpEaFBCDaguUWR19GsTD9MMgIlIYadUKTkulpHJ4iyLnOTtjeyweO+QI/A0Kjl+QVbXxeA9ccNYUAWvglHO5x/t2SSv8iqIytcMyjzGxxYpJEUok/iBSZqTaMY4dOnGoCfuXP4HXDrAavch3ZJRFhyjkeABhnhXs69yqEgiuJPWe0ZNcS7PFn5YpjPxZ0C4T57eQnDOKqu/TcSvUdVugBK4fmB0qBUz8Q7NT2L8TCfbbjn9CA4x3zTeg39z/yyA6ALf+ppNkNBpcfcNQrW7s9x9+e6uYQ7P/nZTPVEkDxkV6czmF9N/DevZra1dKRZB+llZQvUDh7P6vyIbz6dz9xqO/pKFyEKajYZZkWZCnwywNDo5I53Eym85aB13Low9zYw1nAu/xeGLtnmghhUDi+9CPpFeFp7wTAkGhNrlbSL0R/P3ltfdIKPxoruHQOO3CGsNEdddWltHHxKMynRXjOSQTREIKhI9JhkU8p9OypHE8LoqobYIJZhjwb86fmy4uN/C9KRDQtI5bJO69B+0g+mmjCo7P7NzIXndMlDInblrE5ubR3V+7OQHucqbL9tPIsW3BS6PLNbr+AlBLAwQUAAAICAAAQCHs6HL0tW8AAAB6AAAACQAkAG1ldGEuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAatWKkstKs7Mz1OyUjDRM9IzNNVRUEovSizIKAaKGII4pZkpIHa0UpqRRZKpZaKhWWpqcnJSaqKuoXFqkoFlinlaWoqBgWlSklIsUH1JZUGqX2JuKkRPQGJJRlpmXkpmXrpeUGpyYnGJO8hwpdhaAFBLAQItABQAAAgIAABAIez8tz6C7gEAANQDAAALACQAAAAAAAAAAAAAAAAAAABncmFwaDAuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAVBLAQItABQAAAgIAABAIezocvS1bwAAAHoAAAAJACQAAAAAAAAAAAAAADsCAABtZXRhLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFQSwUGAAAAAAIAAgC4AAAA9QIAAAAA
+    dataString: UEsDBBQAAAgIAABAIezuc8oF3wEAAL8DAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQGVU02P2jAQ/StRzi1KYKFLj82i7aFAlXBYbdXDxJ4k1jo29QewIP577cQpoeqlJ2fe+D3PvJlcYtKAAmJQ5UCZ1fHnKJlMP0QxkcJIq9ZwWikllcM7FDkv2Bm7a8ncIUfgb1By/IqsbozHR2DGWVsGrIVTweUeb+GK1vgNRW0ah808xkSONZMiPJH6i0iZkWrHOAb00YEmhC9/xa8htho9w7djlEWHKOR4AGGeFeybwqoKCK4l9YLxk9xIk+MvyxTG/i5oZ4iTyyTnjKIa6wy5Neqme6ACru8yO1QKmPgHZ6dwXBMJ8vmQf0IDjA+dt6Df3Pclig/Ara90kT48RFffL9TrPvvjpw/7Fwto939s8oYqacA4P3uVU7D+PZxnf3ZylVQE6RdpBdUZCif3P4zwYLifLiZpoEwn02VgpbNJX7lu5NFbt7WGM4E3M3xi4waSSSGQ+Kr1fdKzwuBuCYGgUJvCHaTZCv7+8joaCQq/hRs4tI6bWWOYqG/c2jJ6729cTR/L+RLSBSIhJcLHdIZlsqSfqoomybws464JJphhwL87fW4Gc9xuj2YuoO0UcyRuulG3dn63qILjMzu3ctQdE5UsiNsNse01hvq12wrgzl666v6CArsWPDW+XOPrb1BLAwQUAAAICAAAQCHs6HL0tW8AAAB6AAAACQAkAG1ldGEuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAatWKkstKs7Mz1OyUjDRM9IzNNVRUEovSizIKAaKGII4pZkpIHa0UpqRRZKpZaKhWWpqcnJSaqKuoXFqkoFlinlaWoqBgWlSklIsUH1JZUGqX2JuKkRPQGJJRlpmXkpmXrpeUGpyYnGJO8hwpdhaAFBLAQItABQAAAgIAABAIezuc8oF3wEAAL8DAAALACQAAAAAAAAAAAAAAAAAAABncmFwaDAuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAVBLAQItABQAAAgIAABAIezocvS1bwAAAHoAAAAJACQAAAAAAAAAAAAAACwCAABtZXRhLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFQSwUGAAAAAAIAAgC4AAAA5gIAAAAA
     upgradeData: 
     file_cachedStartup: {fileID: 0}
     data_cachedStartup: 
@@ -12358,8 +12358,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 4.686696, y: 11.526309, z: 3.403052}
-  m_Center: {x: 3.4062654e-14, y: 0.56283796, z: 0.7015254}
+  m_Size: {x: 5.0864916, y: 11.526309, z: 3.403052}
+  m_Center: {x: -0.19989693, y: 0.56283826, z: 0.7015254}
 --- !u!1 &1041745201
 GameObject:
   m_ObjectHideFlags: 0
@@ -18014,8 +18014,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 23.667938, y: 2.4171717, z: 1.8005582}
-  m_Center: {x: -0.31050107, y: 0.35096624, z: 0.9260674}
+  m_Size: {x: 23.667938, y: 2.4171717, z: 2.3783479}
+  m_Center: {x: -0.31050107, y: 0.35096624, z: 0.6371726}
 --- !u!1 &1498785561
 GameObject:
   m_ObjectHideFlags: 0

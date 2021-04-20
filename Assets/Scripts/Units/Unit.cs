@@ -171,7 +171,7 @@ namespace Units
                 Goto(InitTarget);
         }
 
-        public void Update()
+        public virtual void Update()
         {
             if(this.HP > 0)
             {

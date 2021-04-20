@@ -16,6 +16,7 @@ public class TutorialManager : MonoBehaviour
     private void Update()
     {
         Debug.Log("Dict Count:" + tutorialDict.Count);
+        Debug.Log("Cur Count:" + NextTutorialIndex);
         if (tutorialDict.Count <= 0 || !tutorialDict.ContainsKey(NextTutorialIndex) ) return;
         if (tutorialDict[NextTutorialIndex].awakeGameObject.activeInHierarchy)
         {
