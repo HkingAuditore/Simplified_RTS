@@ -6,12 +6,13 @@ using UnityEngine.Serialization;
 
 public class CameraScreenShot : MonoBehaviour
 {
-    public  Texture  mixTexture;
-    public  Shader   mixShader;
-    public  Color    baseColor;
-    public  Color    mixColor;
-    private Camera   _camera;
-    private Material _mixMaterial;
+    public  Texture      mixTexture;
+    public  Shader       mixShader;
+    public  Color        baseColor;
+    public  Color        mixColor;
+    public  List<GameObject> unusedUis;
+    private Camera       _camera;
+    private Material     _mixMaterial;
 
     private Material MixMaterial
     {
@@ -70,8 +71,10 @@ public class CameraScreenShot : MonoBehaviour
     public bool      isShotDone = false;
     public IEnumerator MyCaptureScreen()
     {
+        unusedUis.ForEach(g => g.SetActive(false));
         //等待所有的摄像机和GUI被渲染完成。
         yield return new WaitForEndOfFrame ();
+
         //创建一个空纹理（图片大小为屏幕的宽高）
         Texture2D tex = new Texture2D (Screen.width, Screen.height);
         //只能在帧渲染完毕之后调用（从屏幕左下角开始绘制，绘制大小为屏幕的宽高，宽高的偏移量都为0）
@@ -107,5 +110,7 @@ public class CameraScreenShot : MonoBehaviour
         byte[] result = renderResultTex2D.EncodeToJPG ();
         //文件保存，创建一个新文件，在其中写入指定的字节数组（要写入的文件的路径，要写入文件的字节。）
         System.IO.File.WriteAllBytes (Application.streamingAssetsPath +"/ScreenShot.JPG", result);
+        unusedUis.ForEach(g => g.SetActive(true));
+
     }
 }

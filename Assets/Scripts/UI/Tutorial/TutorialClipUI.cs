@@ -52,4 +52,9 @@ public class TutorialClipUI : MonoBehaviour
         }
         DataTransfer.GetDataTransfer.tutorialManager.GoToNextClip();
     }
+
+    public void ChangeTimeScale(float timeScale)
+    {
+        Time.timeScale = timeScale;
+    }
 }

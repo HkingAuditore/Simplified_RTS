@@ -22,6 +22,11 @@ public class ShareUI : MonoBehaviour
         StartCoroutine(WaitForScreenShot());
     }
 
+    public void ClosePanel()
+    {
+        panel.SetActive(false);
+    }
+
     private IEnumerator WaitForScreenShot()
     {
         yield return new WaitUntil((() => cameraScreenShot.isShotDone));
