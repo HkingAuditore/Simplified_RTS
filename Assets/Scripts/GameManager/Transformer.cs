@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Transformer : MonoBehaviour
 {
-    public         TutorialManager tutorialManager;
     private static Transformer     _transformer;
 
     public static Transformer getTransformer => _transformer;

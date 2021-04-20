@@ -141,8 +141,8 @@ public class RangedAttackUnit : Unit, IMilitaryUnit
     private Transform GetEnemySide()
     {
         return LayerMask.LayerToName(gameObject.layer) == "ASide"
-            ? GameObject.Find("BDoor").transform
-            : GameObject.Find("ADoor").transform;
+            ? GameManager.GameManager.GetManager.bSide.door.transform
+            : GameManager.GameManager.GetManager.aSide.door.transform;
     }
 
     private void FindEnemy()

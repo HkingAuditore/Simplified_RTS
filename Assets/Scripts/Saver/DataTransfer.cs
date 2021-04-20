@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class DataTransfer : MonoBehaviour
 {
+    public TutorialManager tutorialManager;
+
     public List<bool> itemRevealedList = new List<bool>();
     public List<bool> characterRevealedList = new List<bool>();
     public List<bool> levelRevealedList = new List<bool>();

@@ -5,8 +5,9 @@ public class Door : Unit
 {
     private string _enemyLayer;
 
-    private void Awake()
+    public override void Start()
     {
+        base.Start();
         HP          = sidePlayer.HP;
         _enemyLayer = LayerMask.LayerToName(gameObject.layer) == "ASide" ? "BSide" : "ASide";
     }

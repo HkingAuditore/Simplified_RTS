@@ -6,7 +6,9 @@ using UnityEngine.UI;
 
 public class TutorialUI : MonoBehaviour
 {
-    public List<string> tutorialNames   = new List<string>();
+    public TutorialClipUI tutorialClipUI;
+    public List<string>   tutorialNames = new List<string>();
+    [TextArea]
     public List<string> tutorialTexts   = new List<string>();
     public List<Sprite> tutorialAvatars = new List<Sprite>();
 
@@ -63,6 +65,6 @@ public class TutorialUI : MonoBehaviour
     {
         this.gameObject.SetActive(false);
         Time.timeScale = 1;
-
+        tutorialClipUI.FinishTutorialClip();
     }
 }

@@ -5,7 +5,6 @@ using Units;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public enum GameResourceType
@@ -23,16 +22,20 @@ public class GameException : ApplicationException
     {
         GameResourceType = rs;
     }
+
     public GameException(string message) : base(message)
     {
-        
     }
 }
 
 public class Player : MonoBehaviour
 {
     [SerializeField] private int  hp;
-    private                  bool _isDead = false;
+    public                   Door door;
+    private                  bool _isDead;
+    
+    public UnityEvent playerDeadEvent = new UnityEvent();
+
     public int HP
     {
         get => hp;
@@ -46,24 +49,22 @@ public class Player : MonoBehaviour
             else
             {
                 Time.timeScale = 0;
-                if(!_isDead)
+                if (!_isDead)
                 {
+                    playerDeadEvent.Invoke();
                     GameManager.GameManager.GetManager.resultUI.ShowResult(gameObject.name[0] == 'B');
                     _isDead = true;
                 }
-                
             }
         }
     }
-    
+
 
     public UnityAction updateEventHandler;
 
 
-
     public virtual void Start()
     {
-
         Top = gameObject.transform.Find("Positions").transform.Find("TopOri").transform;
         Mid = gameObject.transform.Find("Positions").transform.Find("MidOri").transform;
         Bot = gameObject.transform.Find("Positions").transform.Find("BotOri").transform;
@@ -78,14 +79,15 @@ public class Player : MonoBehaviour
     private void FixedUpdate()
     {
         //生产任务
-        if(enableFarmer)
+        if (enableFarmer)
         {
             RegisterProduceFarmer();
             DispatchFarmer();
-        } 
+        }
+
         RegisterProduceResource();
 
-        
+
         updateEventHandler?.Invoke();
     }
 
@@ -157,21 +159,21 @@ public class Player : MonoBehaviour
 
     public bool IsEnoughForUnit(Unit unit)
     {
-        return this.Gold >= unit.costGold && this.Wood >= unit.costWood && this.Food >= unit.costFood;
+        return Gold >= unit.costGold && Wood >= unit.costWood && Food >= unit.costFood;
     }
-    
-    public bool IsEnoughForUnit(Unit unit,GameResourceType gameResourceType)
+
+    public bool IsEnoughForUnit(Unit unit, GameResourceType gameResourceType)
     {
         switch (gameResourceType)
         {
             case GameResourceType.Food:
-                return this.Food >= unit.costFood;
+                return Food >= unit.costFood;
                 break;
             case GameResourceType.Gold:
-                return  this.Gold >= unit.costGold;
+                return Gold >= unit.costGold;
                 break;
             case GameResourceType.Wood:
-                return this.Wood >= unit.costWood;
+                return Wood >= unit.costWood;
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(gameResourceType), gameResourceType, null);
@@ -190,27 +192,25 @@ public class Player : MonoBehaviour
 
     #region 农民相关处理
 
-
     #region 农民调遣
 
     #region 字段和属性
 
-    [Header("农民")]
-    public bool enableFarmer;
-    public  Transform[] resourceTransform;
-    public  Farmer      farmerPrefab;
-    private int         _maxFarmerNumber = 5;
-    private int         _farmerCount     = 1;
-    private int         _dispatchableFarmer;
-    private int[]       _roadFarmers        = new int[3];
-    private int[]       _roadWorkingFarmers = new int[3];
-    public  Transform   Top { get; set; }
-    public  Transform   Mid { get; set; }
-    public  Transform   Bot { get; set; }
-    private int         _food;
-    private int         _wood;
-    private int         _gold;
-    
+    [Header("农民")] public bool        enableFarmer;
+    public                Transform[] resourceTransform;
+    public                Farmer      farmerPrefab;
+    private               int         _maxFarmerNumber = 5;
+    private               int         _farmerCount     = 1;
+    private               int         _dispatchableFarmer;
+    private               int[]       _roadFarmers        = new int[3];
+    private               int[]       _roadWorkingFarmers = new int[3];
+    public                Transform   Top { get; set; }
+    public                Transform   Mid { get; set; }
+    public                Transform   Bot { get; set; }
+    private               int         _food;
+    private               int         _wood;
+    private               int         _gold;
+
 
     // 最大可用农民数量
     public int MaxFarmerNumber
@@ -279,7 +279,7 @@ public class Player : MonoBehaviour
     }
 
     #endregion
-    
+
 
     //增加一条路的农民分配
     public virtual void AddFarmer(GameResourceType rs)
@@ -341,8 +341,8 @@ public class Player : MonoBehaviour
         Debug.Log("TEX :" + "Units/" + farmerPrefab.name + LayerMask.LayerToName(gameObject.layer)[0]);
 
         // farmerInstantiated.GetComponent<NavMeshAgent>().areaMask = resourceLayerMask.value;
-        farmerInstantiated.tag                                   = rd.ToString();
-        farmerInstantiated.sidePlayer                            = this;
+        farmerInstantiated.tag        = rd.ToString();
+        farmerInstantiated.sidePlayer = this;
 
 
         farmerInstantiated.road           = rd;
@@ -389,8 +389,8 @@ public class Player : MonoBehaviour
 
         farmerInstantiated.road = rd;
         farmerInstantiated.ResouceCarried = resourceCarried > farmerInstantiated.maxLoad[(int) rd]
-            ? farmerInstantiated.maxLoad[(int) rd]
-            : resourceCarried;
+                                                ? farmerInstantiated.maxLoad[(int) rd]
+                                                : resourceCarried;
 
         //Debug.Log(this.gameObject.name + " Farmer Road :" + rd);
         farmerInstantiated.gameObject.layer = gameObject.layer;
@@ -417,8 +417,8 @@ public class Player : MonoBehaviour
         for (var i = 0; i < 3; i++)
             if (RoadFarmers[i] > RoadWorkingFarmers[i] && DispatchableFarmer > 0)
                 InstantiateFarmer((Road) i);
-            // 派遣之后人数是否满足要求
-            // if (RoadFarmers[i] > RoadWorkingFarmers[i]) isFixed = false;
+        // 派遣之后人数是否满足要求
+        // if (RoadFarmers[i] > RoadWorkingFarmers[i]) isFixed = false;
 
         // if (!isFixed)
         // {
@@ -453,7 +453,7 @@ public class Player : MonoBehaviour
 
     #region 资源生产
 
-    public      readonly     int[]   resourceProduct = new int[]{0,0,3};
+    public readonly  int[] resourceProduct = {0, 0, 3};
     private          bool  _isProducingResource;
     private readonly float _resourceProducingTime = 3f;
 
@@ -480,25 +480,24 @@ public class Player : MonoBehaviour
     #endregion
 
     #region 单位调遣
-    
-    [Header("单位派遣")]
-    [Space(10)]
-    public int[] availableUnits;
 
-    public  List<Unit> UnitsList = new List<Unit>();
+    [Header("单位派遣")] [Space(10)] public int[] availableUnits;
+
+    public List<Unit> UnitsList = new List<Unit>();
 
     public int CountUnits(UnitType type)
     {
         return (from unit in UnitsList
-                 where unit.unitType == type
-                 select unit).Count();
+                where unit.unitType == type
+                select unit).Count();
     }
+
     public void SetUnits(Vector3 tr, int chosenUnit, Road rd, int number)
     {
         // Debug.Log("NUMBER:" + number);
         //TODO 人数检测
-        Unit unit =  GameManager.GameManager.GetManager.unitsList[availableUnits[chosenUnit]];
-        if (this.CountUnits(unit.unitType) + number > unit.playerOwnMax)
+        var unit = GameManager.GameManager.GetManager.unitsList[availableUnits[chosenUnit]];
+        if (CountUnits(unit.unitType) + number > unit.playerOwnMax)
             throw new GameException("MAX UNITS!");
 
         for (var i = 0; i < number; i++)
@@ -511,14 +510,14 @@ public class Player : MonoBehaviour
             InstantiateUnit(chosenUnit, rd, oriPoint);
         }
     }
-    
-    
-    public void   SetUnits(Vector3 tr, int chosenUnit, Road rd, int number,Vector3 oriVelocity)
+
+
+    public void SetUnits(Vector3 tr, int chosenUnit, Road rd, int number, Vector3 oriVelocity)
     {
         // Debug.Log("NUMBER:" + number);
         //TODO 人数检测
-        Unit unit =  GameManager.GameManager.GetManager.unitsList[availableUnits[chosenUnit]];
-        if (this.CountUnits(unit.unitType) + number > unit.playerOwnMax)
+        var unit = GameManager.GameManager.GetManager.unitsList[availableUnits[chosenUnit]];
+        if (CountUnits(unit.unitType) + number > unit.playerOwnMax)
             throw new GameException("MAX UNITS!");
 
 
@@ -537,22 +536,18 @@ public class Player : MonoBehaviour
     public virtual void InstantiateUnit(int chosenUnit, Road rd, Vector3 oriPoint)
     {
         var unitInstantiated = InstantiateUnitBase(chosenUnit, rd, oriPoint);
-        var unit = unitInstantiated.GetComponent<Unit>();
+        var unit             = unitInstantiated.GetComponent<Unit>();
         unit.enabled = true;
         UnitsList.Add(unit);
-        unit.UnitDeathEventHandler.AddListener(((p, m) =>
-                                                {
-                                                    this.UnitsList.Remove(unit);
-                                                }));
+        unit.UnitDeathEventHandler.AddListener((p, m) => { UnitsList.Remove(unit); });
     }
-    
-    public virtual void  InstantiateUnit(int chosenUnit, Road rd, Vector3 oriPoint,Vector3 oriVelocity)
+
+    public virtual void InstantiateUnit(int chosenUnit, Road rd, Vector3 oriPoint, Vector3 oriVelocity)
     {
-        var unitInstantiated = InstantiateUnitBase(chosenUnit, rd, oriPoint);        
+        var unitInstantiated = InstantiateUnitBase(chosenUnit, rd, oriPoint);
         try
         {
-            ((IMilitaryUnit) (unitInstantiated.gameObject.GetComponent<Unit>())).OriginalVelocity = oriVelocity;
-            
+            ((IMilitaryUnit) unitInstantiated.gameObject.GetComponent<Unit>()).OriginalVelocity = oriVelocity;
         }
         catch (Exception e)
         {
@@ -560,20 +555,16 @@ public class Player : MonoBehaviour
             throw;
         }
 
-        Unit unit = unitInstantiated.GetComponent<Unit>();
+        var unit = unitInstantiated.GetComponent<Unit>();
         unit.enabled = true;
         UnitsList.Add(unit);
-        unit.UnitDeathEventHandler.AddListener(((p, m) =>
-                                                {
-                                                    this.UnitsList.Remove(unit);
-                                                }));
-
+        unit.UnitDeathEventHandler.AddListener((p, m) => { UnitsList.Remove(unit); });
     }
 
 
     private GameObject InstantiateUnitBase(int chosenUnit, Road rd, Vector3 oriPoint)
     {
-        GameObject unitGb = GameManager.GameManager.GetManager.unitsList[ availableUnits[chosenUnit]].gameObject;
+        var unitGb = GameManager.GameManager.GetManager.unitsList[availableUnits[chosenUnit]].gameObject;
         //寻路设置
         LayerMask layerMask =
             (1 << NavMesh.GetAreaFromName(LayerMask.LayerToName(gameObject.layer)[0] + "Walkable")) |
@@ -595,9 +586,9 @@ public class Player : MonoBehaviour
                             .sharedMaterial.SetTexture(
                                                        "_BaseMap",
                                                        Resources.Load("Units/" + unitGb.name +
-                                                                      LayerMask.LayerToName(gameObject.layer)[0]) as Texture
+                                                                      LayerMask.LayerToName(gameObject.layer)[0]) as
+                                                           Texture
                                                       );
-
         }
         catch (Exception e)
         {
@@ -605,17 +596,16 @@ public class Player : MonoBehaviour
             // throw;
         }
 
-        unitInstantiated.gameObject.tag                        = rd.ToString();
-        unitInstantiated.gameObject.layer                      = gameObject.layer;
+        unitInstantiated.gameObject.tag   = rd.ToString();
+        unitInstantiated.gameObject.layer = gameObject.layer;
         // unitInstantiated.GetComponent<NavMeshAgent>().areaMask = layerMask.value;
 
         unitInstantiated.gameObject.GetComponent<Unit>().road       = rd;
         unitInstantiated.gameObject.GetComponent<Unit>().sidePlayer = this;
 
-        
+
         return unitInstantiated;
     }
-
 
     #endregion
 }
