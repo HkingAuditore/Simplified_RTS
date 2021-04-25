@@ -23,7 +23,7 @@ public class TutorialClipUI : MonoBehaviour
     private void Start()
     {
         DataTransfer.GetDataTransfer.tutorialManager.RegisterTutorialClip(this);
-        StartCoroutine(WaitForStayTime());
+        
     }
 
     IEnumerator WaitForStayTime()
@@ -36,12 +36,12 @@ public class TutorialClipUI : MonoBehaviour
     {
         tutorialPanel.SetActive(true);
         this.tutorialStartEvent.Invoke();
+        StartCoroutine(WaitForStayTime());
     }
 
     public void FinishTutorialClip()
     {
         this.closeEvent.Invoke();
-        this.gameObject.SetActive(false);
         try
         {
             StopCoroutine(WaitForStayTime());
@@ -51,6 +51,7 @@ public class TutorialClipUI : MonoBehaviour
             Console.WriteLine(e);
         }
         DataTransfer.GetDataTransfer.tutorialManager.GoToNextClip();
+        this.gameObject.SetActive(false);
     }
 
     public void ChangeTimeScale(float timeScale)

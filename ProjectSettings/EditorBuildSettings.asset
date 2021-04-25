@@ -27,7 +27,7 @@ EditorBuildSettings:
     path: Assets/Scenes/ChineseSports/Map.unity
     guid: 7209160dec2b84c40a397069b0e8b925
   - enabled: 1
-    path: Assets/Scenes/ChineseSports/Battlefield 1.unity
+    path: Assets/Scenes/ChineseSports/Level1.unity
     guid: 40ed252d738cd6e4ba825a3eedf4165c
   - enabled: 1
     path: Assets/Scenes/ChineseSports/Loading.unity

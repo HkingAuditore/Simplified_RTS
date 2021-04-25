@@ -55,7 +55,7 @@ Material:
     - _EnableBumpMap: 0
     - _EnableEmission: 0
     - _GlobalBrightness: 0
-    - _InteriorNoiseLevel: 1
+    - _InteriorNoiseLevel: 0.954
     - _LightingAdjust: 0
     - _MaxOutlineZOffset: 0.067
     - _Outline: 0.0025
