@@ -26,6 +26,11 @@ public class MainUIManager : MonoBehaviour
 
     private bool _isOpenPanel = false;
 
+    private void Start()
+    {
+        Time.timeScale = 1f;
+    }
+
     public void ShowItemUI()
     {
         itemUI.SetActive(true);
@@ -54,10 +59,11 @@ public class MainUIManager : MonoBehaviour
     
     public void ShowScrollUI(int index)
     {
-        scrollUI.gameObject.SetActive(true);
+
         scrollUI.sceneName   = battleSceneNames[index];
         scrollUI.TitleName   = titles[index];
         scrollUI.TitleSprite = titleSprites[index];
+        scrollUI.gameObject.SetActive(true);
         _isOpenPanel         = true;
 
     }

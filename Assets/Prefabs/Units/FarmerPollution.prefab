@@ -117,7 +117,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5408525696826754846}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: b5fa763589f66874fadf6b589d4e7731, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.08
@@ -136,15 +136,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb456977fc5c09141a01bcd386d73ccc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  road: 1
-  sidePlayer: {fileID: 0}
-  isUnmovable: 0
   _hp: 50
   defence: 5
+  isUnmovable: 0
+  playerOwnMax: 5
+  unitRigidbody: {fileID: 0}
   speed: 1
+  road: 1
+  sidePlayer: {fileID: 0}
+  unitType: 0
   costFood: 0
   costWood: 0
   costGold: 0
+  deathReward: 10
+  navStopEventHandler:
+    m_PersistentCalls:
+      m_Calls: []
+  UnitDeathEventHandler:
+    m_PersistentCalls:
+      m_Calls: []
   workTime: 1
   maxLoad: 080000000500000008000000
   isPollution: 0
@@ -245,3 +255,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isUnit: 1
+  isArrow: 0
+  faceRight: 0

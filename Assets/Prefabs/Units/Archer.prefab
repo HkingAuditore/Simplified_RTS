@@ -184,7 +184,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isUnit: 1
-  _isAside: 0
+  isArrow: 0
   faceRight: 0
 --- !u!1 &5051234519974670922
 GameObject:
@@ -257,6 +257,7 @@ MonoBehaviour:
   defence: 3
   isUnmovable: 0
   playerOwnMax: 5
+  unitRigidbody: {fileID: 8201288632642821626}
   speed: 1
   road: 1
   sidePlayer: {fileID: 0}
@@ -265,7 +266,6 @@ MonoBehaviour:
   costWood: 16
   costGold: 5
   deathReward: 10
-  unitRigidbody: {fileID: 8201288632642821626}
   navStopEventHandler:
     m_PersistentCalls:
       m_Calls: []
@@ -325,7 +325,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5051234519974670922}
-  m_Material: {fileID: 13400000, guid: 17d87b79d3e691a48b2ab6916a393374, type: 2}
+  m_Material: {fileID: 13400000, guid: b5fa763589f66874fadf6b589d4e7731, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.08

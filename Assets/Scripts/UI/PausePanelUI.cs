@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PausePanelUI : MonoBehaviour
 {
@@ -23,5 +24,6 @@ public class PausePanelUI : MonoBehaviour
    public void BackToMain()
    {
       //TODO Back to main
+      DataTransfer.GetDataTransfer.LoadSceneInLoadingScene("Map");
    }
 }

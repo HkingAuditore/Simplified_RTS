@@ -93,7 +93,7 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _InteriorNoiseLevel: 0.27
-    - _LightingAdjust: 0.24
+    - _LightingAdjust: 0.22
     - _MaxOutlineZOffset: 1
     - _Metallic: 0
     - _OcclusionStrength: 1

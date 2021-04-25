@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Photon.Pun;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -15,10 +16,10 @@ public class ItemDict
 }
 public class ResultUI : MonoBehaviour
 {
-    [Header("Win or Lose")]
-    public GameObject resultPanel;
-    public GameObject winPanel;
-    public GameObject losePanel;
+    [Header("Win or Lose")] public bool       isWin;
+    public                         GameObject resultPanel;
+    public                         GameObject winPanel;
+    public                         GameObject losePanel;
 
     
     [Header("Item")]
@@ -33,6 +34,9 @@ public class ResultUI : MonoBehaviour
     public GameObject root;
     public GameObject nextButton;
     public GameObject backButton;
+    public GameObject videoManager;
+
+    public UnityEvent onWinResultEnd = new UnityEvent();
 
     public int CurState
     {
@@ -48,11 +52,17 @@ public class ResultUI : MonoBehaviour
             else
             {
                 _curState = itemDicts.Count;
+                if (isWin)
+                {
+                    videoManager.SetActive(true);
+
+                    onWinResultEnd.Invoke();
+                }
             }
         }
     }
 
-    public void ShowResult(bool isWin)
+    public void ShowResult()
     {
         root.SetActive(true);
         if (isWin)
@@ -98,7 +108,8 @@ public class ResultUI : MonoBehaviour
     public void BackToMap()
     {
         DataTransfer.GetDataTransfer.xmlSaver.SaveData();
-        SceneManager.LoadScene("Map");
+        DataTransfer.GetDataTransfer.LoadSceneInLoadingScene("Map");
+        // SceneManager.LoadScene("Map");
     }
 
     public void OnNextClick()
@@ -108,8 +119,16 @@ public class ResultUI : MonoBehaviour
 
     public void ShowButton()
     {
-        if (_curState >= itemDicts.Count)
+        if (!isWin)
         {
+            nextButton.SetActive(false);
+            backButton.transform.GetChild(0).GetComponent<Text>().text = "重 整 旗 鼓";
+            backButton.SetActive(true);
+            return;
+        }
+        if (_curState > itemDicts.Count)
+        {
+
             backButton.SetActive(true);
             nextButton.SetActive(false);
 

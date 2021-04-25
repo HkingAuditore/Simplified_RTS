@@ -70,9 +70,15 @@ public class XMLSaver : MonoBehaviour
     
     public void SaveData()
     {
-
-        SaveData(XMLDataBase.DataName);
+        StartCoroutine(WaitForSaveDone());
+        // SaveData(XMLDataBase.DataName);
         Debug.Log("Save!");
+    }
+
+    IEnumerator WaitForSaveDone()
+    {
+        SaveData(XMLDataBase.DataName);
+        yield return null;
     }
 
     public void AutoSave()

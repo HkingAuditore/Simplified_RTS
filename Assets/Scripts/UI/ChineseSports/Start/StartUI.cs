@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class InitUI : MonoBehaviour
+public class StartUI : MonoBehaviour
 {
    public void InitToMap()
    {
-      SceneManager.LoadScene("Map");
+      DataTransfer.GetDataTransfer.LoadSceneInLoadingScene("Map");
+
    }
 }

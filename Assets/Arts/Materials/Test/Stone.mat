@@ -59,10 +59,10 @@ Material:
     - _LightingAdjust: 0
     - _MaxOutlineZOffset: 0.067
     - _Outline: 0.0025
-    - _OutlineCut: 0.234
+    - _OutlineCut: 0.27
     - _OutlineMinWidth: 0.2
-    - _OutsideNoiseWidth: 1.97
-    - _RimPower: 0.89
+    - _OutsideNoiseWidth: 1.89
+    - _RimPower: 1
     - _Smoothness: 0
     - _Specular: 1
     - hstep: 0.184

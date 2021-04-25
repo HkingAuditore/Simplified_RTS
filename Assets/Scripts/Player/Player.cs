@@ -52,7 +52,8 @@ public class Player : MonoBehaviour
                 if (!_isDead)
                 {
                     playerDeadEvent.Invoke();
-                    GameManager.GameManager.GetManager.resultUI.ShowResult(gameObject.name[0] == 'B');
+                    GameManager.GameManager.GetManager.resultUI.isWin = gameObject.name[0] == 'B';
+                    GameManager.GameManager.GetManager.resultUI.ShowResult();
                     _isDead = true;
                 }
             }
@@ -139,7 +140,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void ChangeResource(GameResourceType gameResourceType, int count)
+    public virtual void ChangeResource(GameResourceType gameResourceType, int count)
     {
         switch (gameResourceType)
         {

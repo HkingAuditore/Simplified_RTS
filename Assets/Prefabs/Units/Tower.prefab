@@ -141,18 +141,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 833c1680de667214293f9c2234f402f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  road: 1
-  sidePlayer: {fileID: 0}
-  isUnmovable: 1
   _hp: 4000
   defence: 2
+  isUnmovable: 1
+  playerOwnMax: 5
+  unitRigidbody: {fileID: 0}
   speed: 0
+  road: 1
+  sidePlayer: {fileID: 0}
+  unitType: 0
   costFood: 0
   costWood: 0
   costGold: 0
+  deathReward: 10
+  navStopEventHandler:
+    m_PersistentCalls:
+      m_Calls: []
+  UnitDeathEventHandler:
+    m_PersistentCalls:
+      m_Calls: []
   attackPower: 20
   attackColdDownTime: 1.2
   attackRange: 5
+  originalVelocity: {x: 0, y: 0, z: 0}
   shootTransform: {fileID: 5315167582520305604}
   bulletObject: {fileID: 3804412901380430263, guid: 608395d063a25f042ac86d9d98df15fc, type: 3}
   findEnemyRadius: 8.8
@@ -202,7 +213,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1142458318243453785}
-  m_Material: {fileID: 13400000, guid: 17d87b79d3e691a48b2ab6916a393374, type: 2}
+  m_Material: {fileID: 13400000, guid: b5fa763589f66874fadf6b589d4e7731, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.0001
@@ -637,3 +648,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isUnit: 0
+  isArrow: 0
+  faceRight: 0

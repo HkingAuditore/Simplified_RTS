@@ -74,12 +74,17 @@ namespace Units
                 {
                     try
                     {
+                        Debug.Log("UnitDeathEventHandler");
+                        Debug.Log(_attacker.SidePlayer);
+                        Debug.Log(_attacker);
                         UnitDeathEventHandler?.Invoke(_attacker.SidePlayer, _attacker);
+                        Debug.Log("UnitDeathEventHandler finished");
+
                     }
                     catch (Exception e)
                     {
                         Console.WriteLine(e);
-                        // throw;
+                        throw;
                     }
                     Death = true;
                     Destroy(gameObject);

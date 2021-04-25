@@ -9,12 +9,13 @@ public class ScrollUI : MonoBehaviour
     public Animator  scrollAnimator;
     [Range(0,1)]
     public float     fillAmount;
-    public                        FillBarUI bar;
-    public                        string    sceneName;
-    public                        Text      titleText;
-    public                        Image     titleImage;
-    [Header("Scroll UI")] private string    titleName;
-    public                        Sprite    titleSprite;
+    public                        FillBarUI          bar;
+    public                        string             sceneName;
+    public                        Text               titleText;
+    public                        Image              titleImage;
+    public                        VideoPlayerManager videoPlayerManager;
+    [Header("Scroll UI")] private string             titleName;
+    public                        Sprite             titleSprite;
 
     public string TitleName
     {
@@ -74,6 +75,20 @@ public class ScrollUI : MonoBehaviour
 
     public void LoadBattle()
     {
-        SceneManager.LoadScene(sceneName);
+        // SceneManager.LoadScene(sceneName);
+        DataTransfer.GetDataTransfer.LoadSceneInLoadingScene(sceneName);
+
+    }
+
+    public void ShowVideo()
+    {
+        videoPlayerManager.videoClipName = this.titleName;
+        videoPlayerManager.gameObject.SetActive(true);
+        videoPlayerManager.Play();
+    }    
+    public void StopVideo()
+    {
+        videoPlayerManager.Stop();
+        videoPlayerManager.gameObject.SetActive(false);
     }
 }
