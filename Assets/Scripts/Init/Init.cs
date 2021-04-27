@@ -1,13 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine;
 
-public class Init : MonoBehaviour
+namespace Init
 {
-    void Start()
+    public class Init : MonoBehaviour
     {
-        DataTransfer.GetDataTransfer.LoadSceneInLoadingScene("Start");
-    }
+        void Start()
+        {
+            DataTransfer.GetDataTransfer.LoadSceneInLoadingScene("Start");
+        }
 
+    }
 }

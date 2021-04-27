@@ -5,20 +5,36 @@ using UnityEngine;
 
 namespace Gameplay.EventSystem
 {
+    /// <summary>
+    /// 全局事件管理
+    /// </summary>
     public class GlobalEventManager : MonoBehaviour
     {
-        public Player aSide;
-        public Player bSide;
-
+        /// <summary>
+        /// 我方
+        /// </summary>
+        public Player.Player aSide;
+        /// <summary>
+        /// 敌方
+        /// </summary>
+        public Player.Player bSide;
+        /// <summary>
+        /// 事件执行列表
+        /// </summary>
         public List<GlobalEventArgs> globalEventArgsList = new List<GlobalEventArgs>();
 
         public static GlobalEventManager GetManager { get; private set; }
 
+        
         private void Awake()
         {
             GetManager = this;
         }
         
+        /// <summary>
+        /// 注册全局事件
+        /// </summary>
+        /// <param name="globalEventArgs"></param>
         public void RegisterGlobalEvent(GlobalEventArgs globalEventArgs)
         {
             //启动延时检查

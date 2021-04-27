@@ -1,10 +1,11 @@
 ﻿using Photon.Pun;
+using Player;
 
 namespace UI.Online
 {
     public class FarmerDispatchUIOnline : MonoBehaviourPun
     {
-        public Player player;
+        public Player.Player player;
 
 
         public void DispatchFood(bool isAdd)

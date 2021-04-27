@@ -8,8 +8,8 @@ public class HPLineUI : MonoBehaviour
 {
     public List<Sprite> indicatorList = new List<Sprite>();
     
-    public Player       aPlayer;
-    public Player       bPlayer;
+    public Player.Player aPlayer;
+    public Player.Player bPlayer;
 
     public Image aPlayerHpUi;
     public Image bPlayerHpUi;

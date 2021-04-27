@@ -1,8 +1,9 @@
 ﻿using System;
+using Network;
 using Photon.Pun;
 using UnityEngine;
 
-public class PlayerOnline_BSide : Player
+public class PlayerOnline_BSide : Player.Player
 {
     public  NetworkPlayerManager   networkPlayerManager;
     private Type                   _playerType;
@@ -22,7 +23,7 @@ public class PlayerOnline_BSide : Player
                 }
     }
 
-    public override void Start()
+    protected override void Start()
     {
         base.Start();
         UpdateRemotePlayerProperties();

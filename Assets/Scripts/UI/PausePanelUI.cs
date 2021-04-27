@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -7,6 +8,19 @@ public class PausePanelUI : MonoBehaviour
 {
    public GameObject pauseButton;
    public GameObject pausePanel;
+
+   private void Start()
+   {
+      GameManager.GameManager.GetManager.winEvent.AddListener((() =>
+                                                               {
+                                                                  this.gameObject.SetActive(false);
+                                                               }));
+      GameManager.GameManager.GetManager.loseEvent.AddListener((() =>
+                                                               {
+                                                                  this.gameObject.SetActive(false);
+                                                               }));
+   }
+
    public void Pause()
    {
       Time.timeScale = 0;
@@ -26,4 +40,6 @@ public class PausePanelUI : MonoBehaviour
       //TODO Back to main
       DataTransfer.GetDataTransfer.LoadSceneInLoadingScene("Map");
    }
+   
+   
 }

@@ -306,7 +306,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hp: 100
-  defence: 5
+  defence: 8
   isUnmovable: 0
   playerOwnMax: 15
   unitRigidbody: {fileID: 1235125175078914600}
@@ -316,7 +316,7 @@ MonoBehaviour:
   unitType: 3
   costFood: 4
   costWood: 2
-  costGold: 2
+  costGold: 4
   deathReward: 10
   navStopEventHandler:
     m_PersistentCalls:

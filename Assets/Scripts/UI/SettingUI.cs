@@ -14,7 +14,7 @@ public class SettingUI : MonoBehaviour
     {
         _isActive                                 = !_isActive;
         sounds.sprite                             = _isActive ? enableSounds : disableSounds;
-        Transformer.getTransformer.isSoundsActive = _isActive;
+        DataTransfer.GetDataTransfer.isSoundsActive = _isActive;
     }
 
     public void QuitGame()

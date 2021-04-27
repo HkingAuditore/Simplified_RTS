@@ -68,7 +68,7 @@ public class RangedAttackUnit : Unit, IMilitaryUnit
         get => originalVelocity;
         set => originalVelocity = value;
     }
-    public Player SidePlayer
+    public Player.Player SidePlayer
     {
         get => sidePlayer;
         set => sidePlayer = value;

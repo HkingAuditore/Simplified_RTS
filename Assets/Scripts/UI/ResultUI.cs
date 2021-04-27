@@ -54,7 +54,8 @@ public class ResultUI : MonoBehaviour
                 _curState = itemDicts.Count;
                 if (isWin)
                 {
-                    videoManager.SetActive(true);
+                    if(videoManager!=null)
+                        videoManager.SetActive(true);
 
                     onWinResultEnd.Invoke();
                 }
@@ -87,7 +88,7 @@ public class ResultUI : MonoBehaviour
         itemPanel.SetActive(true);
         itemImage.sprite  = itemDicts[CurState-1].itemSprite;
         itemNameText.text = itemDicts[CurState-1].itemName;
-        DataTransfer.GetDataTransfer.itemRevealedList[itemDicts[CurState - 1].itemIndex] = true;
+
         
 
     }

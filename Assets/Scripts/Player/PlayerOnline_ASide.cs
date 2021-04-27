@@ -1,10 +1,12 @@
 ﻿using System.Linq;
 using ExitGames.Client.Photon;
+using Network;
 using Photon.Pun;
+using Player;
 using Units;
 using UnityEngine;
 
-public class PlayerOnline_ASide : Player
+public class PlayerOnline_ASide : Player.Player
 {
     public           NetworkPlayerManager networkPlayerManager;
     private readonly Hashtable            _customProperties = new Hashtable();

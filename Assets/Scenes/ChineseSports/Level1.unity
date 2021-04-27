@@ -1213,7 +1213,7 @@ MonoBehaviour:
   version: 1
   type: 0
   mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
-  rectangleSize: {x: 3, y: 3}
+  rectangleSize: {x: 1.68, y: 1.92}
   circleRadius: 0.26
   circleResolution: 5
   height: 1.14
@@ -2761,7 +2761,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c8be4c3659f92445b5dce6df2c7879d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 1
+  hp: 1000
   door: {fileID: 1250947455}
   playerDeadEvent:
     m_PersistentCalls:
@@ -2772,6 +2772,11 @@ MonoBehaviour:
   - {fileID: 1148158866}
   - {fileID: 1407338141}
   farmerPrefab: {fileID: 5408525696826754838, guid: a67446edf35fbb3489516feb6f2d45f9, type: 3}
+  _food: 0
+  _wood: 0
+  _gold: 4
+  resourceProduct: 000000000000000001000000
+  resourceProducingTime: 8
   availableUnits: 03000000
   UnitsList: []
 --- !u!1 &228785069
@@ -3490,7 +3495,7 @@ RectTransform:
   - {fileID: 895974603}
   - {fileID: 2005312570}
   m_Father: {fileID: 633153648}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -4727,6 +4732,7 @@ GameObject:
   m_Component:
   - component: {fileID: 367423697}
   - component: {fileID: 367423696}
+  - component: {fileID: 367423698}
   m_Layer: 0
   m_Name: BGM_Player
   m_TagString: Untagged
@@ -4744,7 +4750,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 9b227130cc76c714ab302ae886382cfb, type: 3}
+  m_audioClip: {fileID: 8300000, guid: a7a20fd75075cbf4bba273641843824e, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.61
   m_Pitch: 1
@@ -4844,6 +4850,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &367423698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 367423695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4500bd91478e6ba40b453d0d4e57ca84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  normalBgm: {fileID: 8300000, guid: a7a20fd75075cbf4bba273641843824e, type: 3}
+  resultBgm: {fileID: 8300000, guid: 9b227130cc76c714ab302ae886382cfb, type: 3}
+  audioSource: {fileID: 367423696}
 --- !u!1 &381108138
 GameObject:
   m_ObjectHideFlags: 0
@@ -5351,6 +5372,16 @@ MonoBehaviour:
   - {fileID: 2546485736200557784, guid: e0d9ec16f93e59f49bac000c3af8a54e, type: 3}
   - {fileID: 2546485736200557784, guid: 51b58f23909c2ba429b9775a37763277, type: 3}
   resultUI: {fileID: 1332352534}
+  winEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  loseEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  unlockLevel: 1
+  unlockCharacter: 2
+  unlockItem: 01000000
+  audioSource: {fileID: 367423696}
 --- !u!4 &395267150
 Transform:
   m_ObjectHideFlags: 0
@@ -8236,9 +8267,9 @@ RectTransform:
   - {fileID: 157779169}
   - {fileID: 1656439819}
   - {fileID: 1332352533}
+  - {fileID: 1301639211}
   - {fileID: 269054081}
   - {fileID: 1474358065}
-  - {fileID: 1301639211}
   m_Father: {fileID: 939729250}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -9045,7 +9076,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 22.381088, y: 1, z: 0.8041217}
-  m_Center: {x: 0.97085965, y: 0, z: -0.097939156}
+  m_Center: {x: 0.97085965, y: 0, z: -0.19}
 --- !u!1 &679839030
 GameObject:
   m_ObjectHideFlags: 0
@@ -10322,7 +10353,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 821438816}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.65, y: 0, z: 3.97}
+  m_LocalPosition: {x: 1.65, y: 0, z: 3.45}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1588934062}
@@ -11459,11 +11490,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 873844785}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Script: {fileID: 11500000, guid: 5b167bd64e7c9a24798a389cf9b3a780, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0.19607845, g: 0.19607845, b: 0.19607845, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -11483,7 +11514,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u3002"
+  m_Text: 
 --- !u!222 &873844788
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -13454,11 +13485,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1048329242}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Script: {fileID: 11500000, guid: 5b167bd64e7c9a24798a389cf9b3a780, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0.19607845, g: 0.19607845, b: 0.19607845, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -13478,7 +13509,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u3002"
+  m_Text: 
 --- !u!222 &1048329245
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -14150,11 +14181,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1144636294}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Script: {fileID: 11500000, guid: 5b167bd64e7c9a24798a389cf9b3a780, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0.19607845, g: 0.19607845, b: 0.19607845, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -14174,7 +14205,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u3002"
+  m_Text: 
 --- !u!222 &1144636297
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -14347,7 +14378,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd1104670c3576a4580c8c172e769984, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  awakeGameObject: {fileID: 546641535}
+  awakeGameObject: {fileID: 1215048750}
   tutorialStartEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -16645,7 +16676,7 @@ Transform:
   - {fileID: 153512557}
   - {fileID: 1171335280}
   m_Father: {fileID: 633153648}
-  m_RootOrder: 7
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1302204179
 GameObject:
@@ -16924,7 +16955,7 @@ MonoBehaviour:
   itemDicts:
   - itemSprite: {fileID: 21300000, guid: 72f547931d473a94b83e2805eb9ff143, type: 3}
     itemName: "\u5B8B\u4EE3\u7259\u96D5\u97A0\u8E74\u56FE\u7B14\u7B52"
-    itemIndex: 8
+    itemIndex: 1
   itemImage: {fileID: 2061497462}
   itemNameText: {fileID: 1982760318}
   itemPanel: {fileID: 1215048750}
@@ -19085,7 +19116,7 @@ RectTransform:
   - {fileID: 691270776}
   - {fileID: 228785070}
   m_Father: {fileID: 633153648}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -20777,7 +20808,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1620722347}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.65, y: 0, z: -4.34}
+  m_LocalPosition: {x: 1.65, y: 0, z: -3.86}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1359572081}
@@ -22868,8 +22899,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dropColdTime: 10
-  dropValue: 10
-  dropCountMax: 3
+  dropValue: 3
+  dropCountMax: 2
   dropCountMin: 1
   gameResourceTypeType: 1
   dropPrefab: {fileID: 315225347388487927, guid: e75bd372416f34c45b2956cefec633e8, type: 3}
@@ -23831,11 +23862,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1892950263}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Script: {fileID: 11500000, guid: 5b167bd64e7c9a24798a389cf9b3a780, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0.19607845, g: 0.19607845, b: 0.19607845, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -23855,7 +23886,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u3002"
+  m_Text: 
 --- !u!222 &1892950266
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -25168,11 +25199,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1949491260}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Script: {fileID: 11500000, guid: 5b167bd64e7c9a24798a389cf9b3a780, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0.19607845, g: 0.19607845, b: 0.19607845, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -25192,7 +25223,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u3002"
+  m_Text: 
 --- !u!222 &1949491263
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -25341,7 +25372,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c8be4c3659f92445b5dce6df2c7879d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 1
+  hp: 1000
   door: {fileID: 1530438264}
   playerDeadEvent:
     m_PersistentCalls:
@@ -25352,6 +25383,11 @@ MonoBehaviour:
   - {fileID: 1148158866}
   - {fileID: 1581739137}
   farmerPrefab: {fileID: 5408525696826754838, guid: a67446edf35fbb3489516feb6f2d45f9, type: 3}
+  _food: 0
+  _wood: 0
+  _gold: 4
+  resourceProduct: 000000000000000001000000
+  resourceProducingTime: 8
   availableUnits: 000000000100000002000000
   UnitsList: []
 --- !u!4 &1954549717
@@ -26568,7 +26604,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3ee22e5b88d6d2246b32d9c33d51d480, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.74
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3ee22e5b88d6d2246b32d9c33d51d480, type: 3}
       propertyPath: m_LocalPosition.y
@@ -26576,7 +26612,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3ee22e5b88d6d2246b32d9c33d51d480, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.67
+      value: -2.42
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3ee22e5b88d6d2246b32d9c33d51d480, type: 3}
       propertyPath: m_LocalRotation.w
@@ -26681,7 +26717,7 @@ MonoBehaviour:
   version: 1
   type: 0
   mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
-  rectangleSize: {x: 3, y: 3}
+  rectangleSize: {x: 1.68, y: 1.92}
   circleRadius: 0.26
   circleResolution: 5
   height: 1.14
@@ -26784,11 +26820,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2043071294}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Script: {fileID: 11500000, guid: 5b167bd64e7c9a24798a389cf9b3a780, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0.19607845, g: 0.19607845, b: 0.19607845, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -26808,7 +26844,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u3002"
+  m_Text: 
 --- !u!222 &2043071297
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Controllers.Camera;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,7 +19,7 @@ public class ShareUI : MonoBehaviour
 
     private void ShowScreenShot()
     {
-        cameraScreenShot.StartCoroutine(cameraScreenShot.MyCaptureScreen());
+        cameraScreenShot.StartCoroutine(cameraScreenShot.GetCaptureScreen());
         StartCoroutine(WaitForScreenShot());
     }
 

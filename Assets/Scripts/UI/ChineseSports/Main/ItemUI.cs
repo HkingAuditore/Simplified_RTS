@@ -22,6 +22,7 @@ public class ItemUI : MonoBehaviour
    public GameObject    unrevealedGameObject;
    public ObjectType    objectType;
    public int           itemIndex;
+   public AudioClip     logAudio;
    
    [SerializeField]
    [ContextMenuItem("SetName","Set")]
@@ -93,6 +94,7 @@ public class ItemUI : MonoBehaviour
    {
       itemContentUI.ItemSprite  = this.itemSprite;
       itemContentUI.ItemName    = this.ItemName;
+      itemContentUI.logAudio    = this.logAudio;
       itemContentUI.ItemContent = this.itemContent;
       itemContentUI.gameObject.SetActive(true);
 

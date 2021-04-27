@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Pathfinding;
+using Player;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
@@ -26,15 +27,15 @@ namespace Units
 
     public interface IMilitaryUnit
     {
-        int              AttackValue        { get; set; }
-        float            AttackColdDownTime { get; set; }
-        float            AttackRange        { get; set; }
-        int              DefenceValue       { get; set; }
-        float            SpeedValue         { get; set; }
-        Vector3          OriginalVelocity   { get; set; }
-        Player           SidePlayer         { get; set; }
-        UnityEvent<Unit> AttackEvent        { get; }
-        UnityEvent<IMilitaryUnit>       UnderAttackedEvent { get; }
+        int                       AttackValue        { get; set; }
+        float                     AttackColdDownTime { get; set; }
+        float                     AttackRange        { get; set; }
+        int                       DefenceValue       { get; set; }
+        float                     SpeedValue         { get; set; }
+        Vector3                   OriginalVelocity   { get; set; }
+        Player.Player             SidePlayer         { get; set; }
+        UnityEvent<Unit>          AttackEvent        { get; }
+        UnityEvent<IMilitaryUnit> UnderAttackedEvent { get; }
         
 
 
@@ -55,10 +56,10 @@ namespace Units
         public int       playerOwnMax = 5;
         public Rigidbody unitRigidbody;
 
-        [SerializeField] private float    speed        = 1;
-        public                   Road     road;
-        public                   Player   sidePlayer;
-        public                   UnitType unitType;
+        [SerializeField] private float         speed = 1;
+        public                   Road          road;
+        public                   Player.Player sidePlayer;
+        public                   UnitType      unitType;
 
         #region 属性封装
 
@@ -74,9 +75,9 @@ namespace Units
                 {
                     try
                     {
-                        Debug.Log("UnitDeathEventHandler");
-                        Debug.Log(_attacker.SidePlayer);
-                        Debug.Log(_attacker);
+                        // Debug.Log("UnitDeathEventHandler");
+                        // Debug.Log(_attacker.SidePlayer);
+                        // Debug.Log(_attacker);
                         UnitDeathEventHandler?.Invoke(_attacker.SidePlayer, _attacker);
                         Debug.Log("UnitDeathEventHandler finished");
 
@@ -115,7 +116,7 @@ namespace Units
         
         [Header("死亡奖励")]
         public int deathReward = 10;
-        private           Player        _enemyPlayer;
+        private           Player.Player _enemyPlayer;
         private protected IMilitaryUnit _attacker;
 
 
@@ -126,8 +127,8 @@ namespace Units
         public    UnityEvent<GameObject, Transform> navStopEventHandler;
         protected UnityEvent                        StartEventHandler;
         //收到攻击
-        protected UnityEvent<IMilitaryUnit>        BeAttackedEventHandler = new UnityEvent<IMilitaryUnit>();
-        public    UnityEvent<Player,IMilitaryUnit> UnitDeathEventHandler = new UnityEvent<Player, IMilitaryUnit>();
+        protected UnityEvent<IMilitaryUnit>               BeAttackedEventHandler = new UnityEvent<IMilitaryUnit>();
+        public    UnityEvent<Player.Player,IMilitaryUnit> UnitDeathEventHandler  = new UnityEvent<Player.Player, IMilitaryUnit>();
 
         
 

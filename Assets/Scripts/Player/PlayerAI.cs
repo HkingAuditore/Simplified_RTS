@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Linq;
+using Player;
 using Units;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class PlayerAI : MonoBehaviour
 {
-    private Unit[] aiAvailableUnits;
-    public  Player aiPlayer;
+    private Unit[]        aiAvailableUnits;
+    public  Player.Player aiPlayer;
     [Header("AI相关")] [Space(15)]
     public bool[]     enableRoads = new bool[3];
     public                              float      aiRestTime  = 5f;

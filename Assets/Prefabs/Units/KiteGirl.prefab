@@ -28,8 +28,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4219854406580097859}
   m_LocalRotation: {x: 0.15159778, y: -0.69066405, z: 0.15159734, w: 0.6906661}
-  m_LocalPosition: {x: -0.039, y: 0.86, z: 0.101}
-  m_LocalScale: {x: 0.5674773, y: 0.56747735, z: 0.5674773}
+  m_LocalPosition: {x: -0.039, y: 0.889, z: 0.344}
+  m_LocalScale: {x: 0.7112321, y: 0.71123224, z: 0.7112321}
   m_Children:
   - {fileID: 4219854407568194172}
   m_Father: {fileID: 4089572768417318978}
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 9131761612596343813, guid: 2415f144719686248a15bc8c9dceb635, type: 3}
+  m_Sprite: {fileID: -5049160071701081941, guid: ca19b9b0ab4bb1d43850eb59e3149ece, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -305,8 +305,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 620d5ab9a1139a74c8b1805b6ceddd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hp: 100
-  defence: 5
+  _hp: 250
+  defence: 10
   isUnmovable: 0
   playerOwnMax: 5
   unitRigidbody: {fileID: 1235125175078914600}
@@ -316,7 +316,7 @@ MonoBehaviour:
   unitType: 2
   costFood: 4
   costWood: 2
-  costGold: 10
+  costGold: 8
   deathReward: 10
   navStopEventHandler:
     m_PersistentCalls:
@@ -324,7 +324,7 @@ MonoBehaviour:
   UnitDeathEventHandler:
     m_PersistentCalls:
       m_Calls: []
-  attackPower: 15
+  attackPower: 8
   attackColdDownTime: 1
   attackRange: 0.85
   originalVelocity: {x: 0, y: 0, z: 0}
@@ -389,7 +389,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8022057804127815773}
   serializedVersion: 2
-  m_Mass: 10
+  m_Mass: 5
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1

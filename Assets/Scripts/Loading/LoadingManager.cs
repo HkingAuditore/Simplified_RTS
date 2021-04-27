@@ -5,9 +5,18 @@ using UnityEngine.UI;
 
 namespace Loading
 {
+    /// <summary>
+    /// 加载管理
+    /// </summary>
     public class LoadingManager : MonoBehaviour
     {
+        /// <summary>
+        /// 加载的下一场景
+        /// </summary>
         public string nextLoadingScene;
+        /// <summary>
+        /// 加载进度条
+        /// </summary>
         public Image  loadingBar;
 
         private float          curProgressValue  = 0;

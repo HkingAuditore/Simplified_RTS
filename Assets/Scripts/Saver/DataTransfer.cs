@@ -14,9 +14,28 @@ public class DataTransfer : MonoBehaviour
     public XMLSaver  xmlSaver;
     public XMLReader xmlReader;
 
-    public string nextLoadingSceneName;
-    
+    public  string nextLoadingSceneName;
+    private bool   _isSoundsActive = true;
+
     public static DataTransfer GetDataTransfer { get; private set; }
+
+    public bool isSoundsActive
+    {
+        get => _isSoundsActive;
+        set
+        {
+            _isSoundsActive = value;
+            if (_isSoundsActive)
+            {
+                GameManager.GameManager.GetManager.audioSource.Play();
+            }
+            else
+            {
+                GameManager.GameManager.GetManager.audioSource.Stop();
+            }
+        }
+    }
+
     private void Awake()
     {
         GetDataTransfer = this;

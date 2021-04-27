@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Gameplay.ScienceTree;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class ScienceTreeNodeUI : MonoBehaviour

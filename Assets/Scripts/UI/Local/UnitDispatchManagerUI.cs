@@ -7,7 +7,7 @@ using UnityEngine;
 public class UnitDispatchManagerUI : MonoBehaviour
 {
     public UnitDispatchUI[]  UnitDispatchUIs;
-    public Player            player;
+    public Player.Player     player;
     public ShootCalculatorUI shootCalculatorUI;
     public bool              IsInDispatching { get; set; } = false;
 

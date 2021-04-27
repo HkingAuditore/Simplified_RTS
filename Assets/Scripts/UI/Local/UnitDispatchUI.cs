@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Player;
 using Units;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,7 +12,7 @@ public class UnitDispatchUI : MonoBehaviour
     public          GameObject            unitSetIndicator;
     public          Unit                  unit;
     public          int                   unitNumber;
-    public          Player                player;
+    public          Player.Player         player;
     public          int                   onceMax;
     public          Text                  resourceText;
     public          UnitDispatchManagerUI dispatchManagerUI;

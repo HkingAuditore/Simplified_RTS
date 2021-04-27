@@ -1,28 +1,48 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class BrokenIce : MonoBehaviour
+namespace Effect
 {
-    public List<Rigidbody> iceRigidbodies = new List<Rigidbody>();
-    public Transform       explosionPos;
-    public float           explosionForce;
-    public float           explosionRadius;
-    void Start()
+    /// <summary>
+    /// 冰块破碎
+    /// </summary>
+    public class BrokenIce : MonoBehaviour
     {
-        iceRigidbodies.ForEach(r =>
-                               {
-                                   r.AddExplosionForce(explosionForce, explosionPos.position, explosionRadius);
-                                   Destroy(r.gameObject,5f);
-                               });
-        Destroy(this.gameObject, 6f);
-    }
+        /// <summary>
+        /// 碎冰刚体
+        /// </summary>
+        public List<Rigidbody> iceRigidbodies = new List<Rigidbody>();
+        /// <summary>
+        /// 爆炸点
+        /// </summary>
+        public Transform       explosionPos;
+        /// <summary>
+        /// 爆炸力度
+        /// </summary>
+        public float           explosionForce;
+        /// <summary>
+        /// 爆炸范围
+        /// </summary>
+        public float           explosionRadius;
+        void Start()
+        {
+            iceRigidbodies.ForEach(r =>
+                                   {
+                                       r.AddExplosionForce(explosionForce, explosionPos.position, explosionRadius);
+                                       Destroy(r.gameObject, 5f);
+                                   });
+            Destroy(this.gameObject, 6f);
+        }
 
-    [ContextMenu("Get Ice List")]
-    public void GetIceList()
-    {
-        iceRigidbodies = this.transform.GetComponentsInChildren<Rigidbody>().ToList();
-    }
+        /// <summary>
+        /// 抓取冰块列表
+        /// </summary>
+        [ContextMenu("Get Ice List")]
+        public void GetIceList()
+        {
+            iceRigidbodies = this.transform.GetComponentsInChildren<Rigidbody>().ToList();
+        }
 
+    }
 }

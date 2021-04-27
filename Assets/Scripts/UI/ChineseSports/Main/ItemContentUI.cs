@@ -1,16 +1,19 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ItemContentUI : MonoBehaviour
 {
-    public                                     Image  itemImage;
-    [SerializeField] private                   Sprite itemSprite;
-    [SerializeField] private                   string itemName;
-    public                                     Text   itemNameText;
-    [TextArea(2, 10)] [SerializeField] private string itemContent;
-    public                                     Text   itemContentText;
+    public                                     Image       itemImage;
+    [SerializeField] private                   Sprite      itemSprite;
+    [SerializeField] private                   string      itemName;
+    public                                     Text        itemNameText;
+    [TextArea(2, 10)] [SerializeField] private string      itemContent;
+    public                                     Text        itemContentText;
+    public                                     AudioSource logAudioSource;
+    public                                     AudioClip   logAudio;
 
     public string ItemName
     {
@@ -51,8 +54,19 @@ public class ItemContentUI : MonoBehaviour
         itemContentText.text = ItemContent;
     }
 
+    private void OnEnable()
+    {
+        if(logAudio!=null)
+        {
+            logAudioSource.clip = logAudio;
+            logAudioSource.Play();
+        }
+        
+    }
+
     public void Close()
     {
         this.gameObject.SetActive(false);
+        logAudioSource.Stop();
     }
 }

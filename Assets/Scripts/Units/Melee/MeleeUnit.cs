@@ -60,7 +60,7 @@ public class MeleeUnit : Unit, IMilitaryUnit
         set => originalVelocity = value;
     }
     
-    public Player SidePlayer
+    public Player.Player SidePlayer
     {
         get => sidePlayer;
         set => sidePlayer = value;

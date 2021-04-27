@@ -1,16 +1,20 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Transformer : MonoBehaviour
+namespace GameManager
 {
-    private static Transformer     _transformer;
+    /// <summary>
+    /// 数据传递工具（已弃用）
+    /// </summary>
+    public class Transformer : MonoBehaviour
+    {
+        private static Transformer _transformer;
 
-    public static Transformer getTransformer => _transformer;
+        public static Transformer getTransformer => _transformer;
 
-    public bool isSoundsActive;
+        public bool isSoundsActive;
 
-    void Awake () {
-        _transformer = this;
+        void Awake () {
+            _transformer = this;
+        }
     }
 }

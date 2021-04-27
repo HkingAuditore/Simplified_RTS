@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using Player;
+using UnityEngine;
 
 public class FarmerDispatchUI : MonoBehaviour
 {
-    public Player player;
+    public Player.Player player;
 
 
     public void DispatchFood(bool isAdd)

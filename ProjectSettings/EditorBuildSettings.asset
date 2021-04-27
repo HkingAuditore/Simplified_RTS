@@ -21,6 +21,9 @@ EditorBuildSettings:
     path: Assets/Scenes/ChineseSports/Init.unity
     guid: 0b2ca147f287ec54dac206c1a796e341
   - enabled: 1
+    path: Assets/Scenes/ChineseSports/Loading.unity
+    guid: 5ea5df2e03c057445b6d1bbb7575ac49
+  - enabled: 1
     path: Assets/Scenes/ChineseSports/Start.unity
     guid: 43d1f8a2c203c1b449c3ec7c0872bf1b
   - enabled: 1
@@ -30,6 +33,6 @@ EditorBuildSettings:
     path: Assets/Scenes/ChineseSports/Level1.unity
     guid: 40ed252d738cd6e4ba825a3eedf4165c
   - enabled: 1
-    path: Assets/Scenes/ChineseSports/Loading.unity
-    guid: 5ea5df2e03c057445b6d1bbb7575ac49
+    path: Assets/Scenes/ChineseSports/Level2.unity
+    guid: 778ef0c0adc06a24db3cdd4f5b37c6e5
   m_configObjects: {}

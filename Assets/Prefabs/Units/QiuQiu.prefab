@@ -268,7 +268,7 @@ MonoBehaviour:
   unitType: 1
   costFood: 12
   costWood: 16
-  costGold: 5
+  costGold: 10
   deathReward: 10
   navStopEventHandler:
     m_PersistentCalls:
@@ -276,7 +276,7 @@ MonoBehaviour:
   UnitDeathEventHandler:
     m_PersistentCalls:
       m_Calls: []
-  attackPower: 10
+  attackPower: 12
   attackColdDownTime: 1.2
   attackRange: 4.5
   originalVelocity: {x: 0, y: 0, z: 0}

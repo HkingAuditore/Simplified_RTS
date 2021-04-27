@@ -5,7 +5,7 @@ namespace UI.Online
     public class UnitDIspatchManagerUIOnline : MonoBehaviourPun
     {
         public UnitDispatchUI[] UnitDispatchUIs;
-        public Player           player;
+        public Player.Player    player;
 
 
         // public void SetClick(int rdInt)

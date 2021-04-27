@@ -3,8 +3,8 @@ using UnityEngine.UI;
 
 public class PlayerHPUI : MonoBehaviour
 {
-    public  Player player;
-    private Image  _fr;
+    public  Player.Player player;
+    private Image         _fr;
 
     private float _hpFull;
 

@@ -1,9 +1,10 @@
-﻿using UnityEngine;
+﻿using Player;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerResouceUI : MonoBehaviour
 {
-    public Player player;
+    public Player.Player player;
 
     public Text foodText;
     public Text woodText;

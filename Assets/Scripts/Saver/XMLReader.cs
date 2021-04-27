@@ -26,7 +26,7 @@ public class XMLReader : MonoBehaviour
         {
             var xmlDoc = new XmlDocument();
             xmlDoc.Load(path);
-            AssetDatabase.Refresh();
+            // AssetDatabase.Refresh();
             return xmlDoc;
         }
 

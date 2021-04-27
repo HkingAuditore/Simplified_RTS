@@ -60,7 +60,7 @@ public class XMLSaver : MonoBehaviour
     {
         var path = XMLDataBase.XMLPath + fileName + ".xml";
         doc.Save(path);
-        AssetDatabase.Refresh();
+        // AssetDatabase.Refresh();
     }
 
     public void SaveData(string fileName )
