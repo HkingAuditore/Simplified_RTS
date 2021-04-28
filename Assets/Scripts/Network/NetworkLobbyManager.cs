@@ -9,49 +9,57 @@ using UnityEngine.UI;
 namespace Network
 {
     /// <summary>
-    /// 网络对战管理
+    ///     网络对战管理
     /// </summary>
     public class NetworkLobbyManager : MonoBehaviourPunCallbacks
     {
         /// <summary>
-        /// 大厅UI
+        ///     大厅UI
         /// </summary>
         public GameObject lobbyUI;
-        /// <summary>
-        /// 大厅卷动栏目
-        /// </summary>
-        public Transform  lobbyPanelContent;
-        /// <summary>
-        /// 房间行
-        /// </summary>
-        public GameObject roomLine;
-        /// <summary>
-        /// 大厅加载延迟Text
-        /// </summary>
-        public Text       lobbyPingText;
-        /// <summary>
-        /// 玩家名
-        /// </summary>
-        public Text       playerName;
-        /// <summary>
-        /// 玩家延迟
-        /// </summary>
-        public Text       pingText;
 
         /// <summary>
-        /// 房间UI
+        ///     大厅卷动栏目
+        /// </summary>
+        public Transform lobbyPanelContent;
+
+        /// <summary>
+        ///     房间行
+        /// </summary>
+        public GameObject roomLine;
+
+        /// <summary>
+        ///     大厅加载延迟Text
+        /// </summary>
+        public Text lobbyPingText;
+
+        /// <summary>
+        ///     玩家名
+        /// </summary>
+        public Text playerName;
+
+        /// <summary>
+        ///     玩家延迟
+        /// </summary>
+        public Text pingText;
+
+        /// <summary>
+        ///     房间UI
         /// </summary>
         public GameObject roomUI;
+
         /// <summary>
-        /// 玩家A
+        ///     玩家A
         /// </summary>
         public GameObject playerA;
+
         /// <summary>
-        /// 玩家B
+        ///     玩家B
         /// </summary>
         public GameObject playerB;
+
         /// <summary>
-        /// 房间延迟
+        ///     房间延迟
         /// </summary>
         public Text roomPingText;
 
@@ -83,7 +91,7 @@ namespace Network
         #region 连接
 
         /// <summary>
-        /// 连接至主服务器
+        ///     连接至主服务器
         /// </summary>
         public override void OnConnectedToMaster()
         {
@@ -101,7 +109,7 @@ namespace Network
         private readonly List<RoomInfo> _roomList = new List<RoomInfo>();
 
         /// <summary>
-        /// 房间列表更新
+        ///     房间列表更新
         /// </summary>
         /// <param name="roomList"></param>
         public override void OnRoomListUpdate(List<RoomInfo> roomList)
@@ -142,9 +150,9 @@ namespace Network
             }
         }
 
-/// <summary>
-/// 创建房间
-/// </summary>
+        /// <summary>
+        ///     创建房间
+        /// </summary>
         public void CreateRoom()
         {
             if (!PhotonNetwork.IsConnected || PhotonNetwork.InRoom)
@@ -168,19 +176,21 @@ namespace Network
 
             Debug.Log("CREATE!");
         }
-/// <summary>
-/// 创建房间
-/// </summary>
+
+        /// <summary>
+        ///     创建房间
+        /// </summary>
         public override void OnCreatedRoom()
         {
             base.OnCreatedRoom();
             Debug.Log("ROOM CREATED!");
         }
-/// <summary>
-/// 创建房间失败
-/// </summary>
-/// <param name="returnCode"></param>
-/// <param name="message"></param>
+
+        /// <summary>
+        ///     创建房间失败
+        /// </summary>
+        /// <param name="returnCode"></param>
+        /// <param name="message"></param>
         public override void OnCreateRoomFailed(short returnCode, string message)
         {
             base.OnCreateRoomFailed(returnCode, message);
@@ -190,9 +200,10 @@ namespace Network
         #endregion
 
         #region 房间
-/// <summary>
-/// 加入房间
-/// </summary>
+
+        /// <summary>
+        ///     加入房间
+        /// </summary>
         public override void OnJoinedRoom()
         {
             base.OnJoinedRoom();
@@ -206,27 +217,30 @@ namespace Network
             //     SceneManager.LoadScene(sceneBuildIndex: 1);
             // }
         }
-/// <summary>
-/// 其他玩家进入房间
-/// </summary>
-/// <param name="newPlayer"></param>
+
+        /// <summary>
+        ///     其他玩家进入房间
+        /// </summary>
+        /// <param name="newPlayer"></param>
         public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
         {
             base.OnPlayerEnteredRoom(newPlayer);
             _playerBNameText.text = newPlayer.NickName;
         }
-/// <summary>
-/// 其他玩家离开房间
-/// </summary>
-/// <param name="otherPlayer"></param>
+
+        /// <summary>
+        ///     其他玩家离开房间
+        /// </summary>
+        /// <param name="otherPlayer"></param>
         public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
         {
             base.OnPlayerLeftRoom(otherPlayer);
             _playerBNameText.text = "待加入";
         }
-/// <summary>
-/// 展示玩家信息
-/// </summary>
+
+        /// <summary>
+        ///     展示玩家信息
+        /// </summary>
         public void ShowPlayerInfo()
         {
             var playersArray = PhotonNetwork.CurrentRoom.Players.Values.ToArray();
@@ -234,9 +248,10 @@ namespace Network
             if (PhotonNetwork.CurrentRoom.PlayerCount > 1)
                 _playerBNameText.text = playersArray[1].NickName;
         }
-/// <summary>
-/// 离开房间
-/// </summary>
+
+        /// <summary>
+        ///     离开房间
+        /// </summary>
         public void QuitRoom()
         {
             PhotonNetwork.LeaveRoom();

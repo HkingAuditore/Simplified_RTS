@@ -2,22 +2,25 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class NetworkRoomUI : MonoBehaviourPunCallbacks
+namespace UI.Online
 {
-    private Text _playerName;
-
-    private void Start()
+    public class NetworkRoomUI : MonoBehaviourPunCallbacks
     {
-        _playerName = transform.parent.parent.parent.parent.Find("PlayerName").Find("Text").GetComponent<Text>();
-    }
+        private Text _playerName;
 
-    public void JoinRoom()
-    {
-        if (!PhotonNetwork.IsConnected || PhotonNetwork.InRoom)
-            return;
-        PhotonNetwork.LocalPlayer.NickName = _playerName.text;
-        PhotonNetwork.JoinRoom(gameObject.name);
-        var roomText = transform.Find("Text").GetComponent<Text>();
-        roomText.color = new Color(1f, 0.34f, 0.44f);
+        private void Start()
+        {
+            _playerName = transform.parent.parent.parent.parent.Find("PlayerName").Find("Text").GetComponent<Text>();
+        }
+
+        public void JoinRoom()
+        {
+            if (!PhotonNetwork.IsConnected || PhotonNetwork.InRoom)
+                return;
+            PhotonNetwork.LocalPlayer.NickName = _playerName.text;
+            PhotonNetwork.JoinRoom(gameObject.name);
+            var roomText = transform.Find("Text").GetComponent<Text>();
+            roomText.color = new Color(1f, 0.34f, 0.44f);
+        }
     }
 }

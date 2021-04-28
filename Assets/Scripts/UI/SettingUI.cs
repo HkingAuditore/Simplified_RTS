@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Saver;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,10 +9,11 @@ public class SettingUI : MonoBehaviour
     public Image  sounds;
 
     private bool _isActive;
+
     public void SetSounds()
     {
-        _isActive                                 = !_isActive;
-        sounds.sprite                             = _isActive ? enableSounds : disableSounds;
+        _isActive                                   = !_isActive;
+        sounds.sprite                               = _isActive ? enableSounds : disableSounds;
         DataTransfer.GetDataTransfer.isSoundsActive = _isActive;
     }
 

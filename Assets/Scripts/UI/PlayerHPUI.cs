@@ -1,21 +1,24 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerHPUI : MonoBehaviour
+namespace UI
 {
-    public  Player.Player player;
-    private Image         _fr;
-
-    private float _hpFull;
-
-    private void Awake()
+    public class PlayerHPUI : MonoBehaviour
     {
-        _hpFull = player.HP;
-        _fr     = transform.Find("FR").GetComponent<Image>();
-    }
+        public  Player.Player player;
+        private Image         _fr;
 
-    private void Update()
-    {
-        _fr.fillAmount = Mathf.Clamp(player.HP / _hpFull, 0f, 100f);
+        private float _hpFull;
+
+        private void Awake()
+        {
+            _hpFull = player.HP;
+            _fr     = transform.Find("FR").GetComponent<Image>();
+        }
+
+        private void Update()
+        {
+            _fr.fillAmount = Mathf.Clamp(player.HP / _hpFull, 0f, 100f);
+        }
     }
 }

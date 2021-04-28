@@ -10,31 +10,33 @@ using Random = UnityEngine.Random;
 namespace Player
 {
     /// <summary>
-    /// 资源类型
+    ///     资源类型
     /// </summary>
     public enum GameResourceType
     {
         /// <summary>
-        /// 食物
+        ///     食物
         /// </summary>
         Food,
+
         /// <summary>
-        /// 黄金
+        ///     黄金
         /// </summary>
         Gold,
+
         /// <summary>
-        /// 木材
+        ///     木材
         /// </summary>
         Wood
     }
 
     /// <summary>
-    /// 游戏错误
+    ///     游戏错误
     /// </summary>
     public class GameException : ApplicationException
     {
         /// <summary>
-        /// 资源类型
+        ///     资源类型
         /// </summary>
         public GameResourceType GameResourceType;
 
@@ -49,30 +51,38 @@ namespace Player
     }
 
     /// <summary>
-    /// 玩家
+    ///     玩家
     /// </summary>
     public class Player : MonoBehaviour
     {
         /// <summary>
-        /// 血量
+        ///     血量
         /// </summary>
-        [SerializeField] private int  hp;
+        [SerializeField] private int hp;
+
         /// <summary>
-        /// 基地门
+        ///     基地门
         /// </summary>
-        public                   Door door;
+        public Door door;
+
         /// <summary>
-        /// 是否已死亡
+        ///     死亡时间
         /// </summary>
-        private                  bool _isDead;
-    /// <summary>
-    /// 死亡时间
-    /// </summary>
         public UnityEvent playerDeadEvent = new UnityEvent();
 
-    /// <summary>
-    /// 血量
-    /// </summary>
+        /// <summary>
+        ///     是否已死亡
+        /// </summary>
+        private bool _isDead;
+
+        /// <summary>
+        ///     每帧执行事件
+        /// </summary>
+        public UnityAction updateEventHandler;
+
+        /// <summary>
+        ///     血量
+        /// </summary>
         public int HP
         {
             get => hp;
@@ -89,15 +99,11 @@ namespace Player
                     if (!_isDead)
                     {
                         playerDeadEvent.Invoke();
-                        bool isWin = gameObject.name[0] == 'B';
+                        var isWin = gameObject.name[0] == 'B';
                         if (isWin)
-                        {
                             GameManager.GameManager.GetManager.PlayerWin();
-                        }
                         else
-                        {
                             GameManager.GameManager.GetManager.PlayerLose();
-                        }
 
                         _isDead = true;
                     }
@@ -105,13 +111,8 @@ namespace Player
             }
         }
 
-/// <summary>
-/// 每帧执行事件
-/// </summary>
-        public UnityAction updateEventHandler;
 
-
-protected virtual void Start()
+        protected virtual void Start()
         {
             Top = gameObject.transform.Find("Positions").transform.Find("TopOri").transform;
             Mid = gameObject.transform.Find("Positions").transform.Find("MidOri").transform;
@@ -139,11 +140,22 @@ protected virtual void Start()
             updateEventHandler?.Invoke();
         }
 
+        #region 网络支持
+
+        /// <summary>
+        ///     更新本地玩家属性
+        /// </summary>
+        public virtual void UpdateLocalPlayerProperties()
+        {
+        }
+
+        #endregion
+
 
         #region 资源
 
         /// <summary>
-        /// 食物
+        ///     食物
         /// </summary>
         /// <exception cref="GameException"></exception>
         public int Food
@@ -162,7 +174,7 @@ protected virtual void Start()
         }
 
         /// <summary>
-        /// 木材
+        ///     木材
         /// </summary>
         /// <exception cref="GameException"></exception>
         public int Wood
@@ -181,7 +193,7 @@ protected virtual void Start()
         }
 
         /// <summary>
-        /// 黄金
+        ///     黄金
         /// </summary>
         /// <exception cref="GameException"></exception>
         public int Gold
@@ -200,7 +212,7 @@ protected virtual void Start()
         }
 
         /// <summary>
-        /// 增减资源
+        ///     增减资源
         /// </summary>
         /// <param name="gameResourceType"></param>
         /// <param name="count"></param>
@@ -224,7 +236,7 @@ protected virtual void Start()
         }
 
         /// <summary>
-        /// 单位是否满足派出条件
+        ///     单位是否满足派出条件
         /// </summary>
         /// <param name="unit"></param>
         /// <returns></returns>
@@ -234,7 +246,7 @@ protected virtual void Start()
         }
 
         /// <summary>
-        /// 单位是否满足派出条件
+        ///     单位是否满足派出条件
         /// </summary>
         /// <param name="unit"></param>
         /// <param name="gameResourceType">要使用的单位类型</param>
@@ -260,58 +272,56 @@ protected virtual void Start()
 
         #endregion
 
-        #region 网络支持
-
-        /// <summary>
-        /// 更新本地玩家属性
-        /// </summary>
-        public virtual void UpdateLocalPlayerProperties()
-        {
-        }
-
-        #endregion
-
         #region 农民相关处理
 
         #region 农民调遣
 
         #region 字段和属性
-/// <summary>
-/// 是否允许派出农民
-/// </summary>
-        [Header("农民")] public    bool        enableFarmer;
-/// <summary>
-/// 资源坐标
-/// </summary>
-        public                   Transform[] resourceTransform;
-/// <summary>
-/// 农民预制体
-/// </summary>
-        public                   Farmer      farmerPrefab;
 
-        private                  int         _maxFarmerNumber = 5;
-        private                  int         _farmerCount     = 1;
-        private                  int         _dispatchableFarmer;
-        private                  int[]       _roadFarmers        = new int[3];
-        private                  int[]       _roadWorkingFarmers = new int[3];
         /// <summary>
-        /// 上路派出位置
+        ///     是否允许派出农民
         /// </summary>
-        public                   Transform   Top { get; set; }
+        [Header("农民")] public bool enableFarmer;
+
         /// <summary>
-        /// 中路派出位置
+        ///     资源坐标
         /// </summary>
-        public                   Transform   Mid { get; set; }
+        public Transform[] resourceTransform;
+
         /// <summary>
-        /// 下路排除位置
+        ///     农民预制体
         /// </summary>
-        public                   Transform   Bot { get; set; }
-        [SerializeField] private int         _food;
-        [SerializeField] private int         _wood;
-        [SerializeField] private int         _gold = 4;
+        public Farmer farmerPrefab;
+
+        private int   _maxFarmerNumber = 5;
+        private int   _farmerCount     = 1;
+        private int   _dispatchableFarmer;
+        private int[] _roadFarmers        = new int[3];
+        private int[] _roadWorkingFarmers = new int[3];
+
+        /// <summary>
+        ///     上路派出位置
+        /// </summary>
+        public Transform Top { get; set; }
+
+        /// <summary>
+        ///     中路派出位置
+        /// </summary>
+        public Transform Mid { get; set; }
+
+        /// <summary>
+        ///     下路排除位置
+        /// </summary>
+        public Transform Bot { get; set; }
+
+        [SerializeField] private int _food;
+        [SerializeField] private int _wood;
+        [SerializeField] private int _gold = 4;
 
 
-        // 最大可用农民数量
+        /// <summary>
+        ///     最大可用农民数量
+        /// </summary>
         public int MaxFarmerNumber
         {
             get => _maxFarmerNumber;
@@ -324,7 +334,9 @@ protected virtual void Start()
             }
         }
 
-        //当前农民数量
+        /// <summary>
+        ///     当前农民数量
+        /// </summary>
         public int FarmerCount
         {
             get => _farmerCount;
@@ -337,7 +349,9 @@ protected virtual void Start()
             }
         }
 
-        //可调遣农民数量
+        /// <summary>
+        ///     可调遣农民数量
+        /// </summary>
         public int DispatchableFarmer
         {
             get => _dispatchableFarmer;
@@ -350,8 +364,10 @@ protected virtual void Start()
             }
         }
 
-        //每条路农民数量
 
+        /// <summary>
+        ///     每条路农民数量
+        /// </summary>
         public int[] RoadFarmers
         {
             get => _roadFarmers;
@@ -364,7 +380,9 @@ protected virtual void Start()
             }
         }
 
-        //每条路正在工作农民数量
+        /// <summary>
+        ///     每条路正在工作农民数量
+        /// </summary>
         public int[] RoadWorkingFarmers
         {
             get => _roadWorkingFarmers;
@@ -380,13 +398,19 @@ protected virtual void Start()
         #endregion
 
 
-        //增加一条路的农民分配
+        /// <summary>
+        ///     增加一条路的农民分配
+        /// </summary>
+        /// <param name="rs"></param>
         public virtual void AddFarmer(GameResourceType rs)
         {
             if (FarmerCount > RoadFarmers.Sum()) RoadFarmers[(int) rs]++;
         }
 
-        //减少一条路的农民分配
+        /// <summary>
+        ///     减少一条路的农民分配
+        /// </summary>
+        /// <param name="rs"></param>
         public virtual void SubtractFarmer(GameResourceType rs)
         {
             if (RoadFarmers[(int) rs] > 0)
@@ -394,7 +418,11 @@ protected virtual void Start()
         }
 
 
-        // 生成农民GameObject
+        /// <summary>
+        ///     生成农民GameObject
+        /// </summary>
+        /// <param name="rd"></param>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
         private void InstantiateFarmer(Road rd)
         {
             RoadWorkingFarmers[(int) rd]++;
@@ -453,6 +481,12 @@ protected virtual void Start()
             farmerInstantiated.enabled = true;
         }
 
+        /// <summary>
+        ///     生成农民GameObject
+        /// </summary>
+        /// <param name="rd"></param>
+        /// <param name="transform"></param>
+        /// <param name="resourceCarried"></param>
         public void InstantiateFarmer(Road rd, Transform transform, int resourceCarried)
         {
             RoadWorkingFarmers[(int) rd]++;
@@ -498,7 +532,11 @@ protected virtual void Start()
             farmerInstantiated.enabled = true;
         }
 
-        // 当农民返回
+        /// <summary>
+        ///     当农民返回
+        /// </summary>
+        /// <param name="farmer"></param>
+        /// <param name="tr"></param>
         public void FarmerBack(Farmer farmer, Transform tr)
         {
             if (RoadWorkingFarmers[(int) farmer.road] > RoadFarmers[(int) farmer.road])
@@ -509,7 +547,9 @@ protected virtual void Start()
             }
         }
 
-        //空闲农民调遣
+        /// <summary>
+        ///     空闲农民调遣
+        /// </summary>
         private void DispatchFarmer()
         {
             // bool isFixed = true;
@@ -552,7 +592,11 @@ protected virtual void Start()
 
         #region 资源生产
 
-        public  int[] resourceProduct = {0, 0, 3};
+        /// <summary>
+        ///     资源生产量
+        /// </summary>
+        public int[] resourceProduct = {0, 0, 3};
+
         private bool  _isProducingResource;
         public  float resourceProducingTime = 3f;
 
@@ -580,10 +624,21 @@ protected virtual void Start()
 
         #region 单位调遣
 
+        /// <summary>
+        ///     玩家可用单位
+        /// </summary>
         [Header("单位派遣")] [Space(10)] public int[] availableUnits;
 
+        /// <summary>
+        ///     玩家场上单位表
+        /// </summary>
         public List<Unit> UnitsList = new List<Unit>();
 
+        /// <summary>
+        ///     对某一单位计数
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
         public int CountUnits(UnitType type)
         {
             return (from unit in UnitsList
@@ -591,6 +646,14 @@ protected virtual void Start()
                     select unit).Count();
         }
 
+        /// <summary>
+        ///     派遣单位
+        /// </summary>
+        /// <param name="tr">位置</param>
+        /// <param name="chosenUnit">派遣的单位</param>
+        /// <param name="rd">派遣的路</param>
+        /// <param name="number"></param>
+        /// <exception cref="GameException"></exception>
         public void SetUnits(Vector3 tr, int chosenUnit, Road rd, int number)
         {
             // Debug.Log("NUMBER:" + number);
@@ -611,6 +674,15 @@ protected virtual void Start()
         }
 
 
+        /// <summary>
+        ///     派遣单位
+        /// </summary>
+        /// <param name="tr">位置</param>
+        /// <param name="chosenUnit">派遣的单位</param>
+        /// <param name="rd">派遣的路</param>
+        /// <param name="number">派遣数量</param>
+        /// <param name="oriVelocity"></param>
+        /// <exception cref="GameException">初速度</exception>
         public void SetUnits(Vector3 tr, int chosenUnit, Road rd, int number, Vector3 oriVelocity)
         {
             // Debug.Log("NUMBER:" + number);
@@ -631,7 +703,12 @@ protected virtual void Start()
             }
         }
 
-        //生成单个单位
+        /// <summary>
+        ///     生成单个单位
+        /// </summary>
+        /// <param name="chosenUnit"></param>
+        /// <param name="rd"></param>
+        /// <param name="oriPoint"></param>
         public virtual void InstantiateUnit(int chosenUnit, Road rd, Vector3 oriPoint)
         {
             var unitInstantiated = InstantiateUnitBase(chosenUnit, rd, oriPoint);
@@ -641,6 +718,13 @@ protected virtual void Start()
             unit.UnitDeathEventHandler.AddListener((p, m) => { UnitsList.Remove(unit); });
         }
 
+        /// <summary>
+        ///     生成单个单位
+        /// </summary>
+        /// <param name="chosenUnit"></param>
+        /// <param name="rd"></param>
+        /// <param name="oriPoint"></param>
+        /// <param name="oriVelocity"></param>
         public virtual void InstantiateUnit(int chosenUnit, Road rd, Vector3 oriPoint, Vector3 oriVelocity)
         {
             var unitInstantiated = InstantiateUnitBase(chosenUnit, rd, oriPoint);

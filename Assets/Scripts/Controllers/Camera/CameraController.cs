@@ -3,7 +3,7 @@
 namespace Controllers.Camera
 {
     /// <summary>
-    /// 相机控制器
+    ///     相机控制器
     /// </summary>
     public class CameraController : MonoBehaviour
     {

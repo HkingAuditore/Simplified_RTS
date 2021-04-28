@@ -1,12 +1,20 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public static class XMLDataBase
+namespace Saver
 {
-    public static string DataName = "UserData";
-    public static string XMLPath
+    /// <summary>
+    ///     XML数据
+    /// </summary>
+    public static class XMLDataBase
     {
-        get => Application.dataPath + "/Data/";
+        /// <summary>
+        ///     存档名
+        /// </summary>
+        public static string DataName = "UserData";
+
+        /// <summary>
+        ///     存档路径
+        /// </summary>
+        public static string XMLPath => Application.dataPath + "/Data/";
     }
 }

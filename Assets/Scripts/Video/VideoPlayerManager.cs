@@ -1,44 +1,46 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using UI.ChineseSports.Battle;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Video;
 
-public class VideoPlayerManager : MonoBehaviour
+namespace Video
 {
-    public VideoPlayer videoPlayer;
-    public RawImage    rawImage;
-    public ResultUI    resultUI;
-    public string      videoClipName;
-
-    private void Awake()
+    /// <summary>
+    ///     视频播放管理
+    /// </summary>
+    public class VideoPlayerManager : MonoBehaviour
     {
-        rawImage.enabled = false;
-        resultUI?.onWinResultEnd.AddListener(Play);
-        videoPlayer.clip = Resources.Load<VideoClip>("Videos/" + videoClipName);
-    }
+        public VideoPlayer videoPlayer;
+        public RawImage    rawImage;
+        public ResultUI    resultUI;
+        public string      videoClipName;
 
-    public void Play()
-    {
-        videoPlayer.targetTexture.Release();
-        rawImage.enabled  = true;
-        videoPlayer.Play();
+        private void Awake()
+        {
+            rawImage.enabled = false;
+            resultUI?.onWinResultEnd.AddListener(Play);
+            videoPlayer.clip = Resources.Load<VideoClip>("Videos/" + videoClipName);
+        }
 
-    }
+        public void Play()
+        {
+            videoPlayer.targetTexture.Release();
+            rawImage.enabled = true;
+            videoPlayer.Play();
+        }
 
-    public void Pause()
-    {
-        videoPlayer.Pause();
-    }
+        public void Pause()
+        {
+            videoPlayer.Pause();
+        }
 
-    public void Stop()
-    {
-        videoPlayer.Stop();
-        videoPlayer.frame = 0;
-        videoPlayer.time  = 0;
-        rawImage.enabled  = false;
-        videoPlayer.targetTexture.Release();
-
+        public void Stop()
+        {
+            videoPlayer.Stop();
+            videoPlayer.frame = 0;
+            videoPlayer.time  = 0;
+            rawImage.enabled  = false;
+            videoPlayer.targetTexture.Release();
+        }
     }
 }

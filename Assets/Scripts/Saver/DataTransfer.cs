@@ -1,57 +1,86 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using UI.Tutorial;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class DataTransfer : MonoBehaviour
+namespace Saver
 {
-    public TutorialManager tutorialManager;
-
-    public List<bool> itemRevealedList      = new List<bool>();
-    public List<bool> characterRevealedList = new List<bool>();
-    public List<bool> levelRevealedList     = new List<bool>();
-
-    public XMLSaver  xmlSaver;
-    public XMLReader xmlReader;
-
-    public  string nextLoadingSceneName;
-    private bool   _isSoundsActive = true;
-
-    public static DataTransfer GetDataTransfer { get; private set; }
-
-    public bool isSoundsActive
+    /// <summary>
+    ///     数据传输
+    /// </summary>
+    public class DataTransfer : MonoBehaviour
     {
-        get => _isSoundsActive;
-        set
+        /// <summary>
+        ///     教程管理
+        /// </summary>
+        public TutorialManager tutorialManager;
+
+        /// <summary>
+        ///     物品解锁表
+        /// </summary>
+        public List<bool> itemRevealedList = new List<bool>();
+
+        /// <summary>
+        ///     角色解锁表
+        /// </summary>
+        public List<bool> characterRevealedList = new List<bool>();
+
+        /// <summary>
+        ///     关卡解锁表
+        /// </summary>
+        public List<bool> levelRevealedList = new List<bool>();
+
+        /// <summary>
+        ///     存档器
+        /// </summary>
+        public XMLSaver xmlSaver;
+
+        /// <summary>
+        ///     读档器
+        /// </summary>
+        public XMLReader xmlReader;
+
+        /// <summary>
+        ///     下一加载场景
+        /// </summary>
+        public string nextLoadingSceneName;
+
+        private bool _isSoundsActive = true;
+
+        public static DataTransfer GetDataTransfer { get; private set; }
+
+        public bool isSoundsActive
         {
-            _isSoundsActive = value;
-            if (_isSoundsActive)
+            get => _isSoundsActive;
+            set
             {
-                GameManager.GameManager.GetManager.audioSource.Play();
-            }
-            else
-            {
-                GameManager.GameManager.GetManager.audioSource.Stop();
+                _isSoundsActive = value;
+                if (_isSoundsActive)
+                    GameManager.GameManager.GetManager.audioSource.Play();
+                else
+                    GameManager.GameManager.GetManager.audioSource.Stop();
             }
         }
-    }
 
-    private void Awake()
-    {
-        GetDataTransfer = this;
-        GameObject.DontDestroyOnLoad(gameObject);
-    }
-    
-    private void Start()
-    {
-        xmlReader.LoadSaver(true);
+        private void Awake()
+        {
+            GetDataTransfer = this;
+            DontDestroyOnLoad(gameObject);
+        }
 
+        private void Start()
+        {
+            xmlReader.LoadSaver(true);
+        }
 
-    }
-
-    public void LoadSceneInLoadingScene(string sceneName)
-    {
-        this.nextLoadingSceneName = sceneName;
-        SceneManager.LoadSceneAsync("Loading");
+        /// <summary>
+        ///     使用进度条加载
+        /// </summary>
+        /// <param name="sceneName"></param>
+        public void LoadSceneInLoadingScene(string sceneName)
+        {
+            nextLoadingSceneName = sceneName;
+            SceneManager.LoadSceneAsync("Loading");
+        }
     }
 }

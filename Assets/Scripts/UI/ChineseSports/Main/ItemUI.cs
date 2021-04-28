@@ -1,102 +1,97 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+using Saver;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum ObjectType
+namespace UI.ChineseSports.Main
 {
-   Item,
-   Character
-}
+    public enum ObjectType
+    {
+        Item,
+        Character
+    }
 
-[ExecuteInEditMode]
-public class ItemUI : MonoBehaviour
-{
-   public Sprite        itemSprite;
-   public Image         itemImage;
-   public Text          itemNameText;
-   public Color         unrevealedColor;
-   public Button        button;
-   public ItemContentUI itemContentUI;
-   public GameObject    unrevealedGameObject;
-   public ObjectType    objectType;
-   public int           itemIndex;
-   public AudioClip     logAudio;
-   
-   [SerializeField]
-   [ContextMenuItem("SetName","Set")]
-   private string itemName;
-   
-   [SerializeField]
-   [TextArea(2,10)]
-   private string itemContent;
-   
-   
-   [SerializeField]
-   [ContextMenuItem("SetReveal", "Set")]
-   private bool   _isRevealed;
+    [ExecuteInEditMode]
+    public class ItemUI : MonoBehaviour
+    {
+        public Sprite        itemSprite;
+        public Image         itemImage;
+        public Text          itemNameText;
+        public Color         unrevealedColor;
+        public Button        button;
+        public ItemContentUI itemContentUI;
+        public GameObject    unrevealedGameObject;
+        public ObjectType    objectType;
+        public int           itemIndex;
+        public AudioClip     logAudio;
 
-   
-   public bool IsRevealed
-   {
-      get => _isRevealed;
-      set
-      {
-         _isRevealed     = value;
-         itemImage.color = value ? Color.white : unrevealedColor;
-         if(unrevealedGameObject != null)unrevealedGameObject.SetActive(!value);
-      }
-   }
+        [SerializeField] [ContextMenuItem("SetName", "Set")]
+        private string itemName;
 
-   public string ItemName
-   {
-      get => itemName;
-      set
-      {
-         itemName          = value;
-         itemNameText.text = _isRevealed ? value : "???";
-      }
-   }
+        [SerializeField] [TextArea(2, 10)] private string itemContent;
 
-   private void Start()
-   {
-      switch (objectType)
-      {
-         case ObjectType.Item:
-            this.IsRevealed = DataTransfer.GetDataTransfer.itemRevealedList[this.itemIndex];
 
-            break;
-         case ObjectType.Character:
-            this.IsRevealed = DataTransfer.GetDataTransfer.characterRevealedList[this.itemIndex];
+        [SerializeField] [ContextMenuItem("SetReveal", "Set")]
+        private bool _isRevealed;
 
-            break;
-         default:
-            throw new ArgumentOutOfRangeException();
-      }
-      Set();
-   }
 
-[ContextMenu("Set")]
-   public void Set()
-   {
-      itemImage.sprite = this.itemSprite;
-      if (button != null)
-      {
-         button.interactable = _isRevealed;
-      }
-      itemImage.color   = _isRevealed ? Color.white : unrevealedColor;
-      itemNameText.text = _isRevealed ? itemName : "???";
-      if(unrevealedGameObject != null)unrevealedGameObject.SetActive(!IsRevealed);
-   }
+        public bool IsRevealed
+        {
+            get => _isRevealed;
+            set
+            {
+                _isRevealed     = value;
+                itemImage.color = value ? Color.white : unrevealedColor;
+                if (unrevealedGameObject != null) unrevealedGameObject.SetActive(!value);
+            }
+        }
 
-   public void ShowContent()
-   {
-      itemContentUI.ItemSprite  = this.itemSprite;
-      itemContentUI.ItemName    = this.ItemName;
-      itemContentUI.logAudio    = this.logAudio;
-      itemContentUI.ItemContent = this.itemContent;
-      itemContentUI.gameObject.SetActive(true);
+        public string ItemName
+        {
+            get => itemName;
+            set
+            {
+                itemName          = value;
+                itemNameText.text = _isRevealed ? value : "???";
+            }
+        }
 
-   }
+        private void Start()
+        {
+            switch (objectType)
+            {
+                case ObjectType.Item:
+                    IsRevealed = DataTransfer.GetDataTransfer.itemRevealedList[itemIndex];
+
+                    break;
+                case ObjectType.Character:
+                    IsRevealed = DataTransfer.GetDataTransfer.characterRevealedList[itemIndex];
+
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+
+            Set();
+        }
+
+        [ContextMenu("Set")]
+        public void Set()
+        {
+            itemImage.sprite = itemSprite;
+            if (button != null) button.interactable = _isRevealed;
+            itemImage.color   = _isRevealed ? Color.white : unrevealedColor;
+            itemNameText.text = _isRevealed ? itemName : "???";
+            if (unrevealedGameObject != null) unrevealedGameObject.SetActive(!IsRevealed);
+        }
+
+        public void ShowContent()
+        {
+            itemContentUI.ItemSprite  = itemSprite;
+            itemContentUI.ItemName    = ItemName;
+            itemContentUI.logAudio    = logAudio;
+            itemContentUI.ItemContent = itemContent;
+            itemContentUI.gameObject.SetActive(true);
+        }
+    }
 }

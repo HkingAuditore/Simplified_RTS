@@ -1,72 +1,71 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class ItemContentUI : MonoBehaviour
+namespace UI.ChineseSports.Main
 {
-    public                                     Image       itemImage;
-    [SerializeField] private                   Sprite      itemSprite;
-    [SerializeField] private                   string      itemName;
-    public                                     Text        itemNameText;
-    [TextArea(2, 10)] [SerializeField] private string      itemContent;
-    public                                     Text        itemContentText;
-    public                                     AudioSource logAudioSource;
-    public                                     AudioClip   logAudio;
-
-    public string ItemName
+    public class ItemContentUI : MonoBehaviour
     {
-        get => itemName;
-        set
+        public                                     Image       itemImage;
+        [SerializeField] private                   Sprite      itemSprite;
+        [SerializeField] private                   string      itemName;
+        public                                     Text        itemNameText;
+        [TextArea(2, 10)] [SerializeField] private string      itemContent;
+        public                                     Text        itemContentText;
+        public                                     AudioSource logAudioSource;
+        public                                     AudioClip   logAudio;
+
+        public string ItemName
         {
-            itemName          = value;
-            itemNameText.text = ItemName;
-
+            get => itemName;
+            set
+            {
+                itemName          = value;
+                itemNameText.text = ItemName;
+            }
         }
-    }
 
-    public string ItemContent
-    {
-        get => itemContent;
-        set
+        public string ItemContent
         {
-            itemContent          = value;
-            itemContentText.text = ItemContent;
-
+            get => itemContent;
+            set
+            {
+                itemContent          = value;
+                itemContentText.text = ItemContent;
+            }
         }
-    }
 
-    public Sprite ItemSprite
-    {
-        get => itemSprite;
-        set
+        public Sprite ItemSprite
         {
-            itemSprite       = value;
-            itemImage.sprite = ItemSprite;
+            get => itemSprite;
+            set
+            {
+                itemSprite       = value;
+                itemImage.sprite = ItemSprite;
+            }
         }
-    }
 
-    public void SetContent()
-    {
-        itemImage.sprite     = ItemSprite;
-        itemNameText.text    = ItemName;
-        itemContentText.text = ItemContent;
-    }
+        private void Start()
+        {
+            logAudioSource.playOnAwake = false;
+        }
 
-    private void OnEnable()
-    {
-        if(logAudio!=null)
+        private void OnEnable()
         {
             logAudioSource.clip = logAudio;
-            logAudioSource.Play();
+            if (logAudio != null) logAudioSource.Play();
         }
-        
-    }
 
-    public void Close()
-    {
-        this.gameObject.SetActive(false);
-        logAudioSource.Stop();
+        public void SetContent()
+        {
+            itemImage.sprite     = ItemSprite;
+            itemNameText.text    = ItemName;
+            itemContentText.text = ItemContent;
+        }
+
+        public void Close()
+        {
+            gameObject.SetActive(false);
+            logAudioSource.Stop();
+        }
     }
 }

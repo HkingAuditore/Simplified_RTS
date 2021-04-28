@@ -1,13 +1,16 @@
 ﻿using Gameplay.ScienceTree;
 using UnityEngine;
 
-public class ScienceTreeUI : MonoBehaviour
+namespace UI.ScienceTree
 {
-    public ScienceTreeBasic ScienceTreeBasic;
-
-
-    public ScienceTreeNodeUI FindNodeUI(ScienceTreeNode node)
+    public class ScienceTreeUI : MonoBehaviour
     {
-        return gameObject.transform.Find(node.nodeName).GetComponent<ScienceTreeNodeUI>();
+        public ScienceTreeBasic ScienceTreeBasic;
+
+
+        public ScienceTreeNodeUI FindNodeUI(ScienceTreeNode node)
+        {
+            return gameObject.transform.Find(node.nodeName).GetComponent<ScienceTreeNodeUI>();
+        }
     }
 }

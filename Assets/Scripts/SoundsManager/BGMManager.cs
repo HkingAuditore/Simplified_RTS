@@ -1,28 +1,42 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using Saver;
 using UnityEngine;
 
-public class BGMManager : MonoBehaviour
+namespace SoundsManager
 {
-    public AudioClip   normalBgm;
-    public AudioClip   resultBgm;
-    public AudioSource audioSource;
-
-    private void Start()
+    /// <summary>
+    ///     BGM管理器
+    /// </summary>
+    public class BGMManager : MonoBehaviour
     {
-        GameManager.GameManager.GetManager.winEvent.AddListener((() =>
-                                                                 {
-                                                                     audioSource.clip = resultBgm;
-                                                                     if(DataTransfer.GetDataTransfer.isSoundsActive)
-                                                                        audioSource.Play();
-                                                                 }));
-        GameManager.GameManager.GetManager.loseEvent.AddListener((() =>
-                                                                 {
-                                                                     audioSource.clip = resultBgm;
-                                                                     if(DataTransfer.GetDataTransfer.isSoundsActive)
-                                                                         audioSource.Play();
+        /// <summary>
+        ///     平时BGM
+        /// </summary>
+        public AudioClip normalBgm;
 
-                                                                 }));
+        /// <summary>
+        ///     结果BGM
+        /// </summary>
+        public AudioClip resultBgm;
+
+        /// <summary>
+        ///     音源
+        /// </summary>
+        public AudioSource audioSource;
+
+        private void Start()
+        {
+            GameManager.GameManager.GetManager.winEvent.AddListener(() =>
+                                                                    {
+                                                                        audioSource.clip = resultBgm;
+                                                                        if (DataTransfer.GetDataTransfer.isSoundsActive)
+                                                                            audioSource.Play();
+                                                                    });
+            GameManager.GameManager.GetManager.loseEvent.AddListener(() =>
+                                                                     {
+                                                                         audioSource.clip = resultBgm;
+                                                                         if (DataTransfer.GetDataTransfer.isSoundsActive)
+                                                                             audioSource.Play();
+                                                                     });
+        }
     }
 }

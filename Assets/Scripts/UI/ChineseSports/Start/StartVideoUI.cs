@@ -1,52 +1,47 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Video;
 
-public class StartVideoUI : MonoBehaviour
+namespace UI.ChineseSports.Start
 {
-    public  VideoClip    formerVideo;
-    public  VideoClip    loopVideo;
-    public  VideoPlayer  videoPlayer;
-    public  GameObject[] startUIElements;
-    public  UnityEvent   videoEndEvent = new UnityEvent();
-    private double       _videoTime;
-
-    public void Start()
+    public class StartVideoUI : MonoBehaviour
     {
-        _videoTime       = formerVideo.frameCount / formerVideo.frameRate;
-        videoPlayer.clip = formerVideo;
-        videoPlayer.Play();
-        StartCoroutine(WaitForVideoEnd());
-    }
+        public  VideoClip    formerVideo;
+        public  VideoClip    loopVideo;
+        public  VideoPlayer  videoPlayer;
+        public  GameObject[] startUIElements;
+        public  UnityEvent   videoEndEvent = new UnityEvent();
+        private double       _videoTime;
 
-    IEnumerator WaitForVideoEnd()
-    {
-        yield return new WaitForSeconds((float)_videoTime);
-        videoPlayer.Stop();
-        videoPlayer.clip      = loopVideo;
-        videoPlayer.isLooping = true;
-        videoPlayer.Play();
-        foreach (GameObject startUIElement in startUIElements)
+        public void Start()
         {
-            startUIElement.SetActive(true);
+            _videoTime       = formerVideo.frameCount / formerVideo.frameRate;
+            videoPlayer.clip = formerVideo;
+            videoPlayer.Play();
+            StartCoroutine(WaitForVideoEnd());
         }
-        videoEndEvent.Invoke();
-    }
 
-    public void ForceStop()
-    {
-        StopCoroutine(WaitForVideoEnd());
-        videoPlayer.Stop();
-        videoPlayer.clip      = loopVideo;
-        videoPlayer.isLooping = true;
-        videoPlayer.Play();
-        foreach (GameObject startUIElement in startUIElements)
+        private IEnumerator WaitForVideoEnd()
         {
-            startUIElement.SetActive(true);
+            yield return new WaitForSeconds((float) _videoTime);
+            videoPlayer.Stop();
+            videoPlayer.clip      = loopVideo;
+            videoPlayer.isLooping = true;
+            videoPlayer.Play();
+            foreach (var startUIElement in startUIElements) startUIElement.SetActive(true);
+            videoEndEvent.Invoke();
         }
-        videoEndEvent.Invoke();
+
+        public void ForceStop()
+        {
+            StopCoroutine(WaitForVideoEnd());
+            videoPlayer.Stop();
+            videoPlayer.clip      = loopVideo;
+            videoPlayer.isLooping = true;
+            videoPlayer.Play();
+            foreach (var startUIElement in startUIElements) startUIElement.SetActive(true);
+            videoEndEvent.Invoke();
+        }
     }
 }

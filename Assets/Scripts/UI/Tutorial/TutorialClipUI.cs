@@ -1,61 +1,63 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
+using Saver;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
 
-public class TutorialClipUI : MonoBehaviour
+namespace UI.Tutorial
 {
-    public GameObject awakeGameObject;
-    public UnityEvent tutorialStartEvent = new UnityEvent();
-    public UnityEvent clickEvent         = new UnityEvent();
-    public UnityEvent closeEvent         = new UnityEvent();
-    public int        tutorialIndex;
-    public float      maxStayTime = 60f;
-    public GameObject tutorialPanel;
-
-    public void OnClick()
+    public class TutorialClipUI : MonoBehaviour
     {
-        clickEvent.Invoke();
-    }
+        public GameObject awakeGameObject;
+        public UnityEvent tutorialStartEvent = new UnityEvent();
+        public UnityEvent clickEvent         = new UnityEvent();
+        public UnityEvent closeEvent         = new UnityEvent();
+        public int        tutorialIndex;
+        public float      maxStayTime = 60f;
+        public GameObject tutorialPanel;
 
-    private void Start()
-    {
-        DataTransfer.GetDataTransfer.tutorialManager.RegisterTutorialClip(this);
-        
-    }
-
-    IEnumerator WaitForStayTime()
-    {
-        yield return new WaitForSeconds(maxStayTime); 
-        FinishTutorialClip();
-    }
-
-    public void ShowTutorialClip()
-    {
-        tutorialPanel.SetActive(true);
-        this.tutorialStartEvent.Invoke();
-        StartCoroutine(WaitForStayTime());
-    }
-
-    public void FinishTutorialClip()
-    {
-        this.closeEvent.Invoke();
-        try
+        private void Start()
         {
-            StopCoroutine(WaitForStayTime());
+            DataTransfer.GetDataTransfer.tutorialManager.RegisterTutorialClip(this);
         }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-        }
-        DataTransfer.GetDataTransfer.tutorialManager.GoToNextClip();
-        this.gameObject.SetActive(false);
-    }
 
-    public void ChangeTimeScale(float timeScale)
-    {
-        Time.timeScale = timeScale;
+        public void OnClick()
+        {
+            clickEvent.Invoke();
+        }
+
+        private IEnumerator WaitForStayTime()
+        {
+            yield return new WaitForSeconds(maxStayTime);
+            FinishTutorialClip();
+        }
+
+        public void ShowTutorialClip()
+        {
+            tutorialPanel.SetActive(true);
+            tutorialStartEvent.Invoke();
+            StartCoroutine(WaitForStayTime());
+        }
+
+        public void FinishTutorialClip()
+        {
+            closeEvent.Invoke();
+            try
+            {
+                StopCoroutine(WaitForStayTime());
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            DataTransfer.GetDataTransfer.tutorialManager.GoToNextClip();
+            gameObject.SetActive(false);
+        }
+
+        public void ChangeTimeScale(float timeScale)
+        {
+            Time.timeScale = timeScale;
+        }
     }
 }

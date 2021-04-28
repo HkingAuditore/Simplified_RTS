@@ -1,91 +1,107 @@
 ﻿using System;
-using Units;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+namespace Units.RangedAttack
 {
-    public  float initSpeed;
-    private float _curAngle;
-
-    private float _curSpeed;
-
-    private float _horizontalSpeed;
-    private bool  _isFlying;
-
-    private       Unit  _shooter;
-    private       float _verticalSpeed;
-    public static float Gravity { get; } = 6f;
-
-
-    private void Start()
+    /// <summary>
+    ///     子弹
+    /// </summary>
+    public class Bullet : MonoBehaviour
     {
-        _curSpeed = initSpeed;
-        _isFlying = true;
-        _curAngle = transform.eulerAngles.z;
+        /// <summary>
+        ///     初速度
+        /// </summary>
+        public float initSpeed;
 
-        //水平速度
-        _horizontalSpeed = _curSpeed * (float) Math.Sin(_curAngle * Mathf.Deg2Rad);
-        //竖直速度
-        _verticalSpeed = _curSpeed * (float) Math.Cos(_curAngle * Mathf.Deg2Rad);
-    }
+        private float _curAngle;
 
-    private void FixedUpdate()
-    {
-        if (_isFlying)
+        private float _curSpeed;
+
+        private float _horizontalSpeed;
+        private bool  _isFlying;
+
+        private Unit  _shooter;
+        private float _verticalSpeed;
+
+        /// <summary>
+        ///     重力
+        /// </summary>
+        public static float Gravity { get; } = 6f;
+
+
+        private void Start()
         {
+            _curSpeed = initSpeed;
+            _isFlying = true;
+            _curAngle = transform.eulerAngles.z;
+
+            //水平速度
+            _horizontalSpeed = _curSpeed * (float) Math.Sin(_curAngle * Mathf.Deg2Rad);
             //竖直速度
-            _verticalSpeed = _verticalSpeed - Math.Abs(Gravity) * Time.fixedDeltaTime;
-
-            var zAngle = (float) Math.Atan(_verticalSpeed / _horizontalSpeed) * Mathf.Rad2Deg;
-
-            // Debug.Log("ANGLE:"+ _curAngle);
-
-            _curSpeed = (float) Math.Sqrt(_horizontalSpeed * _horizontalSpeed + _verticalSpeed * _verticalSpeed);
-            transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, zAngle);
-            transform.Translate(Vector3.right * _curSpeed * Time.fixedDeltaTime, Space.Self);
-
-            _curAngle = zAngle;
-            // Debug.Log(this.transform.TransformDirection(this.transform.right));
+            _verticalSpeed = _curSpeed * (float) Math.Cos(_curAngle * Mathf.Deg2Rad);
         }
-    }
 
-    private void OnCollisionEnter(Collision other)
-    {
-        if (other.gameObject.layer != gameObject.layer)
+        private void FixedUpdate()
         {
-            Debug.Log("COL!");
-            _isFlying = false;
-            Invoke("DestroyArrow", 5f);
-        }
-    }
+            if (_isFlying)
+            {
+                //竖直速度
+                _verticalSpeed = _verticalSpeed - Math.Abs(Gravity) * Time.fixedDeltaTime;
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (!other.isTrigger)
+                var zAngle = (float) Math.Atan(_verticalSpeed / _horizontalSpeed) * Mathf.Rad2Deg;
+
+                // Debug.Log("ANGLE:"+ _curAngle);
+
+                _curSpeed             = (float) Math.Sqrt(_horizontalSpeed * _horizontalSpeed + _verticalSpeed * _verticalSpeed);
+                transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, zAngle);
+                transform.Translate(Vector3.right * _curSpeed * Time.fixedDeltaTime, Space.Self);
+
+                _curAngle = zAngle;
+                // Debug.Log(this.transform.TransformDirection(this.transform.right));
+            }
+        }
+
+        private void OnCollisionEnter(Collision other)
         {
-            _isFlying = false;
-            Invoke("DestroyArrow", 5f);
-            return;
+            if (other.gameObject.layer != gameObject.layer)
+            {
+                Debug.Log("COL!");
+                _isFlying = false;
+                Invoke("DestroyArrow", 5f);
+            }
         }
 
-        if (other.gameObject.layer != gameObject.layer && other.gameObject.TryGetComponent(out Unit unitComponent))
+        private void OnTriggerEnter(Collider other)
         {
-            //Debug.Log("TRI!");
-            _isFlying = false;
-            gameObject.transform.SetParent(other.gameObject.transform);
-            unitComponent.BeAttacked(_shooter as IMilitaryUnit);
-            Invoke("DestroyArrow", 0.1f);
+            if (!other.isTrigger)
+            {
+                _isFlying = false;
+                Invoke("DestroyArrow", 5f);
+                return;
+            }
+
+            if (other.gameObject.layer != gameObject.layer && other.gameObject.TryGetComponent(out Unit unitComponent))
+            {
+                //Debug.Log("TRI!");
+                _isFlying = false;
+                gameObject.transform.SetParent(other.gameObject.transform);
+                unitComponent.BeAttacked(_shooter as IMilitaryUnit);
+                Invoke("DestroyArrow", 0.1f);
+            }
         }
-    }
 
+        /// <summary>
+        ///     设置射击者
+        /// </summary>
+        /// <param name="shooter"></param>
+        public void SetShooter(Unit shooter)
+        {
+            _shooter = shooter;
+        }
 
-    public void SetShooter(Unit shooter)
-    {
-        _shooter = shooter;
-    }
-
-    private void DestroyArrow()
-    {
-        Destroy(gameObject);
+        private void DestroyArrow()
+        {
+            Destroy(gameObject);
+        }
     }
 }

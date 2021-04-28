@@ -1,40 +1,38 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using Saver;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LevelUI : MonoBehaviour
+namespace UI
 {
-    public Button levelButton;
-    public Image  cloud;
-    public int    levelIndex;
-
-    [SerializeField]
-    private bool   _isRevealed;
-
-    public bool IsRevealed
+    public class LevelUI : MonoBehaviour
     {
-        get => _isRevealed;
-        set
+        public Button levelButton;
+        public Image  cloud;
+        public int    levelIndex;
+
+        [SerializeField] private bool _isRevealed;
+
+        public bool IsRevealed
         {
-            _isRevealed = value;
+            get => _isRevealed;
+            set
+            {
+                _isRevealed = value;
+                SetCloud();
+            }
+        }
+
+        private void Start()
+        {
+            IsRevealed = DataTransfer.GetDataTransfer.levelRevealedList[levelIndex];
             SetCloud();
         }
-    }
 
-    [ContextMenu("SetCloud")]
-    public void SetCloud()
-    {
-        levelButton.interactable = IsRevealed;
-        cloud?.gameObject.SetActive(!IsRevealed);
+        [ContextMenu("SetCloud")]
+        public void SetCloud()
+        {
+            levelButton.interactable = IsRevealed;
+            cloud?.gameObject.SetActive(!IsRevealed);
+        }
     }
-
-    private void Start()
-    {
-        this.IsRevealed = DataTransfer.GetDataTransfer.levelRevealedList[this.levelIndex];
-        SetCloud();
-    }
-    
-    
 }

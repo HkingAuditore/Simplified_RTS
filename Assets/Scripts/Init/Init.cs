@@ -1,13 +1,13 @@
-﻿using UnityEngine;
+﻿using Saver;
+using UnityEngine;
 
 namespace Init
 {
     public class Init : MonoBehaviour
     {
-        void Start()
+        private void Start()
         {
             DataTransfer.GetDataTransfer.LoadSceneInLoadingScene("Start");
         }
-
     }
 }

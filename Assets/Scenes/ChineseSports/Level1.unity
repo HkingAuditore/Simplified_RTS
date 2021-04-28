@@ -1211,10 +1211,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 1
-  type: 0
+  type: 1
   mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
   rectangleSize: {x: 1.68, y: 1.92}
-  circleRadius: 0.26
+  circleRadius: 0.74
   circleResolution: 5
   height: 1.14
   meshScale: 1
@@ -11237,11 +11237,13 @@ MonoBehaviour:
   - "\u987E\u6653\u4E91"
   - "\u987E\u6653\u4E91"
   - "\u987E\u6653\u4E91"
+  - "\u987E\u6653\u4E91"
   tutorialTexts:
   - "\u6B63\u4E0A\u65B9\u7EA2\u8272\u4EE3\u8868\u6211\u65B9\u9635\u8425\u76EE\u524D\u7684\u8010\u529B\u503C\uFF0C\u84DD\u8272\u4EE3\u8868\r\u5BF9\u65B9\u9635\u8425\u76EE\u524D\u7684\u8010\u529B\u503C\uFF0C\u5BF9\u65B9\u9635\u8425\u8010\u4E45\u503C\u6E05\u7A7A\u7684\u65F6\u5019\r\u5219\u6211\u65B9\u80DC\u5229\uFF0C\u53CD\u4E4B\u4EA6\u7136\u3002"
   - "\u5728\u653B\u6253\u5BF9\u65B9\u9635\u8425\u7684\u65F6\u5019\uFF0C\u6211\u4EEC\u4E5F\u8981\u6CE8\u610F\u4FDD\u62A4\u6211\u65B9\r\u9635\u8425\uFF0C\u51CF\u5C11\u5BF9\u624B\u9760\u8FD1\u3002"
   - "\u4E0D\u540C\u7684\u9009\u624B\u80FD\u529B\u5404\u6709\u5343\u79CB\uFF0C\u6D88\u8017\u7684\u5143\u5B9D\u548C\u5728\u573A\u4E0A\u9650\u90FD\r\u4E0D\u540C\uFF0C\u5408\u7406\u8FD0\u7528\u9009\u624B\u53EF\u4EE5\u8FBE\u5230\u66F4\u597D\u7684\u6548\u679C\u3002"
-  - "\u70B9\u51FB\u5DE6\u4E0B\u89D2\u6D3E\u51FA\u9009\u624B\uFF0C\u9009\u624B\u4FBF\u4F1A\u5728\u8D77\u70B9\u5904\u542C\u5019\u8C03\u9063\uFF0C\u540C\u65F6\r\u8C03\u6574\u9009\u624B\u53D1\u5C04\u7684\u65B9\u5411\uFF0C\u7EA2\u7EBF\u4E3A\u9884\u8BA1\u8F68\u9053\uFF0C\u62D6\u52A8\u7684\u957F\u5EA6\u4F1A\u51B3\u5B9A\r\u9009\u624B\u7684\u901F\u5EA6\u3002\u73B0\u5728\u6765\u6D3E\u51FA\u4F60\u7684\u7B2C\u4E00\u4E2A\u9009\u624B\u5427\uFF01"
+  - "\u70B9\u51FB\u5DE6\u4E0B\u89D2\u6D3E\u51FA\u9009\u624B\uFF0C\u9009\u624B\u4FBF\u4F1A\u5728\u8D77\u70B9\u5904\u542C\u5019\u8C03\u9063\u3002"
+  - "\u6309\u4F4F\u9F20\u6807\u5411\u540E\u62C9\u52A8\uFF0C\u8C03\u6574\u89D2\u5EA6"
   tutorialAvatars:
   - {fileID: 21300000, guid: 586c3b7002ef3674fb7eeb25f0401439, type: 3}
   nextButton: {fileID: 1102505535}
@@ -11280,7 +11282,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   version: 1
   data:
-    dataString: UEsDBBQAAAgIAABAIezuc8oF3wEAAL8DAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQGVU02P2jAQ/StRzi1KYKFLj82i7aFAlXBYbdXDxJ4k1jo29QewIP577cQpoeqlJ2fe+D3PvJlcYtKAAmJQ5UCZ1fHnKJlMP0QxkcJIq9ZwWikllcM7FDkv2Bm7a8ncIUfgb1By/IqsbozHR2DGWVsGrIVTweUeb+GK1vgNRW0ah808xkSONZMiPJH6i0iZkWrHOAb00YEmhC9/xa8htho9w7djlEWHKOR4AGGeFeybwqoKCK4l9YLxk9xIk+MvyxTG/i5oZ4iTyyTnjKIa6wy5Neqme6ACru8yO1QKmPgHZ6dwXBMJ8vmQf0IDjA+dt6Df3Pclig/Ara90kT48RFffL9TrPvvjpw/7Fwto939s8oYqacA4P3uVU7D+PZxnf3ZylVQE6RdpBdUZCif3P4zwYLifLiZpoEwn02VgpbNJX7lu5NFbt7WGM4E3M3xi4waSSSGQ+Kr1fdKzwuBuCYGgUJvCHaTZCv7+8joaCQq/hRs4tI6bWWOYqG/c2jJ6729cTR/L+RLSBSIhJcLHdIZlsqSfqoomybws464JJphhwL87fW4Gc9xuj2YuoO0UcyRuulG3dn63qILjMzu3ctQdE5UsiNsNse01hvq12wrgzl666v6CArsWPDW+XOPrb1BLAwQUAAAICAAAQCHs6HL0tW8AAAB6AAAACQAkAG1ldGEuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAatWKkstKs7Mz1OyUjDRM9IzNNVRUEovSizIKAaKGII4pZkpIHa0UpqRRZKpZaKhWWpqcnJSaqKuoXFqkoFlinlaWoqBgWlSklIsUH1JZUGqX2JuKkRPQGJJRlpmXkpmXrpeUGpyYnGJO8hwpdhaAFBLAQItABQAAAgIAABAIezuc8oF3wEAAL8DAAALACQAAAAAAAAAAAAAAAAAAABncmFwaDAuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAVBLAQItABQAAAgIAABAIezocvS1bwAAAHoAAAAJACQAAAAAAAAAAAAAACwCAABtZXRhLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFQSwUGAAAAAAIAAgC4AAAA5gIAAAAA
+    dataString: UEsDBBQAAAgIAABAIexG5A9g5QEAAMQDAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQGVU02P2jAQ/Sso5xaRsNClx7JoeyhQEQ6rXfUwsSeJtY5N/QEsiP9eT3BKkHrpyfGbec8zbybnhNVggDk0G+DC2+TrYDTMPg0SppXT3izhuDBGm4C3KEqZixO2aaNJQA4g36GQ+B1FVTvCe+BciqaIWAPHXOod3q4LXuEPVJWrAzYmTKgNVkKr+ERKiciF02YrJEb0MYAuXl+ImWU95JUqnVKOt0gsaqkEaTFABiXuQblnA7s696YEhkvNSTV50ivtNvjbC4MJ5YINrgTFuZZScDQk5IzHfmyJtr5/oYts0RgQ6h+crUHsabEov+niT+hAyK79Bux7+D4Pkj1IT5VO04eHwYVahmp5jb79ouv1xRya3V+vyFWjHbhg6lXlGP3/iOeJzlau1IYh/6a94naOKsj9DyM+GPPT6TCNlGyYzSIrHQ+vldtaH8i6tXdSKLyZQYFVGMhcK4WMqrb3QWLFwd0CCsGgdXk4WL1W8uPltTcSVLSKK9g3gTv3zglV3biVF/ze36TMHovJDNIpImMFwud0jMVoxr+UJR+NJkWRtE0IJZwA+TPoS9eZExa8N3MFTau4QRamO2jXjnaLGzg8i1Oje90JVeqchd1Q66tGV78NWwEy2MsX7a+QY9sCUZPzJbn8AVBLAwQUAAAICAAAQCHs6HL0tW8AAAB6AAAACQAkAG1ldGEuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAatWKkstKs7Mz1OyUjDRM9IzNNVRUEovSizIKAaKGII4pZkpIHa0UpqRRZKpZaKhWWpqcnJSaqKuoXFqkoFlinlaWoqBgWlSklIsUH1JZUGqX2JuKkRPQGJJRlpmXkpmXrpeUGpyYnGJO8hwpdhaAFBLAQItABQAAAgIAABAIexG5A9g5QEAAMQDAAALACQAAAAAAAAAAAAAAAAAAABncmFwaDAuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAVBLAQItABQAAAgIAABAIezocvS1bwAAAHoAAAAJACQAAAAAAAAAAAAAADICAABtZXRhLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFQSwUGAAAAAAIAAgC4AAAA7AIAAAAA
     upgradeData: 
     file_cachedStartup: {fileID: 0}
     data_cachedStartup: 
@@ -11478,8 +11480,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 58.626, y: 249.29999}
-  m_SizeDelta: {x: -491.25208, y: 285.1113}
+  m_AnchoredPosition: {x: 48.5, y: 249.29999}
+  m_SizeDelta: {x: -511.5592, y: 285.1113}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &873844787
 MonoBehaviour:
@@ -11503,7 +11505,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: c69bc61084d384242be307b3fdb23f49, type: 3}
-    m_FontSize: 50
+    m_FontSize: 40
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 5
@@ -13473,8 +13475,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 58.626, y: 249.29999}
-  m_SizeDelta: {x: -491.25208, y: 285.1113}
+  m_AnchoredPosition: {x: 48.5, y: 249.29999}
+  m_SizeDelta: {x: -511.5592, y: 285.1113}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1048329244
 MonoBehaviour:
@@ -13498,7 +13500,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: c69bc61084d384242be307b3fdb23f49, type: 3}
-    m_FontSize: 50
+    m_FontSize: 40
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 5
@@ -14169,8 +14171,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 58.626, y: 249.29999}
-  m_SizeDelta: {x: -491.25208, y: 285.1113}
+  m_AnchoredPosition: {x: 48.5, y: 249.29999}
+  m_SizeDelta: {x: -511.5592, y: 285.1113}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1144636296
 MonoBehaviour:
@@ -14194,7 +14196,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: c69bc61084d384242be307b3fdb23f49, type: 3}
-    m_FontSize: 50
+    m_FontSize: 40
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 5
@@ -23850,8 +23852,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 58.626, y: 249.29999}
-  m_SizeDelta: {x: -491.25208, y: 285.1113}
+  m_AnchoredPosition: {x: 48.5, y: 249.29999}
+  m_SizeDelta: {x: -511.5592, y: 285.1113}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1892950265
 MonoBehaviour:
@@ -23875,7 +23877,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: c69bc61084d384242be307b3fdb23f49, type: 3}
-    m_FontSize: 50
+    m_FontSize: 40
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 5
@@ -25187,8 +25189,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 58.626, y: 249.29999}
-  m_SizeDelta: {x: -491.25208, y: 285.1113}
+  m_AnchoredPosition: {x: 48.5, y: 249.29999}
+  m_SizeDelta: {x: -511.5592, y: 285.1113}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1949491262
 MonoBehaviour:
@@ -25212,7 +25214,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: c69bc61084d384242be307b3fdb23f49, type: 3}
-    m_FontSize: 50
+    m_FontSize: 40
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 5
@@ -26808,8 +26810,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 58.626, y: 249.29999}
-  m_SizeDelta: {x: -491.25208, y: 285.1113}
+  m_AnchoredPosition: {x: 48.5, y: 249.29999}
+  m_SizeDelta: {x: -511.5592, y: 285.1113}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2043071296
 MonoBehaviour:
@@ -26833,7 +26835,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: c69bc61084d384242be307b3fdb23f49, type: 3}
-    m_FontSize: 50
+    m_FontSize: 40
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 5

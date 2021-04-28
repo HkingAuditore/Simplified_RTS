@@ -7,21 +7,22 @@ using UnityEngine;
 namespace Network
 {
     /// <summary>
-    /// 网络玩家管理
+    ///     网络玩家管理
     /// </summary>
     public class NetworkPlayerManager : MonoBehaviourPunCallbacks
     {
         /// <summary>
-        /// 线上玩家A
+        ///     线上玩家A
         /// </summary>
         public PlayerOnline_ASide playerASideOnline;
+
         /// <summary>
-        /// 线上玩家B
+        ///     线上玩家B
         /// </summary>
         public PlayerOnline_BSide playerBSideOnline;
 
         /// <summary>
-        /// 玩家数值更新
+        ///     玩家数值更新
         /// </summary>
         /// <param name="targetPlayer">玩家</param>
         /// <param name="changedProps">改变数值组</param>
@@ -39,11 +40,11 @@ namespace Network
 
         #region 农民调遣
 
-/// <summary>
-///  A发送过来，传输给另一个端的B
-///  添加农民
-/// </summary>
-/// <param name="rs"></param>
+        /// <summary>
+        ///     A发送过来，传输给另一个端的B
+        ///     添加农民
+        /// </summary>
+        /// <param name="rs"></param>
         public void SendAddFarmer(GameResourceType rs)
         {
             // Debug.Log("Call PRC!");
@@ -73,7 +74,7 @@ namespace Network
         #region 单位调遣
 
         /// <summary>
-        /// 派遣单位
+        ///     派遣单位
         /// </summary>
         /// <param name="chosenUnit"></param>
         /// <param name="rd"></param>

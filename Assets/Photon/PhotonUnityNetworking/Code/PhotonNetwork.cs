@@ -3130,7 +3130,7 @@ namespace Photon.Pun
                     AssetDatabase.ImportAsset(settingsPath);
                 }
 
-                PhotonNetwork.PhotonServerSettings = (ServerSettings)ScriptableObject.CreateInstance("ServerSettings");
+                // PhotonNetwork.PhotonServerSettings = (ServerSettings)ScriptableObject.CreateInstance("ServerSettings");
                 if (PhotonNetwork.PhotonServerSettings != null)
                 {
                     AssetDatabase.CreateAsset(PhotonNetwork.PhotonServerSettings, serverSettingsAssetPath);

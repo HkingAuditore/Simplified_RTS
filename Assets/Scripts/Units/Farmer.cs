@@ -5,10 +5,21 @@ using UnityEngine.Events;
 
 namespace Units
 {
+    /// <summary>
+    ///     农民
+    /// </summary>
     public class Farmer : Unit
     {
-        public    float     workTime = 5f;
-        public    int[]     maxLoad  = {10, 5, 10};
+        /// <summary>
+        ///     工作时长
+        /// </summary>
+        public float workTime = 5f;
+
+        /// <summary>
+        ///     资源携带量
+        /// </summary>
+        public int[] maxLoad = {10, 5, 10};
+
         protected Transform _home;
 
         private GameResourceType _resouceType;
@@ -16,15 +27,22 @@ namespace Units
         protected Transform _targerResource;
 
 
-        //返回事件
+        /// <summary>
+        ///     返回事件
+        /// </summary>
         public UnityAction<Farmer, Transform> farmerBackEventHandler;
-        public int                            ResouceCarried { get; protected internal set; }
+
+        /// <summary>
+        ///     携带的资源数量
+        /// </summary>
+        public int ResouceCarried { get; protected internal set; }
 
 
         public override void Start()
         {
             GenerateWorkPath();
-            navStopEventHandler.AddListener(OnNavStop); ;
+            navStopEventHandler.AddListener(OnNavStop);
+            ;
 
             farmerBackEventHandler += Drop;
             farmerBackEventHandler += sidePlayer.FarmerBack;
@@ -52,7 +70,11 @@ namespace Units
             base.Start();
         }
 
-        //到达目的地
+        /// <summary>
+        ///     到达目的地
+        /// </summary>
+        /// <param name="gm"></param>
+        /// <param name="tr"></param>
         protected void OnNavStop(GameObject gm, Transform tr)
         {
             // Debug.Log("To Resource:" + Vector3.Distance(tr.position,_targerResource.position));
@@ -62,6 +84,10 @@ namespace Units
             else if (Vector3.Distance(tr.position, _home.position) < 0.6f) Invoke("FarmerBack", workTime);
         }
 
+        /// <summary>
+        ///     生成工作路径
+        /// </summary>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
         protected void GenerateWorkPath()
         {
             _home = sidePlayer.gameObject.transform.Find("Positions").Find(road + "Ori").transform;
@@ -94,7 +120,9 @@ namespace Units
             }
         }
 
-        // 工作
+        /// <summary>
+        ///     /工作
+        /// </summary>
         protected virtual void Work()
         {
             ResouceCarried += maxLoad[(int) road];
@@ -102,12 +130,19 @@ namespace Units
             Debug.Log("GO HOME");
         }
 
-        // 放下资源
+        /// <summary>
+        ///     农民返回
+        /// </summary>
         private void FarmerBack()
         {
             farmerBackEventHandler(this, transform);
         }
 
+        /// <summary>
+        ///     放下资源
+        /// </summary>
+        /// <param name="farmer"></param>
+        /// <param name="tr"></param>
         protected void Drop(Farmer farmer, Transform tr)
         {
             sidePlayer.ChangeResource(_resouceType, ResouceCarried);

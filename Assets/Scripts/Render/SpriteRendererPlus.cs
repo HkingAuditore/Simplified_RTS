@@ -1,46 +1,61 @@
 ﻿using Units;
 using UnityEngine;
-using UnityEngine.AI;
 using UnityEngine.Rendering;
 
-public class SpriteRendererPlus : MonoBehaviour
+namespace Render
 {
-    public  bool   isUnit;
-    public  bool   isArrow;
-    private int    _isAside;
-    private Unit   _parentUnit;
-    private Camera _mainCamera;
-    [ExecuteAlways]
-    private void Start()
+    /// <summary>
+    ///     Sprite渲染加成
+    /// </summary>
+    public class SpriteRendererPlus : MonoBehaviour
     {
-        _mainCamera = GameManager.GameManager.GetManager.mainCamera;
-        if (isUnit)
-        {
-            _parentUnit = transform.parent.GetComponent<Unit>();
-            _isAside    = LayerMask.LayerToName(transform.parent.gameObject.layer) == "ASide" ? 1 : -1;
-        }
+        /// <summary>
+        ///     是否是单位
+        /// </summary>
+        public bool isUnit;
 
-        GetComponent<SpriteRenderer>().shadowCastingMode = ShadowCastingMode.On;
-    }
+        /// <summary>
+        ///     是否为抛射物
+        /// </summary>
+        public bool isArrow;
 
-    public bool faceRight;
-    private void Update()
-    {
-        if (isUnit)
+        /// <summary>
+        ///     是否朝右
+        /// </summary>
+        public bool faceRight;
+
+        private int    _isAside;
+        private Camera _mainCamera;
+        private Unit   _parentUnit;
+
+        [ExecuteAlways]
+        private void Start()
         {
-            float yDir = _parentUnit.transform.rotation.y;
-           faceRight = ((int) yDir % 360 < 180) ? true : false;
-            if (_isAside == -1)
+            _mainCamera = GameManager.GameManager.GetManager.mainCamera;
+            if (isUnit)
             {
-                faceRight = !faceRight;
+                _parentUnit = transform.parent.GetComponent<Unit>();
+                _isAside    = LayerMask.LayerToName(transform.parent.gameObject.layer) == "ASide" ? 1 : -1;
             }
-            transform.rotation = Quaternion.Euler(25f * (faceRight ? 1 : -1), faceRight ? 0 : 180, 0);
+
+            GetComponent<SpriteRenderer>().shadowCastingMode = ShadowCastingMode.On;
         }
 
-        if (isArrow)
+        private void Update()
         {
-            this.transform.forward  = _mainCamera.transform.forward;
-            this.transform.rotation = _mainCamera.transform.rotation;
+            if (isUnit)
+            {
+                var yDir = _parentUnit.transform.rotation.y;
+                faceRight = (int) yDir % 360 < 180 ? true : false;
+                if (_isAside == -1) faceRight = !faceRight;
+                transform.rotation = Quaternion.Euler(25f * (faceRight ? 1 : -1), faceRight ? 0 : 180, 0);
+            }
+
+            if (isArrow)
+            {
+                transform.forward  = _mainCamera.transform.forward;
+                transform.rotation = _mainCamera.transform.rotation;
+            }
         }
     }
 }
