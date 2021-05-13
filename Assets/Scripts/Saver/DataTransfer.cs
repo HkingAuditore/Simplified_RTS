@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Saver.Quiz;
 using UI.Tutorial;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -29,6 +30,11 @@ namespace Saver
         ///     关卡解锁表
         /// </summary>
         public List<bool> levelRevealedList = new List<bool>();
+        
+        /// <summary>
+        /// 题目表
+        /// </summary>
+        public List<Quiz.Quiz> quizList = new List<Quiz.Quiz>();
 
         /// <summary>
         ///     存档器
@@ -71,6 +77,8 @@ namespace Saver
         private void Start()
         {
             xmlReader.LoadSaver(true);
+            this.quizList = QuizReader.ReadQuizList();
+
         }
 
         /// <summary>
