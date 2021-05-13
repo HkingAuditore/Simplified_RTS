@@ -941,8 +941,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7ba894aedc9f9f4489edb0e6895d803, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hp: 100
-  defence: 5
+  _hp: 80
+  defence: 3
   isUnmovable: 1
   playerOwnMax: 5
   unitRigidbody: {fileID: 85242260}
@@ -2136,7 +2136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hp: 100
-  defence: 5
+  defence: 3
   isUnmovable: 1
   playerOwnMax: 5
   unitRigidbody: {fileID: 204701379}
@@ -3307,8 +3307,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7ba894aedc9f9f4489edb0e6895d803, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hp: 100
-  defence: 5
+  _hp: 80
+  defence: 3
   isUnmovable: 1
   playerOwnMax: 5
   unitRigidbody: {fileID: 341323443}
@@ -9267,8 +9267,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7ba894aedc9f9f4489edb0e6895d803, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hp: 100
-  defence: 5
+  _hp: 30
+  defence: 3
   isUnmovable: 1
   playerOwnMax: 5
   unitRigidbody: {fileID: 1042811215}
@@ -15364,9 +15364,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dropColdTime: 10
-  dropValue: 3
-  dropCountMax: 2
-  dropCountMin: 1
+  dropValue: 4
+  dropCountMax: 3
+  dropCountMin: 2
   gameResourceTypeType: 1
   dropPrefab: {fileID: 315225347388487927, guid: e75bd372416f34c45b2956cefec633e8, type: 3}
   dropArea: {fileID: 1339443894}
@@ -17713,8 +17713,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7ba894aedc9f9f4489edb0e6895d803, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hp: 100
-  defence: 5
+  _hp: 120
+  defence: 3
   isUnmovable: 1
   playerOwnMax: 5
   unitRigidbody: {fileID: 2042800114}

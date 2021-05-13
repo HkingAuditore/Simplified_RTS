@@ -280,7 +280,7 @@ namespace Units
                     }
 
                     Death = true;
-                    Destroy(gameObject);
+                    Destroy(gameObject,3f);
                 }
             }
         }
