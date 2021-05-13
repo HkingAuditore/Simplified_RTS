@@ -228,6 +228,7 @@ MonoBehaviour:
   itemRevealedList: 000000000000000000000000
   characterRevealedList: 00010000
   levelRevealedList: 0000000000
+  quizList: []
   xmlSaver: {fileID: 1496861036}
   xmlReader: {fileID: 1496861037}
   nextLoadingSceneName: 
@@ -252,7 +253,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1496861035}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 954.546, y: 572.0205, z: 19.853027}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
