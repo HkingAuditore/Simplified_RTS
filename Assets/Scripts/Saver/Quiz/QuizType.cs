@@ -2,6 +2,12 @@
 {
     public enum QuizType
     {
-        Skate
+        Skate,
+        CuJu,
+        BingXi,
+        ChuiWan,
+        MaQiu,
+        WuQinXi,
+        
     }
 }

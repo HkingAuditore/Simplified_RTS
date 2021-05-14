@@ -25,6 +25,11 @@ namespace Saver
         ///     角色解锁表
         /// </summary>
         public List<bool> characterRevealedList = new List<bool>();
+        
+        /// <summary>
+        ///     角色答题解锁表
+        /// </summary>
+        public List<bool> characterUnlockedList = new List<bool>();
 
         /// <summary>
         ///     关卡解锁表

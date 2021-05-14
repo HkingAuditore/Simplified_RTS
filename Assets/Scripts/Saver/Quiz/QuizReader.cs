@@ -37,8 +37,8 @@ namespace Saver.Quiz
         public static List<global::Saver.Quiz.Quiz> ReadQuizList()
         {
             List<global::Saver.Quiz.Quiz> quizList = new List<global::Saver.Quiz.Quiz>();
-            var                           xmlNodes = QuizReader.LoadXml().DocumentElement.SelectNodes("/Quiz");
-            // Debug.Log(xmlNodes.Count);
+            var                           xmlNodes = QuizReader.LoadXml().DocumentElement.SelectNodes("Quiz");
+            Debug.Log(xmlNodes.Count);
             foreach (XmlNode xmlNode in xmlNodes)
             {
                 quizList.Add(QuizReader.ConvertXmlToQuiz(xmlNode));

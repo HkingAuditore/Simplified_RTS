@@ -43,6 +43,7 @@ namespace UI.ChineseSports.Main
                 _isRevealed     = value;
                 itemImage.color = value ? Color.white : unrevealedColor;
                 if (unrevealedGameObject != null) unrevealedGameObject.SetActive(!value);
+                Set();
             }
         }
 
@@ -65,7 +66,7 @@ namespace UI.ChineseSports.Main
 
                     break;
                 case ObjectType.Character:
-                    IsRevealed = DataTransfer.GetDataTransfer.characterRevealedList[itemIndex];
+                    IsRevealed = DataTransfer.GetDataTransfer.characterUnlockedList[itemIndex];
 
                     break;
                 default:

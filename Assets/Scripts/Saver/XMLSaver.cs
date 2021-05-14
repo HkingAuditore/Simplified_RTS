@@ -6,6 +6,18 @@ using UnityEngine;
 
 namespace Saver
 {
+    internal class AttributeSet<T>
+    {
+        public List<T> AttributeValue;
+        public string  AttributeName;
+
+        public AttributeSet(List<T> attributeValue, string attributeName)
+        {
+            AttributeValue = attributeValue;
+            AttributeName  = attributeName;
+        }
+    }
+
     public class XMLSaver : MonoBehaviour
     {
         /// <summary>
@@ -27,23 +39,41 @@ namespace Saver
         {
             _xmlDoc.RemoveAll();
             var saver = _xmlDoc.CreateElement("Saver");
-            saver.AppendChild(ConvertListToXmlElement(_dataTransfer.itemRevealedList,      "ItemRevealedList",      "Item"));
-            saver.AppendChild(ConvertListToXmlElement(_dataTransfer.characterRevealedList, "CharacterRevealedList", "Character"));
-            saver.AppendChild(ConvertListToXmlElement(_dataTransfer.levelRevealedList,     "LevelRevealedList",     "Level"));
+            saver.AppendChild(ConvertListToXmlElement(_dataTransfer.itemRevealedList, "ItemRevealedList", "Item", "IsRevealed"));
+            saver.AppendChild(ConvertListToXmlElement("CharacterRevealedList",
+                                                      "Character",
+                                                      new AttributeSet<bool>(_dataTransfer.characterRevealedList, "IsRevealed"),
+                                                      new AttributeSet<bool>(_dataTransfer.characterUnlockedList, "IsUnlocked")));
+            saver.AppendChild(ConvertListToXmlElement(_dataTransfer.levelRevealedList, "LevelRevealedList", "Level", "IsRevealed"));
             saver.AppendChild(ConvertNumberToXmlElement(_dataTransfer.tutorialManager.NextTutorialIndex, "NextTutorialIndex"));
             _xmlDoc.AppendChild(saver);
             return _xmlDoc;
         }
 
-        private XmlElement ConvertListToXmlElement<T>(List<T> list, string elementName, string partName)
+        private XmlElement ConvertListToXmlElement<T>(List<T> list, string elementName, string partName, string attributeTagName)
         {
             var element = _xmlDoc.CreateElement(elementName);
             for (var i = 0; i < list.Count; i++)
             {
                 var b    = list[i];
                 var bXml = _xmlDoc.CreateElement(partName);
-                bXml.SetAttribute("Index",      i.ToString());
-                bXml.SetAttribute("IsRevealed", b.ToString());
+                bXml.SetAttribute("Index",          i.ToString());
+                bXml.SetAttribute(attributeTagName, b.ToString());
+                element.AppendChild(bXml);
+            }
+
+            return element;
+        }
+
+        private XmlElement ConvertListToXmlElement<T>(string elementName, string partName, params AttributeSet<T>[] attributeSet)
+        {
+            var element = _xmlDoc.CreateElement(elementName);
+            for (var i = 0; i < attributeSet[0].AttributeValue.Count; i++)
+            {
+                var bXml = _xmlDoc.CreateElement(partName);
+                bXml.SetAttribute("Index", i.ToString());
+                foreach (var set in attributeSet) bXml.SetAttribute(set.AttributeName, set.AttributeValue[i].ToString());
+
                 element.AppendChild(bXml);
             }
 
