@@ -52,8 +52,9 @@ namespace Units.RangedAttack
 
                 // Debug.Log("ANGLE:"+ _curAngle);
 
-                _curSpeed             = (float) Math.Sqrt(_horizontalSpeed * _horizontalSpeed + _verticalSpeed * _verticalSpeed);
-                transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, zAngle);
+                _curSpeed                  = (float) Math.Sqrt(_horizontalSpeed * _horizontalSpeed + _verticalSpeed * _verticalSpeed);
+                transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, zAngle);
+                Debug.DrawRay( transform.position,transform.right,Color.cyan,10f);
                 transform.Translate(Vector3.right * _curSpeed * Time.fixedDeltaTime, Space.Self);
 
                 _curAngle = zAngle;

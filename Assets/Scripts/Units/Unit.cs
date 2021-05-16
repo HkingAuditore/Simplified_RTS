@@ -180,6 +180,8 @@ namespace Units
         /// </summary>
         public int costGold;
 
+        public bool isDieImmediately = false;
+
         /// <summary>
         ///     击杀奖励
         /// </summary>
@@ -280,7 +282,7 @@ namespace Units
                     }
 
                     Death = true;
-                    Destroy(gameObject,3f);
+                    Destroy(gameObject, isDieImmediately ? 0 : 3f);
                 }
             }
         }

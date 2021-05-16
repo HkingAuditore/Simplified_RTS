@@ -1248,6 +1248,7 @@ MonoBehaviour:
   costFood: 0
   costWood: 0
   costGold: 0
+  isDieImmediately: 1
   deathReward: 10
   navStopEventHandler:
     m_PersistentCalls:
@@ -5637,6 +5638,7 @@ MonoBehaviour:
   costFood: 0
   costWood: 0
   costGold: 0
+  isDieImmediately: 0
   deathReward: 10
   navStopEventHandler:
     m_PersistentCalls:
@@ -7662,6 +7664,7 @@ MonoBehaviour:
   costFood: 0
   costWood: 0
   costGold: 0
+  isDieImmediately: 0
   deathReward: 10
   navStopEventHandler:
     m_PersistentCalls:
@@ -10812,6 +10815,7 @@ MonoBehaviour:
   costFood: 0
   costWood: 0
   costGold: 0
+  isDieImmediately: 0
   deathReward: 10
   navStopEventHandler:
     m_PersistentCalls:
@@ -14351,6 +14355,7 @@ MonoBehaviour:
   costFood: 0
   costWood: 0
   costGold: 0
+  isDieImmediately: 0
   deathReward: 10
   navStopEventHandler:
     m_PersistentCalls:
@@ -15424,6 +15429,7 @@ MonoBehaviour:
   costFood: 0
   costWood: 0
   costGold: 0
+  isDieImmediately: 0
   deathReward: 10
   navStopEventHandler:
     m_PersistentCalls:
@@ -16107,6 +16113,7 @@ MonoBehaviour:
   costFood: 0
   costWood: 0
   costGold: 0
+  isDieImmediately: 0
   deathReward: 0
   navStopEventHandler:
     m_PersistentCalls:
@@ -19701,6 +19708,7 @@ MonoBehaviour:
   costFood: 0
   costWood: 0
   costGold: 0
+  isDieImmediately: 0
   deathReward: 0
   navStopEventHandler:
     m_PersistentCalls:
@@ -24416,6 +24424,7 @@ MonoBehaviour:
   costFood: 0
   costWood: 0
   costGold: 0
+  isDieImmediately: 0
   deathReward: 10
   navStopEventHandler:
     m_PersistentCalls:
@@ -26796,6 +26805,7 @@ MonoBehaviour:
   costFood: 0
   costWood: 0
   costGold: 0
+  isDieImmediately: 1
   deathReward: 10
   navStopEventHandler:
     m_PersistentCalls:

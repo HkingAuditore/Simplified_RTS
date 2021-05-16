@@ -269,6 +269,7 @@ MonoBehaviour:
   costFood: 12
   costWood: 16
   costGold: 10
+  isDieImmediately: 0
   deathReward: 10
   navStopEventHandler:
     m_PersistentCalls:
@@ -369,13 +370,13 @@ MonoBehaviour:
   detailedGizmos: 0
   startEndModifier:
     addPoints: 0
-    exactStartPoint: 3
+    exactStartPoint: 1
     exactEndPoint: 3
-    useRaycasting: 0
+    useRaycasting: 1
     mask:
       serializedVersion: 2
       m_Bits: 4294967295
-    useGraphRaycasting: 0
+    useGraphRaycasting: 1
   traversableTags: -1
   tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   graphMask:
@@ -393,9 +394,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 2
-  radius: 0.12
+  radius: 0.3
   height: 1.12
-  repathRate: 0.5
+  repathRate: 0.7
   canSearch: 1
   canMove: 1
   maxSpeed: 1
@@ -410,7 +411,7 @@ MonoBehaviour:
   maxAcceleration: -2.5
   rotationSpeed: 360
   slowdownDistance: 4.5
-  pickNextWaypointDist: 2
+  pickNextWaypointDist: 0.5
   endReachedDistance: 4.5
   alwaysDrawGizmos: 0
   slowWhenNotFacingTarget: 1
