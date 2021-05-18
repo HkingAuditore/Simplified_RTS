@@ -6513,8 +6513,8 @@ MonoBehaviour:
   titleSprites:
   - {fileID: 21300000, guid: 3e21b3db1b99bd94390c8da1bea52cef, type: 3}
   - {fileID: 21300000, guid: 59f1d9e13e03a78428aceab8c2702a50, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 21300000, guid: 6e347b93f95c5184aba873558ef1f91a, type: 3}
+  - {fileID: 21300000, guid: b9dba8338a5e47b48878de6018633536, type: 3}
   - {fileID: 21300000, guid: 648d53bcadbae7e479b6a1f78ba321ca, type: 3}
   battleSceneNames:
   - Level1
