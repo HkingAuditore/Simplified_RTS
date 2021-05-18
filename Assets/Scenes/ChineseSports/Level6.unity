@@ -4841,7 +4841,7 @@ MonoBehaviour:
   loseEvent:
     m_PersistentCalls:
       m_Calls: []
-  unlockLevel: 0
+  unlockLevel: 6
   unlockCharacter: 0
   unlockItem: 02000000
   audioSource: {fileID: 367423696}
@@ -5389,18 +5389,18 @@ Transform:
   - {fileID: 1531779271}
   - {fileID: 1742707389}
   - {fileID: 2122371810}
-  - {fileID: 865893058}
   - {fileID: 514578892}
   - {fileID: 633341379}
+  - {fileID: 865893058}
   - {fileID: 779568714}
   - {fileID: 786408053}
   - {fileID: 2010267128}
   - {fileID: 352109089}
-  - {fileID: 1866771705}
   - {fileID: 1026140052}
   - {fileID: 536373861}
   - {fileID: 766312944}
   - {fileID: 844844165}
+  - {fileID: 1866771705}
   - {fileID: 139946187}
   - {fileID: 1861680723}
   - {fileID: 2089766228}

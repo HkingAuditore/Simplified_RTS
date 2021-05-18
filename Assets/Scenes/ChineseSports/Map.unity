@@ -6519,9 +6519,9 @@ MonoBehaviour:
   battleSceneNames:
   - Level1
   - Level2
-  - Level1
-  - Level1
-  - Level1
+  - Level3
+  - Level4
+  - Level5
 --- !u!1 &666685823
 GameObject:
   m_ObjectHideFlags: 0

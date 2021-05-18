@@ -5410,7 +5410,7 @@ MonoBehaviour:
   loseEvent:
     m_PersistentCalls:
       m_Calls: []
-  unlockLevel: 0
+  unlockLevel: 4
   unlockCharacter: 0
   unlockItem: 02000000
   audioSource: {fileID: 367423696}
