@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Player;
 using UI.ChineseSports.Battle;
 using Units;
@@ -44,8 +45,9 @@ namespace UI.Local
         {
             try
             {
-                unitNumber = GameManager.GameManager.GetManager.unitsList.FindIndex(u => u.UnitPrefab == this.unit);
-                if (unitNumber == -1)
+                int enemyUnitsNum = GameManager.GameManager.GetManager.unitsList.Count(u => u.IsEnemy);
+                unitNumber = GameManager.GameManager.GetManager.unitsList.FindIndex(u => u.UnitPrefab == this.unit) - enemyUnitsNum;
+                if (unitNumber == -1 - enemyUnitsNum)
                 {
                     this.gameObject.SetActive(false);
                 }
