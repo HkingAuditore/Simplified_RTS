@@ -226,7 +226,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tutorialManager: {fileID: 1496861041}
   itemRevealedList: 000000000000000000000000
-  characterRevealedList: 00010000
+  unitList:
+  - UnitPrefab: {fileID: 2546485736200557784, guid: e0d9ec16f93e59f49bac000c3af8a54e, type: 3}
+    IsEnemy: 0
+  - UnitPrefab: {fileID: 2546485736200557784, guid: 47e1b8ec3b10f174f8597346e3b706cf, type: 3}
+    IsEnemy: 0
+  - UnitPrefab: {fileID: 1248671747110095697, guid: 75aa8d401c716e04391fd5d061418b56, type: 3}
+    IsEnemy: 0
+  - UnitPrefab: {fileID: 2546485736200557784, guid: 3bff7fca176b9c14185b90cb3c42e1ad, type: 3}
+    IsEnemy: 0
+  - UnitPrefab: {fileID: 2546485736200557784, guid: d116d5f3a057283449cf1bf47efe9a95, type: 3}
+    IsEnemy: 0
+  characterRevealedList: 0001000000
+  characterUnlockedList: 0000000000
   levelRevealedList: 0000000000
   quizList: []
   xmlSaver: {fileID: 1496861036}

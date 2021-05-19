@@ -40,6 +40,23 @@ namespace UI.Local
             resourceText.text = unit.costGold.ToString();
         }
 
+        private void Start()
+        {
+            try
+            {
+                unitNumber = GameManager.GameManager.GetManager.unitsList.FindIndex(u => u.UnitPrefab == this.unit);
+                if (unitNumber == -1)
+                {
+                    this.gameObject.SetActive(false);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                this.gameObject.SetActive(false);
+            }
+        }
+
         private void FixedUpdate()
         {
             if (UnitDispatchNumber < onceMax && player.IsEnoughForUnit(unit, GameResourceType.Gold) && !dispatchManagerUI.IsInDispatching && player.CountUnits(unit.unitType) + UnitDispatchNumber < unit.playerOwnMax)

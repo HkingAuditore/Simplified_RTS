@@ -18,6 +18,7 @@
     <Character Index="1" IsRevealed="True" IsUnlocked="True" />
     <Character Index="2" IsRevealed="True" IsUnlocked="True" />
     <Character Index="3" IsRevealed="False" IsUnlocked="False" />
+    <Character Index="4" IsRevealed="False" IsUnlocked="False" />
   </CharacterRevealedList>
   <LevelRevealedList>
     <Level Index="0" IsRevealed="True" />

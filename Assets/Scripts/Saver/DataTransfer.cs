@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using GameManager;
 using Saver.Quiz;
 using UI.Tutorial;
+using Units;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -20,6 +23,9 @@ namespace Saver
         ///     物品解锁表
         /// </summary>
         public List<bool> itemRevealedList = new List<bool>();
+
+        [SerializeField]
+        public List<UnitDict> unitList = new List<UnitDict>();
 
         /// <summary>
         ///     角色解锁表
@@ -94,6 +100,21 @@ namespace Saver
         {
             nextLoadingSceneName = sceneName;
             SceneManager.LoadSceneAsync("Loading");
+        }
+
+        public List<UnitDict> GetAvailableUnits()
+        {
+            List<UnitDict> playerUnits = new List<UnitDict>();
+            for (int i = 0; i < unitList.Count; i++)
+            {
+                if (characterUnlockedList[i] && !unitList[i].IsEnemy)
+                {
+                    playerUnits.Add(unitList[i]);
+                    Debug.Log(unitList[i]);
+                }
+            }
+
+            return playerUnits;
         }
     }
 }

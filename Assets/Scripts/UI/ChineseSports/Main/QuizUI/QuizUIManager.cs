@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Saver;
 using Saver.Quiz;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace UI.ChineseSports.Main.QuizUI
 {
@@ -14,6 +16,11 @@ namespace UI.ChineseSports.Main.QuizUI
         public List<QuizTextTypeSet> quizNumberTextList = new List<QuizTextTypeSet>();
         public List<GameObject>      quizPackList       = new List<GameObject>();
         public List<ItemUI>          ItemUis            = new List<ItemUI>();
+
+
+
+
+        [SerializeField]private List<bool> _ansList = new List<bool>();
         
         
         private List<Quiz> _allQuizList;
@@ -39,6 +46,7 @@ namespace UI.ChineseSports.Main.QuizUI
 
         public void ShowQuiz(Quiz quiz)
         {
+
             quizShowUI.quiz = quiz;
             quizShowUI.gameObject.SetActive(true);
             quizShowUI.ShowQuiz();
@@ -46,6 +54,8 @@ namespace UI.ChineseSports.Main.QuizUI
 
         public void EnterQuiz()
         {
+            this._ansList = new List<bool>();
+            _curQuizIndex = 0;
             SetQuizGroup(quizNumberTextList[_curUnitIndex].QuizType);
             quizConfirmPanel.SetActive(false);
         }
@@ -56,9 +66,10 @@ namespace UI.ChineseSports.Main.QuizUI
             ShowQuiz(_curTypeQuizList[_curQuizIndex]);
         }
 
-        public void Next()
+        public void Next(bool result)
         {
             _curQuizIndex++;
+            this._ansList.Add(result);
             if (_curQuizIndex >= _curTypeQuizList.Count)
             {
                 Finish();
@@ -82,12 +93,17 @@ namespace UI.ChineseSports.Main.QuizUI
 
         private void Finish()
         {
+            bool result = _ansList.All(x => x);
             quizShowUI.gameObject.SetActive(false);
-            finishPanel.unlockedUnitIndex                                     = _curUnitIndex;
-            DataTransfer.GetDataTransfer.characterUnlockedList[_curUnitIndex] = true;
-            DataTransfer.GetDataTransfer.xmlSaver.SaveData();
-            ItemUis[_curUnitIndex].IsRevealed = true;
-            finishPanel.gameObject.SetActive(true);
+            if(result)
+            {
+                finishPanel.unlockedUnitIndex                                     = _curUnitIndex;
+                DataTransfer.GetDataTransfer.characterUnlockedList[_curUnitIndex] = true;
+                DataTransfer.GetDataTransfer.xmlSaver.SaveData();
+                ItemUis[_curUnitIndex].IsRevealed = true;
+                finishPanel.gameObject.SetActive(true);
+
+            }
         }
 
         public void Close()

@@ -36,7 +36,7 @@ namespace GameManager
         /// <summary>
         ///     单位列表
         /// </summary>
-        public List<Unit> unitsList = new List<Unit>();
+        public List<UnitDict> unitsList = new List<UnitDict>();
 
         /// <summary>
         ///     结果显示UI
@@ -79,14 +79,18 @@ namespace GameManager
         private void Awake()
         {
             GetManager = this;
+            unitsList.AddRange(DataTransfer.GetDataTransfer.GetAvailableUnits());
+
         }
 
         private void Start()
         {
+
             if (DataTransfer.GetDataTransfer.isSoundsActive)
                 audioSource.Play();
             else
                 audioSource.Stop();
+
             winEvent.AddListener(() =>
                                  {
                                      if (unlockLevel != null) DataTransfer.GetDataTransfer.levelRevealedList[unlockLevel] = true;

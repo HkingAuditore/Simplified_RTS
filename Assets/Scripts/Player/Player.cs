@@ -114,6 +114,9 @@ namespace Player
 
         protected virtual void Start()
         {
+            availableUnits = (from unitDict in GameManager.GameManager.GetManager.unitsList
+             where unitDict.IsEnemy == this.isEnemy
+             select GameManager.GameManager.GetManager.unitsList.IndexOf(unitDict)).ToArray();
             Top = gameObject.transform.Find("Positions").transform.Find("TopOri").transform;
             Mid = gameObject.transform.Find("Positions").transform.Find("MidOri").transform;
             Bot = gameObject.transform.Find("Positions").transform.Find("BotOri").transform;
@@ -624,6 +627,8 @@ namespace Player
 
         #region 单位调遣
 
+        public bool isEnemy;
+
         /// <summary>
         ///     玩家可用单位
         /// </summary>
@@ -658,7 +663,7 @@ namespace Player
         {
             // Debug.Log("NUMBER:" + number);
             //TODO 人数检测
-            var unit = GameManager.GameManager.GetManager.unitsList[availableUnits[chosenUnit]];
+            var unit = GameManager.GameManager.GetManager.unitsList[availableUnits[chosenUnit]].UnitPrefab;
             if (CountUnits(unit.unitType) + number > unit.playerOwnMax)
                 throw new GameException("MAX UNITS!");
 
@@ -687,7 +692,7 @@ namespace Player
         {
             // Debug.Log("NUMBER:" + number);
             //TODO 人数检测
-            var unit = GameManager.GameManager.GetManager.unitsList[availableUnits[chosenUnit]];
+            var unit = GameManager.GameManager.GetManager.unitsList[availableUnits[chosenUnit]].UnitPrefab;
             if (CountUnits(unit.unitType) + number > unit.playerOwnMax)
                 throw new GameException("MAX UNITS!");
 
@@ -747,7 +752,7 @@ namespace Player
 
         private GameObject InstantiateUnitBase(int chosenUnit, Road rd, Vector3 oriPoint)
         {
-            var unitGb = GameManager.GameManager.GetManager.unitsList[availableUnits[chosenUnit]].gameObject;
+            var unitGb = GameManager.GameManager.GetManager.unitsList[availableUnits[chosenUnit]].UnitPrefab.gameObject;
             //寻路设置
             LayerMask layerMask =
                 (1 << NavMesh.GetAreaFromName(LayerMask.LayerToName(gameObject.layer)[0] + "Walkable")) |

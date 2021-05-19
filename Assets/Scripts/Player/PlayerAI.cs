@@ -41,16 +41,19 @@ namespace Player
         /// <summary>
         ///     敌人可用单位
         /// </summary>
+        [SerializeField]
         private Unit[] aiAvailableUnits;
 
 
         protected void Start()
         {
+
+
             _enemyLayer =
                 LayerMask.NameToLayer(LayerMask.LayerToName(gameObject.layer) == "ASide" ? "BSide" : "ASide");
             // Debug.Log(GameManager.GameManager.GetManager.unitsList.Count);
             aiAvailableUnits = (from availableUnit in aiPlayer.availableUnits
-                                select GameManager.GameManager.GetManager.unitsList[availableUnit]).ToArray();
+                                select GameManager.GameManager.GetManager.unitsList[availableUnit].UnitPrefab).ToArray();
         }
 
         protected void Update()

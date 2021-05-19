@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Units;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -9,6 +10,8 @@ namespace UI.ChineseSports.Main
     public class CharacterViewUI : MonoBehaviour
     {
         public List<Sprite> characterSprites = new List<Sprite>();
+        [Multiline(3)]
+        public List<String>  characterDescriptions = new List<string>();
 
         [FormerlySerializedAs("MilitaryUnits")] [SerializeField]
         public List<Unit> militaryUnits = new List<Unit>();
@@ -18,6 +21,8 @@ namespace UI.ChineseSports.Main
 
         [FormerlySerializedAs("CharacterAvater")]
         public Image characterAvater;
+
+        public Text descriptionText;
 
         public int CurCharacterSpriteIndex { get; set; }
 
@@ -29,6 +34,7 @@ namespace UI.ChineseSports.Main
         public void Set(int index)
         {
             characterAvater.sprite = characterSprites[index];
+            descriptionText.text   = characterDescriptions[index];
             propertyLines.ForEach(l =>
                                   {
                                       Debug.Log(index);
