@@ -8,7 +8,7 @@ public class TutorialUI : MonoBehaviour
     public TutorialClipUI tutorialClipUI;
     public List<string>   tutorialNames = new List<string>();
 
-    [TextArea] public List<string> tutorialTexts = new List<string>();
+    [TextArea(5,10)] public List<string> tutorialTexts = new List<string>();
 
     public List<Sprite> tutorialAvatars = new List<Sprite>();
 

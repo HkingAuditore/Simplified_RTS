@@ -318,7 +318,7 @@ MonoBehaviour:
   costWood: 2
   costGold: 4
   isDieImmediately: 0
-  deathReward: 10
+  deathReward: 18
   navStopEventHandler:
     m_PersistentCalls:
       m_Calls: []

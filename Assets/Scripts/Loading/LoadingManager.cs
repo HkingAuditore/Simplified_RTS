@@ -21,6 +21,10 @@ namespace Loading
         /// </summary>
         public Image loadingBar;
 
+        public RectTransform characterStart;
+        public RectTransform characterEnd;
+        public RectTransform character;
+
         private float          curProgressValue;
         private AsyncOperation operation;
         private float          showProgressValue;
@@ -38,6 +42,11 @@ namespace Loading
             loadingBar.fillAmount = Mathf.SmoothStep(0, 0.85f, showProgressValue * 1.2f) / 0.85f;
 
             if (showProgressValue > .85) operation.allowSceneActivation = true; //启用自动加载场景  
+            character.anchoredPosition = new Vector2(Mathf.Lerp(
+                                                                characterStart.anchoredPosition.x,
+                                                                characterEnd.anchoredPosition.x,
+                                                                loadingBar.fillAmount
+                                                                ), character.anchoredPosition.y);
         }
 
         private void LoadNextScene()

@@ -308,7 +308,7 @@ MonoBehaviour:
   _hp: 100
   defence: 8
   isUnmovable: 0
-  playerOwnMax: 15
+  playerOwnMax: 10
   unitRigidbody: {fileID: 1235125175078914600}
   speed: 0.8
   road: 1

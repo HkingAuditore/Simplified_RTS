@@ -308,7 +308,7 @@ MonoBehaviour:
   _hp: 120
   defence: 8
   isUnmovable: 0
-  playerOwnMax: 10
+  playerOwnMax: 5
   unitRigidbody: {fileID: 1235125175078914600}
   speed: 1
   road: 1
@@ -318,7 +318,7 @@ MonoBehaviour:
   costWood: 2
   costGold: 4
   isDieImmediately: 0
-  deathReward: 10
+  deathReward: 18
   navStopEventHandler:
     m_PersistentCalls:
       m_Calls: []

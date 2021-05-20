@@ -1033,7 +1033,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7ba894aedc9f9f4489edb0e6895d803, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hp: 90
+  _hp: 80
   defence: 3
   isUnmovable: 1
   playerOwnMax: 5
@@ -10393,7 +10393,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7ba894aedc9f9f4489edb0e6895d803, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hp: 200
+  _hp: 80
   defence: 3
   isUnmovable: 1
   playerOwnMax: 5
@@ -17821,7 +17821,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7ba894aedc9f9f4489edb0e6895d803, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hp: 200
+  _hp: 80
   defence: 3
   isUnmovable: 1
   playerOwnMax: 5
@@ -20315,7 +20315,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7ba894aedc9f9f4489edb0e6895d803, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hp: 90
+  _hp: 80
   defence: 3
   isUnmovable: 1
   playerOwnMax: 5
@@ -23622,7 +23622,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7ba894aedc9f9f4489edb0e6895d803, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hp: 90
+  _hp: 80
   defence: 3
   isUnmovable: 1
   playerOwnMax: 5
@@ -24365,7 +24365,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7ba894aedc9f9f4489edb0e6895d803, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hp: 200
+  _hp: 80
   defence: 3
   isUnmovable: 1
   playerOwnMax: 5

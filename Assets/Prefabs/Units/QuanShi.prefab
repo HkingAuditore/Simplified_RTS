@@ -305,8 +305,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 620d5ab9a1139a74c8b1805b6ceddd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hp: 50
-  defence: 8
+  _hp: 100
+  defence: 3
   isUnmovable: 0
   playerOwnMax: 5
   unitRigidbody: {fileID: 1235125175078914600}
@@ -326,7 +326,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   attackPower: 25
-  attackColdDownTime: 1
+  attackColdDownTime: 0.5
   attackRange: 0.3
   originalVelocity: {x: 0, y: 0, z: 0}
   findEnemyRadius: 2.2
