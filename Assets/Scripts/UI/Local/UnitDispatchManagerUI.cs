@@ -55,8 +55,8 @@ namespace UI.Local
             shootCalculatorUI.oriPos       = pos;
             shootCalculatorUI.oriScreenPos = screenPos;
 
-            shootCalculatorUI.shootRigidbody = (from dispatchUI in UnitDispatchUIs
-                                                where dispatchUI.unitNumber > 0
+                 shootCalculatorUI.shootRigidbody = (from dispatchUI in UnitDispatchUIs
+                                                where dispatchUI.UnitDispatchNumber > 0
                                                 select dispatchUI.unit.unitRigidbody).First();
             Debug.Log(shootCalculatorUI.shootRigidbody);
             StartCoroutine(WaitForVelocity(pos, screenPos, rdInt));

@@ -3658,7 +3658,7 @@ RectTransform:
   - {fileID: 895974603}
   - {fileID: 2005312570}
   m_Father: {fileID: 633153648}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -5616,7 +5616,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   unlockLevel: 1
-  unlockCharacter: 2
+  unlockCharacter: 0
   unlockItem: 01000000
   audioSource: {fileID: 367423696}
 --- !u!4 &395267150
@@ -8637,8 +8637,8 @@ RectTransform:
   - {fileID: 157779169}
   - {fileID: 1656439819}
   - {fileID: 1332352533}
-  - {fileID: 1301639211}
   - {fileID: 269054081}
+  - {fileID: 1301639211}
   - {fileID: 1474358065}
   m_Father: {fileID: 939729250}
   m_RootOrder: 0
@@ -17395,7 +17395,7 @@ Transform:
   - {fileID: 153512557}
   - {fileID: 1171335280}
   m_Father: {fileID: 633153648}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1302204179
 GameObject:

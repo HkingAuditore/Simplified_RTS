@@ -205,6 +205,8 @@ namespace Units
         public virtual void Start()
         {
             StartEventHandler?.Invoke();
+            if(!isUnmovable)
+                this._pathFinder.maxSpeed = this.speed;
 
             if (InitTarget != null)
                 // Debug.Log("GOTO!");

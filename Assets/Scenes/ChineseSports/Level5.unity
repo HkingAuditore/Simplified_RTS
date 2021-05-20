@@ -2831,8 +2831,8 @@ MonoBehaviour:
   _gold: 8
   resourceProduct: 000000000000000001000000
   resourceProducingTime: 6
-  isEnemy: 0
-  availableUnits: 03000000
+  isEnemy: 1
+  availableUnits: 00000000
   UnitsList: []
 --- !u!1 &228785069
 GameObject:
@@ -5840,7 +5840,7 @@ MonoBehaviour:
   mainCamera: {fileID: 405662593}
   unitsList:
   - UnitPrefab: {fileID: 2546485736200557784, guid: 92a7e1d018d1af54ebc51b7aba5166e8, type: 3}
-    IsEnemy: 0
+    IsEnemy: 1
   resultUI: {fileID: 1332352534}
   winEvent:
     m_PersistentCalls:

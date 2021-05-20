@@ -310,7 +310,7 @@ MonoBehaviour:
   isUnmovable: 0
   playerOwnMax: 5
   unitRigidbody: {fileID: 1235125175078914600}
-  speed: 10
+  speed: 0.5
   road: 1
   sidePlayer: {fileID: 0}
   unitType: 2

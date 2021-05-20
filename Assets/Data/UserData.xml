@@ -1,8 +1,8 @@
 <Saver>
   <ItemRevealedList>
-    <Item Index="0" IsRevealed="True" />
+    <Item Index="0" IsRevealed="False" />
     <Item Index="1" IsRevealed="True" />
-    <Item Index="2" IsRevealed="True" />
+    <Item Index="2" IsRevealed="False" />
     <Item Index="3" IsRevealed="False" />
     <Item Index="4" IsRevealed="False" />
     <Item Index="5" IsRevealed="False" />
@@ -14,18 +14,18 @@
     <Item Index="11" IsRevealed="False" />
   </ItemRevealedList>
   <CharacterRevealedList>
-    <Character Index="0" IsRevealed="True" IsUnlocked="True" />
+    <Character Index="0" IsRevealed="True" IsUnlocked="False" />
     <Character Index="1" IsRevealed="True" IsUnlocked="True" />
     <Character Index="2" IsRevealed="True" IsUnlocked="True" />
-    <Character Index="3" IsRevealed="False" IsUnlocked="True" />
-    <Character Index="4" IsRevealed="True" IsUnlocked="False" />
+    <Character Index="3" IsRevealed="False" IsUnlocked="False" />
+    <Character Index="4" IsRevealed="False" IsUnlocked="False" />
   </CharacterRevealedList>
   <LevelRevealedList>
     <Level Index="0" IsRevealed="True" />
     <Level Index="1" IsRevealed="True" />
-    <Level Index="2" IsRevealed="True" />
-    <Level Index="3" IsRevealed="True" />
+    <Level Index="2" IsRevealed="False" />
+    <Level Index="3" IsRevealed="False" />
     <Level Index="4" IsRevealed="False" />
   </LevelRevealedList>
-  <NextTutorialIndex Content="11" />
+  <NextTutorialIndex Content="18" />
 </Saver>
