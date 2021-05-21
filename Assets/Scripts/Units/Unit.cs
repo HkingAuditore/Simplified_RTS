@@ -198,7 +198,7 @@ namespace Units
                 : GameManager.GameManager.GetManager.aSide;
             unitRigidbody      = GetComponent<Rigidbody>();
             _destinationSetter = GetComponent<AIDestinationSetter>();
-            _pathFinder        = GetComponent<AIPath>();
+            pathFinder        = GetComponent<AIPath>();
             UnitDeathEventHandler.AddListener((p, m) => { p.ChangeResource(GameResourceType.Gold, deathReward); });
         }
 
@@ -206,7 +206,7 @@ namespace Units
         {
             StartEventHandler?.Invoke();
             if(!isUnmovable)
-                this._pathFinder.maxSpeed = this.speed;
+                this.pathFinder.maxSpeed = this.speed;
 
             if (InitTarget != null)
                 // Debug.Log("GOTO!");
@@ -222,7 +222,7 @@ namespace Units
                 {
                     //TODO 这里会跳出"GetRemainingDistance" can only be called on an active agent that has been placed on a NavMesh.
                     // if (!isUnmovable && navMeshAgent.remainingDistance < 0.2f && !_isAtTarget)
-                    if (!isUnmovable && !_isAtTarget && _pathFinder.reachedDestination)
+                    if (!isUnmovable && !_isAtTarget && pathFinder.reachedDestination)
                     {
                         navStopEventHandler?.Invoke(gameObject, transform);
                         _isAtTarget = true;
@@ -298,7 +298,7 @@ namespace Units
             set
             {
                 speed                = value;
-                _pathFinder.maxSpeed = value;
+                pathFinder.maxSpeed = value;
             }
         }
 
@@ -337,10 +337,10 @@ namespace Units
         /// </summary>
         protected Transform InitTarget { get; set; }
 
-        private AIDestinationSetter _destinationSetter;
-        private AIPath              _pathFinder;
-        private bool                _isAtTarget;
-        private float               _baseTimer;
+        private   AIDestinationSetter _destinationSetter;
+        protected AIPath              pathFinder;
+        private   bool                _isAtTarget;
+        private   float               _baseTimer;
 
         /// <summary>
         ///     是否在敌人家门口

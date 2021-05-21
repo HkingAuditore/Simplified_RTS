@@ -326,7 +326,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   attackPower: 8
-  attackColdDownTime: 1
+  attackColdDownTime: 2
   attackRange: 0.85
   originalVelocity: {x: 0, y: 0, z: 0}
   findEnemyRadius: 2.2
@@ -456,7 +456,7 @@ MonoBehaviour:
   maxAcceleration: -2.5
   rotationSpeed: 360
   slowdownDistance: 0.6
-  pickNextWaypointDist: 0.5
+  pickNextWaypointDist: 1
   endReachedDistance: 0.2
   alwaysDrawGizmos: 0
   slowWhenNotFacingTarget: 1

@@ -25,7 +25,7 @@ namespace UI.Tutorial
         {
             // Debug.Log("Dict Count:" + tutorialDict.Count);
             if (tutorialDict.Count <= 0 || !tutorialDict.ContainsKey(NextTutorialIndex)) return;
-            if (tutorialDict[NextTutorialIndex].awakeGameObject.activeInHierarchy) tutorialDict[NextTutorialIndex].ShowTutorialClip();
+            if (tutorialDict[NextTutorialIndex].awakeGameObject.activeInHierarchy ^ tutorialDict[NextTutorialIndex].isWaitForAwakeGameObjectDisabled) tutorialDict[NextTutorialIndex].ShowTutorialClip();
         }
 
         public void RegisterTutorialClip(TutorialClipUI tutorialClip)

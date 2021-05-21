@@ -329,7 +329,7 @@ MonoBehaviour:
   attackColdDownTime: 1
   attackRange: 0.85
   originalVelocity: {x: 0, y: 0, z: 0}
-  findEnemyRadius: 2.2
+  findEnemyRadius: 5.2
 --- !u!114 &4459561262108975549
 MonoBehaviour:
   m_ObjectHideFlags: 0

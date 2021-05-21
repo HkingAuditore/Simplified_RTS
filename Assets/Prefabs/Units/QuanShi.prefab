@@ -308,7 +308,7 @@ MonoBehaviour:
   _hp: 100
   defence: 3
   isUnmovable: 0
-  playerOwnMax: 5
+  playerOwnMax: 3
   unitRigidbody: {fileID: 1235125175078914600}
   speed: 2
   road: 1
@@ -316,7 +316,7 @@ MonoBehaviour:
   unitType: 0
   costFood: 13
   costWood: 9
-  costGold: 9
+  costGold: 10
   isDieImmediately: 0
   deathReward: 10
   navStopEventHandler:
@@ -456,7 +456,7 @@ MonoBehaviour:
   maxAcceleration: -2.5
   rotationSpeed: 360
   slowdownDistance: 0.6
-  pickNextWaypointDist: 0.5
+  pickNextWaypointDist: 1
   endReachedDistance: 0.2
   alwaysDrawGizmos: 0
   slowWhenNotFacingTarget: 1

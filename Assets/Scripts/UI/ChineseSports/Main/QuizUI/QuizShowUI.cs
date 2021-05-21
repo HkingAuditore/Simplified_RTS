@@ -41,6 +41,7 @@ namespace UI.ChineseSports.Main.QuizUI
             resultText.gameObject.SetActive(false);
             ansButton.SetActive(true);
             quizContent.text = quiz.QuizContent;
+            quizOptionsButtonImages.ForEach(b => b.SetActive(false));
             for (int i = 0; i < quizOptionsButtons.Count; i++)
             {
                 string index ="";

@@ -69,9 +69,10 @@ namespace Units.RangedAttack
                 // TODO StartEventHandler += () => navMeshAgent.stoppingDistance = attackRange * 0.8f;
 
                 unitRigidbody.velocity = OriginalVelocity;
-            InitTarget     = GetEnemySide();
-            _maxShootSpeed = Mathf.Sqrt(attackRange * Bullet.Gravity / Mathf.Sin(45f * 2 * Mathf.Deg2Rad));
-            _attackTrigger = transform.Find("FindEnemyRange").GetComponent<FindEnemyTrigger>();
+            InitTarget                    = GetEnemySide();
+            _maxShootSpeed                = Mathf.Sqrt(attackRange * Bullet.Gravity / Mathf.Sin(45f * 2 * Mathf.Deg2Rad));
+            _attackTrigger                = transform.Find("FindEnemyRange").GetComponent<FindEnemyTrigger>();
+            pathFinder.endReachedDistance = this.attackRange;
 
             FindEnemy();
 
@@ -229,10 +230,12 @@ namespace Units.RangedAttack
             if (distance < attackRange && (isUnmovable || unitRigidbody.velocity.magnitude < 2f))
             {
                 if (!isUnmovable)
-                    transform.LookAt(_enemyUnit.transform);
-                else
+                {
                     shootTransform.LookAt(_enemyUnit.transform);
-                // if (!isUnmovable)
+                }else
+                {
+                    shootTransform.LookAt(_enemyUnit.transform);
+                }                // if (!isUnmovable)
                 //     TODO navMeshAgent.speed = 0f;
 
                 //射击角度 0~45
