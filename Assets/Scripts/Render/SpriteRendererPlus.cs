@@ -1,4 +1,5 @@
-﻿using Units;
+﻿using System;
+using Units;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -24,14 +25,19 @@ namespace Render
         /// </summary>
         public bool faceRight;
 
-        private int    _isAside;
-        private Camera _mainCamera;
-        private Unit   _parentUnit;
+        private int            _isAside;
+        private Camera         _mainCamera;
+        private Unit           _parentUnit;
+        private SpriteRenderer _sprite;
+        private Vector3        _oriLocalPos;
+        private float          _lastOffsetX;
 
         [ExecuteAlways]
         private void Start()
         {
-            _mainCamera = GameManager.GameManager.GetManager.mainCamera;
+            _mainCamera  = GameManager.GameManager.GetManager.mainCamera;
+            _oriLocalPos = transform.localPosition;
+            _sprite      = this.GetComponent<SpriteRenderer>();
             if (isUnit)
             {
                 _parentUnit = transform.parent.GetComponent<Unit>();
@@ -41,14 +47,31 @@ namespace Render
             GetComponent<SpriteRenderer>().shadowCastingMode = ShadowCastingMode.On;
         }
 
-        private void Update()
+
+
+        private void LateUpdate()
         {
             if (isUnit)
             {
-                var yDir = _parentUnit.transform.rotation.y;
-                faceRight = (int) yDir % 360 < 180 ? true : false;
-                if (_isAside == -1) faceRight = !faceRight;
-                transform.rotation = Quaternion.Euler(25f * (faceRight ? 1 : -1), faceRight ? 0 : 180, 0);
+                float offsetX = ( _parentUnit.pathFinder.steeringTarget - this.transform.position).x;
+                if (Mathf.Abs(offsetX) < 1f)
+                {
+                    offsetX = _lastOffsetX;
+                }
+
+                _lastOffsetX = offsetX;
+                if (offsetX > 0)
+                {
+                    transform.rotation      = Quaternion.Euler(25f, 0, 0);
+                    transform.localPosition = _oriLocalPos;
+                }
+                else
+                {
+                    transform.rotation      = Quaternion.Euler(-25f, 180, 0);
+                    transform.localPosition = new Vector3(-_oriLocalPos.x, _oriLocalPos.y, _oriLocalPos.z);
+
+                }
+                
             }
 
             if (isArrow)

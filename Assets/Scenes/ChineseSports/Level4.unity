@@ -1168,6 +1168,7 @@ MonoBehaviour:
   UnitDeathEventHandler:
     m_PersistentCalls:
       m_Calls: []
+  pathFinder: {fileID: 0}
   attackedEffect: {fileID: 628618482459116704, guid: 06dc2e3a32ef81344b381e0df4a8616b, type: 3}
   deathEffect: {fileID: 7253522569038370723, guid: 17872a7dade3dcc449897b3825b4e095, type: 3}
 --- !u!1001 &94737177
@@ -2712,6 +2713,7 @@ MonoBehaviour:
   UnitDeathEventHandler:
     m_PersistentCalls:
       m_Calls: []
+  pathFinder: {fileID: 0}
   attackedEffect: {fileID: 628618482459116704, guid: 06dc2e3a32ef81344b381e0df4a8616b, type: 3}
   deathEffect: {fileID: 7253522569038370723, guid: 17872a7dade3dcc449897b3825b4e095, type: 3}
 --- !u!114 &204701377
@@ -3158,7 +3160,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aiPlayer: {fileID: 228096357}
   enableRoads: 000100
-  aiRestTime: 7
+  aiRestTime: 5
   aiAvailableUnits: []
 --- !u!4 &228096356
 Transform:
@@ -3205,9 +3207,9 @@ MonoBehaviour:
   _wood: 0
   _gold: 8
   resourceProduct: 000000000000000001000000
-  resourceProducingTime: 5
+  resourceProducingTime: 3
   isEnemy: 1
-  availableUnits: 000000000100000002000000
+  availableUnits: 00000000010000000200000003000000
   UnitsList: []
 --- !u!1 &228785069
 GameObject:
@@ -3678,7 +3680,7 @@ RectTransform:
   - {fileID: 895974603}
   - {fileID: 2005312570}
   m_Father: {fileID: 633153648}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -4398,6 +4400,7 @@ MonoBehaviour:
   UnitDeathEventHandler:
     m_PersistentCalls:
       m_Calls: []
+  pathFinder: {fileID: 0}
   attackedEffect: {fileID: 628618482459116704, guid: 06dc2e3a32ef81344b381e0df4a8616b, type: 3}
   deathEffect: {fileID: 7253522569038370723, guid: 17872a7dade3dcc449897b3825b4e095, type: 3}
 --- !u!114 &341323441
@@ -4938,7 +4941,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: 33.600098}
+  m_AnchoredPosition: {x: 0, y: 33.60022}
   m_SizeDelta: {x: 49.870605, y: 51.918427}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &364822497
@@ -5621,6 +5624,8 @@ MonoBehaviour:
   - UnitPrefab: {fileID: 2546485736200557784, guid: 93f807e3d11639f4c9cf2325152a4788, type: 3}
     IsEnemy: 1
   - UnitPrefab: {fileID: 2546485736200557784, guid: 51b58f23909c2ba429b9775a37763277, type: 3}
+    IsEnemy: 1
+  - UnitPrefab: {fileID: 2546485736200557784, guid: de8cc5b49fc443c46a2b4ac1e06f83f2, type: 3}
     IsEnemy: 1
   resultUI: {fileID: 1332352534}
   winEvent:
@@ -7756,9 +7761,9 @@ RectTransform:
   - {fileID: 230724447}
   - {fileID: 157779169}
   - {fileID: 1656439819}
+  - {fileID: 1474358065}
   - {fileID: 1332352533}
   - {fileID: 269054081}
-  - {fileID: 1474358065}
   m_Father: {fileID: 939729250}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -9797,8 +9802,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7ba894aedc9f9f4489edb0e6895d803, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hp: 80
-  defence: 3
+  _hp: 200
+  defence: 1
   isUnmovable: 1
   playerOwnMax: 5
   unitRigidbody: {fileID: 832627243}
@@ -9810,13 +9815,14 @@ MonoBehaviour:
   costWood: 0
   costGold: 0
   isDieImmediately: 1
-  deathReward: 10
+  deathReward: 30
   navStopEventHandler:
     m_PersistentCalls:
       m_Calls: []
   UnitDeathEventHandler:
     m_PersistentCalls:
       m_Calls: []
+  pathFinder: {fileID: 0}
   attackedEffect: {fileID: 628618482459116704, guid: 06dc2e3a32ef81344b381e0df4a8616b, type: 3}
   deathEffect: {fileID: 7253522569038370723, guid: 17872a7dade3dcc449897b3825b4e095, type: 3}
 --- !u!114 &832627241
@@ -10529,7 +10535,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -12299,6 +12305,7 @@ MonoBehaviour:
   UnitDeathEventHandler:
     m_PersistentCalls:
       m_Calls: []
+  pathFinder: {fileID: 0}
   attackedEffect: {fileID: 628618482459116704, guid: 06dc2e3a32ef81344b381e0df4a8616b, type: 3}
   deathEffect: {fileID: 7253522569038370723, guid: 17872a7dade3dcc449897b3825b4e095, type: 3}
 --- !u!114 &1042811213
@@ -14268,7 +14275,7 @@ MonoBehaviour:
   videoPlayer: {fileID: 1235482418}
   rawImage: {fileID: 1235482419}
   resultUI: {fileID: 1332352534}
-  videoClipName: "\u9A91\u9010\u98DE\u7403"
+  _videoClipName: "\u9A91\u9010\u98DE\u7403"
 --- !u!328 &1235482418
 VideoPlayer:
   m_ObjectHideFlags: 0
@@ -14643,6 +14650,7 @@ MonoBehaviour:
   UnitDeathEventHandler:
     m_PersistentCalls:
       m_Calls: []
+  pathFinder: {fileID: 0}
 --- !u!195 &1250947456
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -15188,7 +15196,7 @@ RectTransform:
   m_Children:
   - {fileID: 83495160}
   m_Father: {fileID: 633153648}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -15214,7 +15222,7 @@ MonoBehaviour:
   itemDicts:
   - itemSprite: {fileID: 21300000, guid: c91af09dc8335c64780d65491c1697f6, type: 3}
     itemName: "\u5510\u9676\u6253\u9A6C\u7403\u4FD1"
-    itemIndex: 2
+    itemIndex: 3
   itemImage: {fileID: 2061497462}
   itemNameText: {fileID: 1982760318}
   itemPanel: {fileID: 1215048750}
@@ -16755,7 +16763,7 @@ RectTransform:
   - {fileID: 691270776}
   - {fileID: 228785070}
   m_Father: {fileID: 633153648}
-  m_RootOrder: 6
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -17354,7 +17362,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1530438261}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.56, y: 0, z: 0}
+  m_LocalPosition: {x: 2.008, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1617489273}
@@ -17405,6 +17413,7 @@ MonoBehaviour:
   UnitDeathEventHandler:
     m_PersistentCalls:
       m_Calls: []
+  pathFinder: {fileID: 0}
 --- !u!195 &1530438265
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -18171,6 +18180,7 @@ MonoBehaviour:
   UnitDeathEventHandler:
     m_PersistentCalls:
       m_Calls: []
+  pathFinder: {fileID: 0}
   attackedEffect: {fileID: 628618482459116704, guid: 06dc2e3a32ef81344b381e0df4a8616b, type: 3}
   deathEffect: {fileID: 7253522569038370723, guid: 17872a7dade3dcc449897b3825b4e095, type: 3}
 --- !u!65 &1592190282
@@ -18534,7 +18544,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0.9433962, g: 0.9433962, b: 0.9433962, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -18554,7 +18564,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u7EE7 \u7EED \u6311 \u6218"
+  m_Text: "\u8DF3   \u8FC7 >>>"
 --- !u!222 &1623064655
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -18810,7 +18820,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: 33.600098}
+  m_AnchoredPosition: {x: 0, y: 33.60022}
   m_SizeDelta: {x: 49.870605, y: 51.918427}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1643105410
@@ -20350,9 +20360,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ae2c23286a44da4aa6f393f8e49024c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropColdTime: 10
-  dropValue: 4
-  dropCountMax: 3
+  dropColdTime: 5
+  dropValue: 2
+  dropCountMax: 4
   dropCountMin: 2
   gameResourceTypeType: 1
   dropPrefab: {fileID: 315225347388487927, guid: e75bd372416f34c45b2956cefec633e8, type: 3}
@@ -22221,9 +22231,9 @@ MonoBehaviour:
   farmerPrefab: {fileID: 5408525696826754838, guid: a67446edf35fbb3489516feb6f2d45f9, type: 3}
   _food: 0
   _wood: 0
-  _gold: 8
+  _gold: 10
   resourceProduct: 000000000000000001000000
-  resourceProducingTime: 6
+  resourceProducingTime: 3
   isEnemy: 0
   availableUnits: 000000000100000002000000
   UnitsList: []
@@ -22965,6 +22975,7 @@ MonoBehaviour:
   UnitDeathEventHandler:
     m_PersistentCalls:
       m_Calls: []
+  pathFinder: {fileID: 0}
   attackedEffect: {fileID: 628618482459116704, guid: 06dc2e3a32ef81344b381e0df4a8616b, type: 3}
   deathEffect: {fileID: 7253522569038370723, guid: 17872a7dade3dcc449897b3825b4e095, type: 3}
 --- !u!65 &2042800117

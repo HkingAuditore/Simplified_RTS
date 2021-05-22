@@ -1053,6 +1053,7 @@ MonoBehaviour:
   UnitDeathEventHandler:
     m_PersistentCalls:
       m_Calls: []
+  pathFinder: {fileID: 0}
   attackedEffect: {fileID: 628618482459116704, guid: 06dc2e3a32ef81344b381e0df4a8616b, type: 3}
   deathEffect: {fileID: 7253522569038370723, guid: 17872a7dade3dcc449897b3825b4e095, type: 3}
 --- !u!1001 &94737177
@@ -2468,6 +2469,7 @@ MonoBehaviour:
   UnitDeathEventHandler:
     m_PersistentCalls:
       m_Calls: []
+  pathFinder: {fileID: 0}
   attackedEffect: {fileID: 628618482459116704, guid: 06dc2e3a32ef81344b381e0df4a8616b, type: 3}
   deathEffect: {fileID: 7253522569038370723, guid: 17872a7dade3dcc449897b3825b4e095, type: 3}
 --- !u!114 &204701377
@@ -2783,7 +2785,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aiPlayer: {fileID: 228096357}
   enableRoads: 000100
-  aiRestTime: 7
+  aiRestTime: 5
   aiAvailableUnits: []
 --- !u!4 &228096356
 Transform:
@@ -4215,6 +4217,7 @@ MonoBehaviour:
   UnitDeathEventHandler:
     m_PersistentCalls:
       m_Calls: []
+  pathFinder: {fileID: 0}
   attackedEffect: {fileID: 628618482459116704, guid: 06dc2e3a32ef81344b381e0df4a8616b, type: 3}
   deathEffect: {fileID: 7253522569038370723, guid: 17872a7dade3dcc449897b3825b4e095, type: 3}
 --- !u!114 &341323441
@@ -5047,7 +5050,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: 33.600098}
+  m_AnchoredPosition: {x: 0, y: 33.60022}
   m_SizeDelta: {x: 49.870605, y: 51.918427}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &364822497
@@ -10413,6 +10416,7 @@ MonoBehaviour:
   UnitDeathEventHandler:
     m_PersistentCalls:
       m_Calls: []
+  pathFinder: {fileID: 0}
   attackedEffect: {fileID: 628618482459116704, guid: 06dc2e3a32ef81344b381e0df4a8616b, type: 3}
   deathEffect: {fileID: 7253522569038370723, guid: 17872a7dade3dcc449897b3825b4e095, type: 3}
 --- !u!114 &832627241
@@ -12568,6 +12572,7 @@ MonoBehaviour:
   UnitDeathEventHandler:
     m_PersistentCalls:
       m_Calls: []
+  pathFinder: {fileID: 0}
   attackedEffect: {fileID: 628618482459116704, guid: 06dc2e3a32ef81344b381e0df4a8616b, type: 3}
   deathEffect: {fileID: 7253522569038370723, guid: 17872a7dade3dcc449897b3825b4e095, type: 3}
 --- !u!114 &1042811213
@@ -14530,6 +14535,7 @@ MonoBehaviour:
   UnitDeathEventHandler:
     m_PersistentCalls:
       m_Calls: []
+  pathFinder: {fileID: 0}
 --- !u!195 &1250947456
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -17141,7 +17147,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1530438261}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.56, y: 0, z: 0}
+  m_LocalPosition: {x: 2.06, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1617489273}
@@ -17192,6 +17198,7 @@ MonoBehaviour:
   UnitDeathEventHandler:
     m_PersistentCalls:
       m_Calls: []
+  pathFinder: {fileID: 0}
 --- !u!195 &1530438265
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -17897,6 +17904,7 @@ MonoBehaviour:
   UnitDeathEventHandler:
     m_PersistentCalls:
       m_Calls: []
+  pathFinder: {fileID: 0}
   attackedEffect: {fileID: 628618482459116704, guid: 06dc2e3a32ef81344b381e0df4a8616b, type: 3}
   deathEffect: {fileID: 7253522569038370723, guid: 17872a7dade3dcc449897b3825b4e095, type: 3}
 --- !u!65 &1592190282
@@ -18835,7 +18843,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: 33.600098}
+  m_AnchoredPosition: {x: 0, y: 33.60022}
   m_SizeDelta: {x: 49.870605, y: 51.918427}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1643105410
@@ -20391,6 +20399,7 @@ MonoBehaviour:
   UnitDeathEventHandler:
     m_PersistentCalls:
       m_Calls: []
+  pathFinder: {fileID: 0}
   attackedEffect: {fileID: 628618482459116704, guid: 06dc2e3a32ef81344b381e0df4a8616b, type: 3}
   deathEffect: {fileID: 7253522569038370723, guid: 17872a7dade3dcc449897b3825b4e095, type: 3}
 --- !u!114 &1742707392
@@ -23698,6 +23707,7 @@ MonoBehaviour:
   UnitDeathEventHandler:
     m_PersistentCalls:
       m_Calls: []
+  pathFinder: {fileID: 0}
   attackedEffect: {fileID: 628618482459116704, guid: 06dc2e3a32ef81344b381e0df4a8616b, type: 3}
   deathEffect: {fileID: 7253522569038370723, guid: 17872a7dade3dcc449897b3825b4e095, type: 3}
 --- !u!65 &2042800117
@@ -24441,6 +24451,7 @@ MonoBehaviour:
   UnitDeathEventHandler:
     m_PersistentCalls:
       m_Calls: []
+  pathFinder: {fileID: 0}
   attackedEffect: {fileID: 628618482459116704, guid: 06dc2e3a32ef81344b381e0df4a8616b, type: 3}
   deathEffect: {fileID: 7253522569038370723, guid: 17872a7dade3dcc449897b3825b4e095, type: 3}
 --- !u!114 &2122371813

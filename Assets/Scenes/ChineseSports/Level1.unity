@@ -296,7 +296,7 @@ GameObject:
   - component: {fileID: 15832599}
   - component: {fileID: 15832600}
   m_Layer: 0
-  m_Name: Tutorial13
+  m_Name: Tutorial14
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -365,7 +365,7 @@ MonoBehaviour:
   closeEvent:
     m_PersistentCalls:
       m_Calls: []
-  tutorialIndex: 13
+  tutorialIndex: 14
   maxStayTime: 60
   tutorialPanel: {fileID: 140823326}
 --- !u!1 &19108723
@@ -1258,6 +1258,7 @@ MonoBehaviour:
   UnitDeathEventHandler:
     m_PersistentCalls:
       m_Calls: []
+  pathFinder: {fileID: 0}
   attackedEffect: {fileID: 628618482459116704, guid: 06dc2e3a32ef81344b381e0df4a8616b, type: 3}
   deathEffect: {fileID: 7253522569038370723, guid: 17872a7dade3dcc449897b3825b4e095, type: 3}
 --- !u!1 &96217136
@@ -2605,7 +2606,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3409,7 +3410,7 @@ GameObject:
   - component: {fileID: 254729934}
   - component: {fileID: 254729935}
   m_Layer: 0
-  m_Name: Tutorial11
+  m_Name: Tutorial12
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3454,7 +3455,7 @@ MonoBehaviour:
   closeEvent:
     m_PersistentCalls:
       m_Calls: []
-  tutorialIndex: 11
+  tutorialIndex: 12
   maxStayTime: 60
   tutorialPanel: {fileID: 869577137}
 --- !u!1 &258154268
@@ -3539,7 +3540,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3559,7 +3560,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u7EE7 \u7EED \u6311 \u6218"
+  m_Text: "\u8DF3   \u8FC7 >>>"
 --- !u!222 &265964944
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3933,7 +3934,7 @@ MonoBehaviour:
   videoPlayer: {fileID: 304760141}
   rawImage: {fileID: 304760142}
   resultUI: {fileID: 1332352534}
-  videoClipName: "\u97A0\u8E74\u98DE\u9E1F"
+  _videoClipName: "\u97A0\u8E74\u98DE\u9E1F"
 --- !u!1001 &306652183
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5751,6 +5752,7 @@ MonoBehaviour:
   UnitDeathEventHandler:
     m_PersistentCalls:
       m_Calls: []
+  pathFinder: {fileID: 0}
   attackedEffect: {fileID: 0}
   deathEffect: {fileID: 0}
 --- !u!54 &405013066
@@ -6560,6 +6562,9 @@ Transform:
   - {fileID: 821438817}
   - {fileID: 1620722348}
   - {fileID: 2042800112}
+  - {fileID: 1125977066}
+  - {fileID: 2036932146}
+  - {fileID: 1659331731}
   m_Father: {fileID: 1237185648}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7910,6 +7915,7 @@ MonoBehaviour:
   UnitDeathEventHandler:
     m_PersistentCalls:
       m_Calls: []
+  pathFinder: {fileID: 0}
   attackedEffect: {fileID: 0}
   deathEffect: {fileID: 0}
 --- !u!1 &604382319
@@ -9131,7 +9137,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 659700789}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 0eeae8e18e475cd43a4ca7a9e20e73ac, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -10982,6 +10988,7 @@ MonoBehaviour:
   UnitDeathEventHandler:
     m_PersistentCalls:
       m_Calls: []
+  pathFinder: {fileID: 0}
   attackedEffect: {fileID: 0}
   deathEffect: {fileID: 0}
 --- !u!54 &845518287
@@ -11341,7 +11348,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   version: 1
   data:
-    dataString: UEsDBBQAAAgIAABAIexG5A9g5QEAAMQDAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQGVU02P2jAQ/Sso5xaRsNClx7JoeyhQEQ6rXfUwsSeJtY5N/QEsiP9eT3BKkHrpyfGbec8zbybnhNVggDk0G+DC2+TrYDTMPg0SppXT3izhuDBGm4C3KEqZixO2aaNJQA4g36GQ+B1FVTvCe+BciqaIWAPHXOod3q4LXuEPVJWrAzYmTKgNVkKr+ERKiciF02YrJEb0MYAuXl+ImWU95JUqnVKOt0gsaqkEaTFABiXuQblnA7s696YEhkvNSTV50ivtNvjbC4MJ5YINrgTFuZZScDQk5IzHfmyJtr5/oYts0RgQ6h+crUHsabEov+niT+hAyK79Bux7+D4Pkj1IT5VO04eHwYVahmp5jb79ouv1xRya3V+vyFWjHbhg6lXlGP3/iOeJzlau1IYh/6a94naOKsj9DyM+GPPT6TCNlGyYzSIrHQ+vldtaH8i6tXdSKLyZQYFVGMhcK4WMqrb3QWLFwd0CCsGgdXk4WL1W8uPltTcSVLSKK9g3gTv3zglV3biVF/ze36TMHovJDNIpImMFwud0jMVoxr+UJR+NJkWRtE0IJZwA+TPoS9eZExa8N3MFTau4QRamO2jXjnaLGzg8i1Oje90JVeqchd1Q66tGV78NWwEy2MsX7a+QY9sCUZPzJbn8AVBLAwQUAAAICAAAQCHs6HL0tW8AAAB6AAAACQAkAG1ldGEuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAatWKkstKs7Mz1OyUjDRM9IzNNVRUEovSizIKAaKGII4pZkpIHa0UpqRRZKpZaKhWWpqcnJSaqKuoXFqkoFlinlaWoqBgWlSklIsUH1JZUGqX2JuKkRPQGJJRlpmXkpmXrpeUGpyYnGJO8hwpdhaAFBLAQItABQAAAgIAABAIexG5A9g5QEAAMQDAAALACQAAAAAAAAAAAAAAAAAAABncmFwaDAuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAVBLAQItABQAAAgIAABAIezocvS1bwAAAHoAAAAJACQAAAAAAAAAAAAAADICAABtZXRhLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFQSwUGAAAAAAIAAgC4AAAA7AIAAAAA
+    dataString: UEsDBBQAAAgIAABAIezMjNsX8gEAAM4DAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQF1U8uO2zAM/JXA525gJ5tXj80G20OTFHEOiy16oCXaFlaWUj3yRP69ou00DtqeZA01Q3JIXyJWggHm0GyAC2+jz724P/jUi5hWTnuzhOPCGG0CnhCKUqbijPWzeBKQA8gPyCR+RVGUrsaTDjyXosoIDVgFx1TqHZGn9aMALHiB31AVrgzouD8ZEyzUBguhVZspITJy4bTZCoktOg2ga69v4T4Yxh3knXgzSuItEos6y0FaDJBBiXtQ7tXArky9yYHhUnNSjV70SrsN/vLCYERvwQZzguJcSyk4GhJyxmM3tkRbPma4RbZoDAj1D87WIHa0WCu/ucVf0IGQt/YrsB/h+9KL9iA9VTpOnp97V2oZimUT/fGTrk3GFKrdH6+GlFg7cMHURuXYzuTUnmc6a7lcG4b8i/aK2zmqIPd/xlPcn/xFanO2lGRcj/rUbMyoJSbDflO8LfWB3Ft7J4XCux8UWIWZzLVSyKhw+xgkVju7e0AhGLQuDQcr10qe3t47U0FFK7mCfRW4c++cUMWdW3jBHy2O8sE0G80gGSMyliE8JUPM4hmf5DmP41GWRXUTQgknQH4P+tLd/AmL3hm7gqpW3CALA+7Vm0frxQ0cXsW50p3uhMp1ysJ6qHWjcavfhsUAGezli/pvSLFugajR5RpdfwNQSwMEFAAACAgAAEAh7Ohy9LVvAAAAegAAAAkAJABtZXRhLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQGrVipLLSrOzM9TslIw0TPSMzTVUVBKL0osyCgGihiCOKWZKSB2tFKakUWSqWWioVlqanJyUmqirqFxapKBZYp5WlqKgYFpUpJSLFB9SWVBql9ibipET0BiSUZaZl5KZl66XlBqcmJxiTvIcKXYWgBQSwECLQAUAAAICAAAQCHszIzbF/IBAADOAwAACwAkAAAAAAAAAAAAAAAAAAAAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFQSwECLQAUAAAICAAAQCHs6HL0tW8AAAB6AAAACQAkAAAAAAAAAAAAAAA/AgAAbWV0YS5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0BUEsFBgAAAAACAAIAuAAAAPkCAAAAAA==
     upgradeData: 
     file_cachedStartup: {fileID: 0}
     data_cachedStartup: 
@@ -11595,7 +11602,7 @@ GameObject:
   - component: {fileID: 874225894}
   - component: {fileID: 874225897}
   - component: {fileID: 874225896}
-  m_Layer: 11
+  m_Layer: 12
   m_Name: Background (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11813,7 +11820,7 @@ GameObject:
   - component: {fileID: 879383597}
   - component: {fileID: 879383598}
   m_Layer: 0
-  m_Name: Tutorial14
+  m_Name: Tutorial15
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11858,7 +11865,7 @@ MonoBehaviour:
   closeEvent:
     m_PersistentCalls:
       m_Calls: []
-  tutorialIndex: 14
+  tutorialIndex: 15
   maxStayTime: 60
   tutorialPanel: {fileID: 1873898665}
 --- !u!1001 &881990965
@@ -14483,6 +14490,50 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f9450d58b63333140926e3ecee421c09, type: 3}
+--- !u!1 &1125977065
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1125977066}
+  - component: {fileID: 1125977067}
+  m_Layer: 12
+  m_Name: Snows
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!4 &1125977066
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1125977065}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -3.75, y: 0.42, z: 6.25}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 461538961}
+  m_RootOrder: 22
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1125977067
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1125977065}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 26.264442, y: 1, z: 1}
+  m_Center: {x: 3.3583221, y: 0, z: 0}
 --- !u!1 &1144636294
 GameObject:
   m_ObjectHideFlags: 0
@@ -14693,7 +14744,7 @@ GameObject:
   - component: {fileID: 1171335280}
   - component: {fileID: 1171335281}
   m_Layer: 0
-  m_Name: Tutorial16
+  m_Name: Tutorial17
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14738,7 +14789,7 @@ MonoBehaviour:
   closeEvent:
     m_PersistentCalls:
       m_Calls: []
-  tutorialIndex: 16
+  tutorialIndex: 17
   maxStayTime: 60
   tutorialPanel: {fileID: 1448700939}
 --- !u!1 &1180546610
@@ -14809,6 +14860,7 @@ MonoBehaviour:
   UnitDeathEventHandler:
     m_PersistentCalls:
       m_Calls: []
+  pathFinder: {fileID: 0}
   attackedEffect: {fileID: 0}
   deathEffect: {fileID: 0}
 --- !u!54 &1180546613
@@ -16038,6 +16090,7 @@ MonoBehaviour:
   UnitDeathEventHandler:
     m_PersistentCalls:
       m_Calls: []
+  pathFinder: {fileID: 0}
   attackedEffect: {fileID: 0}
   deathEffect: {fileID: 0}
 --- !u!54 &1226275852
@@ -16319,7 +16372,7 @@ GameObject:
   - component: {fileID: 1247533109}
   - component: {fileID: 1247533110}
   m_Layer: 0
-  m_Name: Tutorial8
+  m_Name: Tutorial9
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16376,7 +16429,7 @@ MonoBehaviour:
   closeEvent:
     m_PersistentCalls:
       m_Calls: []
-  tutorialIndex: 8
+  tutorialIndex: 9
   maxStayTime: 8
   tutorialPanel: {fileID: 1253673396}
 --- !u!1 &1249353114
@@ -16617,6 +16670,7 @@ MonoBehaviour:
   UnitDeathEventHandler:
     m_PersistentCalls:
       m_Calls: []
+  pathFinder: {fileID: 0}
 --- !u!195 &1250947456
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -16722,7 +16776,7 @@ GameObject:
   - component: {fileID: 1261249883}
   - component: {fileID: 1261249884}
   m_Layer: 0
-  m_Name: Tutorial9
+  m_Name: Tutorial10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16767,7 +16821,7 @@ MonoBehaviour:
   closeEvent:
     m_PersistentCalls:
       m_Calls: []
-  tutorialIndex: 9
+  tutorialIndex: 10
   maxStayTime: 60
   tutorialPanel: {fileID: 997444095}
 --- !u!1001 &1267071505
@@ -16957,7 +17011,7 @@ GameObject:
   - component: {fileID: 1282073048}
   - component: {fileID: 1282073049}
   m_Layer: 0
-  m_Name: Tutorial12
+  m_Name: Tutorial13
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17026,7 +17080,7 @@ MonoBehaviour:
   closeEvent:
     m_PersistentCalls:
       m_Calls: []
-  tutorialIndex: 12
+  tutorialIndex: 13
   maxStayTime: 60
   tutorialPanel: {fileID: 1677646302}
 --- !u!1 &1287069132
@@ -17227,7 +17281,7 @@ GameObject:
   - component: {fileID: 1302204180}
   - component: {fileID: 1302204181}
   m_Layer: 0
-  m_Name: Tutorial7
+  m_Name: Tutorial8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17272,7 +17326,7 @@ MonoBehaviour:
   closeEvent:
     m_PersistentCalls:
       m_Calls: []
-  tutorialIndex: 7
+  tutorialIndex: 8
   maxStayTime: 60
   tutorialPanel: {fileID: 463594323}
 --- !u!1 &1306891771
@@ -19188,7 +19242,7 @@ GameObject:
   - component: {fileID: 1438155180}
   - component: {fileID: 1438155181}
   m_Layer: 0
-  m_Name: Tutorial15
+  m_Name: Tutorial16
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19233,7 +19287,7 @@ MonoBehaviour:
   closeEvent:
     m_PersistentCalls:
       m_Calls: []
-  tutorialIndex: 15
+  tutorialIndex: 16
   maxStayTime: 30
   tutorialPanel: {fileID: 1363548567}
 --- !u!4 &1443657456 stripped
@@ -20104,6 +20158,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1493941597}
   - component: {fileID: 1493941598}
+  - component: {fileID: 1493941599}
   m_Layer: 12
   m_Name: BackWall
   m_TagString: Untagged
@@ -20119,7 +20174,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1493941596}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.11595, y: 0, z: 6.37}
+  m_LocalPosition: {x: -0.11595, y: -0.3, z: 6.83}
   m_LocalScale: {x: 1.3492832, y: 1.3492835, z: 1.3492835}
   m_Children:
   - {fileID: 810466281}
@@ -20134,12 +20189,38 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1493941596}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 0eeae8e18e475cd43a4ca7a9e20e73ac, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 23.667938, y: 2.4171717, z: 2.3783479}
-  m_Center: {x: -0.31050107, y: 0.35096624, z: 0.6371726}
+  m_Size: {x: 23.667938, y: 5.6149163, z: 4.7769446}
+  m_Center: {x: -0.31050107, y: -0.15192784, z: 1.5602939}
+--- !u!114 &1493941599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1493941596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bee0a6fa1f5d4f4db481219040523c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  type: 0
+  mesh: {fileID: 0}
+  rectangleSize: {x: 25.21, y: 1.68}
+  circleRadius: 1
+  circleResolution: 6
+  height: 1
+  meshScale: 1
+  center: {x: 0, y: 0, z: 0}
+  updateDistance: 0.4
+  isDual: 0
+  cutsAddedGeom: 1
+  updateRotationDistance: 10
+  useRotationAndScale: 1
 --- !u!1 &1496727714
 GameObject:
   m_ObjectHideFlags: 0
@@ -20376,7 +20457,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1530438261}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.56, y: 0, z: 0}
+  m_LocalPosition: {x: 2.135, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1617489273}
@@ -20427,6 +20508,7 @@ MonoBehaviour:
   UnitDeathEventHandler:
     m_PersistentCalls:
       m_Calls: []
+  pathFinder: {fileID: 0}
 --- !u!195 &1530438265
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -20789,7 +20871,7 @@ GameObject:
   - component: {fileID: 1560312584}
   - component: {fileID: 1560312587}
   - component: {fileID: 1560312586}
-  m_Layer: 11
+  m_Layer: 12
   m_Name: Background (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22524,6 +22606,50 @@ MonoBehaviour:
   bPlayerIndicator: {fileID: 364822497}
   aPlayerFlag: {fileID: 525096707}
   bPlayerFlag: {fileID: 1926936990}
+--- !u!1 &1659331730
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1659331731}
+  - component: {fileID: 1659331732}
+  m_Layer: 12
+  m_Name: Snows (8)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!4 &1659331731
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1659331730}
+  m_LocalRotation: {x: -0, y: -0.70710707, z: -0, w: 0.70710653}
+  m_LocalPosition: {x: -8.16, y: 0.42, z: 0.72}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 461538961}
+  m_RootOrder: 24
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!65 &1659331732
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1659331730}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 26.264442, y: 1, z: 1}
+  m_Center: {x: 3.3583221, y: 0, z: 0}
 --- !u!1 &1669326778
 GameObject:
   m_ObjectHideFlags: 0
@@ -23115,7 +23241,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1752918802}
-  m_Layer: 11
+  m_Layer: 12
   m_Name: BackGround
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24992,6 +25118,7 @@ MonoBehaviour:
   UnitDeathEventHandler:
     m_PersistentCalls:
       m_Calls: []
+  pathFinder: {fileID: 0}
   attackedEffect: {fileID: 0}
   deathEffect: {fileID: 0}
 --- !u!54 &1905914362
@@ -25267,7 +25394,7 @@ GameObject:
   - component: {fileID: 1926288436}
   - component: {fileID: 1926288437}
   m_Layer: 0
-  m_Name: Tutorial10
+  m_Name: Tutorial11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25324,7 +25451,7 @@ MonoBehaviour:
   closeEvent:
     m_PersistentCalls:
       m_Calls: []
-  tutorialIndex: 10
+  tutorialIndex: 11
   maxStayTime: 8
   tutorialPanel: {fileID: 258154268}
 --- !u!1 &1926936988
@@ -26891,6 +27018,50 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2005183980781642671, guid: 5181c1e82f11f9d4b90de23c90196bc4, type: 3}
   m_PrefabInstance: {fileID: 2021127285}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2036932145
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2036932146}
+  - component: {fileID: 2036932147}
+  m_Layer: 12
+  m_Name: Snows (7)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!4 &2036932146
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2036932145}
+  m_LocalRotation: {x: -0, y: -0.70710707, z: -0, w: 0.70710653}
+  m_LocalPosition: {x: 8.63, y: 0.42, z: 0.72}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 461538961}
+  m_RootOrder: 23
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!65 &2036932147
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2036932145}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 26.264442, y: 1, z: 1}
+  m_Center: {x: 3.3583221, y: 0, z: 0}
 --- !u!1001 &2037434897
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27269,6 +27440,7 @@ MonoBehaviour:
   UnitDeathEventHandler:
     m_PersistentCalls:
       m_Calls: []
+  pathFinder: {fileID: 0}
   attackedEffect: {fileID: 628618482459116704, guid: 06dc2e3a32ef81344b381e0df4a8616b, type: 3}
   deathEffect: {fileID: 7253522569038370723, guid: 17872a7dade3dcc449897b3825b4e095, type: 3}
 --- !u!65 &2042800117

@@ -28,8 +28,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4219854406580097859}
   m_LocalRotation: {x: 0.15159778, y: -0.69066405, z: 0.15159734, w: 0.6906661}
-  m_LocalPosition: {x: -0.039, y: 0.889, z: 0.344}
-  m_LocalScale: {x: 0.7112321, y: 0.71123224, z: 0.7112321}
+  m_LocalPosition: {x: 0, y: 0.576, z: 0.679}
+  m_LocalScale: {x: 0.63881296, y: 0.63881296, z: 0.63881296}
   m_Children:
   - {fileID: 4219854407568194172}
   m_Father: {fileID: 4089572768417318978}
@@ -54,7 +54,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d2c46f922ef0df240b88d381de09f8a7, type: 2}
+  - {fileID: 2100000, guid: 932b265716b06654ca6799403e53b9d0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -5049160071701081941, guid: ca19b9b0ab4bb1d43850eb59e3149ece, type: 3}
+  m_Sprite: {fileID: -3600763682421670052, guid: 43b927c42b5af4d478475422af982a62, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -96,7 +96,7 @@ Animator:
   m_GameObject: {fileID: 4219854406580097859}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 389e5eb8b92232342a1f203b9a9b7e07, type: 2}
+  m_Controller: {fileID: 9100000, guid: c0602af803f87174b94a485e32ebfb52, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -163,7 +163,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4219854407568194173}
   m_LocalRotation: {x: 0.045714248, y: 0.000000059604638, z: 0.00000002235174, w: 0.9989546}
-  m_LocalPosition: {x: -8.58, y: -2.45, z: -0.74}
+  m_LocalPosition: {x: -9.26, y: 0.32, z: -0.14}
   m_LocalScale: {x: 2.7925277, y: 2.7925277, z: 2.792528}
   m_Children: []
   m_Father: {fileID: 4219854406580097858}
@@ -252,11 +252,11 @@ GameObject:
   - component: {fileID: 7482106728451038311}
   - component: {fileID: 1235125175078914600}
   - component: {fileID: 5557640780335940753}
-  - component: {fileID: -7189341285793242372}
+  - component: {fileID: -4833020589864635975}
   - component: {fileID: 5707384864536930073}
   - component: {fileID: 2546485736200557784}
   m_Layer: 0
-  m_Name: KiteGirl
+  m_Name: Enemy0_Level5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -313,7 +313,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8022057804127815773}
   serializedVersion: 2
-  m_Mass: 2
+  m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -349,7 +349,7 @@ MonoBehaviour:
   tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   graphMask:
     value: -1
---- !u!114 &-7189341285793242372
+--- !u!114 &-4833020589864635975
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -411,18 +411,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 620d5ab9a1139a74c8b1805b6ceddd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hp: 250
+  _hp: 130
   defence: 10
   isUnmovable: 0
   playerOwnMax: 5
   unitRigidbody: {fileID: 1235125175078914600}
-  speed: 0.5
+  speed: 3.2
   road: 1
   sidePlayer: {fileID: 0}
-  unitType: 2
+  unitType: 9
   costFood: 4
   costWood: 2
-  costGold: 8
+  costGold: 5
   isDieImmediately: 0
   deathReward: 10
   navStopEventHandler:
@@ -431,12 +431,12 @@ MonoBehaviour:
   UnitDeathEventHandler:
     m_PersistentCalls:
       m_Calls: []
-  pathFinder: {fileID: -7189341285793242372}
-  attackPower: 8
-  attackColdDownTime: 2
+  pathFinder: {fileID: -4833020589864635975}
+  attackPower: 13
+  attackColdDownTime: 0.5
   attackRange: 0.85
   originalVelocity: {x: 0, y: 0, z: 0}
-  findEnemyRadius: 2.2
+  findEnemyRadius: 5.2
 --- !u!1 &8084695571145166821
 GameObject:
   m_ObjectHideFlags: 0

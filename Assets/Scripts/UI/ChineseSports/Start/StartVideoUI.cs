@@ -12,6 +12,7 @@ namespace UI.ChineseSports.Start
         public  VideoPlayer  videoPlayer;
         public  GameObject[] startUIElements;
         public  UnityEvent   videoEndEvent = new UnityEvent();
+        public  GameObject   skipButton;
         private double       _videoTime;
 
         public void Start()
@@ -20,8 +21,15 @@ namespace UI.ChineseSports.Start
             videoPlayer.clip = formerVideo;
             videoPlayer.Play();
             StartCoroutine(WaitForVideoEnd());
+            StartCoroutine(WaitForVideoStartBlack());
         }
 
+        private IEnumerator WaitForVideoStartBlack()
+        {
+            yield return new WaitForSeconds(8f);
+            skipButton.SetActive(true);
+            
+        }
         private IEnumerator WaitForVideoEnd()
         {
             yield return new WaitForSeconds((float) _videoTime);

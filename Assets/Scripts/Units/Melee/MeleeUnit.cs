@@ -51,7 +51,8 @@ namespace Units.Melee
             _attackTrigger = transform.Find("FindEnemyRange").GetComponent<FindEnemyTrigger>();
             InitTarget     = GetEnemySide();
             // UnitRigidbody          = this.GetComponent<Rigidbody>();
-            unitRigidbody.velocity = OriginalVelocity;
+            unitRigidbody.velocity             = OriginalVelocity;
+            this.pathFinder.endReachedDistance = this.attackRange;
             // Debug.Log(this.GetComponent<Rigidbody>().velocity);
             FindEnemy();
             base.Start();
@@ -79,11 +80,13 @@ namespace Units.Melee
                     _isFoundEnemy = false;
                 }
             }
-            else if (_isFoundEnemy)
-            {
-                Goto(_enemyUnit.transform);
+            // else if (_isFoundEnemy)
+            // {
+            //     Goto(_enemyUnit.transform);
                 // Debug.DrawLine(this.transform.position,_enemyUnit.transform.position,this.sidePlayer.gameObject.name == "APlayer" ? Color.green : Color.magenta);
                 // Debug.DrawLine(this.transform.position,this.navMeshAgent.destination,this.sidePlayer.gameObject.name == "APlayer" ? Color.cyan : Color.yellow);
+            if(_isFoundEnemy && _enemyUnit != null)
+            {
                 if (_timer                                                              > AttackColdDownTime &&
                     Vector3.Distance(transform.position, _enemyUnit.transform.position) < AttackRange)
                 {
@@ -91,6 +94,7 @@ namespace Units.Melee
                     _timer = 0f;
                 }
             }
+            // }
 
             // Debug.Log(this.navMeshAgent.destination);
         }
@@ -234,14 +238,14 @@ namespace Units.Melee
             // }
 
             _enemyUnit = _attackTrigger.GetEnemyInList();
-            try
-            {
-                Debug.Log(gameObject.name + " Find Enemy :: " + _enemyUnit.gameObject.GetComponent<Unit>().gameObject.name);
-            }
-            catch
-            {
-                // ignored
-            }
+            // try
+            // {
+            //     Debug.Log(gameObject.name + " Find Enemy :: " + _enemyUnit.gameObject.GetComponent<Unit>().gameObject.name);
+            // }
+            // catch
+            // {
+            //     // ignored
+            // }
 
 
             // Debug.Log("END FIND:" + this._enemyUnit.gameObject.name);

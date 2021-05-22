@@ -83,7 +83,7 @@ namespace UI.ChineseSports.Main
 
         public void ShowVideo()
         {
-            videoPlayerManager.videoClipName = titleName;
+            videoPlayerManager.VideoClipName = titleName;
             videoPlayerManager.gameObject.SetActive(true);
             videoPlayerManager.Play();
         }

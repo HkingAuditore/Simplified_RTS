@@ -68,7 +68,7 @@ namespace Units.RangedAttack
             {
                 Debug.Log("COL!");
                 _isFlying = false;
-                Invoke("DestroyArrow", 5f);
+                Invoke("DestroyArrow", .5f);
             }
         }
 

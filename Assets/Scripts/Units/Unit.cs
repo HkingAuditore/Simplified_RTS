@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using Pathfinding;
 using Player;
 using UnityEngine;
@@ -46,11 +48,37 @@ namespace Units
         ///     风筝女
         /// </summary>
         KiteGirl,
+        
+        /// <summary>
+        ///     仕女
+        /// </summary>
+        YuYuan,
+        
+        /// <summary>
+        ///     拳师
+        /// </summary>
+        DaoLin,
 
         /// <summary>
-        ///     普通敌人
+        ///     普通敌人1
         /// </summary>
-        Enemy0
+        Enemy0,
+        /// <summary>
+        ///     普通敌人2
+        /// </summary>
+        Enemy1,
+        /// <summary>
+        ///     普通敌人3
+        /// </summary>
+        Enemy2,
+        /// <summary>
+        ///     普通敌人3
+        /// </summary>
+        Enemy3,
+        /// <summary>
+        ///     普通敌人3
+        /// </summary>
+        Enemy4
     }
 
     /// <summary>
@@ -198,19 +226,31 @@ namespace Units
                 : GameManager.GameManager.GetManager.aSide;
             unitRigidbody      = GetComponent<Rigidbody>();
             _destinationSetter = GetComponent<AIDestinationSetter>();
-            pathFinder        = GetComponent<AIPath>();
+            pathFinder        = GetComponent<RichAI>();
             UnitDeathEventHandler.AddListener((p, m) => { p.ChangeResource(GameResourceType.Gold, deathReward); });
         }
 
+        void OnEnable () {
+            if (pathFinder != null) pathFinder.onTraverseOffMeshLink += TraverseOffMeshLink;
+        }
+
+        void OnDisable () {
+            if (pathFinder != null) pathFinder.onTraverseOffMeshLink -= TraverseOffMeshLink;
+        }
+        
         public virtual void Start()
         {
             StartEventHandler?.Invoke();
             if(!isUnmovable)
-                this.pathFinder.maxSpeed = this.speed;
+            {
+                this.pathFinder.maxSpeed = this.Speed;
 
+                // pathFinder.enabled = true;
+            }
             if (InitTarget != null)
                 // Debug.Log("GOTO!");
                 Goto(InitTarget);
+            
         }
 
         public virtual void Update()
@@ -233,6 +273,17 @@ namespace Units
                     //Console.WriteLine(e);
                 }
             }
+
+            
+        }
+        
+        IEnumerator TraverseOffMeshLink (RichSpecial link) {
+            // Traverse the link over 1 second
+            float startTime = Time.time;
+            this.pathFinder.canMove = false;
+            yield return new WaitForSeconds(.1f);
+            transform.position      = link.second.position;
+            this.pathFinder.canMove = true;
         }
 
         #region 战斗
@@ -337,10 +388,10 @@ namespace Units
         /// </summary>
         protected Transform InitTarget { get; set; }
 
-        private   AIDestinationSetter _destinationSetter;
-        protected AIPath              pathFinder;
-        private   bool                _isAtTarget;
-        private   float               _baseTimer;
+        private AIDestinationSetter _destinationSetter;
+        public  RichAI              pathFinder;
+        private bool                _isAtTarget;
+        private float               _baseTimer;
 
         /// <summary>
         ///     是否在敌人家门口
@@ -363,7 +414,10 @@ namespace Units
         /// <param name="tr"></param>
         protected void Goto(Transform tr)
         {
-            _destinationSetter.target = tr;
+            // if(!(_destinationSetter.target is null) && tr != _destinationSetter.target)
+            // this.pathFinder.canMove = true;
+
+                _destinationSetter.target = tr;
         }
 
 

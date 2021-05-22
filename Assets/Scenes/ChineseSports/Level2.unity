@@ -942,8 +942,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7ba894aedc9f9f4489edb0e6895d803, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hp: 80
-  defence: 3
+  _hp: 20
+  defence: 0
   isUnmovable: 1
   playerOwnMax: 5
   unitRigidbody: {fileID: 85242260}
@@ -962,6 +962,7 @@ MonoBehaviour:
   UnitDeathEventHandler:
     m_PersistentCalls:
       m_Calls: []
+  pathFinder: {fileID: 0}
   attackedEffect: {fileID: 628618482459116704, guid: 06dc2e3a32ef81344b381e0df4a8616b, type: 3}
   deathEffect: {fileID: 7253522569038370723, guid: 17872a7dade3dcc449897b3825b4e095, type: 3}
 --- !u!1 &96217136
@@ -2194,8 +2195,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7ba894aedc9f9f4489edb0e6895d803, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hp: 80
-  defence: 3
+  _hp: 20
+  defence: 0
   isUnmovable: 1
   playerOwnMax: 5
   unitRigidbody: {fileID: 204701379}
@@ -2214,6 +2215,7 @@ MonoBehaviour:
   UnitDeathEventHandler:
     m_PersistentCalls:
       m_Calls: []
+  pathFinder: {fileID: 0}
   attackedEffect: {fileID: 628618482459116704, guid: 06dc2e3a32ef81344b381e0df4a8616b, type: 3}
   deathEffect: {fileID: 7253522569038370723, guid: 17872a7dade3dcc449897b3825b4e095, type: 3}
 --- !u!114 &204701377
@@ -2445,7 +2447,7 @@ MonoBehaviour:
   _wood: 0
   _gold: 8
   resourceProduct: 000000000000000001000000
-  resourceProducingTime: 8
+  resourceProducingTime: 10
   isEnemy: 1
   availableUnits: 00000000
   UnitsList: []
@@ -2820,7 +2822,7 @@ RectTransform:
   - {fileID: 895974603}
   - {fileID: 2005312570}
   m_Father: {fileID: 633153648}
-  m_RootOrder: 5
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -3373,8 +3375,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7ba894aedc9f9f4489edb0e6895d803, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hp: 80
-  defence: 3
+  _hp: 40
+  defence: 0
   isUnmovable: 1
   playerOwnMax: 5
   unitRigidbody: {fileID: 341323443}
@@ -3393,6 +3395,7 @@ MonoBehaviour:
   UnitDeathEventHandler:
     m_PersistentCalls:
       m_Calls: []
+  pathFinder: {fileID: 0}
   attackedEffect: {fileID: 628618482459116704, guid: 06dc2e3a32ef81344b381e0df4a8616b, type: 3}
   deathEffect: {fileID: 7253522569038370723, guid: 17872a7dade3dcc449897b3825b4e095, type: 3}
 --- !u!114 &341323441
@@ -3856,7 +3859,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: 33.600098}
+  m_AnchoredPosition: {x: 0, y: 33.60022}
   m_SizeDelta: {x: 49.870605, y: 51.918427}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &364822497
@@ -4469,7 +4472,7 @@ MonoBehaviour:
   seeker: {fileID: 395267148}
   mainCamera: {fileID: 405662593}
   unitsList:
-  - UnitPrefab: {fileID: 2546485736200557784, guid: 92a7e1d018d1af54ebc51b7aba5166e8, type: 3}
+  - UnitPrefab: {fileID: 2546485736200557784, guid: 51b58f23909c2ba429b9775a37763277, type: 3}
     IsEnemy: 1
   resultUI: {fileID: 1332352534}
   winEvent:
@@ -5211,7 +5214,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -6274,9 +6277,10 @@ RectTransform:
   - {fileID: 230724447}
   - {fileID: 157779169}
   - {fileID: 1656439819}
+  - {fileID: 1519124832}
+  - {fileID: 1474358065}
   - {fileID: 1332352533}
   - {fileID: 269054081}
-  - {fileID: 1474358065}
   m_Father: {fileID: 939729250}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -9853,7 +9857,7 @@ MonoBehaviour:
   videoPlayer: {fileID: 1012398199}
   rawImage: {fileID: 1012398200}
   resultUI: {fileID: 1332352534}
-  videoClipName: "\u8E0F\u96EA\u75BE\u884C"
+  _videoClipName: "\u8E0F\u96EA\u75BE\u884C"
 --- !u!328 &1012398199
 VideoPlayer:
   m_ObjectHideFlags: 0
@@ -10187,8 +10191,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7ba894aedc9f9f4489edb0e6895d803, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hp: 80
-  defence: 3
+  _hp: 20
+  defence: 0
   isUnmovable: 1
   playerOwnMax: 5
   unitRigidbody: {fileID: 1042811215}
@@ -10207,6 +10211,7 @@ MonoBehaviour:
   UnitDeathEventHandler:
     m_PersistentCalls:
       m_Calls: []
+  pathFinder: {fileID: 0}
   attackedEffect: {fileID: 628618482459116704, guid: 06dc2e3a32ef81344b381e0df4a8616b, type: 3}
   deathEffect: {fileID: 7253522569038370723, guid: 17872a7dade3dcc449897b3825b4e095, type: 3}
 --- !u!114 &1042811213
@@ -11743,6 +11748,7 @@ MonoBehaviour:
   UnitDeathEventHandler:
     m_PersistentCalls:
       m_Calls: []
+  pathFinder: {fileID: 0}
 --- !u!195 &1250947456
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -12203,7 +12209,7 @@ RectTransform:
   m_Children:
   - {fileID: 83495160}
   m_Father: {fileID: 633153648}
-  m_RootOrder: 4
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -12525,6 +12531,41 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1339443894}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1346247638
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1346247639}
+  m_Layer: 5
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1346247639
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1346247638}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1418364647}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1351932357
 GameObject:
   m_ObjectHideFlags: 0
@@ -13031,6 +13072,82 @@ Transform:
   m_Father: {fileID: 1954549717}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1418364646
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1418364647}
+  - component: {fileID: 1418364648}
+  m_Layer: 5
+  m_Name: Tutorial22
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1418364647
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1418364646}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1346247639}
+  m_Father: {fileID: 1519124832}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1418364648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1418364646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd1104670c3576a4580c8c172e769984, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  awakeGameObject: {fileID: 395267147}
+  isWaitForAwakeGameObjectDisabled: 0
+  tutorialStartEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  clickEventDelay: 0
+  clickEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1418364648}
+        m_TargetAssemblyTypeName: UI.Tutorial.TutorialClipUI, Assembly-CSharp
+        m_MethodName: FinishTutorialClip
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  closeEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  tutorialIndex: 22
+  maxStayTime: 0.1
+  tutorialPanel: {fileID: 1346247638}
 --- !u!1 &1454671940
 GameObject:
   m_ObjectHideFlags: 0
@@ -13331,7 +13448,7 @@ RectTransform:
   - {fileID: 691270776}
   - {fileID: 228785070}
   m_Father: {fileID: 633153648}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -13402,7 +13519,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -13422,7 +13539,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u7EE7 \u7EED \u6311 \u6218"
+  m_Text: "\u8DF3   \u8FC7 >>>"
 --- !u!222 &1474880467
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -14041,6 +14158,42 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1498785561}
   m_CullTransparentMesh: 0
+--- !u!1 &1519124831
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1519124832}
+  m_Layer: 5
+  m_Name: Tutorials
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1519124832
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1519124831}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 2.3999999, y: 2.3999999, z: 2.3999999}
+  m_Children:
+  - {fileID: 1418364647}
+  m_Father: {fileID: 633153648}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &1527571556
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14136,7 +14289,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1530438261}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.56, y: 0, z: 0}
+  m_LocalPosition: {x: 2.068, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1617489273}
@@ -14187,6 +14340,7 @@ MonoBehaviour:
   UnitDeathEventHandler:
     m_PersistentCalls:
       m_Calls: []
+  pathFinder: {fileID: 0}
 --- !u!195 &1530438265
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -15335,7 +15489,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: 33.600098}
+  m_AnchoredPosition: {x: 0, y: 33.60022}
   m_SizeDelta: {x: 49.870605, y: 51.918427}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1643105410
@@ -16652,7 +16806,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dropColdTime: 10
-  dropValue: 4
+  dropValue: 2
   dropCountMax: 3
   dropCountMin: 2
   gameResourceTypeType: 1
@@ -18424,7 +18578,7 @@ MonoBehaviour:
   _wood: 0
   _gold: 8
   resourceProduct: 000000000000000001000000
-  resourceProducingTime: 7
+  resourceProducingTime: 5
   isEnemy: 0
   availableUnits: 000000000100000002000000
   UnitsList: []
@@ -19002,8 +19156,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7ba894aedc9f9f4489edb0e6895d803, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hp: 80
-  defence: 3
+  _hp: 30
+  defence: 0
   isUnmovable: 1
   playerOwnMax: 5
   unitRigidbody: {fileID: 2042800114}
@@ -19022,6 +19176,7 @@ MonoBehaviour:
   UnitDeathEventHandler:
     m_PersistentCalls:
       m_Calls: []
+  pathFinder: {fileID: 0}
   attackedEffect: {fileID: 628618482459116704, guid: 06dc2e3a32ef81344b381e0df4a8616b, type: 3}
   deathEffect: {fileID: 7253522569038370723, guid: 17872a7dade3dcc449897b3825b4e095, type: 3}
 --- !u!65 &2042800117

@@ -249,14 +249,12 @@ GameObject:
   m_Component:
   - component: {fileID: 4089572768417318978}
   - component: {fileID: 3093386031307472475}
-  - component: {fileID: 2546485736200557784}
-  - component: {fileID: 4459561262108975549}
-  - component: {fileID: 4144391004480154900}
   - component: {fileID: 7482106728451038311}
   - component: {fileID: 1235125175078914600}
   - component: {fileID: 5557640780335940753}
-  - component: {fileID: 8713721298664140849}
+  - component: {fileID: 2163061513190250458}
   - component: {fileID: 5707384864536930073}
+  - component: {fileID: 2546485736200557784}
   m_Layer: 0
   m_Name: Enemy0_Level2
   m_TagString: Untagged
@@ -293,81 +291,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1.7934563, z: 1}
   m_Center: {x: 0, y: 0.83, z: 0}
---- !u!114 &2546485736200557784
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8022057804127815773}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 620d5ab9a1139a74c8b1805b6ceddd85, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _hp: 120
-  defence: 8
-  isUnmovable: 0
-  playerOwnMax: 5
-  unitRigidbody: {fileID: 1235125175078914600}
-  speed: 1
-  road: 1
-  sidePlayer: {fileID: 0}
-  unitType: 3
-  costFood: 4
-  costWood: 2
-  costGold: 4
-  isDieImmediately: 0
-  deathReward: 18
-  navStopEventHandler:
-    m_PersistentCalls:
-      m_Calls: []
-  UnitDeathEventHandler:
-    m_PersistentCalls:
-      m_Calls: []
-  attackPower: 15
-  attackColdDownTime: 1
-  attackRange: 0.85
-  originalVelocity: {x: 0, y: 0, z: 0}
-  findEnemyRadius: 5.2
---- !u!114 &4459561262108975549
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8022057804127815773}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  observableSearch: 0
-  Synchronization: 3
-  OwnershipTransfer: 0
-  ObservedComponents:
-  - {fileID: 4144391004480154900}
-  viewIdField: 0
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
---- !u!114 &4144391004480154900
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8022057804127815773}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SynchronizePosition: 1
-  m_SynchronizeRotation: 1
-  m_SynchronizeScale: 0
 --- !u!136 &7482106728451038311
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -397,7 +320,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 84
-  m_CollisionDetection: 1
+  m_CollisionDetection: 2
 --- !u!114 &5557640780335940753
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -426,7 +349,7 @@ MonoBehaviour:
   tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   graphMask:
     value: -1
---- !u!114 &8713721298664140849
+--- !u!114 &2163061513190250458
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -435,13 +358,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 8022057804127815773}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6eb1402c17e84a9282a7f0f62eb584f, type: 3}
+  m_Script: {fileID: 11500000, guid: ce11ea984e202491d9271f53021d8b89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  version: 2
-  radius: 0.3
-  height: 1.12
-  repathRate: 0.7
+  version: 1
+  radius: 0.2
+  height: 1
+  repathRate: 0.3
   canSearch: 1
   canMove: 1
   maxSpeed: 1
@@ -453,15 +376,15 @@ MonoBehaviour:
   orientation: 0
   enableRotation: 1
   targetCompatibility: {fileID: 0}
-  maxAcceleration: -2.5
+  acceleration: 5
   rotationSpeed: 360
-  slowdownDistance: 0.6
-  pickNextWaypointDist: 0.5
-  endReachedDistance: 0.2
-  alwaysDrawGizmos: 0
+  slowdownTime: 0.5
+  endReachedDistance: 0.01
+  wallForce: 2
+  wallDist: 0.1
+  funnelSimplification: 0
   slowWhenNotFacingTarget: 1
-  whenCloseToDestination: 0
-  constrainInsideGraph: 0
+  animCompatibility: {fileID: 0}
 --- !u!114 &5707384864536930073
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -476,6 +399,44 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   version: 1
   target: {fileID: 0}
+--- !u!114 &2546485736200557784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8022057804127815773}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 620d5ab9a1139a74c8b1805b6ceddd85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hp: 120
+  defence: 8
+  isUnmovable: 0
+  playerOwnMax: 8
+  unitRigidbody: {fileID: 1235125175078914600}
+  speed: 1
+  road: 1
+  sidePlayer: {fileID: 0}
+  unitType: 6
+  costFood: 4
+  costWood: 2
+  costGold: 4
+  isDieImmediately: 0
+  deathReward: 5
+  navStopEventHandler:
+    m_PersistentCalls:
+      m_Calls: []
+  UnitDeathEventHandler:
+    m_PersistentCalls:
+      m_Calls: []
+  pathFinder: {fileID: 2163061513190250458}
+  attackPower: 10
+  attackColdDownTime: 0.9
+  attackRange: 0.85
+  originalVelocity: {x: 0, y: 0, z: 0}
+  findEnemyRadius: 5.2
 --- !u!1 &8084695571145166821
 GameObject:
   m_ObjectHideFlags: 0

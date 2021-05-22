@@ -1,4 +1,5 @@
-﻿using UI.ChineseSports.Battle;
+﻿using System;
+using UI.ChineseSports.Battle;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Video;
@@ -10,16 +11,26 @@ namespace Video
     /// </summary>
     public class VideoPlayerManager : MonoBehaviour
     {
-        public VideoPlayer videoPlayer;
-        public RawImage    rawImage;
-        public ResultUI    resultUI;
-        public string      videoClipName;
+        public  VideoPlayer videoPlayer;
+        public  RawImage    rawImage;
+        public  ResultUI    resultUI;
+        [SerializeField]private string      _videoClipName;
+
+        public string VideoClipName
+        {
+            get => _videoClipName;
+            set
+            {
+                _videoClipName   = value;
+                videoPlayer.clip = Resources.Load<VideoClip>("Videos/" + VideoClipName);
+            }
+        }
 
         private void Awake()
         {
             rawImage.enabled = false;
             resultUI?.onWinResultEnd.AddListener(Play);
-            videoPlayer.clip = Resources.Load<VideoClip>("Videos/" + videoClipName);
+            videoPlayer.clip = Resources.Load<VideoClip>("Videos/" + VideoClipName);
         }
 
         public void Play()

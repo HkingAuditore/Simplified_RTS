@@ -72,7 +72,7 @@ namespace Units.RangedAttack
             InitTarget                    = GetEnemySide();
             _maxShootSpeed                = Mathf.Sqrt(attackRange * Bullet.Gravity / Mathf.Sin(45f * 2 * Mathf.Deg2Rad));
             _attackTrigger                = transform.Find("FindEnemyRange").GetComponent<FindEnemyTrigger>();
-            pathFinder.endReachedDistance = this.attackRange;
+            pathFinder.endReachedDistance = this.attackRange * .8f;
 
             FindEnemy();
 
@@ -81,14 +81,49 @@ namespace Units.RangedAttack
 
         private void FixedUpdate()
         {
+            // _timer += Time.deltaTime;
+            //
+            // // if (_enemyUnit != null)
+            // //     Goto(_enemyUnit.transform);
+            // // 寻敌攻击
+            // if (!_isFoundEnemy || _enemyUnit == null || _isFoundEnemy && _enemyUnit.HP <= 0)
+            // {
+            //     //Debug.Log("FIND NEW!");
+            //     FindEnemy();
+            //     if (_enemyUnit != null)
+            //     {
+            //         Goto(_enemyUnit.transform);
+            //         _isFoundEnemy = true;
+            //     }
+            //     else
+            //     {
+            //         Goto(InitTarget);
+            //         _isFoundEnemy = false;
+            //     }
+            //
+            //     // if (!isUnmovable)
+            //     // TODO navMeshAgent.speed = Speed;
+            // }
+            // else if (_isFoundEnemy)
+            // {
+            //     Goto(_enemyUnit.transform);
+            //     if (_timer > attackColdDownTime)
+            //     {
+            //         Attack();
+            //         _timer = 0f;
+            //     }
+            // }
             _timer += Time.deltaTime;
-            if (_enemyUnit != null)
-                Goto(_enemyUnit.transform);
+            // if(_enemyUnit!=null && Vector3.Distance( this.navMeshAgent.destination,this._enemyUnit.transform.position) > .1f)
+            // {
+            //     this.Goto(_enemyUnit.transform);
+            // }
             // 寻敌攻击
-            if (!_isFoundEnemy || _enemyUnit == null || _isFoundEnemy && _enemyUnit.HP <= 0)
+            if (!_isFoundEnemy || _enemyUnit == null || (_isFoundEnemy && _enemyUnit?.HP <= 0))
             {
-                //Debug.Log("FIND NEW!");
                 FindEnemy();
+                if(!isUnmovable)
+                    this.pathFinder.maxSpeed = this.Speed;
                 if (_enemyUnit != null)
                 {
                     Goto(_enemyUnit.transform);
@@ -99,18 +134,30 @@ namespace Units.RangedAttack
                     Goto(InitTarget);
                     _isFoundEnemy = false;
                 }
-
-                // if (!isUnmovable)
-                // TODO navMeshAgent.speed = Speed;
             }
-            else if (_isFoundEnemy)
-            {
-                if (_timer > attackColdDownTime)
+            // else if (_isFoundEnemy)
+            // {
+            //     Goto(_enemyUnit.transform);
+                // Debug.DrawLine(this.transform.position,_enemyUnit.transform.position,this.sidePlayer.gameObject.name == "APlayer" ? Color.green : Color.magenta);
+                // Debug.DrawLine(this.transform.position,this.navMeshAgent.destination,this.sidePlayer.gameObject.name == "APlayer" ? Color.cyan : Color.yellow);
+                if(_isFoundEnemy && _enemyUnit != null)
                 {
-                    Attack();
-                    _timer = 0f;
+                    if (_timer                                                              > AttackColdDownTime &&
+                        Vector3.Distance(transform.position, _enemyUnit.transform.position) < AttackRange)
+                    {
+                        Attack();
+                        pathFinder.maxSpeed = 0f;
+                        _timer              = 0f;
+                    }
+
+                    if (Vector3.Distance(transform.position, _enemyUnit.transform.position) > AttackRange)
+                    {
+                        if(!isUnmovable)
+                            this.pathFinder.maxSpeed = this.Speed;
+                    }
                 }
-            }
+            // }
+
         }
 
 
@@ -229,13 +276,13 @@ namespace Units.RangedAttack
             var distance = Vector3.Distance(transform.position, _enemyUnit.transform.position);
             if (distance < attackRange && (isUnmovable || unitRigidbody.velocity.magnitude < 2f))
             {
-                if (!isUnmovable)
-                {
-                    shootTransform.LookAt(_enemyUnit.transform);
-                }else
-                {
-                    shootTransform.LookAt(_enemyUnit.transform);
-                }                // if (!isUnmovable)
+                // if (!isUnmovable)
+                // {
+                shootTransform.LookAt(_enemyUnit.transform);
+                // }else
+                // {
+                //     shootTransform.LookAt(_enemyUnit.transform);
+                // }                // if (!isUnmovable)
                 //     TODO navMeshAgent.speed = 0f;
 
                 //射击角度 0~45

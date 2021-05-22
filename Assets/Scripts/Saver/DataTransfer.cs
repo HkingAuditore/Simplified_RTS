@@ -73,9 +73,9 @@ namespace Saver
             {
                 _isSoundsActive = value;
                 if (_isSoundsActive)
-                    GameManager.GameManager.GetManager.audioSource.Play();
+                    GameManager.GameManager.GetManager.audioSource.volume = 60;
                 else
-                    GameManager.GameManager.GetManager.audioSource.Stop();
+                    GameManager.GameManager.GetManager.audioSource.volume = 0;
             }
         }
 
